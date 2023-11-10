@@ -2,10 +2,10 @@ use alloc::boxed::Box;
 use alloc::vec::Vec;
 
 use crate::euclid::Mat4;
+use crate::image::Image;
 
 use super::{
     geometry::{Offset, RRect, Rect},
-    image::Image,
     paint::{BlendMode, Color, Paint},
     paragraph::Paragraph,
     path::Path,
