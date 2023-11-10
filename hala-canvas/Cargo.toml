@@ -1,0 +1,12 @@
+[package]
+edition.workspace = true
+name = "hala-canvas"
+repository.workspace = true
+version.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+glam = {workspace = true}
+libm = {workspace = true}
+serde = {workspace = true}
