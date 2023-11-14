@@ -36,9 +36,6 @@ pub struct Paint {
 
     /// The stroke config when style is set to [`PaintingStyle.Stroke`]
     pub stroke: Option<PaintStroke>,
-
-    /// Whether to paint inside shapes, the edges of shapes, or both.
-    pub paint_style: PaintStyle,
 }
 
 #[derive(Debug, Default, Clone, PartialEq)]

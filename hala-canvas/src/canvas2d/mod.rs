@@ -7,3 +7,6 @@ pub mod canvas;
 pub mod paint;
 
 pub mod paragraph;
+
+#[cfg(feature = "tessellator")]
+pub mod tessellator;
