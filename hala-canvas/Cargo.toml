@@ -10,8 +10,13 @@ version.workspace = true
 [dependencies]
 glam = {workspace = true}
 libm = {workspace = true}
+protobuf = {workspace = true}
 serde = {workspace = true}
 
 [features]
 default = ["tessellator"]
 tessellator = []
+
+[build-dependencies]
+protobuf-codegen = {workspace = true}
+protoc-bin-vendored = {workspace = true}

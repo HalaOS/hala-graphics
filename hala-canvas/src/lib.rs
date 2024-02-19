@@ -1,8 +1,13 @@
-#![no_std]
-pub extern crate alloc;
+mod proto;
+pub use proto::*;
 
-pub mod canvas2d;
+#[cfg(test)]
+mod tests {
+    use crate::canvas::{OpCode, Scale};
 
-pub mod euclid;
-
-pub mod image;
+    #[test]
+    fn test_union() {
+        let mut op = OpCode::new();
+        op.set_scale(Scale::default());
+    }
+}
