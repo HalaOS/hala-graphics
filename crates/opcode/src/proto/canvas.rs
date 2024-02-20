@@ -95,8 +95,57 @@ impl OpCode {
         }
     }
 
+    // .hala.canvas.Skew skew = 2;
+
+    pub fn skew(&self) -> &Skew {
+        match self.code {
+            ::std::option::Option::Some(op_code::Code::Skew(ref v)) => v,
+            _ => <Skew as ::protobuf::Message>::default_instance(),
+        }
+    }
+
+    pub fn clear_skew(&mut self) {
+        self.code = ::std::option::Option::None;
+    }
+
+    pub fn has_skew(&self) -> bool {
+        match self.code {
+            ::std::option::Option::Some(op_code::Code::Skew(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_skew(&mut self, v: Skew) {
+        self.code = ::std::option::Option::Some(op_code::Code::Skew(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_skew(&mut self) -> &mut Skew {
+        if let ::std::option::Option::Some(op_code::Code::Skew(_)) = self.code {
+        } else {
+            self.code = ::std::option::Option::Some(op_code::Code::Skew(Skew::new()));
+        }
+        match self.code {
+            ::std::option::Option::Some(op_code::Code::Skew(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_skew(&mut self) -> Skew {
+        if self.has_skew() {
+            match self.code.take() {
+                ::std::option::Option::Some(op_code::Code::Skew(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            Skew::new()
+        }
+    }
+
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut fields = ::std::vec::Vec::with_capacity(2);
         let mut oneofs = ::std::vec::Vec::with_capacity(1);
         fields.push(::protobuf::reflect::rt::v2::make_oneof_message_has_get_mut_set_accessor::<_, Scale>(
             "scale",
@@ -104,6 +153,13 @@ impl OpCode {
             OpCode::scale,
             OpCode::mut_scale,
             OpCode::set_scale,
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_oneof_message_has_get_mut_set_accessor::<_, Skew>(
+            "skew",
+            OpCode::has_skew,
+            OpCode::skew,
+            OpCode::mut_skew,
+            OpCode::set_skew,
         ));
         oneofs.push(op_code::Code::generated_oneof_descriptor_data());
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<OpCode>(
@@ -127,6 +183,9 @@ impl ::protobuf::Message for OpCode {
                 10 => {
                     self.code = ::std::option::Option::Some(op_code::Code::Scale(is.read_message()?));
                 },
+                18 => {
+                    self.code = ::std::option::Option::Some(op_code::Code::Skew(is.read_message()?));
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -145,6 +204,10 @@ impl ::protobuf::Message for OpCode {
                     let len = v.compute_size();
                     my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
                 },
+                &op_code::Code::Skew(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+                },
             };
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
@@ -157,6 +220,9 @@ impl ::protobuf::Message for OpCode {
             match v {
                 &op_code::Code::Scale(ref v) => {
                     ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+                },
+                &op_code::Code::Skew(ref v) => {
+                    ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
                 },
             };
         }
@@ -177,6 +243,7 @@ impl ::protobuf::Message for OpCode {
     }
 
     fn clear(&mut self) {
+        self.code = ::std::option::Option::None;
         self.code = ::std::option::Option::None;
         self.special_fields.clear();
     }
@@ -216,6 +283,8 @@ pub mod op_code {
     pub enum Code {
         // @@protoc_insertion_point(oneof_field:hala.canvas.OpCode.scale)
         Scale(super::Scale),
+        // @@protoc_insertion_point(oneof_field:hala.canvas.OpCode.skew)
+        Skew(super::Skew),
     }
 
     impl ::protobuf::Oneof for Code {
@@ -578,9 +647,10 @@ impl ClipOp {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0ccanvas.proto\x12\x0bhala.canvas\"<\n\x06OpCode\x12*\n\x05scale\x18\
-    \x01\x20\x01(\x0b2\x12.hala.canvas.ScaleH\0R\x05scaleB\x06\n\x04code\"3\
-    \n\x05Scale\x12\x0e\n\x02sx\x18\x01\x20\x01(\x02R\x02sx\x12\x13\n\x02sy\
+    \n\x0ccanvas.proto\x12\x0bhala.canvas\"e\n\x06OpCode\x12*\n\x05scale\x18\
+    \x01\x20\x01(\x0b2\x12.hala.canvas.ScaleH\0R\x05scale\x12'\n\x04skew\x18\
+    \x02\x20\x01(\x0b2\x11.hala.canvas.SkewH\0R\x04skewB\x06\n\x04code\"3\n\
+    \x05Scale\x12\x0e\n\x02sx\x18\x01\x20\x01(\x02R\x02sx\x12\x13\n\x02sy\
     \x18\x02\x20\x01(\x02H\0R\x02sy\x88\x01\x01B\x05\n\x03_sy\"&\n\x04Skew\
     \x12\x0e\n\x02sx\x18\x01\x20\x01(\x02R\x02sx\x12\x0e\n\x02sy\x18\x02\x20\
     \x01(\x02R\x02sy*'\n\x06ClipOp\x12\x0e\n\nDifference\x10\0\x12\r\n\tInte\

@@ -1,7 +1,7 @@
 [package]
-description = "Core graphic api for Hala OS"
+description = "Drawing opcode for canvas2d."
 edition.workspace = true
-name = "hala-canvas"
+name = "hala-graphics-opcode"
 repository.workspace = true
 version.workspace = true
 

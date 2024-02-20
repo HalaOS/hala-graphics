@@ -1,0 +1,762 @@
+/// This file define canvas opcode types.
+
+syntax = "proto3";
+
+package hala.canvas.opcode;
+
+/// Canvas drawing operations will be saved as OpCode sequences 
+/// to be executed later.
+message OpCode {
+    oneof directive {
+        /// Scale ops
+        Scale scale = 1;
+        
+        /// Skew ops.
+        Skew skew = 2;
+        
+        /// Reduces the clip region to the intersection of the current clip and the given Path.
+        ClipPath clip_path = 3;
+        
+        /// Reduces the clip region to the intersection of the current clip and the given rectangle.
+        ClipRect clip_rect = 4;
+        
+        /// Reduces the clip region to the intersection of the current clip and the given rounded rectangle.
+        ClipRRect clip_rrect = 5;
+        
+        /// Paints the given Color onto the canvas, applying the given BlendMode, 
+        /// with the given color being the source and the background being the destination.
+        DrawColor draw_color = 6;
+
+        /// Draws the given Path with the given Paint.
+        DrawPath draw_path = 7;
+
+        /// Draws the given Image into the canvas with its top-left corner at the given Offset. The image is composited into the canvas using the given Paint.
+        DrawImage draw_image = 8;
+
+        /// Draws the subset of the given image described by the src argument into the canvas in the axis-aligned rectangle given by the dst argument.
+        DrawImageRect draw_image_rect = 9;
+
+        /// Fills the canvas with the given Paint.
+        Paint draw_paint = 10;
+
+        /// Draws a shadow for a Path representing the given material elevation.
+        DrawShadow draw_shadow = 11;
+
+        /// Multiply the current transform by the specified 4⨉4 transformation matrix specified as a list of values in column-major order.
+        Mat4 transform = 12;
+
+        /// Add a translation to the current transform, shifting the coordinate space horizontally by the first argument and vertically by the second argument.
+        Offset translate = 13;
+
+        /// Add a rotation to the current transform. The argument is in radians clockwise.
+        float rotate = 14;
+
+        /// Draws the text in the given Paragraph into this canvas at the given Offset.
+        DrawParagraph draw_paragraph = 15;
+    }
+}
+
+/// A paragraph of text.
+/// A paragraph retains the size and position of each glyph in the text and can be efficiently resized and painted.
+message Paragraph {
+    /// The distance from the top of the paragraph to the alphabetic baseline of the first line, in logical pixels.
+    float alphabetic_baseline = 1;
+    /// True if there is more vertical content, but the text was truncated, either because we reached maxLines lines
+    /// of text or because the maxLines was null, ellipsis was not null, and one of the lines exceeded the width constraint.
+    float  did_exceed_max_lines = 2;
+    /// The amount of vertical space this paragraph occupies.
+    float  height = 3;
+    /// The distance from the top of the paragraph to the ideographic baseline of the first line, in logical pixels.
+    float  ideo_graphic_baseline = 4;
+    /// The distance from the left edge of the leftmost glyph to the right edge of the rightmost glyph in the paragraph.
+    float  longest_line = 5;
+    /// Returns the smallest width beyond which increasing the width never decreases the height.
+    float  max_intrinsic_with = 6;
+    /// The minimum width that this paragraph could be without failing to paint its contents within itself.
+    float  min_intrinsic_width = 7;
+    /// The amount of horizontal space this paragraph occupies.
+    float  width = 8;
+}
+
+/// Draws the text in the given Paragraph into this canvas at the given Offset.
+message DrawParagraph {
+    /// drawing paragraph of text.
+    Paragraph paragraph = 1;
+    /// offset in the canvas.
+    Offset offset = 2;
+}
+
+/// A description of the style to use when drawing on a Canvas.
+message Paint {
+    /// Controls the performance vs quality trade-off to use when sampling bitmaps, as with an ImageShader, 
+    /// or when drawing images, as with Canvas.drawImage, Canvas.drawImageRect, Canvas.drawImageNine or Canvas.drawAtlas.
+    enum FilterQuality {
+        /// The fastest filtering method, albeit also the lowest quality.
+        ///
+        /// This value results in a "Nearest Neighbor" algorithm which just repeats or eliminates pixels as an image is scaled up or down.
+        None = 0;
+
+        /// Better quality than none, faster than medium.
+        /// This value results in a "Bilinear" algorithm which smoothly interpolates between pixels in an image.
+        Low = 1;
+
+        /// The best all around filtering method that is only worse than high at extremely large scale factors.
+        ///
+        /// This value improves upon the "Bilinear" algorithm specified by low by utilizing a Mipmap that pre-computes
+        /// high quality lower resolutions of the image at half (and quarter and eighth, etc.) sizes and then blends
+        /// between those to prevent loss of detail at small scale sizes.
+        Medium = 2;
+
+        /// Best possible quality when scaling up images by scale factors larger than 5-10x.
+        /// When images are scaled down, this can be worse than medium for scales smaller than 0.5x, or when animating the scale factor.
+        ///
+        /// This option is also the slowest.
+        ///
+        /// This value results in a standard "Bicubic" algorithm which uses a 3rd order equation to smooth the abrupt transitions between
+        /// pixels while preserving some of the sense of an edge and avoiding sharp peaks in the result.
+        Hight = 3;
+    }
+
+    /// A blend mode to apply when a shape is drawn or a layer is composited.
+    BlendMode blend_mode = 1;
+    
+    /// The color to use when stroking or filling a shape.
+    Color color = 2;
+    
+    /// Controls the performance vs quality trade-off to use when sampling bitmaps
+    FilterQuality filter_quality = 3;
+    
+    /// Whether the colors of the image are inverted when drawn. 
+    bool invert_color = 4;
+    
+    /// Whether to apply anti-aliasing to lines and images drawn on the canvas.
+    bool is_anti_alias = 5;
+
+    /// The stroke config when style is set to [`PaintingStyle.Stroke`]
+    optional PaintStroke stroke = 6;
+}
+
+/// 
+message PaintStroke {
+    /// The kind of finish to place on the end of lines drawn when style is set to PaintingStyle.stroke.
+    enum StrokeCap {
+        /// Begin and end contours with a flat edge and no extension.
+        StrokeCapButt = 0;
+
+        /// Begin and end contours with a semi-circle extension.
+        StrokeCapRound = 1;
+
+        /// Begin and end contours with a half square extension.
+        /// This is similar to extending each contour by half the stroke width (as given by Paint.strokeWidth).
+        StrokeCapSquare = 2;
+    }
+
+    /// 
+    enum StrokeJoin {
+        /// Joins between line segments form sharp corners.
+        StrokeJoinMiter = 0;
+
+        /// Joins between line segments are semi-circular.
+        StrokeJoinRound = 1;
+
+        /// Joins between line segments connect the corners of the butt
+        /// ends of the line segments to give a beveled appearance.
+        StrokeJoinBevel = 2;
+    }
+
+    /// The kind of finish to place on the end of lines drawn when style is set to [`PaintingStyle.Stroke`].
+    StrokeCap stroke_cap = 1;
+
+    /// The kind of finish to place on the joins between segments.
+    StrokeJoin stroke_join = 2;
+
+    /// The limit for miters to be drawn on segments when the join is set to StrokeJoin.miter and the style is
+    /// set to [`PaintingStyle::Stroke`]. If this limit is exceeded, then a [`StrokeJoin::Bevel`] join will be drawn instead.
+    /// This may cause some 'popping' of the corners of a path if the angle between line segments is animated,
+    /// as seen in the diagrams below.
+    float stroke_miter_limit = 3;
+    /// How wide to make edges drawn when style is set to PaintingStyle.stroke.
+    /// The width is given in logical pixels measured in the direction orthogonal
+    /// to the direction of the path.
+    float stroke_width = 4;
+}
+
+///
+message Image {
+    /// 
+    oneof image {
+        ///
+        string path = 1;
+    }
+}
+
+/// Draws the given Image into the canvas with its top-left corner at the given Offset. 
+/// The image is composited into the canvas using the given Paint.
+message DrawImage {
+    /// Image source.
+    Image image = 1;
+    /// 
+    Offset offset = 2;
+    /// 
+    Paint paint = 3;
+}
+
+/// Draws the given Image into the canvas with its top-left corner at the given Offset. 
+/// The image is composited into the canvas using the given Paint.
+message DrawImageRect {
+    /// Image source.
+    Image image = 1;
+    /// 
+    Rect src = 2;
+    ///
+    Rect dst = 3;
+    /// 
+    Paint paint = 4;
+}
+
+/// 
+message DrawPath {
+    /// drawing path.
+    Path path = 1;
+    /// drawing paint style.
+    Paint paint = 2;
+}
+
+/// Reduces the clip region to the intersection of the current clip and the given Path.
+message ClipPath {
+    /// 
+    Path path = 1;
+    /// 
+    bool do_anti_alias = 2;
+}
+
+/// Reduces the clip region to the intersection of the current clip and the given rectangle.
+message ClipRect {
+    /// Defines how a new clip region should be merged with the existing clip region.
+    enum ClipOp {
+        /// Subtract the new region from the existing region.
+        Difference = 0;
+        /// Intersect the new region from the existing region.
+        Intersect = 1;
+    }
+    ///
+    Rect rect = 1;
+    /// 
+    ClipOp clip_op = 2;
+    /// 
+    bool do_anti_alias = 3;
+}
+
+/// Reduces the clip region to the intersection of the current clip and the given rounded rectangle.
+message ClipRRect {
+    /// 
+    RRect rrect = 1;
+    /// 
+    bool do_anti_alias = 2;
+}
+
+/// Paints the given Color onto the canvas, applying the given BlendMode, 
+/// with the given color being the source and the background being the destination.
+message DrawColor {
+    ///
+    Color color = 1;
+    /// 
+    BlendMode blend_mode = 2;
+
+}
+
+/// 
+enum BlendMode {
+    /// Drop both the source and destination images, leaving nothing.
+    /// This corresponds to the "clear" Porter-Duff operator.
+    Clear = 0;
+    /// Drop the destination image, only paint the source image.
+    /// Conceptually, the destination is first cleared, then the source image is painted.
+    /// This corresponds to the "Copy" Porter-Duff operator.
+    Src = 2;
+    /// Drop the source image, only paint the destination image.
+    /// Conceptually, the source image is discarded, leaving the destination untouched.
+    /// This corresponds to the "Destination" Porter-Duff operator.
+    Dst = 3;
+    /// Composite the source image over the destination image.
+    /// This is the default value. It represents the most intuitive case,
+    /// where shapes are painted on top of what is below,
+    ///  with transparent areas showing the destination layer.
+    ///
+    /// This corresponds to the "Source over Destination" Porter-Duff operator,
+    /// also known as the Painter's Algorithm.
+    SrcOver = 4;
+    /// Composite the source image under the destination image.
+    /// This is the opposite of srcOver.
+    /// This corresponds to the "Destination over Source" Porter-Duff operator.
+    DstOver = 5;
+    /// Show the source image, but only where the two images overlap.
+    /// The destination image is not rendered, it is treated merely as a mask.
+    /// The color channels of the destination are ignored, only the opacity has an effect.
+    ///
+    /// To show the destination image instead, consider [`DstIn`](BlendMode::DstIn).
+    ///
+    /// To reverse the semantic of the mask (only showing the source where the destination is absent,
+    /// rather than where it is present), consider [`SrcOut`](BlendMode::SrcOut).
+    ///
+    /// This corresponds to the "Source in Destination" Porter-Duff operator.
+    SrcIn = 6;
+    /// Show the destination image, but only where the two images overlap.
+    /// The source image is not rendered, it is treated merely as a mask.
+    /// The color channels of the source are ignored, only the opacity has an effect.
+    ///
+    /// To show the source image instead, consider [`SrcIn`](BlendMode::SrcIn).
+    ///
+    /// To reverse the semantic of the mask (only showing the source where the destination is present,
+    /// rather than where it is absent), consider dstOut.
+    ///
+    /// This corresponds to the "Destination in Source" Porter-Duff operator.
+    DstIn = 7;
+    /// Show the source image, but only where the two images do not overlap.
+    /// The destination image is not rendered, it is treated merely as a mask.
+    /// The color channels of the destination are ignored, only the opacity has an effect.
+    ///
+    /// To show the destination image instead, consider [`DstOut`](BlendMode::DstOut).
+    ///
+    /// To reverse the semantic of the mask (only showing the source where the destination is present,
+    /// rather than where it is absent), consider [`SrcIn](BlendMode::SrcIn).
+    ///
+    /// This corresponds to the "Source out Destination" Porter-Duff operator.
+    SrcOut = 8;
+    /// Show the destination image, but only where the two images do not overlap.
+    /// The source image is not rendered, it is treated merely as a mask.
+    /// The color channels of the source are ignored, only the opacity has an effect.
+    ///
+    /// To show the source image instead, consider [`SrcOut`](BlendMode::SrcOut).
+    ///
+    /// To reverse the semantic of the mask (only showing the destination where the source is present,
+    /// rather than where it is absent), consider [`DstIn`](BlendMode::DstIn).
+    ///
+    /// This corresponds to the "Destination out Source" Porter-Duff operator.
+    DstOut = 9;
+
+    /// Composite the source image over the destination image, but only where it overlaps the destination.
+    ///
+    /// This corresponds to the "Source atop Destination" Porter-Duff operator.
+    ///
+    /// This is essentially the [`SrcOver](BlendMode::SrcOver) operator,
+    /// but with the output's opacity channel being set to that of the destination image instead of being
+    /// a combination of both image's opacity channels.
+    SrcATop = 10;
+    /// Composite the destination image over the source image, but only where it overlaps the source.
+    ///
+    /// This corresponds to the "Destination atop Source" Porter-Duff operator.
+    ///
+    /// This is essentially the [`DstOver](BlendMode::DstOver) operator, but with the output's opacity channel being set to that
+    /// of the source image instead of being a combination of both image's opacity channels.
+    ///
+    /// For a variant with the source on top instead of the destination, see [`SrcATop](BlendMode::SrcATop).
+    DstATop = 11;
+    /// Apply a bitwise xor operator to the source and destination images. This leaves transparency where they would overlap.
+    ///
+    /// This corresponds to the "Source xor Destination" Porter-Duff operator.
+    Xor = 12;
+    /// Sum the components of the source and destination images.
+    ///
+    /// Transparency in a pixel of one of the images reduces the contribution of that image to the corresponding output pixel,
+    /// as if the color of that pixel in that image was darker.
+    ///
+    /// This corresponds to the "Source plus Destination" Porter-Duff operator.
+    Plus = 13;
+
+    /// Multiply the color components of the source and destination images.
+    ///
+    /// This can only result in the same or darker colors (multiplying by white, 1.0, results in no change;
+    /// multiplying by black, 0.0, results in black).
+    ///
+    /// When compositing two opaque images, this has similar effect to overlapping two transparencies on a projector.
+    ///
+    /// For a variant that also multiplies the alpha channel, consider [`Multiply`](BlendMode::Multiply).
+    Modulate = 14;
+
+    /// Multiply the inverse of the components of the source and destination images, and inverse the result.
+    ///
+    /// Inverting the components means that a fully saturated channel (opaque white) is treated as the value 0.0,
+    /// and values normally treated as 0.0 (black, transparent) are treated as 1.0.
+    ///
+    /// This is essentially the same as modulate blend mode, but with the values of the colors inverted before
+    /// the multiplication and the result being inverted back before rendering.
+    ///
+    /// This can only result in the same or lighter colors (multiplying by black, 1.0, results in no change;
+    /// multiplying by white, 0.0, results in white). Similarly, in the alpha channel, it can only result in
+    /// more opaque colors.
+    ///
+    /// This has similar effect to two projectors displaying their images on the same screen simultaneously.
+    Screen = 15;
+
+    /// Multiply the components of the source and destination images after adjusting them to favor the destination.
+    ///
+    /// Specifically, if the destination value is smaller, this multiplies it with the source value, whereas is the
+    /// source value is smaller, it multiplies the inverse of the source value with the inverse of the destination
+    /// value, then inverts the result.
+    ///
+    /// Inverting the components means that a fully saturated channel (opaque white) is treated as the value 0.0, and
+    /// values normally treated as 0.0 (black, transparent) are treated as 1.0.
+    Overlay = 16;
+
+    /// Composite the source and destination image by choosing the lowest value from each color channel.
+    ///
+    /// The opacity of the output image is computed in the same way as for [`SrcOver](BlendMode::SrcOver).
+    Darken = 17;
+
+    /// Composite the source and destination image by choosing the highest value from each color channel.
+    ///
+    /// The opacity of the output image is computed in the same way as for [`SrcOver](BlendMode::SrcOver).
+    Lighten = 18;
+
+    /// Divide the destination by the inverse of the source.
+    ///
+    /// Inverting the components means that a fully saturated channel (opaque white) is treated as the value 0.0,
+    /// and values normally treated as 0.0 (black, transparent) are treated as 1.0.
+    ColorDodge = 19;
+
+    /// Divide the inverse of the destination by the source, and inverse the result.
+    ///
+    /// Inverting the components means that a fully saturated channel (opaque white) is treated as the value 0.0,
+    /// and values normally treated as 0.0 (black, transparent) are treated as 1.0.
+    ColorBurn = 20;
+
+    /// Multiply the components of the source and destination images after adjusting them to favor the source.
+    ///
+    /// Specifically, if the source value is smaller, this multiplies it with the destination value, whereas
+    /// is the destination value is smaller, it multiplies the inverse of the destination value with the inverse
+    /// of the source value, then inverts the result.
+    ///
+    /// Inverting the components means that a fully saturated channel (opaque white) is treated as the value 0.0,
+    /// and values normally treated as 0.0 (black, transparent) are treated as 1.0.
+    HardLight = 21;
+
+    /// Use [`ColorDodge](BlendMode::ColorDodge) for source values below 0.5 and colorBurn for source values above 0.5.
+    ///
+    /// This results in a similar but softer effect than [`Overlay`](BlendMode::Overlay).
+    SoftLight = 22;
+
+    /// Subtract the smaller value from the bigger value for each channel.
+    ///
+    /// Compositing black has no effect; compositing white inverts the colors of the other image.
+    ///
+    /// The opacity of the output image is computed in the same way as for [`SrcOver`](BlendMode::SrcOver).
+    ///
+    /// The effect is similar to exclusion but harsher.
+    Difference = 23;
+
+    /// Subtract double the product of the two images from the sum of the two images.
+    ///
+    /// Compositing black has no effect; compositing white inverts the colors of the other image.
+    ///
+    /// The opacity of the output image is computed in the same way as for [`SrcOver](BlendMode::SrcOver).
+    ///
+    /// The effect is similar to [`Difference`](BlendMode::Difference) but softer.
+    Exclusion = 24;
+
+    /// Multiply the components of the source and destination images, including the alpha channel.
+    ///
+    /// This can only result in the same or darker colors (multiplying by white, 1.0, results in no change;
+    /// multiplying by black, 0.0, results in black).
+    ///
+    /// Since the alpha channel is also multiplied, a fully-transparent pixel (opacity 0.0) in one image
+    /// results in a fully transparent pixel in the output. This is similar to [`DstIn](BlendMode::DstIn), but with the colors combined.
+    ///
+    /// For a variant that multiplies the colors but does not multiply the alpha channel, consider [`Modulate`](BlendMode::Modulate).
+    Multiply = 25;
+
+    /// Take the hue of the source image, and the saturation and luminosity of the destination image.
+    ///
+    /// The effect is to tint the destination image with the source image.
+    ///
+    /// The opacity of the output image is computed in the same way as for [`SrcOver`](BlendMode::SrcOver).
+    /// Regions that are entirely transparent in the source image take their hue from the destination.
+    Hue = 26;
+
+    /// Take the saturation of the source image, and the hue and luminosity of the destination image.
+    ///
+    /// The opacity of the output image is computed in the same way as for [`SrcOver`](BlendMode::SrcOver).
+    /// Regions that are entirely transparent in the source image take their saturation from the destination.
+    Saturation = 27;
+
+    /// Take the hue and saturation of the source image, and the luminosity of the destination image.
+    ///
+    /// The effect is to tint the destination image with the source image.
+    ///
+    /// The opacity of the output image is computed in the same way as for srcOver.
+    /// Regions that are entirely transparent in the source image take their hue and
+    /// saturation from the destination.
+    BlendModeColor = 28;
+
+    /// Take the luminosity of the source image, and the hue and saturation of the destination image.
+    ///
+    /// The opacity of the output image is computed in the same way as for srcOver.
+    /// Regions that are entirely transparent in the source image take their luminosity from the destination.
+    Luminosity = 29;
+}
+
+/// Add an axis-aligned scale to the current transform, 
+/// scaling by the first argument in the horizontal direction 
+/// and the second in the vertical direction.
+/// If sy is unspecified, sx will be used for the scale in both directions.
+message Scale {
+    /// Scaling in the horizontal direction 
+    float sx = 1;
+    /// Scaling in the vertical direction 
+    optional float sy = 2;
+}
+
+/// Add an axis-aligned skew to the current transform, with the first argument 
+/// being the horizontal skew in rise over run units clockwise around the origin, 
+/// and the second argument being the vertical skew in rise over run units clockwise
+/// around the origin.
+message Skew {
+    /// horizontal skew
+    float sx = 1;
+    /// vertical skew
+    float sy = 2;
+}
+
+/// Draws a shadow for a Path representing the given material elevation.
+/// The transparentOccluder argument should be true if the occluding object is not opaque.
+/// The arguments must not be null.
+message DrawShadow {
+    /// Shadow color.
+    Color color = 1;
+    /// material elevation
+    float elevation = 2;
+    /// 
+    bool transparent_occluder = 3;
+}
+
+/// An immutable 32 bit color value in ARGB format.
+message Color {
+    /// Red component of the color
+    double r = 1;
+    /// Green component of the color
+    double g = 2;
+    /// Blue component of the color
+    double b = 3;
+    /// Alpha component of the color
+    double a = 4;
+}
+
+/// Sub-paths consist of segments of various types,
+message SubPath {
+    oneof code {
+        /// Adds a straight line segment from the current point to the given point.
+        Offset line_to = 1;
+        /// Adds a straight line segment from the current point to the point at the given offset from the current point.
+        Offset relative_line_to = 2;
+        /// Starts a new sub-path at the given coordinate.
+        Offset move_to = 3;
+        /// Starts a new sub-path at the given offset from the current point.
+        Offset realtive_move_to = 4;
+        /// Adds a new sub-path with one arc segment that consists of the arc that follows 
+        /// the edge of the oval bounded by the given rectangle, from startAngle radians around 
+        /// the oval up to startAngle + sweepAngle radians around the oval, with zero radians being 
+        /// the point on the right hand side of the oval that crosses the horizontal line that 
+        /// intersects the center of the rectangle and with positive angles going clockwise around the oval.
+        Arc arc = 5;
+        /// If the forceMoveTo argument is false, adds a straight line segment and an arc segment.
+        ArcTo arc_to = 6;
+        /// Appends up to four conic curves weighted to describe an oval of radius and rotated by rotation (measured in degrees and clockwise).
+        ArcToPoint arc_to_point = 7;
+        /// 
+        ArcToPoint relative_arc_to_point = 8;
+        /// 
+        Rect oval = 9;
+        /// 
+        ExtendWithPath path = 10;
+        /// 
+        Conic conic_to = 11;
+        ///
+        Conic relative_conic_to = 12;
+        /// 
+        Cubic cubic_to = 13;
+        ///
+        Cubic relative_cubic_to = 14;
+        /// 
+        QuadraticBezier quadratic_bezier_to = 15;
+        /// 
+        QuadraticBezier relative_quadratic_bezier_to = 16;
+        ///
+        Offset shift = 17;
+        /// 
+        Mat4 transform = 18;
+        ///
+        bool closed = 19;
+        /// 
+        RRect rrect = 20;
+    }
+}
+
+
+
+/// A complex, one-dimensional subset of a plane.
+/// A path consists of a number of sub-paths, and a current point.
+/// Sub-paths consist of segments of various types, such as lines, arcs, or beziers. Sub-paths can be open or closed, and can self-intersect.
+/// Closed sub-paths enclose a (possibly discontiguous) region of the plane based on the current fillType.
+/// The current point is initially at the origin. After each operation adding a segment to a sub-path, the current point is updated to the end of that segment.
+message Path {
+    /// 
+    repeated SubPath sub_paths = 1;
+}
+
+///
+message Conic {
+    /// 
+    Offset p1 = 1;
+    /// 
+    Offset p2 = 2;
+    /// If the weight is greater than 1, then the curve is a hyperbola; if the weight equals 1,
+    /// it's a parabola; and if it is less than 1, it is an ellipse.
+    float w = 3;
+}
+
+///
+message Cubic {
+    /// 
+    Offset p1 = 1;
+    /// 
+    Offset p2 = 2;
+    ///
+    float p3 = 3;
+}
+
+/// Adds a new sub-path with one arc segment that consists of the arc that follows 
+/// the edge of the oval bounded by the given rectangle, from startAngle radians around 
+/// the oval up to startAngle + sweepAngle radians around the oval, with zero radians being 
+/// the point on the right hand side of the oval that crosses the horizontal line that 
+/// intersects the center of the rectangle and with positive angles going clockwise around the oval.
+message Arc {
+    /// Oval
+    Rect oval = 1;
+    /// 
+    float start_angle = 2;
+    /// 
+    float sweep_angle = 3;
+}
+
+/// If the forceMoveTo argument is false, adds a straight line segment and an arc segment.
+message ArcTo {
+    /// Oval
+    Rect oval = 1;
+    /// 
+    float start_angle = 2;
+    /// 
+    float sweep_angle = 3;
+    /// 
+    bool force_move_to = 4;
+}
+
+/// Appends up to four conic curves weighted to describe an oval of radius and 
+/// rotated by rotation (measured in degrees and clockwise).
+message ArcToPoint {
+    /// 
+    Offset arc_end = 1;
+    /// Optional radius
+    optional Radius radius = 2;
+    /// 
+    optional double rotation = 3;
+    ///
+    optional bool large_arc = 4;
+    ///
+    optional bool clockwise = 5;
+    
+}
+
+/// A radius for either circular or elliptical shapes.
+message Radius {
+    oneof types {
+        /// Constructs a circular radius. x and y will have the same radius value.
+        float circular = 1;
+        /// Constructs an elliptical radius with the given radii.
+        Size elliptical = 2;
+    }
+}
+
+/// An immutable 2D floating-point offset.
+message Offset {
+    /// the horizontal component
+    float dx = 1;
+    /// the vectical component
+    float dy = 2;
+}
+
+/// Holds a 2D floating-point size.
+message Size {
+    /// width.
+    float width = 1;
+    /// height.
+    float height = 2;
+}
+
+/// An immutable, 2D, axis-aligned, floating-point rectangle whose coordinates are relative to a given origin.
+message Rect {
+    /// Rect left/top pointer.
+    Offset offset = 1;
+    /// Rect width/height size.
+    Size size = 2;
+}
+
+
+
+/// Adds the sub-paths of path, offset by offset, to this path. 
+/// The current sub-path is extended with the first sub-path of path, 
+/// connecting them with a lineTo if necessary.
+message ExtendWithPath {
+    /// append sub-paths of path.
+    Path path = 1;
+    /// offset to this path.
+    Offset offset = 2;
+    /// transformed by this matrix
+    optional Mat4 mat4 = 3;
+}
+
+/// Adds a quadratic bezier segment that curves from the current point to the given point (x2,y2), 
+/// using the control point (x1,y1).
+message QuadraticBezier {
+    /// 
+    Offset p1 = 1;
+    /// 
+    Offset p2 = 2;
+}
+
+/// A 4-dimensional vector.
+message Vec4 {
+    // point of X axis.
+    float x = 1;
+    // point of Y axis.
+    float y = 2;
+    // point of Z axis.
+    float z = 3;
+    // point of W axis.
+    float w = 4;
+}
+
+/// A 4x4 column major matrix.
+message Mat4 {
+    /// 
+    Vec4 x_axis = 1;
+    /// 
+    Vec4 y_axis = 2;
+    /// 
+    Vec4 z_axis = 3;
+    /// 
+    Vec4 w_axis = 4;
+}
+
+/// 
+message RRect {
+    /// 
+    Rect rect = 1;
+    /// 
+    Radius tl = 2;
+    /// 
+    Radius tr = 3;
+    /// 
+    Radius bl = 4;
+    /// 
+    Radius br = 5;
+}
