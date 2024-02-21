@@ -88,35 +88,6 @@ message DrawParagraph {
 
 /// A description of the style to use when drawing on a Canvas.
 message Paint {
-    /// Controls the performance vs quality trade-off to use when sampling bitmaps, as with an ImageShader, 
-    /// or when drawing images, as with Canvas.drawImage, Canvas.drawImageRect, Canvas.drawImageNine or Canvas.drawAtlas.
-    enum FilterQuality {
-        /// The fastest filtering method, albeit also the lowest quality.
-        ///
-        /// This value results in a "Nearest Neighbor" algorithm which just repeats or eliminates pixels as an image is scaled up or down.
-        None = 0;
-
-        /// Better quality than none, faster than medium.
-        /// This value results in a "Bilinear" algorithm which smoothly interpolates between pixels in an image.
-        Low = 1;
-
-        /// The best all around filtering method that is only worse than high at extremely large scale factors.
-        ///
-        /// This value improves upon the "Bilinear" algorithm specified by low by utilizing a Mipmap that pre-computes
-        /// high quality lower resolutions of the image at half (and quarter and eighth, etc.) sizes and then blends
-        /// between those to prevent loss of detail at small scale sizes.
-        Medium = 2;
-
-        /// Best possible quality when scaling up images by scale factors larger than 5-10x.
-        /// When images are scaled down, this can be worse than medium for scales smaller than 0.5x, or when animating the scale factor.
-        ///
-        /// This option is also the slowest.
-        ///
-        /// This value results in a standard "Bicubic" algorithm which uses a 3rd order equation to smooth the abrupt transitions between
-        /// pixels while preserving some of the sense of an edge and avoiding sharp peaks in the result.
-        Hight = 3;
-    }
-
     /// A blend mode to apply when a shape is drawn or a layer is composited.
     BlendMode blend_mode = 1;
     
@@ -136,34 +107,56 @@ message Paint {
     optional PaintStroke stroke = 6;
 }
 
+/// Controls the performance vs quality trade-off to use when sampling bitmaps, as with an ImageShader, 
+/// or when drawing images, as with Canvas.drawImage, Canvas.drawImageRect, Canvas.drawImageNine or Canvas.drawAtlas.
+enum FilterQuality {
+    /// The fastest filtering method, albeit also the lowest quality.
+    ///
+    /// This value results in a "Nearest Neighbor" algorithm which just repeats or eliminates pixels as an image is scaled up or down.
+    FilterQualityNone = 0;
+    /// Better quality than none, faster than medium.
+    /// This value results in a "Bilinear" algorithm which smoothly interpolates between pixels in an image.
+    FilterQualityLow = 1;
+    /// The best all around filtering method that is only worse than high at extremely large scale factors.
+    ///
+    /// This value improves upon the "Bilinear" algorithm specified by low by utilizing a Mipmap that pre-computes
+    /// high quality lower resolutions of the image at half (and quarter and eighth, etc.) sizes and then blends
+    /// between those to prevent loss of detail at small scale sizes.
+    FilterQualityMedium = 2;
+    /// Best possible quality when scaling up images by scale factors larger than 5-10x.
+    /// When images are scaled down, this can be worse than medium for scales smaller than 0.5x, or when animating the scale factor.
+    ///
+    /// This option is also the slowest.
+    ///
+    /// This value results in a standard "Bicubic" algorithm which uses a 3rd order equation to smooth the abrupt transitions between
+    /// pixels while preserving some of the sense of an edge and avoiding sharp peaks in the result.
+    FilterQualityHight = 3;
+}
+
+/// The kind of finish to place on the end of lines drawn when style is set to PaintingStyle.stroke.
+enum StrokeCap {
+    /// Begin and end contours with a flat edge and no extension.
+    StrokeCapButt = 0;
+    /// Begin and end contours with a semi-circle extension.
+    StrokeCapRound = 1;
+    /// Begin and end contours with a half square extension.
+    /// This is similar to extending each contour by half the stroke width (as given by Paint.strokeWidth).
+    StrokeCapSquare = 2;
+}
+
+/// 
+enum StrokeJoin {
+    /// Joins between line segments form sharp corners.
+    StrokeJoinMiter = 0;
+    /// Joins between line segments are semi-circular.
+    StrokeJoinRound = 1;
+    /// Joins between line segments connect the corners of the butt
+    /// ends of the line segments to give a beveled appearance.
+    StrokeJoinBevel = 2;
+}
+
 /// 
 message PaintStroke {
-    /// The kind of finish to place on the end of lines drawn when style is set to PaintingStyle.stroke.
-    enum StrokeCap {
-        /// Begin and end contours with a flat edge and no extension.
-        StrokeCapButt = 0;
-
-        /// Begin and end contours with a semi-circle extension.
-        StrokeCapRound = 1;
-
-        /// Begin and end contours with a half square extension.
-        /// This is similar to extending each contour by half the stroke width (as given by Paint.strokeWidth).
-        StrokeCapSquare = 2;
-    }
-
-    /// 
-    enum StrokeJoin {
-        /// Joins between line segments form sharp corners.
-        StrokeJoinMiter = 0;
-
-        /// Joins between line segments are semi-circular.
-        StrokeJoinRound = 1;
-
-        /// Joins between line segments connect the corners of the butt
-        /// ends of the line segments to give a beveled appearance.
-        StrokeJoinBevel = 2;
-    }
-
     /// The kind of finish to place on the end of lines drawn when style is set to [`PaintingStyle.Stroke`].
     StrokeCap stroke_cap = 1;
 

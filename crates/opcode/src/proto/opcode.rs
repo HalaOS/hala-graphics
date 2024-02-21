@@ -1574,7 +1574,7 @@ pub struct Paint {
     // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.color)
     pub color: ::protobuf::MessageField<Color>,
     // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.filter_quality)
-    pub filter_quality: ::protobuf::EnumOrUnknown<paint::FilterQuality>,
+    pub filter_quality: ::protobuf::EnumOrUnknown<FilterQuality>,
     // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.invert_color)
     pub invert_color: bool,
     // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.is_anti_alias)
@@ -1685,7 +1685,7 @@ impl ::protobuf::Message for Paint {
             let len = v.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         }
-        if self.filter_quality != ::protobuf::EnumOrUnknown::new(paint::FilterQuality::None) {
+        if self.filter_quality != ::protobuf::EnumOrUnknown::new(FilterQuality::FilterQualityNone) {
             my_size += ::protobuf::rt::int32_size(3, self.filter_quality.value());
         }
         if self.invert_color != false {
@@ -1710,7 +1710,7 @@ impl ::protobuf::Message for Paint {
         if let Some(v) = self.color.as_ref() {
             ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
         }
-        if self.filter_quality != ::protobuf::EnumOrUnknown::new(paint::FilterQuality::None) {
+        if self.filter_quality != ::protobuf::EnumOrUnknown::new(FilterQuality::FilterQualityNone) {
             os.write_enum(3, ::protobuf::EnumOrUnknown::value(&self.filter_quality))?;
         }
         if self.invert_color != false {
@@ -1741,7 +1741,7 @@ impl ::protobuf::Message for Paint {
     fn clear(&mut self) {
         self.blend_mode = ::protobuf::EnumOrUnknown::new(BlendMode::Clear);
         self.color.clear();
-        self.filter_quality = ::protobuf::EnumOrUnknown::new(paint::FilterQuality::None);
+        self.filter_quality = ::protobuf::EnumOrUnknown::new(FilterQuality::FilterQualityNone);
         self.invert_color = false;
         self.is_anti_alias = false;
         self.stroke.clear();
@@ -1779,89 +1779,14 @@ impl ::protobuf::reflect::ProtobufValue for Paint {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-/// Nested message and enums of message `Paint`
-pub mod paint {
-    #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-    // @@protoc_insertion_point(enum:hala.canvas.opcode.Paint.FilterQuality)
-    pub enum FilterQuality {
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.Paint.FilterQuality.None)
-        None = 0,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.Paint.FilterQuality.Low)
-        Low = 1,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.Paint.FilterQuality.Medium)
-        Medium = 2,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.Paint.FilterQuality.Hight)
-        Hight = 3,
-    }
-
-    impl ::protobuf::Enum for FilterQuality {
-        const NAME: &'static str = "FilterQuality";
-
-        fn value(&self) -> i32 {
-            *self as i32
-        }
-
-        fn from_i32(value: i32) -> ::std::option::Option<FilterQuality> {
-            match value {
-                0 => ::std::option::Option::Some(FilterQuality::None),
-                1 => ::std::option::Option::Some(FilterQuality::Low),
-                2 => ::std::option::Option::Some(FilterQuality::Medium),
-                3 => ::std::option::Option::Some(FilterQuality::Hight),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        fn from_str(str: &str) -> ::std::option::Option<FilterQuality> {
-            match str {
-                "None" => ::std::option::Option::Some(FilterQuality::None),
-                "Low" => ::std::option::Option::Some(FilterQuality::Low),
-                "Medium" => ::std::option::Option::Some(FilterQuality::Medium),
-                "Hight" => ::std::option::Option::Some(FilterQuality::Hight),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        const VALUES: &'static [FilterQuality] = &[
-            FilterQuality::None,
-            FilterQuality::Low,
-            FilterQuality::Medium,
-            FilterQuality::Hight,
-        ];
-    }
-
-    impl ::protobuf::EnumFull for FilterQuality {
-        fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| super::file_descriptor().enum_by_package_relative_name("Paint.FilterQuality").unwrap()).clone()
-        }
-
-        fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
-            let index = *self as usize;
-            Self::enum_descriptor().value_by_index(index)
-        }
-    }
-
-    impl ::std::default::Default for FilterQuality {
-        fn default() -> Self {
-            FilterQuality::None
-        }
-    }
-
-    impl FilterQuality {
-        pub(in super) fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
-            ::protobuf::reflect::GeneratedEnumDescriptorData::new::<FilterQuality>("Paint.FilterQuality")
-        }
-    }
-}
-
 // @@protoc_insertion_point(message:hala.canvas.opcode.PaintStroke)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct PaintStroke {
     // message fields
     // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_cap)
-    pub stroke_cap: ::protobuf::EnumOrUnknown<paint_stroke::StrokeCap>,
+    pub stroke_cap: ::protobuf::EnumOrUnknown<StrokeCap>,
     // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_join)
-    pub stroke_join: ::protobuf::EnumOrUnknown<paint_stroke::StrokeJoin>,
+    pub stroke_join: ::protobuf::EnumOrUnknown<StrokeJoin>,
     // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_miter_limit)
     pub stroke_miter_limit: f32,
     // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_width)
@@ -1947,10 +1872,10 @@ impl ::protobuf::Message for PaintStroke {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u64 {
         let mut my_size = 0;
-        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(paint_stroke::StrokeCap::StrokeCapButt) {
+        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(StrokeCap::StrokeCapButt) {
             my_size += ::protobuf::rt::int32_size(1, self.stroke_cap.value());
         }
-        if self.stroke_join != ::protobuf::EnumOrUnknown::new(paint_stroke::StrokeJoin::StrokeJoinMiter) {
+        if self.stroke_join != ::protobuf::EnumOrUnknown::new(StrokeJoin::StrokeJoinMiter) {
             my_size += ::protobuf::rt::int32_size(2, self.stroke_join.value());
         }
         if self.stroke_miter_limit != 0. {
@@ -1965,10 +1890,10 @@ impl ::protobuf::Message for PaintStroke {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(paint_stroke::StrokeCap::StrokeCapButt) {
+        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(StrokeCap::StrokeCapButt) {
             os.write_enum(1, ::protobuf::EnumOrUnknown::value(&self.stroke_cap))?;
         }
-        if self.stroke_join != ::protobuf::EnumOrUnknown::new(paint_stroke::StrokeJoin::StrokeJoinMiter) {
+        if self.stroke_join != ::protobuf::EnumOrUnknown::new(StrokeJoin::StrokeJoinMiter) {
             os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.stroke_join))?;
         }
         if self.stroke_miter_limit != 0. {
@@ -1994,8 +1919,8 @@ impl ::protobuf::Message for PaintStroke {
     }
 
     fn clear(&mut self) {
-        self.stroke_cap = ::protobuf::EnumOrUnknown::new(paint_stroke::StrokeCap::StrokeCapButt);
-        self.stroke_join = ::protobuf::EnumOrUnknown::new(paint_stroke::StrokeJoin::StrokeJoinMiter);
+        self.stroke_cap = ::protobuf::EnumOrUnknown::new(StrokeCap::StrokeCapButt);
+        self.stroke_join = ::protobuf::EnumOrUnknown::new(StrokeJoin::StrokeJoinMiter);
         self.stroke_miter_limit = 0.;
         self.stroke_width = 0.;
         self.special_fields.clear();
@@ -2028,143 +1953,6 @@ impl ::std::fmt::Display for PaintStroke {
 
 impl ::protobuf::reflect::ProtobufValue for PaintStroke {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-/// Nested message and enums of message `PaintStroke`
-pub mod paint_stroke {
-    #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-    // @@protoc_insertion_point(enum:hala.canvas.opcode.PaintStroke.StrokeCap)
-    pub enum StrokeCap {
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.PaintStroke.StrokeCap.StrokeCapButt)
-        StrokeCapButt = 0,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.PaintStroke.StrokeCap.StrokeCapRound)
-        StrokeCapRound = 1,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.PaintStroke.StrokeCap.StrokeCapSquare)
-        StrokeCapSquare = 2,
-    }
-
-    impl ::protobuf::Enum for StrokeCap {
-        const NAME: &'static str = "StrokeCap";
-
-        fn value(&self) -> i32 {
-            *self as i32
-        }
-
-        fn from_i32(value: i32) -> ::std::option::Option<StrokeCap> {
-            match value {
-                0 => ::std::option::Option::Some(StrokeCap::StrokeCapButt),
-                1 => ::std::option::Option::Some(StrokeCap::StrokeCapRound),
-                2 => ::std::option::Option::Some(StrokeCap::StrokeCapSquare),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        fn from_str(str: &str) -> ::std::option::Option<StrokeCap> {
-            match str {
-                "StrokeCapButt" => ::std::option::Option::Some(StrokeCap::StrokeCapButt),
-                "StrokeCapRound" => ::std::option::Option::Some(StrokeCap::StrokeCapRound),
-                "StrokeCapSquare" => ::std::option::Option::Some(StrokeCap::StrokeCapSquare),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        const VALUES: &'static [StrokeCap] = &[
-            StrokeCap::StrokeCapButt,
-            StrokeCap::StrokeCapRound,
-            StrokeCap::StrokeCapSquare,
-        ];
-    }
-
-    impl ::protobuf::EnumFull for StrokeCap {
-        fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| super::file_descriptor().enum_by_package_relative_name("PaintStroke.StrokeCap").unwrap()).clone()
-        }
-
-        fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
-            let index = *self as usize;
-            Self::enum_descriptor().value_by_index(index)
-        }
-    }
-
-    impl ::std::default::Default for StrokeCap {
-        fn default() -> Self {
-            StrokeCap::StrokeCapButt
-        }
-    }
-
-    impl StrokeCap {
-        pub(in super) fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
-            ::protobuf::reflect::GeneratedEnumDescriptorData::new::<StrokeCap>("PaintStroke.StrokeCap")
-        }
-    }
-
-    #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-    // @@protoc_insertion_point(enum:hala.canvas.opcode.PaintStroke.StrokeJoin)
-    pub enum StrokeJoin {
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.PaintStroke.StrokeJoin.StrokeJoinMiter)
-        StrokeJoinMiter = 0,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.PaintStroke.StrokeJoin.StrokeJoinRound)
-        StrokeJoinRound = 1,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.PaintStroke.StrokeJoin.StrokeJoinBevel)
-        StrokeJoinBevel = 2,
-    }
-
-    impl ::protobuf::Enum for StrokeJoin {
-        const NAME: &'static str = "StrokeJoin";
-
-        fn value(&self) -> i32 {
-            *self as i32
-        }
-
-        fn from_i32(value: i32) -> ::std::option::Option<StrokeJoin> {
-            match value {
-                0 => ::std::option::Option::Some(StrokeJoin::StrokeJoinMiter),
-                1 => ::std::option::Option::Some(StrokeJoin::StrokeJoinRound),
-                2 => ::std::option::Option::Some(StrokeJoin::StrokeJoinBevel),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        fn from_str(str: &str) -> ::std::option::Option<StrokeJoin> {
-            match str {
-                "StrokeJoinMiter" => ::std::option::Option::Some(StrokeJoin::StrokeJoinMiter),
-                "StrokeJoinRound" => ::std::option::Option::Some(StrokeJoin::StrokeJoinRound),
-                "StrokeJoinBevel" => ::std::option::Option::Some(StrokeJoin::StrokeJoinBevel),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        const VALUES: &'static [StrokeJoin] = &[
-            StrokeJoin::StrokeJoinMiter,
-            StrokeJoin::StrokeJoinRound,
-            StrokeJoin::StrokeJoinBevel,
-        ];
-    }
-
-    impl ::protobuf::EnumFull for StrokeJoin {
-        fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| super::file_descriptor().enum_by_package_relative_name("PaintStroke.StrokeJoin").unwrap()).clone()
-        }
-
-        fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
-            let index = *self as usize;
-            Self::enum_descriptor().value_by_index(index)
-        }
-    }
-
-    impl ::std::default::Default for StrokeJoin {
-        fn default() -> Self {
-            StrokeJoin::StrokeJoinMiter
-        }
-    }
-
-    impl StrokeJoin {
-        pub(in super) fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
-            ::protobuf::reflect::GeneratedEnumDescriptorData::new::<StrokeJoin>("PaintStroke.StrokeJoin")
-        }
-    }
 }
 
 // @@protoc_insertion_point(message:hala.canvas.opcode.Image)
@@ -8124,6 +7912,212 @@ impl ::protobuf::reflect::ProtobufValue for RRect {
 }
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:hala.canvas.opcode.FilterQuality)
+pub enum FilterQuality {
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityNone)
+    FilterQualityNone = 0,
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityLow)
+    FilterQualityLow = 1,
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityMedium)
+    FilterQualityMedium = 2,
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityHight)
+    FilterQualityHight = 3,
+}
+
+impl ::protobuf::Enum for FilterQuality {
+    const NAME: &'static str = "FilterQuality";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<FilterQuality> {
+        match value {
+            0 => ::std::option::Option::Some(FilterQuality::FilterQualityNone),
+            1 => ::std::option::Option::Some(FilterQuality::FilterQualityLow),
+            2 => ::std::option::Option::Some(FilterQuality::FilterQualityMedium),
+            3 => ::std::option::Option::Some(FilterQuality::FilterQualityHight),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<FilterQuality> {
+        match str {
+            "FilterQualityNone" => ::std::option::Option::Some(FilterQuality::FilterQualityNone),
+            "FilterQualityLow" => ::std::option::Option::Some(FilterQuality::FilterQualityLow),
+            "FilterQualityMedium" => ::std::option::Option::Some(FilterQuality::FilterQualityMedium),
+            "FilterQualityHight" => ::std::option::Option::Some(FilterQuality::FilterQualityHight),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [FilterQuality] = &[
+        FilterQuality::FilterQualityNone,
+        FilterQuality::FilterQualityLow,
+        FilterQuality::FilterQualityMedium,
+        FilterQuality::FilterQualityHight,
+    ];
+}
+
+impl ::protobuf::EnumFull for FilterQuality {
+    fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().enum_by_package_relative_name("FilterQuality").unwrap()).clone()
+    }
+
+    fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
+        let index = *self as usize;
+        Self::enum_descriptor().value_by_index(index)
+    }
+}
+
+impl ::std::default::Default for FilterQuality {
+    fn default() -> Self {
+        FilterQuality::FilterQualityNone
+    }
+}
+
+impl FilterQuality {
+    fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
+        ::protobuf::reflect::GeneratedEnumDescriptorData::new::<FilterQuality>("FilterQuality")
+    }
+}
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:hala.canvas.opcode.StrokeCap)
+pub enum StrokeCap {
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeCap.StrokeCapButt)
+    StrokeCapButt = 0,
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeCap.StrokeCapRound)
+    StrokeCapRound = 1,
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeCap.StrokeCapSquare)
+    StrokeCapSquare = 2,
+}
+
+impl ::protobuf::Enum for StrokeCap {
+    const NAME: &'static str = "StrokeCap";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<StrokeCap> {
+        match value {
+            0 => ::std::option::Option::Some(StrokeCap::StrokeCapButt),
+            1 => ::std::option::Option::Some(StrokeCap::StrokeCapRound),
+            2 => ::std::option::Option::Some(StrokeCap::StrokeCapSquare),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<StrokeCap> {
+        match str {
+            "StrokeCapButt" => ::std::option::Option::Some(StrokeCap::StrokeCapButt),
+            "StrokeCapRound" => ::std::option::Option::Some(StrokeCap::StrokeCapRound),
+            "StrokeCapSquare" => ::std::option::Option::Some(StrokeCap::StrokeCapSquare),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [StrokeCap] = &[
+        StrokeCap::StrokeCapButt,
+        StrokeCap::StrokeCapRound,
+        StrokeCap::StrokeCapSquare,
+    ];
+}
+
+impl ::protobuf::EnumFull for StrokeCap {
+    fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().enum_by_package_relative_name("StrokeCap").unwrap()).clone()
+    }
+
+    fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
+        let index = *self as usize;
+        Self::enum_descriptor().value_by_index(index)
+    }
+}
+
+impl ::std::default::Default for StrokeCap {
+    fn default() -> Self {
+        StrokeCap::StrokeCapButt
+    }
+}
+
+impl StrokeCap {
+    fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
+        ::protobuf::reflect::GeneratedEnumDescriptorData::new::<StrokeCap>("StrokeCap")
+    }
+}
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:hala.canvas.opcode.StrokeJoin)
+pub enum StrokeJoin {
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeJoin.StrokeJoinMiter)
+    StrokeJoinMiter = 0,
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeJoin.StrokeJoinRound)
+    StrokeJoinRound = 1,
+    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeJoin.StrokeJoinBevel)
+    StrokeJoinBevel = 2,
+}
+
+impl ::protobuf::Enum for StrokeJoin {
+    const NAME: &'static str = "StrokeJoin";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<StrokeJoin> {
+        match value {
+            0 => ::std::option::Option::Some(StrokeJoin::StrokeJoinMiter),
+            1 => ::std::option::Option::Some(StrokeJoin::StrokeJoinRound),
+            2 => ::std::option::Option::Some(StrokeJoin::StrokeJoinBevel),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<StrokeJoin> {
+        match str {
+            "StrokeJoinMiter" => ::std::option::Option::Some(StrokeJoin::StrokeJoinMiter),
+            "StrokeJoinRound" => ::std::option::Option::Some(StrokeJoin::StrokeJoinRound),
+            "StrokeJoinBevel" => ::std::option::Option::Some(StrokeJoin::StrokeJoinBevel),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [StrokeJoin] = &[
+        StrokeJoin::StrokeJoinMiter,
+        StrokeJoin::StrokeJoinRound,
+        StrokeJoin::StrokeJoinBevel,
+    ];
+}
+
+impl ::protobuf::EnumFull for StrokeJoin {
+    fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().enum_by_package_relative_name("StrokeJoin").unwrap()).clone()
+    }
+
+    fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
+        let index = *self as usize;
+        Self::enum_descriptor().value_by_index(index)
+    }
+}
+
+impl ::std::default::Default for StrokeJoin {
+    fn default() -> Self {
+        StrokeJoin::StrokeJoinMiter
+    }
+}
+
+impl StrokeJoin {
+    fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
+        ::protobuf::reflect::GeneratedEnumDescriptorData::new::<StrokeJoin>("StrokeJoin")
+    }
+}
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
 // @@protoc_insertion_point(enum:hala.canvas.opcode.BlendMode)
 pub enum BlendMode {
     // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Clear)
@@ -8380,141 +8374,142 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     rinsicWidth\x12\x14\n\x05width\x18\x08\x20\x01(\x02R\x05width\"\x80\x01\
     \n\rDrawParagraph\x12;\n\tparagraph\x18\x01\x20\x01(\x0b2\x1d.hala.canva\
     s.opcode.ParagraphR\tparagraph\x122\n\x06offset\x18\x02\x20\x01(\x0b2\
-    \x1a.hala.canvas.opcode.OffsetR\x06offset\"\x91\x03\n\x05Paint\x12<\n\nb\
+    \x1a.hala.canvas.opcode.OffsetR\x06offset\"\xd0\x02\n\x05Paint\x12<\n\nb\
     lend_mode\x18\x01\x20\x01(\x0e2\x1d.hala.canvas.opcode.BlendModeR\tblend\
     Mode\x12/\n\x05color\x18\x02\x20\x01(\x0b2\x19.hala.canvas.opcode.ColorR\
-    \x05color\x12N\n\x0efilter_quality\x18\x03\x20\x01(\x0e2'.hala.canvas.op\
-    code.Paint.FilterQualityR\rfilterQuality\x12!\n\x0cinvert_color\x18\x04\
-    \x20\x01(\x08R\x0binvertColor\x12\"\n\ris_anti_alias\x18\x05\x20\x01(\
-    \x08R\x0bisAntiAlias\x12<\n\x06stroke\x18\x06\x20\x01(\x0b2\x1f.hala.can\
-    vas.opcode.PaintStrokeH\0R\x06stroke\x88\x01\x01\"9\n\rFilterQuality\x12\
-    \x08\n\x04None\x10\0\x12\x07\n\x03Low\x10\x01\x12\n\n\x06Medium\x10\x02\
-    \x12\t\n\x05Hight\x10\x03B\t\n\x07_stroke\"\x8b\x03\n\x0bPaintStroke\x12\
-    H\n\nstroke_cap\x18\x01\x20\x01(\x0e2).hala.canvas.opcode.PaintStroke.St\
-    rokeCapR\tstrokeCap\x12K\n\x0bstroke_join\x18\x02\x20\x01(\x0e2*.hala.ca\
-    nvas.opcode.PaintStroke.StrokeJoinR\nstrokeJoin\x12,\n\x12stroke_miter_l\
-    imit\x18\x03\x20\x01(\x02R\x10strokeMiterLimit\x12!\n\x0cstroke_width\
-    \x18\x04\x20\x01(\x02R\x0bstrokeWidth\"G\n\tStrokeCap\x12\x11\n\rStrokeC\
-    apButt\x10\0\x12\x12\n\x0eStrokeCapRound\x10\x01\x12\x13\n\x0fStrokeCapS\
-    quare\x10\x02\"K\n\nStrokeJoin\x12\x13\n\x0fStrokeJoinMiter\x10\0\x12\
-    \x13\n\x0fStrokeJoinRound\x10\x01\x12\x13\n\x0fStrokeJoinBevel\x10\x02\"\
-    &\n\x05Image\x12\x14\n\x04path\x18\x01\x20\x01(\tH\0R\x04pathB\x07\n\x05\
-    image\"\xa1\x01\n\tDrawImage\x12/\n\x05image\x18\x01\x20\x01(\x0b2\x19.h\
-    ala.canvas.opcode.ImageR\x05image\x122\n\x06offset\x18\x02\x20\x01(\x0b2\
-    \x1a.hala.canvas.opcode.OffsetR\x06offset\x12/\n\x05paint\x18\x03\x20\
-    \x01(\x0b2\x19.hala.canvas.opcode.PaintR\x05paint\"\xc9\x01\n\rDrawImage\
-    Rect\x12/\n\x05image\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.ImageR\
-    \x05image\x12*\n\x03src\x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.Rec\
-    tR\x03src\x12*\n\x03dst\x18\x03\x20\x01(\x0b2\x18.hala.canvas.opcode.Rec\
-    tR\x03dst\x12/\n\x05paint\x18\x04\x20\x01(\x0b2\x19.hala.canvas.opcode.P\
-    aintR\x05paint\"i\n\x08DrawPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\x18\
-    .hala.canvas.opcode.PathR\x04path\x12/\n\x05paint\x18\x02\x20\x01(\x0b2\
-    \x19.hala.canvas.opcode.PaintR\x05paint\"\\\n\x08ClipPath\x12,\n\x04path\
-    \x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.PathR\x04path\x12\"\n\rdo_\
-    anti_alias\x18\x02\x20\x01(\x08R\x0bdoAntiAlias\"\xc3\x01\n\x08ClipRect\
-    \x12,\n\x04rect\x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\x04re\
-    ct\x12<\n\x07clip_op\x18\x02\x20\x01(\x0e2#.hala.canvas.opcode.ClipRect.\
-    ClipOpR\x06clipOp\x12\"\n\rdo_anti_alias\x18\x03\x20\x01(\x08R\x0bdoAnti\
-    Alias\"'\n\x06ClipOp\x12\x0e\n\nDifference\x10\0\x12\r\n\tIntersect\x10\
-    \x01\"`\n\tClipRRect\x12/\n\x05rrect\x18\x01\x20\x01(\x0b2\x19.hala.canv\
-    as.opcode.RRectR\x05rrect\x12\"\n\rdo_anti_alias\x18\x02\x20\x01(\x08R\
-    \x0bdoAntiAlias\"z\n\tDrawColor\x12/\n\x05color\x18\x01\x20\x01(\x0b2\
-    \x19.hala.canvas.opcode.ColorR\x05color\x12<\n\nblend_mode\x18\x02\x20\
-    \x01(\x0e2\x1d.hala.canvas.opcode.BlendModeR\tblendMode\"3\n\x05Scale\
-    \x12\x0e\n\x02sx\x18\x01\x20\x01(\x02R\x02sx\x12\x13\n\x02sy\x18\x02\x20\
-    \x01(\x02H\0R\x02sy\x88\x01\x01B\x05\n\x03_sy\"&\n\x04Skew\x12\x0e\n\x02\
-    sx\x18\x01\x20\x01(\x02R\x02sx\x12\x0e\n\x02sy\x18\x02\x20\x01(\x02R\x02\
-    sy\"\x8e\x01\n\nDrawShadow\x12/\n\x05color\x18\x01\x20\x01(\x0b2\x19.hal\
-    a.canvas.opcode.ColorR\x05color\x12\x1c\n\televation\x18\x02\x20\x01(\
-    \x02R\televation\x121\n\x14transparent_occluder\x18\x03\x20\x01(\x08R\
-    \x13transparentOccluder\"?\n\x05Color\x12\x0c\n\x01r\x18\x01\x20\x01(\
-    \x01R\x01r\x12\x0c\n\x01g\x18\x02\x20\x01(\x01R\x01g\x12\x0c\n\x01b\x18\
-    \x03\x20\x01(\x01R\x01b\x12\x0c\n\x01a\x18\x04\x20\x01(\x01R\x01a\"\xef\
-    \t\n\x07SubPath\x125\n\x07line_to\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.\
-    opcode.OffsetH\0R\x06lineTo\x12F\n\x10relative_line_to\x18\x02\x20\x01(\
-    \x0b2\x1a.hala.canvas.opcode.OffsetH\0R\x0erelativeLineTo\x125\n\x07move\
-    _to\x18\x03\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetH\0R\x06moveTo\
-    \x12F\n\x10realtive_move_to\x18\x04\x20\x01(\x0b2\x1a.hala.canvas.opcode\
-    .OffsetH\0R\x0erealtiveMoveTo\x12+\n\x03arc\x18\x05\x20\x01(\x0b2\x17.ha\
-    la.canvas.opcode.ArcH\0R\x03arc\x122\n\x06arc_to\x18\x06\x20\x01(\x0b2\
-    \x19.hala.canvas.opcode.ArcToH\0R\x05arcTo\x12B\n\x0carc_to_point\x18\
-    \x07\x20\x01(\x0b2\x1e.hala.canvas.opcode.ArcToPointH\0R\narcToPoint\x12\
-    S\n\x15relative_arc_to_point\x18\x08\x20\x01(\x0b2\x1e.hala.canvas.opcod\
-    e.ArcToPointH\0R\x12relativeArcToPoint\x12.\n\x04oval\x18\t\x20\x01(\x0b\
-    2\x18.hala.canvas.opcode.RectH\0R\x04oval\x128\n\x04path\x18\n\x20\x01(\
-    \x0b2\".hala.canvas.opcode.ExtendWithPathH\0R\x04path\x126\n\x08conic_to\
-    \x18\x0b\x20\x01(\x0b2\x19.hala.canvas.opcode.ConicH\0R\x07conicTo\x12G\
-    \n\x11relative_conic_to\x18\x0c\x20\x01(\x0b2\x19.hala.canvas.opcode.Con\
-    icH\0R\x0frelativeConicTo\x126\n\x08cubic_to\x18\r\x20\x01(\x0b2\x19.hal\
-    a.canvas.opcode.CubicH\0R\x07cubicTo\x12G\n\x11relative_cubic_to\x18\x0e\
-    \x20\x01(\x0b2\x19.hala.canvas.opcode.CubicH\0R\x0frelativeCubicTo\x12U\
-    \n\x13quadratic_bezier_to\x18\x0f\x20\x01(\x0b2#.hala.canvas.opcode.Quad\
-    raticBezierH\0R\x11quadraticBezierTo\x12f\n\x1crelative_quadratic_bezier\
-    _to\x18\x10\x20\x01(\x0b2#.hala.canvas.opcode.QuadraticBezierH\0R\x19rel\
-    ativeQuadraticBezierTo\x122\n\x05shift\x18\x11\x20\x01(\x0b2\x1a.hala.ca\
-    nvas.opcode.OffsetH\0R\x05shift\x128\n\ttransform\x18\x12\x20\x01(\x0b2\
-    \x18.hala.canvas.opcode.Mat4H\0R\ttransform\x12\x18\n\x06closed\x18\x13\
-    \x20\x01(\x08H\0R\x06closed\x121\n\x05rrect\x18\x14\x20\x01(\x0b2\x19.ha\
-    la.canvas.opcode.RRectH\0R\x05rrectB\x06\n\x04code\"@\n\x04Path\x128\n\t\
-    sub_paths\x18\x01\x20\x03(\x0b2\x1b.hala.canvas.opcode.SubPathR\x08subPa\
-    ths\"m\n\x05Conic\x12*\n\x02p1\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opc\
-    ode.OffsetR\x02p1\x12*\n\x02p2\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opc\
-    ode.OffsetR\x02p2\x12\x0c\n\x01w\x18\x03\x20\x01(\x02R\x01w\"o\n\x05Cubi\
-    c\x12*\n\x02p1\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p\
-    1\x12*\n\x02p2\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p\
-    2\x12\x0e\n\x02p3\x18\x03\x20\x01(\x02R\x02p3\"u\n\x03Arc\x12,\n\x04oval\
-    \x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\x04oval\x12\x1f\n\
-    \x0bstart_angle\x18\x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_ang\
-    le\x18\x03\x20\x01(\x02R\nsweepAngle\"\x9b\x01\n\x05ArcTo\x12,\n\x04oval\
-    \x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\x04oval\x12\x1f\n\
-    \x0bstart_angle\x18\x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_ang\
-    le\x18\x03\x20\x01(\x02R\nsweepAngle\x12\"\n\rforce_move_to\x18\x04\x20\
-    \x01(\x08R\x0bforceMoveTo\"\x94\x02\n\nArcToPoint\x123\n\x07arc_end\x18\
-    \x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x06arcEnd\x127\n\x06ra\
-    dius\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.RadiusH\0R\x06radius\
-    \x88\x01\x01\x12\x1f\n\x08rotation\x18\x03\x20\x01(\x01H\x01R\x08rotatio\
-    n\x88\x01\x01\x12\x20\n\tlarge_arc\x18\x04\x20\x01(\x08H\x02R\x08largeAr\
-    c\x88\x01\x01\x12!\n\tclockwise\x18\x05\x20\x01(\x08H\x03R\tclockwise\
-    \x88\x01\x01B\t\n\x07_radiusB\x0b\n\t_rotationB\x0c\n\n_large_arcB\x0c\n\
-    \n_clockwise\"k\n\x06Radius\x12\x1c\n\x08circular\x18\x01\x20\x01(\x02H\
-    \0R\x08circular\x12:\n\nelliptical\x18\x02\x20\x01(\x0b2\x18.hala.canvas\
-    .opcode.SizeH\0R\nellipticalB\x07\n\x05types\"(\n\x06Offset\x12\x0e\n\
-    \x02dx\x18\x01\x20\x01(\x02R\x02dx\x12\x0e\n\x02dy\x18\x02\x20\x01(\x02R\
-    \x02dy\"4\n\x04Size\x12\x14\n\x05width\x18\x01\x20\x01(\x02R\x05width\
-    \x12\x16\n\x06height\x18\x02\x20\x01(\x02R\x06height\"h\n\x04Rect\x122\n\
-    \x06offset\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x06offse\
-    t\x12,\n\x04size\x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.SizeR\x04s\
-    ize\"\xae\x01\n\x0eExtendWithPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\
-    \x18.hala.canvas.opcode.PathR\x04path\x122\n\x06offset\x18\x02\x20\x01(\
-    \x0b2\x1a.hala.canvas.opcode.OffsetR\x06offset\x121\n\x04mat4\x18\x03\
-    \x20\x01(\x0b2\x18.hala.canvas.opcode.Mat4H\0R\x04mat4\x88\x01\x01B\x07\
-    \n\x05_mat4\"i\n\x0fQuadraticBezier\x12*\n\x02p1\x18\x01\x20\x01(\x0b2\
-    \x1a.hala.canvas.opcode.OffsetR\x02p1\x12*\n\x02p2\x18\x02\x20\x01(\x0b2\
-    \x1a.hala.canvas.opcode.OffsetR\x02p2\">\n\x04Vec4\x12\x0c\n\x01x\x18\
-    \x01\x20\x01(\x02R\x01x\x12\x0c\n\x01y\x18\x02\x20\x01(\x02R\x01y\x12\
-    \x0c\n\x01z\x18\x03\x20\x01(\x02R\x01z\x12\x0c\n\x01w\x18\x04\x20\x01(\
-    \x02R\x01w\"\xca\x01\n\x04Mat4\x12/\n\x06x_axis\x18\x01\x20\x01(\x0b2\
-    \x18.hala.canvas.opcode.Vec4R\x05xAxis\x12/\n\x06y_axis\x18\x02\x20\x01(\
-    \x0b2\x18.hala.canvas.opcode.Vec4R\x05yAxis\x12/\n\x06z_axis\x18\x03\x20\
-    \x01(\x0b2\x18.hala.canvas.opcode.Vec4R\x05zAxis\x12/\n\x06w_axis\x18\
-    \x04\x20\x01(\x0b2\x18.hala.canvas.opcode.Vec4R\x05wAxis\"\xe5\x01\n\x05\
-    RRect\x12,\n\x04rect\x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\
-    \x04rect\x12*\n\x02tl\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.Radiu\
-    sR\x02tl\x12*\n\x02tr\x18\x03\x20\x01(\x0b2\x1a.hala.canvas.opcode.Radiu\
-    sR\x02tr\x12*\n\x02bl\x18\x04\x20\x01(\x0b2\x1a.hala.canvas.opcode.Radiu\
-    sR\x02bl\x12*\n\x02br\x18\x05\x20\x01(\x0b2\x1a.hala.canvas.opcode.Radiu\
-    sR\x02br*\x84\x03\n\tBlendMode\x12\t\n\x05Clear\x10\0\x12\x07\n\x03Src\
-    \x10\x02\x12\x07\n\x03Dst\x10\x03\x12\x0b\n\x07SrcOver\x10\x04\x12\x0b\n\
-    \x07DstOver\x10\x05\x12\t\n\x05SrcIn\x10\x06\x12\t\n\x05DstIn\x10\x07\
-    \x12\n\n\x06SrcOut\x10\x08\x12\n\n\x06DstOut\x10\t\x12\x0b\n\x07SrcATop\
-    \x10\n\x12\x0b\n\x07DstATop\x10\x0b\x12\x07\n\x03Xor\x10\x0c\x12\x08\n\
-    \x04Plus\x10\r\x12\x0c\n\x08Modulate\x10\x0e\x12\n\n\x06Screen\x10\x0f\
-    \x12\x0b\n\x07Overlay\x10\x10\x12\n\n\x06Darken\x10\x11\x12\x0b\n\x07Lig\
-    hten\x10\x12\x12\x0e\n\nColorDodge\x10\x13\x12\r\n\tColorBurn\x10\x14\
-    \x12\r\n\tHardLight\x10\x15\x12\r\n\tSoftLight\x10\x16\x12\x0e\n\nDiffer\
-    ence\x10\x17\x12\r\n\tExclusion\x10\x18\x12\x0c\n\x08Multiply\x10\x19\
-    \x12\x07\n\x03Hue\x10\x1a\x12\x0e\n\nSaturation\x10\x1b\x12\x12\n\x0eBle\
-    ndModeColor\x10\x1c\x12\x0e\n\nLuminosity\x10\x1db\x06proto3\
+    \x05color\x12H\n\x0efilter_quality\x18\x03\x20\x01(\x0e2!.hala.canvas.op\
+    code.FilterQualityR\rfilterQuality\x12!\n\x0cinvert_color\x18\x04\x20\
+    \x01(\x08R\x0binvertColor\x12\"\n\ris_anti_alias\x18\x05\x20\x01(\x08R\
+    \x0bisAntiAlias\x12<\n\x06stroke\x18\x06\x20\x01(\x0b2\x1f.hala.canvas.o\
+    pcode.PaintStrokeH\0R\x06stroke\x88\x01\x01B\t\n\x07_stroke\"\xdd\x01\n\
+    \x0bPaintStroke\x12<\n\nstroke_cap\x18\x01\x20\x01(\x0e2\x1d.hala.canvas\
+    .opcode.StrokeCapR\tstrokeCap\x12?\n\x0bstroke_join\x18\x02\x20\x01(\x0e\
+    2\x1e.hala.canvas.opcode.StrokeJoinR\nstrokeJoin\x12,\n\x12stroke_miter_\
+    limit\x18\x03\x20\x01(\x02R\x10strokeMiterLimit\x12!\n\x0cstroke_width\
+    \x18\x04\x20\x01(\x02R\x0bstrokeWidth\"&\n\x05Image\x12\x14\n\x04path\
+    \x18\x01\x20\x01(\tH\0R\x04pathB\x07\n\x05image\"\xa1\x01\n\tDrawImage\
+    \x12/\n\x05image\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.ImageR\x05\
+    image\x122\n\x06offset\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.Offs\
+    etR\x06offset\x12/\n\x05paint\x18\x03\x20\x01(\x0b2\x19.hala.canvas.opco\
+    de.PaintR\x05paint\"\xc9\x01\n\rDrawImageRect\x12/\n\x05image\x18\x01\
+    \x20\x01(\x0b2\x19.hala.canvas.opcode.ImageR\x05image\x12*\n\x03src\x18\
+    \x02\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\x03src\x12*\n\x03dst\x18\
+    \x03\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\x03dst\x12/\n\x05paint\
+    \x18\x04\x20\x01(\x0b2\x19.hala.canvas.opcode.PaintR\x05paint\"i\n\x08Dr\
+    awPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.PathR\
+    \x04path\x12/\n\x05paint\x18\x02\x20\x01(\x0b2\x19.hala.canvas.opcode.Pa\
+    intR\x05paint\"\\\n\x08ClipPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\x18\
+    .hala.canvas.opcode.PathR\x04path\x12\"\n\rdo_anti_alias\x18\x02\x20\x01\
+    (\x08R\x0bdoAntiAlias\"\xc3\x01\n\x08ClipRect\x12,\n\x04rect\x18\x01\x20\
+    \x01(\x0b2\x18.hala.canvas.opcode.RectR\x04rect\x12<\n\x07clip_op\x18\
+    \x02\x20\x01(\x0e2#.hala.canvas.opcode.ClipRect.ClipOpR\x06clipOp\x12\"\
+    \n\rdo_anti_alias\x18\x03\x20\x01(\x08R\x0bdoAntiAlias\"'\n\x06ClipOp\
+    \x12\x0e\n\nDifference\x10\0\x12\r\n\tIntersect\x10\x01\"`\n\tClipRRect\
+    \x12/\n\x05rrect\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.RRectR\x05\
+    rrect\x12\"\n\rdo_anti_alias\x18\x02\x20\x01(\x08R\x0bdoAntiAlias\"z\n\t\
+    DrawColor\x12/\n\x05color\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.C\
+    olorR\x05color\x12<\n\nblend_mode\x18\x02\x20\x01(\x0e2\x1d.hala.canvas.\
+    opcode.BlendModeR\tblendMode\"3\n\x05Scale\x12\x0e\n\x02sx\x18\x01\x20\
+    \x01(\x02R\x02sx\x12\x13\n\x02sy\x18\x02\x20\x01(\x02H\0R\x02sy\x88\x01\
+    \x01B\x05\n\x03_sy\"&\n\x04Skew\x12\x0e\n\x02sx\x18\x01\x20\x01(\x02R\
+    \x02sx\x12\x0e\n\x02sy\x18\x02\x20\x01(\x02R\x02sy\"\x8e\x01\n\nDrawShad\
+    ow\x12/\n\x05color\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.ColorR\
+    \x05color\x12\x1c\n\televation\x18\x02\x20\x01(\x02R\televation\x121\n\
+    \x14transparent_occluder\x18\x03\x20\x01(\x08R\x13transparentOccluder\"?\
+    \n\x05Color\x12\x0c\n\x01r\x18\x01\x20\x01(\x01R\x01r\x12\x0c\n\x01g\x18\
+    \x02\x20\x01(\x01R\x01g\x12\x0c\n\x01b\x18\x03\x20\x01(\x01R\x01b\x12\
+    \x0c\n\x01a\x18\x04\x20\x01(\x01R\x01a\"\xef\t\n\x07SubPath\x125\n\x07li\
+    ne_to\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetH\0R\x06lineTo\
+    \x12F\n\x10relative_line_to\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode\
+    .OffsetH\0R\x0erelativeLineTo\x125\n\x07move_to\x18\x03\x20\x01(\x0b2\
+    \x1a.hala.canvas.opcode.OffsetH\0R\x06moveTo\x12F\n\x10realtive_move_to\
+    \x18\x04\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetH\0R\x0erealtiveMove\
+    To\x12+\n\x03arc\x18\x05\x20\x01(\x0b2\x17.hala.canvas.opcode.ArcH\0R\
+    \x03arc\x122\n\x06arc_to\x18\x06\x20\x01(\x0b2\x19.hala.canvas.opcode.Ar\
+    cToH\0R\x05arcTo\x12B\n\x0carc_to_point\x18\x07\x20\x01(\x0b2\x1e.hala.c\
+    anvas.opcode.ArcToPointH\0R\narcToPoint\x12S\n\x15relative_arc_to_point\
+    \x18\x08\x20\x01(\x0b2\x1e.hala.canvas.opcode.ArcToPointH\0R\x12relative\
+    ArcToPoint\x12.\n\x04oval\x18\t\x20\x01(\x0b2\x18.hala.canvas.opcode.Rec\
+    tH\0R\x04oval\x128\n\x04path\x18\n\x20\x01(\x0b2\".hala.canvas.opcode.Ex\
+    tendWithPathH\0R\x04path\x126\n\x08conic_to\x18\x0b\x20\x01(\x0b2\x19.ha\
+    la.canvas.opcode.ConicH\0R\x07conicTo\x12G\n\x11relative_conic_to\x18\
+    \x0c\x20\x01(\x0b2\x19.hala.canvas.opcode.ConicH\0R\x0frelativeConicTo\
+    \x126\n\x08cubic_to\x18\r\x20\x01(\x0b2\x19.hala.canvas.opcode.CubicH\0R\
+    \x07cubicTo\x12G\n\x11relative_cubic_to\x18\x0e\x20\x01(\x0b2\x19.hala.c\
+    anvas.opcode.CubicH\0R\x0frelativeCubicTo\x12U\n\x13quadratic_bezier_to\
+    \x18\x0f\x20\x01(\x0b2#.hala.canvas.opcode.QuadraticBezierH\0R\x11quadra\
+    ticBezierTo\x12f\n\x1crelative_quadratic_bezier_to\x18\x10\x20\x01(\x0b2\
+    #.hala.canvas.opcode.QuadraticBezierH\0R\x19relativeQuadraticBezierTo\
+    \x122\n\x05shift\x18\x11\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetH\0R\
+    \x05shift\x128\n\ttransform\x18\x12\x20\x01(\x0b2\x18.hala.canvas.opcode\
+    .Mat4H\0R\ttransform\x12\x18\n\x06closed\x18\x13\x20\x01(\x08H\0R\x06clo\
+    sed\x121\n\x05rrect\x18\x14\x20\x01(\x0b2\x19.hala.canvas.opcode.RRectH\
+    \0R\x05rrectB\x06\n\x04code\"@\n\x04Path\x128\n\tsub_paths\x18\x01\x20\
+    \x03(\x0b2\x1b.hala.canvas.opcode.SubPathR\x08subPaths\"m\n\x05Conic\x12\
+    *\n\x02p1\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p1\x12\
+    *\n\x02p2\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p2\x12\
+    \x0c\n\x01w\x18\x03\x20\x01(\x02R\x01w\"o\n\x05Cubic\x12*\n\x02p1\x18\
+    \x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p1\x12*\n\x02p2\x18\
+    \x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p2\x12\x0e\n\x02p3\
+    \x18\x03\x20\x01(\x02R\x02p3\"u\n\x03Arc\x12,\n\x04oval\x18\x01\x20\x01(\
+    \x0b2\x18.hala.canvas.opcode.RectR\x04oval\x12\x1f\n\x0bstart_angle\x18\
+    \x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_angle\x18\x03\x20\x01(\
+    \x02R\nsweepAngle\"\x9b\x01\n\x05ArcTo\x12,\n\x04oval\x18\x01\x20\x01(\
+    \x0b2\x18.hala.canvas.opcode.RectR\x04oval\x12\x1f\n\x0bstart_angle\x18\
+    \x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_angle\x18\x03\x20\x01(\
+    \x02R\nsweepAngle\x12\"\n\rforce_move_to\x18\x04\x20\x01(\x08R\x0bforceM\
+    oveTo\"\x94\x02\n\nArcToPoint\x123\n\x07arc_end\x18\x01\x20\x01(\x0b2\
+    \x1a.hala.canvas.opcode.OffsetR\x06arcEnd\x127\n\x06radius\x18\x02\x20\
+    \x01(\x0b2\x1a.hala.canvas.opcode.RadiusH\0R\x06radius\x88\x01\x01\x12\
+    \x1f\n\x08rotation\x18\x03\x20\x01(\x01H\x01R\x08rotation\x88\x01\x01\
+    \x12\x20\n\tlarge_arc\x18\x04\x20\x01(\x08H\x02R\x08largeArc\x88\x01\x01\
+    \x12!\n\tclockwise\x18\x05\x20\x01(\x08H\x03R\tclockwise\x88\x01\x01B\t\
+    \n\x07_radiusB\x0b\n\t_rotationB\x0c\n\n_large_arcB\x0c\n\n_clockwise\"k\
+    \n\x06Radius\x12\x1c\n\x08circular\x18\x01\x20\x01(\x02H\0R\x08circular\
+    \x12:\n\nelliptical\x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.SizeH\0\
+    R\nellipticalB\x07\n\x05types\"(\n\x06Offset\x12\x0e\n\x02dx\x18\x01\x20\
+    \x01(\x02R\x02dx\x12\x0e\n\x02dy\x18\x02\x20\x01(\x02R\x02dy\"4\n\x04Siz\
+    e\x12\x14\n\x05width\x18\x01\x20\x01(\x02R\x05width\x12\x16\n\x06height\
+    \x18\x02\x20\x01(\x02R\x06height\"h\n\x04Rect\x122\n\x06offset\x18\x01\
+    \x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x06offset\x12,\n\x04size\
+    \x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.SizeR\x04size\"\xae\x01\n\
+    \x0eExtendWithPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\x18.hala.canvas.\
+    opcode.PathR\x04path\x122\n\x06offset\x18\x02\x20\x01(\x0b2\x1a.hala.can\
+    vas.opcode.OffsetR\x06offset\x121\n\x04mat4\x18\x03\x20\x01(\x0b2\x18.ha\
+    la.canvas.opcode.Mat4H\0R\x04mat4\x88\x01\x01B\x07\n\x05_mat4\"i\n\x0fQu\
+    adraticBezier\x12*\n\x02p1\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.\
+    OffsetR\x02p1\x12*\n\x02p2\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.\
+    OffsetR\x02p2\">\n\x04Vec4\x12\x0c\n\x01x\x18\x01\x20\x01(\x02R\x01x\x12\
+    \x0c\n\x01y\x18\x02\x20\x01(\x02R\x01y\x12\x0c\n\x01z\x18\x03\x20\x01(\
+    \x02R\x01z\x12\x0c\n\x01w\x18\x04\x20\x01(\x02R\x01w\"\xca\x01\n\x04Mat4\
+    \x12/\n\x06x_axis\x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.Vec4R\x05\
+    xAxis\x12/\n\x06y_axis\x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.Vec4\
+    R\x05yAxis\x12/\n\x06z_axis\x18\x03\x20\x01(\x0b2\x18.hala.canvas.opcode\
+    .Vec4R\x05zAxis\x12/\n\x06w_axis\x18\x04\x20\x01(\x0b2\x18.hala.canvas.o\
+    pcode.Vec4R\x05wAxis\"\xe5\x01\n\x05RRect\x12,\n\x04rect\x18\x01\x20\x01\
+    (\x0b2\x18.hala.canvas.opcode.RectR\x04rect\x12*\n\x02tl\x18\x02\x20\x01\
+    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02tl\x12*\n\x02tr\x18\x03\x20\x01\
+    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02tr\x12*\n\x02bl\x18\x04\x20\x01\
+    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02bl\x12*\n\x02br\x18\x05\x20\x01\
+    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02br*m\n\rFilterQuality\x12\x15\n\
+    \x11FilterQualityNone\x10\0\x12\x14\n\x10FilterQualityLow\x10\x01\x12\
+    \x17\n\x13FilterQualityMedium\x10\x02\x12\x16\n\x12FilterQualityHight\
+    \x10\x03*G\n\tStrokeCap\x12\x11\n\rStrokeCapButt\x10\0\x12\x12\n\x0eStro\
+    keCapRound\x10\x01\x12\x13\n\x0fStrokeCapSquare\x10\x02*K\n\nStrokeJoin\
+    \x12\x13\n\x0fStrokeJoinMiter\x10\0\x12\x13\n\x0fStrokeJoinRound\x10\x01\
+    \x12\x13\n\x0fStrokeJoinBevel\x10\x02*\x84\x03\n\tBlendMode\x12\t\n\x05C\
+    lear\x10\0\x12\x07\n\x03Src\x10\x02\x12\x07\n\x03Dst\x10\x03\x12\x0b\n\
+    \x07SrcOver\x10\x04\x12\x0b\n\x07DstOver\x10\x05\x12\t\n\x05SrcIn\x10\
+    \x06\x12\t\n\x05DstIn\x10\x07\x12\n\n\x06SrcOut\x10\x08\x12\n\n\x06DstOu\
+    t\x10\t\x12\x0b\n\x07SrcATop\x10\n\x12\x0b\n\x07DstATop\x10\x0b\x12\x07\
+    \n\x03Xor\x10\x0c\x12\x08\n\x04Plus\x10\r\x12\x0c\n\x08Modulate\x10\x0e\
+    \x12\n\n\x06Screen\x10\x0f\x12\x0b\n\x07Overlay\x10\x10\x12\n\n\x06Darke\
+    n\x10\x11\x12\x0b\n\x07Lighten\x10\x12\x12\x0e\n\nColorDodge\x10\x13\x12\
+    \r\n\tColorBurn\x10\x14\x12\r\n\tHardLight\x10\x15\x12\r\n\tSoftLight\
+    \x10\x16\x12\x0e\n\nDifference\x10\x17\x12\r\n\tExclusion\x10\x18\x12\
+    \x0c\n\x08Multiply\x10\x19\x12\x07\n\x03Hue\x10\x1a\x12\x0e\n\nSaturatio\
+    n\x10\x1b\x12\x12\n\x0eBlendModeColor\x10\x1c\x12\x0e\n\nLuminosity\x10\
+    \x1db\x06proto3\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -8567,10 +8562,10 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(Mat4::generated_message_descriptor_data());
             messages.push(RRect::generated_message_descriptor_data());
             let mut enums = ::std::vec::Vec::with_capacity(5);
+            enums.push(FilterQuality::generated_enum_descriptor_data());
+            enums.push(StrokeCap::generated_enum_descriptor_data());
+            enums.push(StrokeJoin::generated_enum_descriptor_data());
             enums.push(BlendMode::generated_enum_descriptor_data());
-            enums.push(paint::FilterQuality::generated_enum_descriptor_data());
-            enums.push(paint_stroke::StrokeCap::generated_enum_descriptor_data());
-            enums.push(paint_stroke::StrokeJoin::generated_enum_descriptor_data());
             enums.push(clip_rect::ClipOp::generated_enum_descriptor_data());
             ::protobuf::reflect::GeneratedFileDescriptor::new_generated(
                 file_descriptor_proto(),
