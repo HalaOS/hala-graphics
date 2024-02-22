@@ -3,36 +3,6 @@ use alloc::{boxed::Box, vec::Vec};
 
 use super::geometry::{Offset, RRect, Radius, Rect};
 
-/// Sub-paths consist of segments of various types,
-#[derive(Debug, Clone)]
-#[cfg_attr(
-    feature = "serde_support",
-    derive(serde::Serialize, serde::Deserialize)
-)]
-pub enum SubPath {
-    LineTo(Offset),
-    RelativeLineTo(Offset),
-    MoveTo(Offset),
-    RelativeMoveTo(Offset),
-    Arc(Box<Arc>),
-    ArcTo(Box<ArcTo>),
-    ArcToPoint(Box<ArcToPoint>),
-    RelativeArcToPoint(Box<ArcToPoint>),
-    Oval(Box<Rect>),
-    Path(Box<ExtendWithPath>),
-    ExtendWithPath(Box<ExtendWithPath>),
-    ConicTo(Box<Conic>),
-    RelativeConicTo(Box<Conic>),
-    CubicTo(Box<Cubic>),
-    RelativeCubicTo(Box<Cubic>),
-    Close,
-    RRect(Box<RRect>),
-    QuadraticBezierTo(Box<QuadraticBezier>),
-    RelativeQuadraticBezierTo(Box<QuadraticBezier>),
-    Shift(Offset),
-    Transform(Box<Mat4>),
-}
-
 /// A conic bezier subpath parameter
 #[derive(Debug, Clone)]
 #[cfg_attr(
@@ -114,6 +84,36 @@ pub struct ExtendWithPath {
 pub struct QuadraticBezier {
     pub p1: Offset,
     pub p2: Offset,
+}
+
+/// Sub-paths consist of segments of various types,
+#[derive(Debug, Clone)]
+#[cfg_attr(
+    feature = "serde_support",
+    derive(serde::Serialize, serde::Deserialize)
+)]
+pub enum SubPath {
+    LineTo(Offset),
+    RelativeLineTo(Offset),
+    MoveTo(Offset),
+    RelativeMoveTo(Offset),
+    Arc(Box<Arc>),
+    ArcTo(Box<ArcTo>),
+    ArcToPoint(Box<ArcToPoint>),
+    RelativeArcToPoint(Box<ArcToPoint>),
+    Oval(Box<Rect>),
+    Path(Box<ExtendWithPath>),
+    ExtendWithPath(Box<ExtendWithPath>),
+    ConicTo(Box<Conic>),
+    RelativeConicTo(Box<Conic>),
+    CubicTo(Box<Cubic>),
+    RelativeCubicTo(Box<Cubic>),
+    Close,
+    RRect(Box<RRect>),
+    QuadraticBezierTo(Box<QuadraticBezier>),
+    RelativeQuadraticBezierTo(Box<QuadraticBezier>),
+    Shift(Offset),
+    Transform(Box<Mat4>),
 }
 
 /// A complex, one-dimensional subset of a plane.

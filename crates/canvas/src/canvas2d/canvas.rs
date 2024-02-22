@@ -22,55 +22,6 @@ pub enum ClipOp {
     Intersect,
 }
 
-/// Defines canvas operations.
-#[derive(Debug, Clone)]
-#[cfg_attr(
-    feature = "serde_support",
-    derive(serde::Serialize, serde::Deserialize)
-)]
-pub enum CanvasOp {
-    ClipPath(Box<ClipPath>),
-    ClipRect(Box<ClipRect>),
-    ClipRRect(Box<ClipRRect>),
-    DrawColor(Box<DrawColor>),
-    DrawPath(Box<DrawPath>),
-    DrawImage(Box<DrawImage>),
-    DrawImageRect(Box<DrawImageRect>),
-    DrawPaint(Box<Paint>),
-    DrawParagraph(Box<DrawParagraph>),
-    DrawShadow(Box<DrawShadow>),
-    Transform(Box<Mat4>),
-    Translate(Offset),
-    Scale(Scale),
-    Skew(Skew),
-    Rotate(f32),
-    Layer(Box<Layer>),
-}
-
-impl From<f32> for CanvasOp {
-    fn from(value: f32) -> Self {
-        Self::Rotate(value)
-    }
-}
-
-impl From<Paint> for CanvasOp {
-    fn from(value: Paint) -> Self {
-        Self::DrawPaint(Box::new(value))
-    }
-}
-
-impl From<Mat4> for CanvasOp {
-    fn from(value: Mat4) -> Self {
-        Self::Transform(Box::new(value))
-    }
-}
-
-impl From<Offset> for CanvasOp {
-    fn from(value: Offset) -> Self {
-        Self::Translate(value)
-    }
-}
-
 #[derive(Debug, Clone)]
 #[cfg_attr(
     feature = "serde_support",
@@ -273,6 +224,55 @@ pub struct ClipRRect {
 impl From<ClipRRect> for CanvasOp {
     fn from(value: ClipRRect) -> Self {
         Self::ClipRRect(Box::new(value))
+    }
+}
+
+/// Defines canvas opcode.
+#[derive(Debug, Clone)]
+#[cfg_attr(
+    feature = "serde_support",
+    derive(serde::Serialize, serde::Deserialize)
+)]
+pub enum CanvasOp {
+    ClipPath(Box<ClipPath>),
+    ClipRect(Box<ClipRect>),
+    ClipRRect(Box<ClipRRect>),
+    DrawColor(Box<DrawColor>),
+    DrawPath(Box<DrawPath>),
+    DrawImage(Box<DrawImage>),
+    DrawImageRect(Box<DrawImageRect>),
+    DrawPaint(Box<Paint>),
+    DrawParagraph(Box<DrawParagraph>),
+    DrawShadow(Box<DrawShadow>),
+    Transform(Box<Mat4>),
+    Translate(Offset),
+    Scale(Scale),
+    Skew(Skew),
+    Rotate(f32),
+    Layer(Box<Layer>),
+}
+
+impl From<f32> for CanvasOp {
+    fn from(value: f32) -> Self {
+        Self::Rotate(value)
+    }
+}
+
+impl From<Paint> for CanvasOp {
+    fn from(value: Paint) -> Self {
+        Self::DrawPaint(Box::new(value))
+    }
+}
+
+impl From<Mat4> for CanvasOp {
+    fn from(value: Mat4) -> Self {
+        Self::Transform(Box::new(value))
+    }
+}
+
+impl From<Offset> for CanvasOp {
+    fn from(value: Offset) -> Self {
+        Self::Translate(value)
     }
 }
 

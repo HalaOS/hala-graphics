@@ -10,9 +10,14 @@ version.workspace = true
 [dependencies]
 glam = {workspace = true}
 libm = {workspace = true}
+log = {workspace = true}
 serde = {workspace = true}
 
 [features]
 default = ["tessellator", "serde_support"]
 serde_support = []
 tessellator = []
+
+[dev-dependencies]
+pretty_env_logger = {workspace = true}
+serde_json = {workspace = true}
