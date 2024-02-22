@@ -13,5 +13,6 @@ libm = {workspace = true}
 serde = {workspace = true}
 
 [features]
-default = ["tessellator"]
+default = ["tessellator", "serde_support"]
+serde_support = []
 tessellator = []

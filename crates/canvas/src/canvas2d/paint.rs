@@ -15,7 +15,7 @@ pub struct Color {
 ///
 #[derive(Debug, Default, Clone, PartialEq)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Paint {
@@ -40,7 +40,7 @@ pub struct Paint {
 
 #[derive(Debug, Default, Clone, PartialEq)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct PaintStroke {
@@ -65,7 +65,7 @@ pub struct PaintStroke {
 /// Strategies for painting shapes and paths on a canvas.
 #[derive(Debug, Clone, PartialEq)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum PaintStyle {
@@ -88,7 +88,7 @@ impl Default for PaintStyle {
 /// Styles to use for line segment joins.
 #[derive(Debug, Clone, PartialEq)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum StrokeJoin {
@@ -112,7 +112,7 @@ impl Default for StrokeJoin {
 /// Styles to use for line endings.
 #[derive(Debug, Clone, PartialEq)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum StrokeCap {
@@ -136,7 +136,7 @@ impl Default for StrokeCap {
 /// Quality levels for image sampling in ImageFilter and Shader objects that sample images and for Canvas operations that render images.
 #[derive(Debug, Clone, PartialEq)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum FilterQuality {
@@ -175,7 +175,7 @@ impl Default for FilterQuality {
 /// A blend mode to apply when a shape is drawn or a layer is composited.
 #[derive(Debug, Clone, PartialEq)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum BlendMode {

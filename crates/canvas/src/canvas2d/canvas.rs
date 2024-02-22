@@ -14,7 +14,7 @@ use super::{
 /// Defines how a new clip region should be merged with the existing clip region.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum ClipOp {
@@ -25,7 +25,7 @@ pub enum ClipOp {
 /// Defines canvas operations.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum CanvasOp {
@@ -73,7 +73,7 @@ impl From<Offset> for CanvasOp {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Layer {
@@ -90,7 +90,7 @@ impl From<Layer> for CanvasOp {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Scale {
@@ -106,7 +106,7 @@ impl From<Scale> for CanvasOp {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Skew {
@@ -122,7 +122,7 @@ impl From<Skew> for CanvasOp {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct DrawShadow {
@@ -141,7 +141,7 @@ impl From<DrawShadow> for CanvasOp {
 /// Draw paragraph op.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct DrawParagraph {
@@ -158,7 +158,7 @@ impl From<DrawParagraph> for CanvasOp {
 /// Draw color op.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct DrawColor {
@@ -175,7 +175,7 @@ impl From<DrawColor> for CanvasOp {
 /// Draw color op.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct DrawPath {
@@ -191,7 +191,7 @@ impl From<DrawPath> for CanvasOp {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct DrawImage {
@@ -208,7 +208,7 @@ impl From<DrawImage> for CanvasOp {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct DrawImageRect {
@@ -227,7 +227,7 @@ impl From<DrawImageRect> for CanvasOp {
 /// The clip region path object.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct ClipPath {
@@ -244,7 +244,7 @@ impl From<ClipPath> for CanvasOp {
 /// The clip region path object.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct ClipRect {
@@ -262,7 +262,7 @@ impl From<ClipRect> for CanvasOp {
 /// The clip region path object.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct ClipRRect {

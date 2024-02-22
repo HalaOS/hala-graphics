@@ -1,7 +1,7 @@
 /// An immutable 2D floating-point offset.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Offset {
@@ -60,7 +60,7 @@ impl Offset {
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Size {
@@ -129,7 +129,7 @@ impl Size {
 /// An immutable, 2D, axis-aligned, floating-point rectangle whose coordinates are relative to a given origin.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Rect {
@@ -405,7 +405,7 @@ impl From<(Offset, Offset)> for Rect {
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 #[allow(dead_code)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct RRect {
@@ -443,7 +443,7 @@ impl RRect {
 /// A radius for either circular or elliptical shapes.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum Radius {

@@ -6,7 +6,7 @@ use super::geometry::{Offset, RRect, Radius, Rect};
 /// Sub-paths consist of segments of various types,
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum SubPath {
@@ -36,7 +36,7 @@ pub enum SubPath {
 /// A conic bezier subpath parameter
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Conic {
@@ -50,7 +50,7 @@ pub struct Conic {
 /// A cubic bezier subpath parameter
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Cubic {
@@ -61,7 +61,7 @@ pub struct Cubic {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Arc {
@@ -72,7 +72,7 @@ pub struct Arc {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct ArcTo {
@@ -84,7 +84,7 @@ pub struct ArcTo {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct ArcToPoint {
@@ -97,7 +97,7 @@ pub struct ArcToPoint {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct ExtendWithPath {
@@ -108,7 +108,7 @@ pub struct ExtendWithPath {
 
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct QuadraticBezier {
@@ -124,7 +124,7 @@ pub struct QuadraticBezier {
 #[derive(Debug, Clone, Default)]
 #[allow(dead_code)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Path {

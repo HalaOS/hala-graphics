@@ -2,7 +2,7 @@
 /// A paragraph retains the size and position of each glyph in the text and can be efficiently resized and painted.
 #[derive(Debug, Clone)]
 #[cfg_attr(
-    feature = "serialization",
+    feature = "serde_support",
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub struct Paragraph {
