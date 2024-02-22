@@ -1,5 +1,5 @@
 [workspace]
-members = ["hala-canvas"]
+members = ["crates/*"]
 resolver = "2"
 
 [workspace.package]
@@ -12,7 +12,7 @@ anyhow = "^1"
 bencher = "^0.1.5"
 clap = "^4.4"
 dotenv = "^0.15"
-glam = {version = "^0.24.2", default-features = false, features = ["libm", "serde"]}
+glam = {version = "^0.25", default-features = false, features = ["libm", "serde"]}
 libm = "^0.2.7"
 log = "^0.4"
 pretty_env_logger = "^0.5"
