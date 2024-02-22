@@ -25,13 +25,13 @@
 /// of protobuf runtime.
 const _PROTOBUF_VERSION_CHECK: () = ::protobuf::VERSION_3_3_0;
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.OpCode)
+// @@protoc_insertion_point(message:hala.graphic.opcode.OpCode)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct OpCode {
     // message oneof groups
     pub directive: ::std::option::Option<op_code::Directive>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.OpCode.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.OpCode.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -46,7 +46,7 @@ impl OpCode {
         ::std::default::Default::default()
     }
 
-    // .hala.canvas.opcode.Scale scale = 1;
+    // .hala.graphic.opcode.Scale scale = 1;
 
     pub fn scale(&self) -> &Scale {
         match self.directive {
@@ -95,7 +95,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.Skew skew = 2;
+    // .hala.graphic.opcode.Skew skew = 2;
 
     pub fn skew(&self) -> &Skew {
         match self.directive {
@@ -144,7 +144,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.ClipPath clip_path = 3;
+    // .hala.graphic.opcode.ClipPath clip_path = 3;
 
     pub fn clip_path(&self) -> &ClipPath {
         match self.directive {
@@ -193,7 +193,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.ClipRect clip_rect = 4;
+    // .hala.graphic.opcode.ClipRect clip_rect = 4;
 
     pub fn clip_rect(&self) -> &ClipRect {
         match self.directive {
@@ -242,7 +242,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.ClipRRect clip_rrect = 5;
+    // .hala.graphic.opcode.ClipRRect clip_rrect = 5;
 
     pub fn clip_rrect(&self) -> &ClipRRect {
         match self.directive {
@@ -291,7 +291,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.DrawColor draw_color = 6;
+    // .hala.graphic.opcode.DrawColor draw_color = 6;
 
     pub fn draw_color(&self) -> &DrawColor {
         match self.directive {
@@ -340,7 +340,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.DrawPath draw_path = 7;
+    // .hala.graphic.opcode.DrawPath draw_path = 7;
 
     pub fn draw_path(&self) -> &DrawPath {
         match self.directive {
@@ -389,7 +389,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.DrawImage draw_image = 8;
+    // .hala.graphic.opcode.DrawImage draw_image = 8;
 
     pub fn draw_image(&self) -> &DrawImage {
         match self.directive {
@@ -438,7 +438,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.DrawImageRect draw_image_rect = 9;
+    // .hala.graphic.opcode.DrawImageRect draw_image_rect = 9;
 
     pub fn draw_image_rect(&self) -> &DrawImageRect {
         match self.directive {
@@ -487,7 +487,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.Paint draw_paint = 10;
+    // .hala.graphic.opcode.Paint draw_paint = 10;
 
     pub fn draw_paint(&self) -> &Paint {
         match self.directive {
@@ -536,7 +536,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.DrawShadow draw_shadow = 11;
+    // .hala.graphic.opcode.DrawShadow draw_shadow = 11;
 
     pub fn draw_shadow(&self) -> &DrawShadow {
         match self.directive {
@@ -585,7 +585,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.Mat4 transform = 12;
+    // .hala.graphic.opcode.Mat4 transform = 12;
 
     pub fn transform(&self) -> &Mat4 {
         match self.directive {
@@ -634,7 +634,7 @@ impl OpCode {
         }
     }
 
-    // .hala.canvas.opcode.Offset translate = 13;
+    // .hala.graphic.opcode.Offset translate = 13;
 
     pub fn translate(&self) -> &Offset {
         match self.directive {
@@ -708,7 +708,7 @@ impl OpCode {
         self.directive = ::std::option::Option::Some(op_code::Directive::Rotate(v))
     }
 
-    // .hala.canvas.opcode.DrawParagraph draw_paragraph = 15;
+    // .hala.graphic.opcode.DrawParagraph draw_paragraph = 15;
 
     pub fn draw_paragraph(&self) -> &DrawParagraph {
         match self.directive {
@@ -1124,37 +1124,37 @@ pub mod op_code {
 
     #[derive(Clone,PartialEq,Debug)]
     #[non_exhaustive]
-    // @@protoc_insertion_point(oneof:hala.canvas.opcode.OpCode.directive)
+    // @@protoc_insertion_point(oneof:hala.graphic.opcode.OpCode.directive)
     pub enum Directive {
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.scale)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.scale)
         Scale(super::Scale),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.skew)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.skew)
         Skew(super::Skew),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.clip_path)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.clip_path)
         ClipPath(super::ClipPath),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.clip_rect)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.clip_rect)
         ClipRect(super::ClipRect),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.clip_rrect)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.clip_rrect)
         ClipRrect(super::ClipRRect),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.draw_color)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.draw_color)
         DrawColor(super::DrawColor),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.draw_path)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.draw_path)
         DrawPath(super::DrawPath),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.draw_image)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.draw_image)
         DrawImage(super::DrawImage),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.draw_image_rect)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.draw_image_rect)
         DrawImageRect(super::DrawImageRect),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.draw_paint)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.draw_paint)
         DrawPaint(super::Paint),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.draw_shadow)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.draw_shadow)
         DrawShadow(super::DrawShadow),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.transform)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.transform)
         Transform(super::Mat4),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.translate)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.translate)
         Translate(super::Offset),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.rotate)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.rotate)
         Rotate(f32),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.OpCode.draw_paragraph)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.OpCode.draw_paragraph)
         DrawParagraph(super::DrawParagraph),
     }
 
@@ -1175,28 +1175,1882 @@ pub mod op_code {
     }
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Paragraph)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Scale)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct Scale {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Scale.sx)
+    pub sx: f32,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Scale.sy)
+    pub sy: ::std::option::Option<f32>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Scale.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a Scale {
+    fn default() -> &'a Scale {
+        <Scale as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl Scale {
+    pub fn new() -> Scale {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "sx",
+            |m: &Scale| { &m.sx },
+            |m: &mut Scale| { &mut m.sx },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "sy",
+            |m: &Scale| { &m.sy },
+            |m: &mut Scale| { &mut m.sy },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Scale>(
+            "Scale",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for Scale {
+    const NAME: &'static str = "Scale";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                13 => {
+                    self.sx = is.read_float()?;
+                },
+                21 => {
+                    self.sy = ::std::option::Option::Some(is.read_float()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if self.sx != 0. {
+            my_size += 1 + 4;
+        }
+        if let Some(v) = self.sy {
+            my_size += 1 + 4;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if self.sx != 0. {
+            os.write_float(1, self.sx)?;
+        }
+        if let Some(v) = self.sy {
+            os.write_float(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> Scale {
+        Scale::new()
+    }
+
+    fn clear(&mut self) {
+        self.sx = 0.;
+        self.sy = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static Scale {
+        static instance: Scale = Scale {
+            sx: 0.,
+            sy: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for Scale {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("Scale").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for Scale {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for Scale {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.Skew)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct Skew {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Skew.sx)
+    pub sx: f32,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Skew.sy)
+    pub sy: f32,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Skew.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a Skew {
+    fn default() -> &'a Skew {
+        <Skew as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl Skew {
+    pub fn new() -> Skew {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "sx",
+            |m: &Skew| { &m.sx },
+            |m: &mut Skew| { &mut m.sx },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "sy",
+            |m: &Skew| { &m.sy },
+            |m: &mut Skew| { &mut m.sy },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Skew>(
+            "Skew",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for Skew {
+    const NAME: &'static str = "Skew";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                13 => {
+                    self.sx = is.read_float()?;
+                },
+                21 => {
+                    self.sy = is.read_float()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if self.sx != 0. {
+            my_size += 1 + 4;
+        }
+        if self.sy != 0. {
+            my_size += 1 + 4;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if self.sx != 0. {
+            os.write_float(1, self.sx)?;
+        }
+        if self.sy != 0. {
+            os.write_float(2, self.sy)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> Skew {
+        Skew::new()
+    }
+
+    fn clear(&mut self) {
+        self.sx = 0.;
+        self.sy = 0.;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static Skew {
+        static instance: Skew = Skew {
+            sx: 0.,
+            sy: 0.,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for Skew {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("Skew").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for Skew {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for Skew {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.DrawShadow)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct DrawShadow {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawShadow.color)
+    pub color: ::protobuf::MessageField<Color>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawShadow.elevation)
+    pub elevation: f32,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawShadow.transparent_occluder)
+    pub transparent_occluder: bool,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.DrawShadow.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a DrawShadow {
+    fn default() -> &'a DrawShadow {
+        <DrawShadow as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl DrawShadow {
+    pub fn new() -> DrawShadow {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Color>(
+            "color",
+            |m: &DrawShadow| { &m.color },
+            |m: &mut DrawShadow| { &mut m.color },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "elevation",
+            |m: &DrawShadow| { &m.elevation },
+            |m: &mut DrawShadow| { &mut m.elevation },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "transparent_occluder",
+            |m: &DrawShadow| { &m.transparent_occluder },
+            |m: &mut DrawShadow| { &mut m.transparent_occluder },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawShadow>(
+            "DrawShadow",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for DrawShadow {
+    const NAME: &'static str = "DrawShadow";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.color)?;
+                },
+                21 => {
+                    self.elevation = is.read_float()?;
+                },
+                24 => {
+                    self.transparent_occluder = is.read_bool()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.color.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if self.elevation != 0. {
+            my_size += 1 + 4;
+        }
+        if self.transparent_occluder != false {
+            my_size += 1 + 1;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.color.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if self.elevation != 0. {
+            os.write_float(2, self.elevation)?;
+        }
+        if self.transparent_occluder != false {
+            os.write_bool(3, self.transparent_occluder)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> DrawShadow {
+        DrawShadow::new()
+    }
+
+    fn clear(&mut self) {
+        self.color.clear();
+        self.elevation = 0.;
+        self.transparent_occluder = false;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static DrawShadow {
+        static instance: DrawShadow = DrawShadow {
+            color: ::protobuf::MessageField::none(),
+            elevation: 0.,
+            transparent_occluder: false,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for DrawShadow {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawShadow").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for DrawShadow {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DrawShadow {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.DrawImage)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct DrawImage {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawImage.image)
+    pub image: ::protobuf::MessageField<Image>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawImage.offset)
+    pub offset: ::protobuf::MessageField<Offset>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawImage.paint)
+    pub paint: ::protobuf::MessageField<Paint>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.DrawImage.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a DrawImage {
+    fn default() -> &'a DrawImage {
+        <DrawImage as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl DrawImage {
+    pub fn new() -> DrawImage {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Image>(
+            "image",
+            |m: &DrawImage| { &m.image },
+            |m: &mut DrawImage| { &mut m.image },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Offset>(
+            "offset",
+            |m: &DrawImage| { &m.offset },
+            |m: &mut DrawImage| { &mut m.offset },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paint>(
+            "paint",
+            |m: &DrawImage| { &m.paint },
+            |m: &mut DrawImage| { &mut m.paint },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawImage>(
+            "DrawImage",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for DrawImage {
+    const NAME: &'static str = "DrawImage";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.image)?;
+                },
+                18 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.offset)?;
+                },
+                26 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paint)?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.image.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.paint.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.image.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        if let Some(v) = self.paint.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> DrawImage {
+        DrawImage::new()
+    }
+
+    fn clear(&mut self) {
+        self.image.clear();
+        self.offset.clear();
+        self.paint.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static DrawImage {
+        static instance: DrawImage = DrawImage {
+            image: ::protobuf::MessageField::none(),
+            offset: ::protobuf::MessageField::none(),
+            paint: ::protobuf::MessageField::none(),
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for DrawImage {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawImage").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for DrawImage {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DrawImage {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.DrawImageRect)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct DrawImageRect {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawImageRect.image)
+    pub image: ::protobuf::MessageField<Image>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawImageRect.src)
+    pub src: ::protobuf::MessageField<Rect>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawImageRect.dst)
+    pub dst: ::protobuf::MessageField<Rect>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawImageRect.paint)
+    pub paint: ::protobuf::MessageField<Paint>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.DrawImageRect.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a DrawImageRect {
+    fn default() -> &'a DrawImageRect {
+        <DrawImageRect as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl DrawImageRect {
+    pub fn new() -> DrawImageRect {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(4);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Image>(
+            "image",
+            |m: &DrawImageRect| { &m.image },
+            |m: &mut DrawImageRect| { &mut m.image },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Rect>(
+            "src",
+            |m: &DrawImageRect| { &m.src },
+            |m: &mut DrawImageRect| { &mut m.src },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Rect>(
+            "dst",
+            |m: &DrawImageRect| { &m.dst },
+            |m: &mut DrawImageRect| { &mut m.dst },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paint>(
+            "paint",
+            |m: &DrawImageRect| { &m.paint },
+            |m: &mut DrawImageRect| { &mut m.paint },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawImageRect>(
+            "DrawImageRect",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for DrawImageRect {
+    const NAME: &'static str = "DrawImageRect";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.image)?;
+                },
+                18 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.src)?;
+                },
+                26 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.dst)?;
+                },
+                34 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paint)?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.image.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.src.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.dst.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.paint.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.image.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if let Some(v) = self.src.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        if let Some(v) = self.dst.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
+        }
+        if let Some(v) = self.paint.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> DrawImageRect {
+        DrawImageRect::new()
+    }
+
+    fn clear(&mut self) {
+        self.image.clear();
+        self.src.clear();
+        self.dst.clear();
+        self.paint.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static DrawImageRect {
+        static instance: DrawImageRect = DrawImageRect {
+            image: ::protobuf::MessageField::none(),
+            src: ::protobuf::MessageField::none(),
+            dst: ::protobuf::MessageField::none(),
+            paint: ::protobuf::MessageField::none(),
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for DrawImageRect {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawImageRect").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for DrawImageRect {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DrawImageRect {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.DrawPath)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct DrawPath {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawPath.path)
+    pub path: ::protobuf::MessageField<Path>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawPath.paint)
+    pub paint: ::protobuf::MessageField<Paint>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.DrawPath.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a DrawPath {
+    fn default() -> &'a DrawPath {
+        <DrawPath as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl DrawPath {
+    pub fn new() -> DrawPath {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Path>(
+            "path",
+            |m: &DrawPath| { &m.path },
+            |m: &mut DrawPath| { &mut m.path },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paint>(
+            "paint",
+            |m: &DrawPath| { &m.paint },
+            |m: &mut DrawPath| { &mut m.paint },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawPath>(
+            "DrawPath",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for DrawPath {
+    const NAME: &'static str = "DrawPath";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.path)?;
+                },
+                18 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paint)?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.path.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.paint.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.path.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if let Some(v) = self.paint.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> DrawPath {
+        DrawPath::new()
+    }
+
+    fn clear(&mut self) {
+        self.path.clear();
+        self.paint.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static DrawPath {
+        static instance: DrawPath = DrawPath {
+            path: ::protobuf::MessageField::none(),
+            paint: ::protobuf::MessageField::none(),
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for DrawPath {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawPath").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for DrawPath {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DrawPath {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.ClipPath)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct ClipPath {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ClipPath.path)
+    pub path: ::protobuf::MessageField<Path>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ClipPath.do_anti_alias)
+    pub do_anti_alias: bool,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.ClipPath.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a ClipPath {
+    fn default() -> &'a ClipPath {
+        <ClipPath as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl ClipPath {
+    pub fn new() -> ClipPath {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Path>(
+            "path",
+            |m: &ClipPath| { &m.path },
+            |m: &mut ClipPath| { &mut m.path },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "do_anti_alias",
+            |m: &ClipPath| { &m.do_anti_alias },
+            |m: &mut ClipPath| { &mut m.do_anti_alias },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClipPath>(
+            "ClipPath",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for ClipPath {
+    const NAME: &'static str = "ClipPath";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.path)?;
+                },
+                16 => {
+                    self.do_anti_alias = is.read_bool()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.path.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if self.do_anti_alias != false {
+            my_size += 1 + 1;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.path.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if self.do_anti_alias != false {
+            os.write_bool(2, self.do_anti_alias)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> ClipPath {
+        ClipPath::new()
+    }
+
+    fn clear(&mut self) {
+        self.path.clear();
+        self.do_anti_alias = false;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static ClipPath {
+        static instance: ClipPath = ClipPath {
+            path: ::protobuf::MessageField::none(),
+            do_anti_alias: false,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for ClipPath {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("ClipPath").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for ClipPath {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for ClipPath {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.ClipRect)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct ClipRect {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ClipRect.rect)
+    pub rect: ::protobuf::MessageField<Rect>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ClipRect.clip_op)
+    pub clip_op: ::protobuf::EnumOrUnknown<ClipOp>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ClipRect.do_anti_alias)
+    pub do_anti_alias: bool,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.ClipRect.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a ClipRect {
+    fn default() -> &'a ClipRect {
+        <ClipRect as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl ClipRect {
+    pub fn new() -> ClipRect {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Rect>(
+            "rect",
+            |m: &ClipRect| { &m.rect },
+            |m: &mut ClipRect| { &mut m.rect },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "clip_op",
+            |m: &ClipRect| { &m.clip_op },
+            |m: &mut ClipRect| { &mut m.clip_op },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "do_anti_alias",
+            |m: &ClipRect| { &m.do_anti_alias },
+            |m: &mut ClipRect| { &mut m.do_anti_alias },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClipRect>(
+            "ClipRect",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for ClipRect {
+    const NAME: &'static str = "ClipRect";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.rect)?;
+                },
+                16 => {
+                    self.clip_op = is.read_enum_or_unknown()?;
+                },
+                24 => {
+                    self.do_anti_alias = is.read_bool()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.rect.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if self.clip_op != ::protobuf::EnumOrUnknown::new(ClipOp::ClipOpDifference) {
+            my_size += ::protobuf::rt::int32_size(2, self.clip_op.value());
+        }
+        if self.do_anti_alias != false {
+            my_size += 1 + 1;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.rect.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if self.clip_op != ::protobuf::EnumOrUnknown::new(ClipOp::ClipOpDifference) {
+            os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.clip_op))?;
+        }
+        if self.do_anti_alias != false {
+            os.write_bool(3, self.do_anti_alias)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> ClipRect {
+        ClipRect::new()
+    }
+
+    fn clear(&mut self) {
+        self.rect.clear();
+        self.clip_op = ::protobuf::EnumOrUnknown::new(ClipOp::ClipOpDifference);
+        self.do_anti_alias = false;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static ClipRect {
+        static instance: ClipRect = ClipRect {
+            rect: ::protobuf::MessageField::none(),
+            clip_op: ::protobuf::EnumOrUnknown::from_i32(0),
+            do_anti_alias: false,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for ClipRect {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("ClipRect").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for ClipRect {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for ClipRect {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.ClipRRect)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct ClipRRect {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ClipRRect.rrect)
+    pub rrect: ::protobuf::MessageField<RRect>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ClipRRect.do_anti_alias)
+    pub do_anti_alias: bool,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.ClipRRect.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a ClipRRect {
+    fn default() -> &'a ClipRRect {
+        <ClipRRect as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl ClipRRect {
+    pub fn new() -> ClipRRect {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, RRect>(
+            "rrect",
+            |m: &ClipRRect| { &m.rrect },
+            |m: &mut ClipRRect| { &mut m.rrect },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "do_anti_alias",
+            |m: &ClipRRect| { &m.do_anti_alias },
+            |m: &mut ClipRRect| { &mut m.do_anti_alias },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClipRRect>(
+            "ClipRRect",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for ClipRRect {
+    const NAME: &'static str = "ClipRRect";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.rrect)?;
+                },
+                16 => {
+                    self.do_anti_alias = is.read_bool()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.rrect.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if self.do_anti_alias != false {
+            my_size += 1 + 1;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.rrect.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if self.do_anti_alias != false {
+            os.write_bool(2, self.do_anti_alias)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> ClipRRect {
+        ClipRRect::new()
+    }
+
+    fn clear(&mut self) {
+        self.rrect.clear();
+        self.do_anti_alias = false;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static ClipRRect {
+        static instance: ClipRRect = ClipRRect {
+            rrect: ::protobuf::MessageField::none(),
+            do_anti_alias: false,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for ClipRRect {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("ClipRRect").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for ClipRRect {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for ClipRRect {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.DrawColor)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct DrawColor {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawColor.color)
+    pub color: ::protobuf::MessageField<Color>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawColor.blend_mode)
+    pub blend_mode: ::protobuf::EnumOrUnknown<BlendMode>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.DrawColor.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a DrawColor {
+    fn default() -> &'a DrawColor {
+        <DrawColor as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl DrawColor {
+    pub fn new() -> DrawColor {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Color>(
+            "color",
+            |m: &DrawColor| { &m.color },
+            |m: &mut DrawColor| { &mut m.color },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "blend_mode",
+            |m: &DrawColor| { &m.blend_mode },
+            |m: &mut DrawColor| { &mut m.blend_mode },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawColor>(
+            "DrawColor",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for DrawColor {
+    const NAME: &'static str = "DrawColor";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.color)?;
+                },
+                16 => {
+                    self.blend_mode = is.read_enum_or_unknown()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.color.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::BlendModeClear) {
+            my_size += ::protobuf::rt::int32_size(2, self.blend_mode.value());
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.color.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::BlendModeClear) {
+            os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.blend_mode))?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> DrawColor {
+        DrawColor::new()
+    }
+
+    fn clear(&mut self) {
+        self.color.clear();
+        self.blend_mode = ::protobuf::EnumOrUnknown::new(BlendMode::BlendModeClear);
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static DrawColor {
+        static instance: DrawColor = DrawColor {
+            color: ::protobuf::MessageField::none(),
+            blend_mode: ::protobuf::EnumOrUnknown::from_i32(0),
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for DrawColor {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawColor").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for DrawColor {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DrawColor {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.DrawParagraph)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct DrawParagraph {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawParagraph.paragraph)
+    pub paragraph: ::protobuf::MessageField<Paragraph>,
+    // @@protoc_insertion_point(field:hala.graphic.opcode.DrawParagraph.offset)
+    pub offset: ::protobuf::MessageField<Offset>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.DrawParagraph.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a DrawParagraph {
+    fn default() -> &'a DrawParagraph {
+        <DrawParagraph as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl DrawParagraph {
+    pub fn new() -> DrawParagraph {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paragraph>(
+            "paragraph",
+            |m: &DrawParagraph| { &m.paragraph },
+            |m: &mut DrawParagraph| { &mut m.paragraph },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Offset>(
+            "offset",
+            |m: &DrawParagraph| { &m.offset },
+            |m: &mut DrawParagraph| { &mut m.offset },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawParagraph>(
+            "DrawParagraph",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for DrawParagraph {
+    const NAME: &'static str = "DrawParagraph";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paragraph)?;
+                },
+                18 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.offset)?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.paragraph.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.paragraph.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> DrawParagraph {
+        DrawParagraph::new()
+    }
+
+    fn clear(&mut self) {
+        self.paragraph.clear();
+        self.offset.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static DrawParagraph {
+        static instance: DrawParagraph = DrawParagraph {
+            paragraph: ::protobuf::MessageField::none(),
+            offset: ::protobuf::MessageField::none(),
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for DrawParagraph {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawParagraph").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for DrawParagraph {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DrawParagraph {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.Image)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct Image {
+    // message oneof groups
+    pub image: ::std::option::Option<image::Image>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Image.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a Image {
+    fn default() -> &'a Image {
+        <Image as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl Image {
+    pub fn new() -> Image {
+        ::std::default::Default::default()
+    }
+
+    // string path = 1;
+
+    pub fn path(&self) -> &str {
+        match self.image {
+            ::std::option::Option::Some(image::Image::Path(ref v)) => v,
+            _ => "",
+        }
+    }
+
+    pub fn clear_path(&mut self) {
+        self.image = ::std::option::Option::None;
+    }
+
+    pub fn has_path(&self) -> bool {
+        match self.image {
+            ::std::option::Option::Some(image::Image::Path(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_path(&mut self, v: ::std::string::String) {
+        self.image = ::std::option::Option::Some(image::Image::Path(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_path(&mut self) -> &mut ::std::string::String {
+        if let ::std::option::Option::Some(image::Image::Path(_)) = self.image {
+        } else {
+            self.image = ::std::option::Option::Some(image::Image::Path(::std::string::String::new()));
+        }
+        match self.image {
+            ::std::option::Option::Some(image::Image::Path(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_path(&mut self) -> ::std::string::String {
+        if self.has_path() {
+            match self.image.take() {
+                ::std::option::Option::Some(image::Image::Path(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            ::std::string::String::new()
+        }
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(1);
+        fields.push(::protobuf::reflect::rt::v2::make_oneof_deref_has_get_set_simpler_accessor::<_, _>(
+            "path",
+            Image::has_path,
+            Image::path,
+            Image::set_path,
+        ));
+        oneofs.push(image::Image::generated_oneof_descriptor_data());
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Image>(
+            "Image",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for Image {
+    const NAME: &'static str = "Image";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.image = ::std::option::Option::Some(image::Image::Path(is.read_string()?));
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let ::std::option::Option::Some(ref v) = self.image {
+            match v {
+                &image::Image::Path(ref v) => {
+                    my_size += ::protobuf::rt::string_size(1, &v);
+                },
+            };
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let ::std::option::Option::Some(ref v) = self.image {
+            match v {
+                &image::Image::Path(ref v) => {
+                    os.write_string(1, v)?;
+                },
+            };
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> Image {
+        Image::new()
+    }
+
+    fn clear(&mut self) {
+        self.image = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static Image {
+        static instance: Image = Image {
+            image: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for Image {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("Image").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for Image {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for Image {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+/// Nested message and enums of message `Image`
+pub mod image {
+
+    #[derive(Clone,PartialEq,Debug)]
+    #[non_exhaustive]
+    // @@protoc_insertion_point(oneof:hala.graphic.opcode.Image.image)
+    pub enum Image {
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.Image.path)
+        Path(::std::string::String),
+    }
+
+    impl ::protobuf::Oneof for Image {
+    }
+
+    impl ::protobuf::OneofFull for Image {
+        fn descriptor() -> ::protobuf::reflect::OneofDescriptor {
+            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::OneofDescriptor> = ::protobuf::rt::Lazy::new();
+            descriptor.get(|| <super::Image as ::protobuf::MessageFull>::descriptor().oneof_by_name("image").unwrap()).clone()
+        }
+    }
+
+    impl Image {
+        pub(in super) fn generated_oneof_descriptor_data() -> ::protobuf::reflect::GeneratedOneofDescriptorData {
+            ::protobuf::reflect::GeneratedOneofDescriptorData::new::<Image>("image")
+        }
+    }
+}
+
+// @@protoc_insertion_point(message:hala.graphic.opcode.Paragraph)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Paragraph {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.alphabetic_baseline)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.alphabetic_baseline)
     pub alphabetic_baseline: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.did_exceed_max_lines)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.did_exceed_max_lines)
     pub did_exceed_max_lines: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.height)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.height)
     pub height: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.ideo_graphic_baseline)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.ideo_graphic_baseline)
     pub ideo_graphic_baseline: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.longest_line)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.longest_line)
     pub longest_line: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.max_intrinsic_with)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.max_intrinsic_with)
     pub max_intrinsic_with: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.min_intrinsic_width)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.min_intrinsic_width)
     pub min_intrinsic_width: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paragraph.width)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paragraph.width)
     pub width: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Paragraph.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Paragraph.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -1423,166 +3277,24 @@ impl ::protobuf::reflect::ProtobufValue for Paragraph {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.DrawParagraph)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct DrawParagraph {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawParagraph.paragraph)
-    pub paragraph: ::protobuf::MessageField<Paragraph>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawParagraph.offset)
-    pub offset: ::protobuf::MessageField<Offset>,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.DrawParagraph.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a DrawParagraph {
-    fn default() -> &'a DrawParagraph {
-        <DrawParagraph as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl DrawParagraph {
-    pub fn new() -> DrawParagraph {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paragraph>(
-            "paragraph",
-            |m: &DrawParagraph| { &m.paragraph },
-            |m: &mut DrawParagraph| { &mut m.paragraph },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Offset>(
-            "offset",
-            |m: &DrawParagraph| { &m.offset },
-            |m: &mut DrawParagraph| { &mut m.offset },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawParagraph>(
-            "DrawParagraph",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for DrawParagraph {
-    const NAME: &'static str = "DrawParagraph";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paragraph)?;
-                },
-                18 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.offset)?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.paragraph.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if let Some(v) = self.offset.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.paragraph.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if let Some(v) = self.offset.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> DrawParagraph {
-        DrawParagraph::new()
-    }
-
-    fn clear(&mut self) {
-        self.paragraph.clear();
-        self.offset.clear();
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static DrawParagraph {
-        static instance: DrawParagraph = DrawParagraph {
-            paragraph: ::protobuf::MessageField::none(),
-            offset: ::protobuf::MessageField::none(),
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for DrawParagraph {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawParagraph").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for DrawParagraph {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for DrawParagraph {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.Paint)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Paint)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Paint {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.blend_mode)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paint.blend_mode)
     pub blend_mode: ::protobuf::EnumOrUnknown<BlendMode>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.color)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paint.color)
     pub color: ::protobuf::MessageField<Color>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.filter_quality)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paint.filter_quality)
     pub filter_quality: ::protobuf::EnumOrUnknown<FilterQuality>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.invert_color)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paint.invert_color)
     pub invert_color: bool,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.is_anti_alias)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paint.is_anti_alias)
     pub is_anti_alias: bool,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Paint.stroke)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Paint.stroke)
     pub stroke: ::protobuf::MessageField<PaintStroke>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Paint.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Paint.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -1678,14 +3390,14 @@ impl ::protobuf::Message for Paint {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u64 {
         let mut my_size = 0;
-        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::Clear) {
+        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::BlendModeClear) {
             my_size += ::protobuf::rt::int32_size(1, self.blend_mode.value());
         }
         if let Some(v) = self.color.as_ref() {
             let len = v.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         }
-        if self.filter_quality != ::protobuf::EnumOrUnknown::new(FilterQuality::FilterQualityNone) {
+        if self.filter_quality != ::protobuf::EnumOrUnknown::new(FilterQuality::QualityNone) {
             my_size += ::protobuf::rt::int32_size(3, self.filter_quality.value());
         }
         if self.invert_color != false {
@@ -1704,13 +3416,13 @@ impl ::protobuf::Message for Paint {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::Clear) {
+        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::BlendModeClear) {
             os.write_enum(1, ::protobuf::EnumOrUnknown::value(&self.blend_mode))?;
         }
         if let Some(v) = self.color.as_ref() {
             ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
         }
-        if self.filter_quality != ::protobuf::EnumOrUnknown::new(FilterQuality::FilterQualityNone) {
+        if self.filter_quality != ::protobuf::EnumOrUnknown::new(FilterQuality::QualityNone) {
             os.write_enum(3, ::protobuf::EnumOrUnknown::value(&self.filter_quality))?;
         }
         if self.invert_color != false {
@@ -1739,9 +3451,9 @@ impl ::protobuf::Message for Paint {
     }
 
     fn clear(&mut self) {
-        self.blend_mode = ::protobuf::EnumOrUnknown::new(BlendMode::Clear);
+        self.blend_mode = ::protobuf::EnumOrUnknown::new(BlendMode::BlendModeClear);
         self.color.clear();
-        self.filter_quality = ::protobuf::EnumOrUnknown::new(FilterQuality::FilterQualityNone);
+        self.filter_quality = ::protobuf::EnumOrUnknown::new(FilterQuality::QualityNone);
         self.invert_color = false;
         self.is_anti_alias = false;
         self.stroke.clear();
@@ -1779,20 +3491,20 @@ impl ::protobuf::reflect::ProtobufValue for Paint {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.PaintStroke)
+// @@protoc_insertion_point(message:hala.graphic.opcode.PaintStroke)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct PaintStroke {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_cap)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.PaintStroke.stroke_cap)
     pub stroke_cap: ::protobuf::EnumOrUnknown<StrokeCap>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_join)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.PaintStroke.stroke_join)
     pub stroke_join: ::protobuf::EnumOrUnknown<StrokeJoin>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_miter_limit)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.PaintStroke.stroke_miter_limit)
     pub stroke_miter_limit: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.PaintStroke.stroke_width)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.PaintStroke.stroke_width)
     pub stroke_width: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.PaintStroke.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.PaintStroke.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -1872,10 +3584,10 @@ impl ::protobuf::Message for PaintStroke {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u64 {
         let mut my_size = 0;
-        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(StrokeCap::StrokeCapButt) {
+        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(StrokeCap::CapButt) {
             my_size += ::protobuf::rt::int32_size(1, self.stroke_cap.value());
         }
-        if self.stroke_join != ::protobuf::EnumOrUnknown::new(StrokeJoin::StrokeJoinMiter) {
+        if self.stroke_join != ::protobuf::EnumOrUnknown::new(StrokeJoin::JoinMiter) {
             my_size += ::protobuf::rt::int32_size(2, self.stroke_join.value());
         }
         if self.stroke_miter_limit != 0. {
@@ -1890,10 +3602,10 @@ impl ::protobuf::Message for PaintStroke {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(StrokeCap::StrokeCapButt) {
+        if self.stroke_cap != ::protobuf::EnumOrUnknown::new(StrokeCap::CapButt) {
             os.write_enum(1, ::protobuf::EnumOrUnknown::value(&self.stroke_cap))?;
         }
-        if self.stroke_join != ::protobuf::EnumOrUnknown::new(StrokeJoin::StrokeJoinMiter) {
+        if self.stroke_join != ::protobuf::EnumOrUnknown::new(StrokeJoin::JoinMiter) {
             os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.stroke_join))?;
         }
         if self.stroke_miter_limit != 0. {
@@ -1919,8 +3631,8 @@ impl ::protobuf::Message for PaintStroke {
     }
 
     fn clear(&mut self) {
-        self.stroke_cap = ::protobuf::EnumOrUnknown::new(StrokeCap::StrokeCapButt);
-        self.stroke_join = ::protobuf::EnumOrUnknown::new(StrokeJoin::StrokeJoinMiter);
+        self.stroke_cap = ::protobuf::EnumOrUnknown::new(StrokeCap::CapButt);
+        self.stroke_join = ::protobuf::EnumOrUnknown::new(StrokeJoin::JoinMiter);
         self.stroke_miter_limit = 0.;
         self.stroke_width = 0.;
         self.special_fields.clear();
@@ -1955,268 +3667,46 @@ impl ::protobuf::reflect::ProtobufValue for PaintStroke {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Image)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Path)
 #[derive(PartialEq,Clone,Default,Debug)]
-pub struct Image {
-    // message oneof groups
-    pub image: ::std::option::Option<image::Image>,
+pub struct Path {
+    // message fields
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Path.sub_paths)
+    pub sub_paths: ::std::vec::Vec<SubPath>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Image.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Path.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
-impl<'a> ::std::default::Default for &'a Image {
-    fn default() -> &'a Image {
-        <Image as ::protobuf::Message>::default_instance()
+impl<'a> ::std::default::Default for &'a Path {
+    fn default() -> &'a Path {
+        <Path as ::protobuf::Message>::default_instance()
     }
 }
 
-impl Image {
-    pub fn new() -> Image {
+impl Path {
+    pub fn new() -> Path {
         ::std::default::Default::default()
-    }
-
-    // string path = 1;
-
-    pub fn path(&self) -> &str {
-        match self.image {
-            ::std::option::Option::Some(image::Image::Path(ref v)) => v,
-            _ => "",
-        }
-    }
-
-    pub fn clear_path(&mut self) {
-        self.image = ::std::option::Option::None;
-    }
-
-    pub fn has_path(&self) -> bool {
-        match self.image {
-            ::std::option::Option::Some(image::Image::Path(..)) => true,
-            _ => false,
-        }
-    }
-
-    // Param is passed by value, moved
-    pub fn set_path(&mut self, v: ::std::string::String) {
-        self.image = ::std::option::Option::Some(image::Image::Path(v))
-    }
-
-    // Mutable pointer to the field.
-    pub fn mut_path(&mut self) -> &mut ::std::string::String {
-        if let ::std::option::Option::Some(image::Image::Path(_)) = self.image {
-        } else {
-            self.image = ::std::option::Option::Some(image::Image::Path(::std::string::String::new()));
-        }
-        match self.image {
-            ::std::option::Option::Some(image::Image::Path(ref mut v)) => v,
-            _ => panic!(),
-        }
-    }
-
-    // Take field
-    pub fn take_path(&mut self) -> ::std::string::String {
-        if self.has_path() {
-            match self.image.take() {
-                ::std::option::Option::Some(image::Image::Path(v)) => v,
-                _ => panic!(),
-            }
-        } else {
-            ::std::string::String::new()
-        }
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
         let mut fields = ::std::vec::Vec::with_capacity(1);
-        let mut oneofs = ::std::vec::Vec::with_capacity(1);
-        fields.push(::protobuf::reflect::rt::v2::make_oneof_deref_has_get_set_simpler_accessor::<_, _>(
-            "path",
-            Image::has_path,
-            Image::path,
-            Image::set_path,
-        ));
-        oneofs.push(image::Image::generated_oneof_descriptor_data());
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Image>(
-            "Image",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for Image {
-    const NAME: &'static str = "Image";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    self.image = ::std::option::Option::Some(image::Image::Path(is.read_string()?));
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let ::std::option::Option::Some(ref v) = self.image {
-            match v {
-                &image::Image::Path(ref v) => {
-                    my_size += ::protobuf::rt::string_size(1, &v);
-                },
-            };
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let ::std::option::Option::Some(ref v) = self.image {
-            match v {
-                &image::Image::Path(ref v) => {
-                    os.write_string(1, v)?;
-                },
-            };
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> Image {
-        Image::new()
-    }
-
-    fn clear(&mut self) {
-        self.image = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static Image {
-        static instance: Image = Image {
-            image: ::std::option::Option::None,
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for Image {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("Image").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for Image {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for Image {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-/// Nested message and enums of message `Image`
-pub mod image {
-
-    #[derive(Clone,PartialEq,Debug)]
-    #[non_exhaustive]
-    // @@protoc_insertion_point(oneof:hala.canvas.opcode.Image.image)
-    pub enum Image {
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.Image.path)
-        Path(::std::string::String),
-    }
-
-    impl ::protobuf::Oneof for Image {
-    }
-
-    impl ::protobuf::OneofFull for Image {
-        fn descriptor() -> ::protobuf::reflect::OneofDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::OneofDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| <super::Image as ::protobuf::MessageFull>::descriptor().oneof_by_name("image").unwrap()).clone()
-        }
-    }
-
-    impl Image {
-        pub(in super) fn generated_oneof_descriptor_data() -> ::protobuf::reflect::GeneratedOneofDescriptorData {
-            ::protobuf::reflect::GeneratedOneofDescriptorData::new::<Image>("image")
-        }
-    }
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.DrawImage)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct DrawImage {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawImage.image)
-    pub image: ::protobuf::MessageField<Image>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawImage.offset)
-    pub offset: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawImage.paint)
-    pub paint: ::protobuf::MessageField<Paint>,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.DrawImage.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a DrawImage {
-    fn default() -> &'a DrawImage {
-        <DrawImage as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl DrawImage {
-    pub fn new() -> DrawImage {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Image>(
-            "image",
-            |m: &DrawImage| { &m.image },
-            |m: &mut DrawImage| { &mut m.image },
+        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+            "sub_paths",
+            |m: &Path| { &m.sub_paths },
+            |m: &mut Path| { &mut m.sub_paths },
         ));
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Offset>(
-            "offset",
-            |m: &DrawImage| { &m.offset },
-            |m: &mut DrawImage| { &mut m.offset },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paint>(
-            "paint",
-            |m: &DrawImage| { &m.paint },
-            |m: &mut DrawImage| { &mut m.paint },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawImage>(
-            "DrawImage",
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Path>(
+            "Path",
             fields,
             oneofs,
         )
     }
 }
 
-impl ::protobuf::Message for DrawImage {
-    const NAME: &'static str = "DrawImage";
+impl ::protobuf::Message for Path {
+    const NAME: &'static str = "Path";
 
     fn is_initialized(&self) -> bool {
         true
@@ -2226,13 +3716,7 @@ impl ::protobuf::Message for DrawImage {
         while let Some(tag) = is.read_raw_tag_or_eof()? {
             match tag {
                 10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.image)?;
-                },
-                18 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.offset)?;
-                },
-                26 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paint)?;
+                    self.sub_paths.push(is.read_message()?);
                 },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -2246,33 +3730,19 @@ impl ::protobuf::Message for DrawImage {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u64 {
         let mut my_size = 0;
-        if let Some(v) = self.image.as_ref() {
-            let len = v.compute_size();
+        for value in &self.sub_paths {
+            let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if let Some(v) = self.offset.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if let Some(v) = self.paint.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
+        };
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.image.as_ref() {
+        for v in &self.sub_paths {
             ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if let Some(v) = self.offset.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
-        }
-        if let Some(v) = self.paint.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
-        }
+        };
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2285,1467 +3755,55 @@ impl ::protobuf::Message for DrawImage {
         &mut self.special_fields
     }
 
-    fn new() -> DrawImage {
-        DrawImage::new()
+    fn new() -> Path {
+        Path::new()
     }
 
     fn clear(&mut self) {
-        self.image.clear();
-        self.offset.clear();
-        self.paint.clear();
+        self.sub_paths.clear();
         self.special_fields.clear();
     }
 
-    fn default_instance() -> &'static DrawImage {
-        static instance: DrawImage = DrawImage {
-            image: ::protobuf::MessageField::none(),
-            offset: ::protobuf::MessageField::none(),
-            paint: ::protobuf::MessageField::none(),
+    fn default_instance() -> &'static Path {
+        static instance: Path = Path {
+            sub_paths: ::std::vec::Vec::new(),
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
     }
 }
 
-impl ::protobuf::MessageFull for DrawImage {
+impl ::protobuf::MessageFull for Path {
     fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
         static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawImage").unwrap()).clone()
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("Path").unwrap()).clone()
     }
 }
 
-impl ::std::fmt::Display for DrawImage {
+impl ::std::fmt::Display for Path {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         ::protobuf::text_format::fmt(self, f)
     }
 }
 
-impl ::protobuf::reflect::ProtobufValue for DrawImage {
+impl ::protobuf::reflect::ProtobufValue for Path {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.DrawImageRect)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct DrawImageRect {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawImageRect.image)
-    pub image: ::protobuf::MessageField<Image>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawImageRect.src)
-    pub src: ::protobuf::MessageField<Rect>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawImageRect.dst)
-    pub dst: ::protobuf::MessageField<Rect>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawImageRect.paint)
-    pub paint: ::protobuf::MessageField<Paint>,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.DrawImageRect.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a DrawImageRect {
-    fn default() -> &'a DrawImageRect {
-        <DrawImageRect as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl DrawImageRect {
-    pub fn new() -> DrawImageRect {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(4);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Image>(
-            "image",
-            |m: &DrawImageRect| { &m.image },
-            |m: &mut DrawImageRect| { &mut m.image },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Rect>(
-            "src",
-            |m: &DrawImageRect| { &m.src },
-            |m: &mut DrawImageRect| { &mut m.src },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Rect>(
-            "dst",
-            |m: &DrawImageRect| { &m.dst },
-            |m: &mut DrawImageRect| { &mut m.dst },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paint>(
-            "paint",
-            |m: &DrawImageRect| { &m.paint },
-            |m: &mut DrawImageRect| { &mut m.paint },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawImageRect>(
-            "DrawImageRect",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for DrawImageRect {
-    const NAME: &'static str = "DrawImageRect";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.image)?;
-                },
-                18 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.src)?;
-                },
-                26 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.dst)?;
-                },
-                34 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paint)?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.image.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if let Some(v) = self.src.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if let Some(v) = self.dst.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if let Some(v) = self.paint.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.image.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if let Some(v) = self.src.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
-        }
-        if let Some(v) = self.dst.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(3, v, os)?;
-        }
-        if let Some(v) = self.paint.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(4, v, os)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> DrawImageRect {
-        DrawImageRect::new()
-    }
-
-    fn clear(&mut self) {
-        self.image.clear();
-        self.src.clear();
-        self.dst.clear();
-        self.paint.clear();
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static DrawImageRect {
-        static instance: DrawImageRect = DrawImageRect {
-            image: ::protobuf::MessageField::none(),
-            src: ::protobuf::MessageField::none(),
-            dst: ::protobuf::MessageField::none(),
-            paint: ::protobuf::MessageField::none(),
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for DrawImageRect {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawImageRect").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for DrawImageRect {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for DrawImageRect {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.DrawPath)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct DrawPath {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawPath.path)
-    pub path: ::protobuf::MessageField<Path>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawPath.paint)
-    pub paint: ::protobuf::MessageField<Paint>,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.DrawPath.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a DrawPath {
-    fn default() -> &'a DrawPath {
-        <DrawPath as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl DrawPath {
-    pub fn new() -> DrawPath {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Path>(
-            "path",
-            |m: &DrawPath| { &m.path },
-            |m: &mut DrawPath| { &mut m.path },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Paint>(
-            "paint",
-            |m: &DrawPath| { &m.paint },
-            |m: &mut DrawPath| { &mut m.paint },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawPath>(
-            "DrawPath",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for DrawPath {
-    const NAME: &'static str = "DrawPath";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.path)?;
-                },
-                18 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.paint)?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.path.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if let Some(v) = self.paint.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.path.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if let Some(v) = self.paint.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(2, v, os)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> DrawPath {
-        DrawPath::new()
-    }
-
-    fn clear(&mut self) {
-        self.path.clear();
-        self.paint.clear();
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static DrawPath {
-        static instance: DrawPath = DrawPath {
-            path: ::protobuf::MessageField::none(),
-            paint: ::protobuf::MessageField::none(),
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for DrawPath {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawPath").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for DrawPath {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for DrawPath {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.ClipPath)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct ClipPath {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ClipPath.path)
-    pub path: ::protobuf::MessageField<Path>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ClipPath.do_anti_alias)
-    pub do_anti_alias: bool,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.ClipPath.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a ClipPath {
-    fn default() -> &'a ClipPath {
-        <ClipPath as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl ClipPath {
-    pub fn new() -> ClipPath {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Path>(
-            "path",
-            |m: &ClipPath| { &m.path },
-            |m: &mut ClipPath| { &mut m.path },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "do_anti_alias",
-            |m: &ClipPath| { &m.do_anti_alias },
-            |m: &mut ClipPath| { &mut m.do_anti_alias },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClipPath>(
-            "ClipPath",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for ClipPath {
-    const NAME: &'static str = "ClipPath";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.path)?;
-                },
-                16 => {
-                    self.do_anti_alias = is.read_bool()?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.path.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if self.do_anti_alias != false {
-            my_size += 1 + 1;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.path.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if self.do_anti_alias != false {
-            os.write_bool(2, self.do_anti_alias)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> ClipPath {
-        ClipPath::new()
-    }
-
-    fn clear(&mut self) {
-        self.path.clear();
-        self.do_anti_alias = false;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static ClipPath {
-        static instance: ClipPath = ClipPath {
-            path: ::protobuf::MessageField::none(),
-            do_anti_alias: false,
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for ClipPath {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("ClipPath").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for ClipPath {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for ClipPath {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.ClipRect)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct ClipRect {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ClipRect.rect)
-    pub rect: ::protobuf::MessageField<Rect>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ClipRect.clip_op)
-    pub clip_op: ::protobuf::EnumOrUnknown<clip_rect::ClipOp>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ClipRect.do_anti_alias)
-    pub do_anti_alias: bool,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.ClipRect.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a ClipRect {
-    fn default() -> &'a ClipRect {
-        <ClipRect as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl ClipRect {
-    pub fn new() -> ClipRect {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Rect>(
-            "rect",
-            |m: &ClipRect| { &m.rect },
-            |m: &mut ClipRect| { &mut m.rect },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "clip_op",
-            |m: &ClipRect| { &m.clip_op },
-            |m: &mut ClipRect| { &mut m.clip_op },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "do_anti_alias",
-            |m: &ClipRect| { &m.do_anti_alias },
-            |m: &mut ClipRect| { &mut m.do_anti_alias },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClipRect>(
-            "ClipRect",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for ClipRect {
-    const NAME: &'static str = "ClipRect";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.rect)?;
-                },
-                16 => {
-                    self.clip_op = is.read_enum_or_unknown()?;
-                },
-                24 => {
-                    self.do_anti_alias = is.read_bool()?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.rect.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if self.clip_op != ::protobuf::EnumOrUnknown::new(clip_rect::ClipOp::Difference) {
-            my_size += ::protobuf::rt::int32_size(2, self.clip_op.value());
-        }
-        if self.do_anti_alias != false {
-            my_size += 1 + 1;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.rect.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if self.clip_op != ::protobuf::EnumOrUnknown::new(clip_rect::ClipOp::Difference) {
-            os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.clip_op))?;
-        }
-        if self.do_anti_alias != false {
-            os.write_bool(3, self.do_anti_alias)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> ClipRect {
-        ClipRect::new()
-    }
-
-    fn clear(&mut self) {
-        self.rect.clear();
-        self.clip_op = ::protobuf::EnumOrUnknown::new(clip_rect::ClipOp::Difference);
-        self.do_anti_alias = false;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static ClipRect {
-        static instance: ClipRect = ClipRect {
-            rect: ::protobuf::MessageField::none(),
-            clip_op: ::protobuf::EnumOrUnknown::from_i32(0),
-            do_anti_alias: false,
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for ClipRect {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("ClipRect").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for ClipRect {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for ClipRect {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-/// Nested message and enums of message `ClipRect`
-pub mod clip_rect {
-    #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-    // @@protoc_insertion_point(enum:hala.canvas.opcode.ClipRect.ClipOp)
-    pub enum ClipOp {
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.ClipRect.ClipOp.Difference)
-        Difference = 0,
-        // @@protoc_insertion_point(enum_value:hala.canvas.opcode.ClipRect.ClipOp.Intersect)
-        Intersect = 1,
-    }
-
-    impl ::protobuf::Enum for ClipOp {
-        const NAME: &'static str = "ClipOp";
-
-        fn value(&self) -> i32 {
-            *self as i32
-        }
-
-        fn from_i32(value: i32) -> ::std::option::Option<ClipOp> {
-            match value {
-                0 => ::std::option::Option::Some(ClipOp::Difference),
-                1 => ::std::option::Option::Some(ClipOp::Intersect),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        fn from_str(str: &str) -> ::std::option::Option<ClipOp> {
-            match str {
-                "Difference" => ::std::option::Option::Some(ClipOp::Difference),
-                "Intersect" => ::std::option::Option::Some(ClipOp::Intersect),
-                _ => ::std::option::Option::None
-            }
-        }
-
-        const VALUES: &'static [ClipOp] = &[
-            ClipOp::Difference,
-            ClipOp::Intersect,
-        ];
-    }
-
-    impl ::protobuf::EnumFull for ClipOp {
-        fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
-            static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
-            descriptor.get(|| super::file_descriptor().enum_by_package_relative_name("ClipRect.ClipOp").unwrap()).clone()
-        }
-
-        fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
-            let index = *self as usize;
-            Self::enum_descriptor().value_by_index(index)
-        }
-    }
-
-    impl ::std::default::Default for ClipOp {
-        fn default() -> Self {
-            ClipOp::Difference
-        }
-    }
-
-    impl ClipOp {
-        pub(in super) fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
-            ::protobuf::reflect::GeneratedEnumDescriptorData::new::<ClipOp>("ClipRect.ClipOp")
-        }
-    }
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.ClipRRect)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct ClipRRect {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ClipRRect.rrect)
-    pub rrect: ::protobuf::MessageField<RRect>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ClipRRect.do_anti_alias)
-    pub do_anti_alias: bool,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.ClipRRect.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a ClipRRect {
-    fn default() -> &'a ClipRRect {
-        <ClipRRect as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl ClipRRect {
-    pub fn new() -> ClipRRect {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, RRect>(
-            "rrect",
-            |m: &ClipRRect| { &m.rrect },
-            |m: &mut ClipRRect| { &mut m.rrect },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "do_anti_alias",
-            |m: &ClipRRect| { &m.do_anti_alias },
-            |m: &mut ClipRRect| { &mut m.do_anti_alias },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClipRRect>(
-            "ClipRRect",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for ClipRRect {
-    const NAME: &'static str = "ClipRRect";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.rrect)?;
-                },
-                16 => {
-                    self.do_anti_alias = is.read_bool()?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.rrect.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if self.do_anti_alias != false {
-            my_size += 1 + 1;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.rrect.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if self.do_anti_alias != false {
-            os.write_bool(2, self.do_anti_alias)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> ClipRRect {
-        ClipRRect::new()
-    }
-
-    fn clear(&mut self) {
-        self.rrect.clear();
-        self.do_anti_alias = false;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static ClipRRect {
-        static instance: ClipRRect = ClipRRect {
-            rrect: ::protobuf::MessageField::none(),
-            do_anti_alias: false,
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for ClipRRect {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("ClipRRect").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for ClipRRect {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for ClipRRect {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.DrawColor)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct DrawColor {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawColor.color)
-    pub color: ::protobuf::MessageField<Color>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawColor.blend_mode)
-    pub blend_mode: ::protobuf::EnumOrUnknown<BlendMode>,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.DrawColor.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a DrawColor {
-    fn default() -> &'a DrawColor {
-        <DrawColor as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl DrawColor {
-    pub fn new() -> DrawColor {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Color>(
-            "color",
-            |m: &DrawColor| { &m.color },
-            |m: &mut DrawColor| { &mut m.color },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "blend_mode",
-            |m: &DrawColor| { &m.blend_mode },
-            |m: &mut DrawColor| { &mut m.blend_mode },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawColor>(
-            "DrawColor",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for DrawColor {
-    const NAME: &'static str = "DrawColor";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.color)?;
-                },
-                16 => {
-                    self.blend_mode = is.read_enum_or_unknown()?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.color.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::Clear) {
-            my_size += ::protobuf::rt::int32_size(2, self.blend_mode.value());
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.color.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if self.blend_mode != ::protobuf::EnumOrUnknown::new(BlendMode::Clear) {
-            os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.blend_mode))?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> DrawColor {
-        DrawColor::new()
-    }
-
-    fn clear(&mut self) {
-        self.color.clear();
-        self.blend_mode = ::protobuf::EnumOrUnknown::new(BlendMode::Clear);
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static DrawColor {
-        static instance: DrawColor = DrawColor {
-            color: ::protobuf::MessageField::none(),
-            blend_mode: ::protobuf::EnumOrUnknown::from_i32(0),
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for DrawColor {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawColor").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for DrawColor {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for DrawColor {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.Scale)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct Scale {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Scale.sx)
-    pub sx: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Scale.sy)
-    pub sy: ::std::option::Option<f32>,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Scale.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a Scale {
-    fn default() -> &'a Scale {
-        <Scale as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl Scale {
-    pub fn new() -> Scale {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "sx",
-            |m: &Scale| { &m.sx },
-            |m: &mut Scale| { &mut m.sx },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
-            "sy",
-            |m: &Scale| { &m.sy },
-            |m: &mut Scale| { &mut m.sy },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Scale>(
-            "Scale",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for Scale {
-    const NAME: &'static str = "Scale";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                13 => {
-                    self.sx = is.read_float()?;
-                },
-                21 => {
-                    self.sy = ::std::option::Option::Some(is.read_float()?);
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if self.sx != 0. {
-            my_size += 1 + 4;
-        }
-        if let Some(v) = self.sy {
-            my_size += 1 + 4;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if self.sx != 0. {
-            os.write_float(1, self.sx)?;
-        }
-        if let Some(v) = self.sy {
-            os.write_float(2, v)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> Scale {
-        Scale::new()
-    }
-
-    fn clear(&mut self) {
-        self.sx = 0.;
-        self.sy = ::std::option::Option::None;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static Scale {
-        static instance: Scale = Scale {
-            sx: 0.,
-            sy: ::std::option::Option::None,
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for Scale {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("Scale").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for Scale {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for Scale {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.Skew)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct Skew {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Skew.sx)
-    pub sx: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Skew.sy)
-    pub sy: f32,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Skew.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a Skew {
-    fn default() -> &'a Skew {
-        <Skew as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl Skew {
-    pub fn new() -> Skew {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "sx",
-            |m: &Skew| { &m.sx },
-            |m: &mut Skew| { &mut m.sx },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "sy",
-            |m: &Skew| { &m.sy },
-            |m: &mut Skew| { &mut m.sy },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Skew>(
-            "Skew",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for Skew {
-    const NAME: &'static str = "Skew";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                13 => {
-                    self.sx = is.read_float()?;
-                },
-                21 => {
-                    self.sy = is.read_float()?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if self.sx != 0. {
-            my_size += 1 + 4;
-        }
-        if self.sy != 0. {
-            my_size += 1 + 4;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if self.sx != 0. {
-            os.write_float(1, self.sx)?;
-        }
-        if self.sy != 0. {
-            os.write_float(2, self.sy)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> Skew {
-        Skew::new()
-    }
-
-    fn clear(&mut self) {
-        self.sx = 0.;
-        self.sy = 0.;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static Skew {
-        static instance: Skew = Skew {
-            sx: 0.,
-            sy: 0.,
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for Skew {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("Skew").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for Skew {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for Skew {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.DrawShadow)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct DrawShadow {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawShadow.color)
-    pub color: ::protobuf::MessageField<Color>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawShadow.elevation)
-    pub elevation: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.DrawShadow.transparent_occluder)
-    pub transparent_occluder: bool,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.DrawShadow.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a DrawShadow {
-    fn default() -> &'a DrawShadow {
-        <DrawShadow as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl DrawShadow {
-    pub fn new() -> DrawShadow {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, Color>(
-            "color",
-            |m: &DrawShadow| { &m.color },
-            |m: &mut DrawShadow| { &mut m.color },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "elevation",
-            |m: &DrawShadow| { &m.elevation },
-            |m: &mut DrawShadow| { &mut m.elevation },
-        ));
-        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
-            "transparent_occluder",
-            |m: &DrawShadow| { &m.transparent_occluder },
-            |m: &mut DrawShadow| { &mut m.transparent_occluder },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DrawShadow>(
-            "DrawShadow",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for DrawShadow {
-    const NAME: &'static str = "DrawShadow";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.color)?;
-                },
-                21 => {
-                    self.elevation = is.read_float()?;
-                },
-                24 => {
-                    self.transparent_occluder = is.read_bool()?;
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        if let Some(v) = self.color.as_ref() {
-            let len = v.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        }
-        if self.elevation != 0. {
-            my_size += 1 + 4;
-        }
-        if self.transparent_occluder != false {
-            my_size += 1 + 1;
-        }
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        if let Some(v) = self.color.as_ref() {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        }
-        if self.elevation != 0. {
-            os.write_float(2, self.elevation)?;
-        }
-        if self.transparent_occluder != false {
-            os.write_bool(3, self.transparent_occluder)?;
-        }
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> DrawShadow {
-        DrawShadow::new()
-    }
-
-    fn clear(&mut self) {
-        self.color.clear();
-        self.elevation = 0.;
-        self.transparent_occluder = false;
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static DrawShadow {
-        static instance: DrawShadow = DrawShadow {
-            color: ::protobuf::MessageField::none(),
-            elevation: 0.,
-            transparent_occluder: false,
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for DrawShadow {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("DrawShadow").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for DrawShadow {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for DrawShadow {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.Color)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Color)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Color {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Color.r)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Color.r)
     pub r: f64,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Color.g)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Color.g)
     pub g: f64,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Color.b)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Color.b)
     pub b: f64,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Color.a)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Color.a)
     pub a: f64,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Color.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Color.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -3908,13 +3966,13 @@ impl ::protobuf::reflect::ProtobufValue for Color {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.SubPath)
+// @@protoc_insertion_point(message:hala.graphic.opcode.SubPath)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct SubPath {
     // message oneof groups
     pub code: ::std::option::Option<sub_path::Code>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.SubPath.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.SubPath.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -3929,7 +3987,7 @@ impl SubPath {
         ::std::default::Default::default()
     }
 
-    // .hala.canvas.opcode.Offset line_to = 1;
+    // .hala.graphic.opcode.Offset line_to = 1;
 
     pub fn line_to(&self) -> &Offset {
         match self.code {
@@ -3978,7 +4036,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Offset relative_line_to = 2;
+    // .hala.graphic.opcode.Offset relative_line_to = 2;
 
     pub fn relative_line_to(&self) -> &Offset {
         match self.code {
@@ -4027,7 +4085,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Offset move_to = 3;
+    // .hala.graphic.opcode.Offset move_to = 3;
 
     pub fn move_to(&self) -> &Offset {
         match self.code {
@@ -4076,7 +4134,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Offset realtive_move_to = 4;
+    // .hala.graphic.opcode.Offset realtive_move_to = 4;
 
     pub fn realtive_move_to(&self) -> &Offset {
         match self.code {
@@ -4125,7 +4183,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Arc arc = 5;
+    // .hala.graphic.opcode.Arc arc = 5;
 
     pub fn arc(&self) -> &Arc {
         match self.code {
@@ -4174,7 +4232,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.ArcTo arc_to = 6;
+    // .hala.graphic.opcode.ArcTo arc_to = 6;
 
     pub fn arc_to(&self) -> &ArcTo {
         match self.code {
@@ -4223,7 +4281,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.ArcToPoint arc_to_point = 7;
+    // .hala.graphic.opcode.ArcToPoint arc_to_point = 7;
 
     pub fn arc_to_point(&self) -> &ArcToPoint {
         match self.code {
@@ -4272,7 +4330,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.ArcToPoint relative_arc_to_point = 8;
+    // .hala.graphic.opcode.ArcToPoint relative_arc_to_point = 8;
 
     pub fn relative_arc_to_point(&self) -> &ArcToPoint {
         match self.code {
@@ -4321,7 +4379,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Rect oval = 9;
+    // .hala.graphic.opcode.Rect oval = 9;
 
     pub fn oval(&self) -> &Rect {
         match self.code {
@@ -4370,7 +4428,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.ExtendWithPath path = 10;
+    // .hala.graphic.opcode.ExtendWithPath path = 10;
 
     pub fn path(&self) -> &ExtendWithPath {
         match self.code {
@@ -4419,7 +4477,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Conic conic_to = 11;
+    // .hala.graphic.opcode.Conic conic_to = 11;
 
     pub fn conic_to(&self) -> &Conic {
         match self.code {
@@ -4468,7 +4526,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Conic relative_conic_to = 12;
+    // .hala.graphic.opcode.Conic relative_conic_to = 12;
 
     pub fn relative_conic_to(&self) -> &Conic {
         match self.code {
@@ -4517,7 +4575,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Cubic cubic_to = 13;
+    // .hala.graphic.opcode.Cubic cubic_to = 13;
 
     pub fn cubic_to(&self) -> &Cubic {
         match self.code {
@@ -4566,7 +4624,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Cubic relative_cubic_to = 14;
+    // .hala.graphic.opcode.Cubic relative_cubic_to = 14;
 
     pub fn relative_cubic_to(&self) -> &Cubic {
         match self.code {
@@ -4615,7 +4673,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.QuadraticBezier quadratic_bezier_to = 15;
+    // .hala.graphic.opcode.QuadraticBezier quadratic_bezier_to = 15;
 
     pub fn quadratic_bezier_to(&self) -> &QuadraticBezier {
         match self.code {
@@ -4664,7 +4722,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.QuadraticBezier relative_quadratic_bezier_to = 16;
+    // .hala.graphic.opcode.QuadraticBezier relative_quadratic_bezier_to = 16;
 
     pub fn relative_quadratic_bezier_to(&self) -> &QuadraticBezier {
         match self.code {
@@ -4713,7 +4771,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Offset shift = 17;
+    // .hala.graphic.opcode.Offset shift = 17;
 
     pub fn shift(&self) -> &Offset {
         match self.code {
@@ -4762,7 +4820,7 @@ impl SubPath {
         }
     }
 
-    // .hala.canvas.opcode.Mat4 transform = 18;
+    // .hala.graphic.opcode.Mat4 transform = 18;
 
     pub fn transform(&self) -> &Mat4 {
         match self.code {
@@ -4836,7 +4894,7 @@ impl SubPath {
         self.code = ::std::option::Option::Some(sub_path::Code::Closed(v))
     }
 
-    // .hala.canvas.opcode.RRect rrect = 20;
+    // .hala.graphic.opcode.RRect rrect = 20;
 
     pub fn rrect(&self) -> &RRect {
         match self.code {
@@ -5342,47 +5400,47 @@ pub mod sub_path {
 
     #[derive(Clone,PartialEq,Debug)]
     #[non_exhaustive]
-    // @@protoc_insertion_point(oneof:hala.canvas.opcode.SubPath.code)
+    // @@protoc_insertion_point(oneof:hala.graphic.opcode.SubPath.code)
     pub enum Code {
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.line_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.line_to)
         LineTo(super::Offset),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.relative_line_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.relative_line_to)
         RelativeLineTo(super::Offset),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.move_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.move_to)
         MoveTo(super::Offset),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.realtive_move_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.realtive_move_to)
         RealtiveMoveTo(super::Offset),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.arc)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.arc)
         Arc(super::Arc),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.arc_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.arc_to)
         ArcTo(super::ArcTo),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.arc_to_point)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.arc_to_point)
         ArcToPoint(super::ArcToPoint),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.relative_arc_to_point)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.relative_arc_to_point)
         RelativeArcToPoint(super::ArcToPoint),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.oval)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.oval)
         Oval(super::Rect),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.path)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.path)
         Path(super::ExtendWithPath),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.conic_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.conic_to)
         ConicTo(super::Conic),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.relative_conic_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.relative_conic_to)
         RelativeConicTo(super::Conic),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.cubic_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.cubic_to)
         CubicTo(super::Cubic),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.relative_cubic_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.relative_cubic_to)
         RelativeCubicTo(super::Cubic),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.quadratic_bezier_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.quadratic_bezier_to)
         QuadraticBezierTo(super::QuadraticBezier),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.relative_quadratic_bezier_to)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.relative_quadratic_bezier_to)
         RelativeQuadraticBezierTo(super::QuadraticBezier),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.shift)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.shift)
         Shift(super::Offset),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.transform)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.transform)
         Transform(super::Mat4),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.closed)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.closed)
         Closed(bool),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.SubPath.rrect)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.SubPath.rrect)
         Rrect(super::RRect),
     }
 
@@ -5403,141 +5461,18 @@ pub mod sub_path {
     }
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Path)
-#[derive(PartialEq,Clone,Default,Debug)]
-pub struct Path {
-    // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Path.sub_paths)
-    pub sub_paths: ::std::vec::Vec<SubPath>,
-    // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Path.special_fields)
-    pub special_fields: ::protobuf::SpecialFields,
-}
-
-impl<'a> ::std::default::Default for &'a Path {
-    fn default() -> &'a Path {
-        <Path as ::protobuf::Message>::default_instance()
-    }
-}
-
-impl Path {
-    pub fn new() -> Path {
-        ::std::default::Default::default()
-    }
-
-    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(1);
-        let mut oneofs = ::std::vec::Vec::with_capacity(0);
-        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
-            "sub_paths",
-            |m: &Path| { &m.sub_paths },
-            |m: &mut Path| { &mut m.sub_paths },
-        ));
-        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<Path>(
-            "Path",
-            fields,
-            oneofs,
-        )
-    }
-}
-
-impl ::protobuf::Message for Path {
-    const NAME: &'static str = "Path";
-
-    fn is_initialized(&self) -> bool {
-        true
-    }
-
-    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
-        while let Some(tag) = is.read_raw_tag_or_eof()? {
-            match tag {
-                10 => {
-                    self.sub_paths.push(is.read_message()?);
-                },
-                tag => {
-                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
-                },
-            };
-        }
-        ::std::result::Result::Ok(())
-    }
-
-    // Compute sizes of nested messages
-    #[allow(unused_variables)]
-    fn compute_size(&self) -> u64 {
-        let mut my_size = 0;
-        for value in &self.sub_paths {
-            let len = value.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
-        };
-        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
-        self.special_fields.cached_size().set(my_size as u32);
-        my_size
-    }
-
-    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
-        for v in &self.sub_paths {
-            ::protobuf::rt::write_message_field_with_cached_size(1, v, os)?;
-        };
-        os.write_unknown_fields(self.special_fields.unknown_fields())?;
-        ::std::result::Result::Ok(())
-    }
-
-    fn special_fields(&self) -> &::protobuf::SpecialFields {
-        &self.special_fields
-    }
-
-    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
-        &mut self.special_fields
-    }
-
-    fn new() -> Path {
-        Path::new()
-    }
-
-    fn clear(&mut self) {
-        self.sub_paths.clear();
-        self.special_fields.clear();
-    }
-
-    fn default_instance() -> &'static Path {
-        static instance: Path = Path {
-            sub_paths: ::std::vec::Vec::new(),
-            special_fields: ::protobuf::SpecialFields::new(),
-        };
-        &instance
-    }
-}
-
-impl ::protobuf::MessageFull for Path {
-    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
-        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
-        descriptor.get(|| file_descriptor().message_by_package_relative_name("Path").unwrap()).clone()
-    }
-}
-
-impl ::std::fmt::Display for Path {
-    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        ::protobuf::text_format::fmt(self, f)
-    }
-}
-
-impl ::protobuf::reflect::ProtobufValue for Path {
-    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
-}
-
-// @@protoc_insertion_point(message:hala.canvas.opcode.Conic)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Conic)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Conic {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Conic.p1)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Conic.p1)
     pub p1: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Conic.p2)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Conic.p2)
     pub p2: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Conic.w)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Conic.w)
     pub w: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Conic.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Conic.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -5686,18 +5621,18 @@ impl ::protobuf::reflect::ProtobufValue for Conic {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Cubic)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Cubic)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Cubic {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Cubic.p1)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Cubic.p1)
     pub p1: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Cubic.p2)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Cubic.p2)
     pub p2: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Cubic.p3)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Cubic.p3)
     pub p3: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Cubic.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Cubic.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -5846,18 +5781,18 @@ impl ::protobuf::reflect::ProtobufValue for Cubic {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Arc)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Arc)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Arc {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Arc.oval)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Arc.oval)
     pub oval: ::protobuf::MessageField<Rect>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Arc.start_angle)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Arc.start_angle)
     pub start_angle: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Arc.sweep_angle)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Arc.sweep_angle)
     pub sweep_angle: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Arc.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Arc.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -6005,20 +5940,20 @@ impl ::protobuf::reflect::ProtobufValue for Arc {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.ArcTo)
+// @@protoc_insertion_point(message:hala.graphic.opcode.ArcTo)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct ArcTo {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcTo.oval)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcTo.oval)
     pub oval: ::protobuf::MessageField<Rect>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcTo.start_angle)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcTo.start_angle)
     pub start_angle: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcTo.sweep_angle)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcTo.sweep_angle)
     pub sweep_angle: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcTo.force_move_to)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcTo.force_move_to)
     pub force_move_to: bool,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.ArcTo.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.ArcTo.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -6182,22 +6117,22 @@ impl ::protobuf::reflect::ProtobufValue for ArcTo {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.ArcToPoint)
+// @@protoc_insertion_point(message:hala.graphic.opcode.ArcToPoint)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct ArcToPoint {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcToPoint.arc_end)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcToPoint.arc_end)
     pub arc_end: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcToPoint.radius)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcToPoint.radius)
     pub radius: ::protobuf::MessageField<Radius>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcToPoint.rotation)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcToPoint.rotation)
     pub rotation: ::std::option::Option<f64>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcToPoint.large_arc)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcToPoint.large_arc)
     pub large_arc: ::std::option::Option<bool>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ArcToPoint.clockwise)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ArcToPoint.clockwise)
     pub clockwise: ::std::option::Option<bool>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.ArcToPoint.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.ArcToPoint.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -6378,13 +6313,13 @@ impl ::protobuf::reflect::ProtobufValue for ArcToPoint {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Radius)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Radius)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Radius {
     // message oneof groups
     pub types: ::std::option::Option<radius::Types>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Radius.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Radius.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -6424,7 +6359,7 @@ impl Radius {
         self.types = ::std::option::Option::Some(radius::Types::Circular(v))
     }
 
-    // .hala.canvas.opcode.Size elliptical = 2;
+    // .hala.graphic.opcode.Size elliptical = 2;
 
     pub fn elliptical(&self) -> &Size {
         match self.types {
@@ -6606,11 +6541,11 @@ pub mod radius {
 
     #[derive(Clone,PartialEq,Debug)]
     #[non_exhaustive]
-    // @@protoc_insertion_point(oneof:hala.canvas.opcode.Radius.types)
+    // @@protoc_insertion_point(oneof:hala.graphic.opcode.Radius.types)
     pub enum Types {
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.Radius.circular)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.Radius.circular)
         Circular(f32),
-        // @@protoc_insertion_point(oneof_field:hala.canvas.opcode.Radius.elliptical)
+        // @@protoc_insertion_point(oneof_field:hala.graphic.opcode.Radius.elliptical)
         Elliptical(super::Size),
     }
 
@@ -6631,16 +6566,16 @@ pub mod radius {
     }
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Offset)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Offset)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Offset {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Offset.dx)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Offset.dx)
     pub dx: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Offset.dy)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Offset.dy)
     pub dy: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Offset.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Offset.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -6771,16 +6706,16 @@ impl ::protobuf::reflect::ProtobufValue for Offset {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Size)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Size)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Size {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Size.width)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Size.width)
     pub width: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Size.height)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Size.height)
     pub height: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Size.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Size.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -6911,16 +6846,16 @@ impl ::protobuf::reflect::ProtobufValue for Size {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Rect)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Rect)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Rect {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Rect.offset)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Rect.offset)
     pub offset: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Rect.size)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Rect.size)
     pub size: ::protobuf::MessageField<Size>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Rect.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Rect.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -7053,18 +6988,18 @@ impl ::protobuf::reflect::ProtobufValue for Rect {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.ExtendWithPath)
+// @@protoc_insertion_point(message:hala.graphic.opcode.ExtendWithPath)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct ExtendWithPath {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ExtendWithPath.path)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ExtendWithPath.path)
     pub path: ::protobuf::MessageField<Path>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ExtendWithPath.offset)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ExtendWithPath.offset)
     pub offset: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.ExtendWithPath.mat4)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.ExtendWithPath.mat4)
     pub mat4: ::protobuf::MessageField<Mat4>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.ExtendWithPath.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.ExtendWithPath.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -7214,16 +7149,16 @@ impl ::protobuf::reflect::ProtobufValue for ExtendWithPath {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.QuadraticBezier)
+// @@protoc_insertion_point(message:hala.graphic.opcode.QuadraticBezier)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct QuadraticBezier {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.QuadraticBezier.p1)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.QuadraticBezier.p1)
     pub p1: ::protobuf::MessageField<Offset>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.QuadraticBezier.p2)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.QuadraticBezier.p2)
     pub p2: ::protobuf::MessageField<Offset>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.QuadraticBezier.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.QuadraticBezier.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -7356,20 +7291,20 @@ impl ::protobuf::reflect::ProtobufValue for QuadraticBezier {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Vec4)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Vec4)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Vec4 {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Vec4.x)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Vec4.x)
     pub x: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Vec4.y)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Vec4.y)
     pub y: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Vec4.z)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Vec4.z)
     pub z: f32,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Vec4.w)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Vec4.w)
     pub w: f32,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Vec4.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Vec4.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -7532,20 +7467,20 @@ impl ::protobuf::reflect::ProtobufValue for Vec4 {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.Mat4)
+// @@protoc_insertion_point(message:hala.graphic.opcode.Mat4)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct Mat4 {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Mat4.x_axis)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Mat4.x_axis)
     pub x_axis: ::protobuf::MessageField<Vec4>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Mat4.y_axis)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Mat4.y_axis)
     pub y_axis: ::protobuf::MessageField<Vec4>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Mat4.z_axis)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Mat4.z_axis)
     pub z_axis: ::protobuf::MessageField<Vec4>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.Mat4.w_axis)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.Mat4.w_axis)
     pub w_axis: ::protobuf::MessageField<Vec4>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.Mat4.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.Mat4.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -7712,22 +7647,22 @@ impl ::protobuf::reflect::ProtobufValue for Mat4 {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
-// @@protoc_insertion_point(message:hala.canvas.opcode.RRect)
+// @@protoc_insertion_point(message:hala.graphic.opcode.RRect)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct RRect {
     // message fields
-    // @@protoc_insertion_point(field:hala.canvas.opcode.RRect.rect)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.RRect.rect)
     pub rect: ::protobuf::MessageField<Rect>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.RRect.tl)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.RRect.tl)
     pub tl: ::protobuf::MessageField<Radius>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.RRect.tr)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.RRect.tr)
     pub tr: ::protobuf::MessageField<Radius>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.RRect.bl)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.RRect.bl)
     pub bl: ::protobuf::MessageField<Radius>,
-    // @@protoc_insertion_point(field:hala.canvas.opcode.RRect.br)
+    // @@protoc_insertion_point(field:hala.graphic.opcode.RRect.br)
     pub br: ::protobuf::MessageField<Radius>,
     // special fields
-    // @@protoc_insertion_point(special_field:hala.canvas.opcode.RRect.special_fields)
+    // @@protoc_insertion_point(special_field:hala.graphic.opcode.RRect.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
 }
 
@@ -7912,16 +7847,78 @@ impl ::protobuf::reflect::ProtobufValue for RRect {
 }
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-// @@protoc_insertion_point(enum:hala.canvas.opcode.FilterQuality)
+// @@protoc_insertion_point(enum:hala.graphic.opcode.ClipOp)
+pub enum ClipOp {
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.ClipOp.ClipOpDifference)
+    ClipOpDifference = 0,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.ClipOp.ClipOpIntersect)
+    ClipOpIntersect = 1,
+}
+
+impl ::protobuf::Enum for ClipOp {
+    const NAME: &'static str = "ClipOp";
+
+    fn value(&self) -> i32 {
+        *self as i32
+    }
+
+    fn from_i32(value: i32) -> ::std::option::Option<ClipOp> {
+        match value {
+            0 => ::std::option::Option::Some(ClipOp::ClipOpDifference),
+            1 => ::std::option::Option::Some(ClipOp::ClipOpIntersect),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    fn from_str(str: &str) -> ::std::option::Option<ClipOp> {
+        match str {
+            "ClipOpDifference" => ::std::option::Option::Some(ClipOp::ClipOpDifference),
+            "ClipOpIntersect" => ::std::option::Option::Some(ClipOp::ClipOpIntersect),
+            _ => ::std::option::Option::None
+        }
+    }
+
+    const VALUES: &'static [ClipOp] = &[
+        ClipOp::ClipOpDifference,
+        ClipOp::ClipOpIntersect,
+    ];
+}
+
+impl ::protobuf::EnumFull for ClipOp {
+    fn enum_descriptor() -> ::protobuf::reflect::EnumDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::EnumDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().enum_by_package_relative_name("ClipOp").unwrap()).clone()
+    }
+
+    fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
+        let index = *self as usize;
+        Self::enum_descriptor().value_by_index(index)
+    }
+}
+
+impl ::std::default::Default for ClipOp {
+    fn default() -> Self {
+        ClipOp::ClipOpDifference
+    }
+}
+
+impl ClipOp {
+    fn generated_enum_descriptor_data() -> ::protobuf::reflect::GeneratedEnumDescriptorData {
+        ::protobuf::reflect::GeneratedEnumDescriptorData::new::<ClipOp>("ClipOp")
+    }
+}
+
+#[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
+// @@protoc_insertion_point(enum:hala.graphic.opcode.FilterQuality)
 pub enum FilterQuality {
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityNone)
-    FilterQualityNone = 0,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityLow)
-    FilterQualityLow = 1,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityMedium)
-    FilterQualityMedium = 2,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.FilterQuality.FilterQualityHight)
-    FilterQualityHight = 3,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.FilterQuality.QualityNone)
+    QualityNone = 0,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.FilterQuality.QualityLow)
+    QualityLow = 1,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.FilterQuality.QualityMedium)
+    QualityMedium = 2,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.FilterQuality.QualityHight)
+    QualityHight = 3,
 }
 
 impl ::protobuf::Enum for FilterQuality {
@@ -7933,29 +7930,29 @@ impl ::protobuf::Enum for FilterQuality {
 
     fn from_i32(value: i32) -> ::std::option::Option<FilterQuality> {
         match value {
-            0 => ::std::option::Option::Some(FilterQuality::FilterQualityNone),
-            1 => ::std::option::Option::Some(FilterQuality::FilterQualityLow),
-            2 => ::std::option::Option::Some(FilterQuality::FilterQualityMedium),
-            3 => ::std::option::Option::Some(FilterQuality::FilterQualityHight),
+            0 => ::std::option::Option::Some(FilterQuality::QualityNone),
+            1 => ::std::option::Option::Some(FilterQuality::QualityLow),
+            2 => ::std::option::Option::Some(FilterQuality::QualityMedium),
+            3 => ::std::option::Option::Some(FilterQuality::QualityHight),
             _ => ::std::option::Option::None
         }
     }
 
     fn from_str(str: &str) -> ::std::option::Option<FilterQuality> {
         match str {
-            "FilterQualityNone" => ::std::option::Option::Some(FilterQuality::FilterQualityNone),
-            "FilterQualityLow" => ::std::option::Option::Some(FilterQuality::FilterQualityLow),
-            "FilterQualityMedium" => ::std::option::Option::Some(FilterQuality::FilterQualityMedium),
-            "FilterQualityHight" => ::std::option::Option::Some(FilterQuality::FilterQualityHight),
+            "QualityNone" => ::std::option::Option::Some(FilterQuality::QualityNone),
+            "QualityLow" => ::std::option::Option::Some(FilterQuality::QualityLow),
+            "QualityMedium" => ::std::option::Option::Some(FilterQuality::QualityMedium),
+            "QualityHight" => ::std::option::Option::Some(FilterQuality::QualityHight),
             _ => ::std::option::Option::None
         }
     }
 
     const VALUES: &'static [FilterQuality] = &[
-        FilterQuality::FilterQualityNone,
-        FilterQuality::FilterQualityLow,
-        FilterQuality::FilterQualityMedium,
-        FilterQuality::FilterQualityHight,
+        FilterQuality::QualityNone,
+        FilterQuality::QualityLow,
+        FilterQuality::QualityMedium,
+        FilterQuality::QualityHight,
     ];
 }
 
@@ -7973,7 +7970,7 @@ impl ::protobuf::EnumFull for FilterQuality {
 
 impl ::std::default::Default for FilterQuality {
     fn default() -> Self {
-        FilterQuality::FilterQualityNone
+        FilterQuality::QualityNone
     }
 }
 
@@ -7984,14 +7981,14 @@ impl FilterQuality {
 }
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-// @@protoc_insertion_point(enum:hala.canvas.opcode.StrokeCap)
+// @@protoc_insertion_point(enum:hala.graphic.opcode.StrokeCap)
 pub enum StrokeCap {
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeCap.StrokeCapButt)
-    StrokeCapButt = 0,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeCap.StrokeCapRound)
-    StrokeCapRound = 1,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeCap.StrokeCapSquare)
-    StrokeCapSquare = 2,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.StrokeCap.CapButt)
+    CapButt = 0,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.StrokeCap.CapRound)
+    CapRound = 1,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.StrokeCap.CapSquare)
+    CapSquare = 2,
 }
 
 impl ::protobuf::Enum for StrokeCap {
@@ -8003,26 +8000,26 @@ impl ::protobuf::Enum for StrokeCap {
 
     fn from_i32(value: i32) -> ::std::option::Option<StrokeCap> {
         match value {
-            0 => ::std::option::Option::Some(StrokeCap::StrokeCapButt),
-            1 => ::std::option::Option::Some(StrokeCap::StrokeCapRound),
-            2 => ::std::option::Option::Some(StrokeCap::StrokeCapSquare),
+            0 => ::std::option::Option::Some(StrokeCap::CapButt),
+            1 => ::std::option::Option::Some(StrokeCap::CapRound),
+            2 => ::std::option::Option::Some(StrokeCap::CapSquare),
             _ => ::std::option::Option::None
         }
     }
 
     fn from_str(str: &str) -> ::std::option::Option<StrokeCap> {
         match str {
-            "StrokeCapButt" => ::std::option::Option::Some(StrokeCap::StrokeCapButt),
-            "StrokeCapRound" => ::std::option::Option::Some(StrokeCap::StrokeCapRound),
-            "StrokeCapSquare" => ::std::option::Option::Some(StrokeCap::StrokeCapSquare),
+            "CapButt" => ::std::option::Option::Some(StrokeCap::CapButt),
+            "CapRound" => ::std::option::Option::Some(StrokeCap::CapRound),
+            "CapSquare" => ::std::option::Option::Some(StrokeCap::CapSquare),
             _ => ::std::option::Option::None
         }
     }
 
     const VALUES: &'static [StrokeCap] = &[
-        StrokeCap::StrokeCapButt,
-        StrokeCap::StrokeCapRound,
-        StrokeCap::StrokeCapSquare,
+        StrokeCap::CapButt,
+        StrokeCap::CapRound,
+        StrokeCap::CapSquare,
     ];
 }
 
@@ -8040,7 +8037,7 @@ impl ::protobuf::EnumFull for StrokeCap {
 
 impl ::std::default::Default for StrokeCap {
     fn default() -> Self {
-        StrokeCap::StrokeCapButt
+        StrokeCap::CapButt
     }
 }
 
@@ -8051,14 +8048,14 @@ impl StrokeCap {
 }
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-// @@protoc_insertion_point(enum:hala.canvas.opcode.StrokeJoin)
+// @@protoc_insertion_point(enum:hala.graphic.opcode.StrokeJoin)
 pub enum StrokeJoin {
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeJoin.StrokeJoinMiter)
-    StrokeJoinMiter = 0,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeJoin.StrokeJoinRound)
-    StrokeJoinRound = 1,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.StrokeJoin.StrokeJoinBevel)
-    StrokeJoinBevel = 2,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.StrokeJoin.JoinMiter)
+    JoinMiter = 0,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.StrokeJoin.JoinRound)
+    JoinRound = 1,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.StrokeJoin.JoinBevel)
+    JoinBevel = 2,
 }
 
 impl ::protobuf::Enum for StrokeJoin {
@@ -8070,26 +8067,26 @@ impl ::protobuf::Enum for StrokeJoin {
 
     fn from_i32(value: i32) -> ::std::option::Option<StrokeJoin> {
         match value {
-            0 => ::std::option::Option::Some(StrokeJoin::StrokeJoinMiter),
-            1 => ::std::option::Option::Some(StrokeJoin::StrokeJoinRound),
-            2 => ::std::option::Option::Some(StrokeJoin::StrokeJoinBevel),
+            0 => ::std::option::Option::Some(StrokeJoin::JoinMiter),
+            1 => ::std::option::Option::Some(StrokeJoin::JoinRound),
+            2 => ::std::option::Option::Some(StrokeJoin::JoinBevel),
             _ => ::std::option::Option::None
         }
     }
 
     fn from_str(str: &str) -> ::std::option::Option<StrokeJoin> {
         match str {
-            "StrokeJoinMiter" => ::std::option::Option::Some(StrokeJoin::StrokeJoinMiter),
-            "StrokeJoinRound" => ::std::option::Option::Some(StrokeJoin::StrokeJoinRound),
-            "StrokeJoinBevel" => ::std::option::Option::Some(StrokeJoin::StrokeJoinBevel),
+            "JoinMiter" => ::std::option::Option::Some(StrokeJoin::JoinMiter),
+            "JoinRound" => ::std::option::Option::Some(StrokeJoin::JoinRound),
+            "JoinBevel" => ::std::option::Option::Some(StrokeJoin::JoinBevel),
             _ => ::std::option::Option::None
         }
     }
 
     const VALUES: &'static [StrokeJoin] = &[
-        StrokeJoin::StrokeJoinMiter,
-        StrokeJoin::StrokeJoinRound,
-        StrokeJoin::StrokeJoinBevel,
+        StrokeJoin::JoinMiter,
+        StrokeJoin::JoinRound,
+        StrokeJoin::JoinBevel,
     ];
 }
 
@@ -8107,7 +8104,7 @@ impl ::protobuf::EnumFull for StrokeJoin {
 
 impl ::std::default::Default for StrokeJoin {
     fn default() -> Self {
-        StrokeJoin::StrokeJoinMiter
+        StrokeJoin::JoinMiter
     }
 }
 
@@ -8118,66 +8115,66 @@ impl StrokeJoin {
 }
 
 #[derive(Clone,Copy,PartialEq,Eq,Debug,Hash)]
-// @@protoc_insertion_point(enum:hala.canvas.opcode.BlendMode)
+// @@protoc_insertion_point(enum:hala.graphic.opcode.BlendMode)
 pub enum BlendMode {
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Clear)
-    Clear = 0,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Src)
-    Src = 2,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Dst)
-    Dst = 3,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.SrcOver)
-    SrcOver = 4,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.DstOver)
-    DstOver = 5,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.SrcIn)
-    SrcIn = 6,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.DstIn)
-    DstIn = 7,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.SrcOut)
-    SrcOut = 8,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.DstOut)
-    DstOut = 9,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.SrcATop)
-    SrcATop = 10,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.DstATop)
-    DstATop = 11,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Xor)
-    Xor = 12,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Plus)
-    Plus = 13,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Modulate)
-    Modulate = 14,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Screen)
-    Screen = 15,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Overlay)
-    Overlay = 16,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Darken)
-    Darken = 17,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Lighten)
-    Lighten = 18,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.ColorDodge)
-    ColorDodge = 19,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.ColorBurn)
-    ColorBurn = 20,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.HardLight)
-    HardLight = 21,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.SoftLight)
-    SoftLight = 22,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Difference)
-    Difference = 23,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Exclusion)
-    Exclusion = 24,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Multiply)
-    Multiply = 25,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Hue)
-    Hue = 26,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Saturation)
-    Saturation = 27,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.BlendModeColor)
-    BlendModeColor = 28,
-    // @@protoc_insertion_point(enum_value:hala.canvas.opcode.BlendMode.Luminosity)
-    Luminosity = 29,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeClear)
+    BlendModeClear = 0,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeSrc)
+    BlendModeSrc = 2,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeDst)
+    BlendModeDst = 3,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeSrcOver)
+    BlendModeSrcOver = 4,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeDstOver)
+    BlendModeDstOver = 5,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeSrcIn)
+    BlendModeSrcIn = 6,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeDstIn)
+    BlendModeDstIn = 7,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeSrcOut)
+    BlendModeSrcOut = 8,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeDstOut)
+    BlendModeDstOut = 9,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeSrcATop)
+    BlendModeSrcATop = 10,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeDstATop)
+    BlendModeDstATop = 11,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeXor)
+    BlendModeXor = 12,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModePlus)
+    BlendModePlus = 13,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeModulate)
+    BlendModeModulate = 14,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeScreen)
+    BlendModeScreen = 15,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeOverlay)
+    BlendModeOverlay = 16,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeDarken)
+    BlendModeDarken = 17,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeLighten)
+    BlendModeLighten = 18,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeColorDodge)
+    BlendModeColorDodge = 19,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeColorBurn)
+    BlendModeColorBurn = 20,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeHardLight)
+    BlendModeHardLight = 21,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeSoftLight)
+    BlendModeSoftLight = 22,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeDifference)
+    BlendModeDifference = 23,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeExclusion)
+    BlendModeExclusion = 24,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeMultiply)
+    BlendModeMultiply = 25,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeHue)
+    BlendModeHue = 26,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeSaturation)
+    BlendModeSaturation = 27,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeBlendModeColor)
+    BlendModeBlendModeColor = 28,
+    // @@protoc_insertion_point(enum_value:hala.graphic.opcode.BlendMode.BlendModeLuminosity)
+    BlendModeLuminosity = 29,
 }
 
 impl ::protobuf::Enum for BlendMode {
@@ -8189,104 +8186,104 @@ impl ::protobuf::Enum for BlendMode {
 
     fn from_i32(value: i32) -> ::std::option::Option<BlendMode> {
         match value {
-            0 => ::std::option::Option::Some(BlendMode::Clear),
-            2 => ::std::option::Option::Some(BlendMode::Src),
-            3 => ::std::option::Option::Some(BlendMode::Dst),
-            4 => ::std::option::Option::Some(BlendMode::SrcOver),
-            5 => ::std::option::Option::Some(BlendMode::DstOver),
-            6 => ::std::option::Option::Some(BlendMode::SrcIn),
-            7 => ::std::option::Option::Some(BlendMode::DstIn),
-            8 => ::std::option::Option::Some(BlendMode::SrcOut),
-            9 => ::std::option::Option::Some(BlendMode::DstOut),
-            10 => ::std::option::Option::Some(BlendMode::SrcATop),
-            11 => ::std::option::Option::Some(BlendMode::DstATop),
-            12 => ::std::option::Option::Some(BlendMode::Xor),
-            13 => ::std::option::Option::Some(BlendMode::Plus),
-            14 => ::std::option::Option::Some(BlendMode::Modulate),
-            15 => ::std::option::Option::Some(BlendMode::Screen),
-            16 => ::std::option::Option::Some(BlendMode::Overlay),
-            17 => ::std::option::Option::Some(BlendMode::Darken),
-            18 => ::std::option::Option::Some(BlendMode::Lighten),
-            19 => ::std::option::Option::Some(BlendMode::ColorDodge),
-            20 => ::std::option::Option::Some(BlendMode::ColorBurn),
-            21 => ::std::option::Option::Some(BlendMode::HardLight),
-            22 => ::std::option::Option::Some(BlendMode::SoftLight),
-            23 => ::std::option::Option::Some(BlendMode::Difference),
-            24 => ::std::option::Option::Some(BlendMode::Exclusion),
-            25 => ::std::option::Option::Some(BlendMode::Multiply),
-            26 => ::std::option::Option::Some(BlendMode::Hue),
-            27 => ::std::option::Option::Some(BlendMode::Saturation),
-            28 => ::std::option::Option::Some(BlendMode::BlendModeColor),
-            29 => ::std::option::Option::Some(BlendMode::Luminosity),
+            0 => ::std::option::Option::Some(BlendMode::BlendModeClear),
+            2 => ::std::option::Option::Some(BlendMode::BlendModeSrc),
+            3 => ::std::option::Option::Some(BlendMode::BlendModeDst),
+            4 => ::std::option::Option::Some(BlendMode::BlendModeSrcOver),
+            5 => ::std::option::Option::Some(BlendMode::BlendModeDstOver),
+            6 => ::std::option::Option::Some(BlendMode::BlendModeSrcIn),
+            7 => ::std::option::Option::Some(BlendMode::BlendModeDstIn),
+            8 => ::std::option::Option::Some(BlendMode::BlendModeSrcOut),
+            9 => ::std::option::Option::Some(BlendMode::BlendModeDstOut),
+            10 => ::std::option::Option::Some(BlendMode::BlendModeSrcATop),
+            11 => ::std::option::Option::Some(BlendMode::BlendModeDstATop),
+            12 => ::std::option::Option::Some(BlendMode::BlendModeXor),
+            13 => ::std::option::Option::Some(BlendMode::BlendModePlus),
+            14 => ::std::option::Option::Some(BlendMode::BlendModeModulate),
+            15 => ::std::option::Option::Some(BlendMode::BlendModeScreen),
+            16 => ::std::option::Option::Some(BlendMode::BlendModeOverlay),
+            17 => ::std::option::Option::Some(BlendMode::BlendModeDarken),
+            18 => ::std::option::Option::Some(BlendMode::BlendModeLighten),
+            19 => ::std::option::Option::Some(BlendMode::BlendModeColorDodge),
+            20 => ::std::option::Option::Some(BlendMode::BlendModeColorBurn),
+            21 => ::std::option::Option::Some(BlendMode::BlendModeHardLight),
+            22 => ::std::option::Option::Some(BlendMode::BlendModeSoftLight),
+            23 => ::std::option::Option::Some(BlendMode::BlendModeDifference),
+            24 => ::std::option::Option::Some(BlendMode::BlendModeExclusion),
+            25 => ::std::option::Option::Some(BlendMode::BlendModeMultiply),
+            26 => ::std::option::Option::Some(BlendMode::BlendModeHue),
+            27 => ::std::option::Option::Some(BlendMode::BlendModeSaturation),
+            28 => ::std::option::Option::Some(BlendMode::BlendModeBlendModeColor),
+            29 => ::std::option::Option::Some(BlendMode::BlendModeLuminosity),
             _ => ::std::option::Option::None
         }
     }
 
     fn from_str(str: &str) -> ::std::option::Option<BlendMode> {
         match str {
-            "Clear" => ::std::option::Option::Some(BlendMode::Clear),
-            "Src" => ::std::option::Option::Some(BlendMode::Src),
-            "Dst" => ::std::option::Option::Some(BlendMode::Dst),
-            "SrcOver" => ::std::option::Option::Some(BlendMode::SrcOver),
-            "DstOver" => ::std::option::Option::Some(BlendMode::DstOver),
-            "SrcIn" => ::std::option::Option::Some(BlendMode::SrcIn),
-            "DstIn" => ::std::option::Option::Some(BlendMode::DstIn),
-            "SrcOut" => ::std::option::Option::Some(BlendMode::SrcOut),
-            "DstOut" => ::std::option::Option::Some(BlendMode::DstOut),
-            "SrcATop" => ::std::option::Option::Some(BlendMode::SrcATop),
-            "DstATop" => ::std::option::Option::Some(BlendMode::DstATop),
-            "Xor" => ::std::option::Option::Some(BlendMode::Xor),
-            "Plus" => ::std::option::Option::Some(BlendMode::Plus),
-            "Modulate" => ::std::option::Option::Some(BlendMode::Modulate),
-            "Screen" => ::std::option::Option::Some(BlendMode::Screen),
-            "Overlay" => ::std::option::Option::Some(BlendMode::Overlay),
-            "Darken" => ::std::option::Option::Some(BlendMode::Darken),
-            "Lighten" => ::std::option::Option::Some(BlendMode::Lighten),
-            "ColorDodge" => ::std::option::Option::Some(BlendMode::ColorDodge),
-            "ColorBurn" => ::std::option::Option::Some(BlendMode::ColorBurn),
-            "HardLight" => ::std::option::Option::Some(BlendMode::HardLight),
-            "SoftLight" => ::std::option::Option::Some(BlendMode::SoftLight),
-            "Difference" => ::std::option::Option::Some(BlendMode::Difference),
-            "Exclusion" => ::std::option::Option::Some(BlendMode::Exclusion),
-            "Multiply" => ::std::option::Option::Some(BlendMode::Multiply),
-            "Hue" => ::std::option::Option::Some(BlendMode::Hue),
-            "Saturation" => ::std::option::Option::Some(BlendMode::Saturation),
-            "BlendModeColor" => ::std::option::Option::Some(BlendMode::BlendModeColor),
-            "Luminosity" => ::std::option::Option::Some(BlendMode::Luminosity),
+            "BlendModeClear" => ::std::option::Option::Some(BlendMode::BlendModeClear),
+            "BlendModeSrc" => ::std::option::Option::Some(BlendMode::BlendModeSrc),
+            "BlendModeDst" => ::std::option::Option::Some(BlendMode::BlendModeDst),
+            "BlendModeSrcOver" => ::std::option::Option::Some(BlendMode::BlendModeSrcOver),
+            "BlendModeDstOver" => ::std::option::Option::Some(BlendMode::BlendModeDstOver),
+            "BlendModeSrcIn" => ::std::option::Option::Some(BlendMode::BlendModeSrcIn),
+            "BlendModeDstIn" => ::std::option::Option::Some(BlendMode::BlendModeDstIn),
+            "BlendModeSrcOut" => ::std::option::Option::Some(BlendMode::BlendModeSrcOut),
+            "BlendModeDstOut" => ::std::option::Option::Some(BlendMode::BlendModeDstOut),
+            "BlendModeSrcATop" => ::std::option::Option::Some(BlendMode::BlendModeSrcATop),
+            "BlendModeDstATop" => ::std::option::Option::Some(BlendMode::BlendModeDstATop),
+            "BlendModeXor" => ::std::option::Option::Some(BlendMode::BlendModeXor),
+            "BlendModePlus" => ::std::option::Option::Some(BlendMode::BlendModePlus),
+            "BlendModeModulate" => ::std::option::Option::Some(BlendMode::BlendModeModulate),
+            "BlendModeScreen" => ::std::option::Option::Some(BlendMode::BlendModeScreen),
+            "BlendModeOverlay" => ::std::option::Option::Some(BlendMode::BlendModeOverlay),
+            "BlendModeDarken" => ::std::option::Option::Some(BlendMode::BlendModeDarken),
+            "BlendModeLighten" => ::std::option::Option::Some(BlendMode::BlendModeLighten),
+            "BlendModeColorDodge" => ::std::option::Option::Some(BlendMode::BlendModeColorDodge),
+            "BlendModeColorBurn" => ::std::option::Option::Some(BlendMode::BlendModeColorBurn),
+            "BlendModeHardLight" => ::std::option::Option::Some(BlendMode::BlendModeHardLight),
+            "BlendModeSoftLight" => ::std::option::Option::Some(BlendMode::BlendModeSoftLight),
+            "BlendModeDifference" => ::std::option::Option::Some(BlendMode::BlendModeDifference),
+            "BlendModeExclusion" => ::std::option::Option::Some(BlendMode::BlendModeExclusion),
+            "BlendModeMultiply" => ::std::option::Option::Some(BlendMode::BlendModeMultiply),
+            "BlendModeHue" => ::std::option::Option::Some(BlendMode::BlendModeHue),
+            "BlendModeSaturation" => ::std::option::Option::Some(BlendMode::BlendModeSaturation),
+            "BlendModeBlendModeColor" => ::std::option::Option::Some(BlendMode::BlendModeBlendModeColor),
+            "BlendModeLuminosity" => ::std::option::Option::Some(BlendMode::BlendModeLuminosity),
             _ => ::std::option::Option::None
         }
     }
 
     const VALUES: &'static [BlendMode] = &[
-        BlendMode::Clear,
-        BlendMode::Src,
-        BlendMode::Dst,
-        BlendMode::SrcOver,
-        BlendMode::DstOver,
-        BlendMode::SrcIn,
-        BlendMode::DstIn,
-        BlendMode::SrcOut,
-        BlendMode::DstOut,
-        BlendMode::SrcATop,
-        BlendMode::DstATop,
-        BlendMode::Xor,
-        BlendMode::Plus,
-        BlendMode::Modulate,
-        BlendMode::Screen,
-        BlendMode::Overlay,
-        BlendMode::Darken,
-        BlendMode::Lighten,
-        BlendMode::ColorDodge,
-        BlendMode::ColorBurn,
-        BlendMode::HardLight,
-        BlendMode::SoftLight,
-        BlendMode::Difference,
-        BlendMode::Exclusion,
-        BlendMode::Multiply,
-        BlendMode::Hue,
-        BlendMode::Saturation,
-        BlendMode::BlendModeColor,
-        BlendMode::Luminosity,
+        BlendMode::BlendModeClear,
+        BlendMode::BlendModeSrc,
+        BlendMode::BlendModeDst,
+        BlendMode::BlendModeSrcOver,
+        BlendMode::BlendModeDstOver,
+        BlendMode::BlendModeSrcIn,
+        BlendMode::BlendModeDstIn,
+        BlendMode::BlendModeSrcOut,
+        BlendMode::BlendModeDstOut,
+        BlendMode::BlendModeSrcATop,
+        BlendMode::BlendModeDstATop,
+        BlendMode::BlendModeXor,
+        BlendMode::BlendModePlus,
+        BlendMode::BlendModeModulate,
+        BlendMode::BlendModeScreen,
+        BlendMode::BlendModeOverlay,
+        BlendMode::BlendModeDarken,
+        BlendMode::BlendModeLighten,
+        BlendMode::BlendModeColorDodge,
+        BlendMode::BlendModeColorBurn,
+        BlendMode::BlendModeHardLight,
+        BlendMode::BlendModeSoftLight,
+        BlendMode::BlendModeDifference,
+        BlendMode::BlendModeExclusion,
+        BlendMode::BlendModeMultiply,
+        BlendMode::BlendModeHue,
+        BlendMode::BlendModeSaturation,
+        BlendMode::BlendModeBlendModeColor,
+        BlendMode::BlendModeLuminosity,
     ];
 }
 
@@ -8298,35 +8295,35 @@ impl ::protobuf::EnumFull for BlendMode {
 
     fn descriptor(&self) -> ::protobuf::reflect::EnumValueDescriptor {
         let index = match self {
-            BlendMode::Clear => 0,
-            BlendMode::Src => 1,
-            BlendMode::Dst => 2,
-            BlendMode::SrcOver => 3,
-            BlendMode::DstOver => 4,
-            BlendMode::SrcIn => 5,
-            BlendMode::DstIn => 6,
-            BlendMode::SrcOut => 7,
-            BlendMode::DstOut => 8,
-            BlendMode::SrcATop => 9,
-            BlendMode::DstATop => 10,
-            BlendMode::Xor => 11,
-            BlendMode::Plus => 12,
-            BlendMode::Modulate => 13,
-            BlendMode::Screen => 14,
-            BlendMode::Overlay => 15,
-            BlendMode::Darken => 16,
-            BlendMode::Lighten => 17,
-            BlendMode::ColorDodge => 18,
-            BlendMode::ColorBurn => 19,
-            BlendMode::HardLight => 20,
-            BlendMode::SoftLight => 21,
-            BlendMode::Difference => 22,
-            BlendMode::Exclusion => 23,
-            BlendMode::Multiply => 24,
-            BlendMode::Hue => 25,
-            BlendMode::Saturation => 26,
-            BlendMode::BlendModeColor => 27,
-            BlendMode::Luminosity => 28,
+            BlendMode::BlendModeClear => 0,
+            BlendMode::BlendModeSrc => 1,
+            BlendMode::BlendModeDst => 2,
+            BlendMode::BlendModeSrcOver => 3,
+            BlendMode::BlendModeDstOver => 4,
+            BlendMode::BlendModeSrcIn => 5,
+            BlendMode::BlendModeDstIn => 6,
+            BlendMode::BlendModeSrcOut => 7,
+            BlendMode::BlendModeDstOut => 8,
+            BlendMode::BlendModeSrcATop => 9,
+            BlendMode::BlendModeDstATop => 10,
+            BlendMode::BlendModeXor => 11,
+            BlendMode::BlendModePlus => 12,
+            BlendMode::BlendModeModulate => 13,
+            BlendMode::BlendModeScreen => 14,
+            BlendMode::BlendModeOverlay => 15,
+            BlendMode::BlendModeDarken => 16,
+            BlendMode::BlendModeLighten => 17,
+            BlendMode::BlendModeColorDodge => 18,
+            BlendMode::BlendModeColorBurn => 19,
+            BlendMode::BlendModeHardLight => 20,
+            BlendMode::BlendModeSoftLight => 21,
+            BlendMode::BlendModeDifference => 22,
+            BlendMode::BlendModeExclusion => 23,
+            BlendMode::BlendModeMultiply => 24,
+            BlendMode::BlendModeHue => 25,
+            BlendMode::BlendModeSaturation => 26,
+            BlendMode::BlendModeBlendModeColor => 27,
+            BlendMode::BlendModeLuminosity => 28,
         };
         Self::enum_descriptor().value_by_index(index)
     }
@@ -8334,7 +8331,7 @@ impl ::protobuf::EnumFull for BlendMode {
 
 impl ::std::default::Default for BlendMode {
     fn default() -> Self {
-        BlendMode::Clear
+        BlendMode::BlendModeClear
     }
 }
 
@@ -8345,171 +8342,175 @@ impl BlendMode {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0copcode.proto\x12\x12hala.canvas.opcode\"\x97\x07\n\x06OpCode\x121\
-    \n\x05scale\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.ScaleH\0R\x05sc\
-    ale\x12.\n\x04skew\x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.SkewH\0R\
-    \x04skew\x12;\n\tclip_path\x18\x03\x20\x01(\x0b2\x1c.hala.canvas.opcode.\
-    ClipPathH\0R\x08clipPath\x12;\n\tclip_rect\x18\x04\x20\x01(\x0b2\x1c.hal\
-    a.canvas.opcode.ClipRectH\0R\x08clipRect\x12>\n\nclip_rrect\x18\x05\x20\
-    \x01(\x0b2\x1d.hala.canvas.opcode.ClipRRectH\0R\tclipRrect\x12>\n\ndraw_\
-    color\x18\x06\x20\x01(\x0b2\x1d.hala.canvas.opcode.DrawColorH\0R\tdrawCo\
-    lor\x12;\n\tdraw_path\x18\x07\x20\x01(\x0b2\x1c.hala.canvas.opcode.DrawP\
-    athH\0R\x08drawPath\x12>\n\ndraw_image\x18\x08\x20\x01(\x0b2\x1d.hala.ca\
-    nvas.opcode.DrawImageH\0R\tdrawImage\x12K\n\x0fdraw_image_rect\x18\t\x20\
-    \x01(\x0b2!.hala.canvas.opcode.DrawImageRectH\0R\rdrawImageRect\x12:\n\n\
-    draw_paint\x18\n\x20\x01(\x0b2\x19.hala.canvas.opcode.PaintH\0R\tdrawPai\
-    nt\x12A\n\x0bdraw_shadow\x18\x0b\x20\x01(\x0b2\x1e.hala.canvas.opcode.Dr\
-    awShadowH\0R\ndrawShadow\x128\n\ttransform\x18\x0c\x20\x01(\x0b2\x18.hal\
-    a.canvas.opcode.Mat4H\0R\ttransform\x12:\n\ttranslate\x18\r\x20\x01(\x0b\
-    2\x1a.hala.canvas.opcode.OffsetH\0R\ttranslate\x12\x18\n\x06rotate\x18\
-    \x0e\x20\x01(\x02H\0R\x06rotate\x12J\n\x0edraw_paragraph\x18\x0f\x20\x01\
-    (\x0b2!.hala.canvas.opcode.DrawParagraphH\0R\rdrawParagraphB\x0b\n\tdire\
-    ctive\"\xd0\x02\n\tParagraph\x12/\n\x13alphabetic_baseline\x18\x01\x20\
-    \x01(\x02R\x12alphabeticBaseline\x12/\n\x14did_exceed_max_lines\x18\x02\
-    \x20\x01(\x02R\x11didExceedMaxLines\x12\x16\n\x06height\x18\x03\x20\x01(\
-    \x02R\x06height\x122\n\x15ideo_graphic_baseline\x18\x04\x20\x01(\x02R\
-    \x13ideoGraphicBaseline\x12!\n\x0clongest_line\x18\x05\x20\x01(\x02R\x0b\
-    longestLine\x12,\n\x12max_intrinsic_with\x18\x06\x20\x01(\x02R\x10maxInt\
-    rinsicWith\x12.\n\x13min_intrinsic_width\x18\x07\x20\x01(\x02R\x11minInt\
-    rinsicWidth\x12\x14\n\x05width\x18\x08\x20\x01(\x02R\x05width\"\x80\x01\
-    \n\rDrawParagraph\x12;\n\tparagraph\x18\x01\x20\x01(\x0b2\x1d.hala.canva\
-    s.opcode.ParagraphR\tparagraph\x122\n\x06offset\x18\x02\x20\x01(\x0b2\
-    \x1a.hala.canvas.opcode.OffsetR\x06offset\"\xd0\x02\n\x05Paint\x12<\n\nb\
-    lend_mode\x18\x01\x20\x01(\x0e2\x1d.hala.canvas.opcode.BlendModeR\tblend\
-    Mode\x12/\n\x05color\x18\x02\x20\x01(\x0b2\x19.hala.canvas.opcode.ColorR\
-    \x05color\x12H\n\x0efilter_quality\x18\x03\x20\x01(\x0e2!.hala.canvas.op\
-    code.FilterQualityR\rfilterQuality\x12!\n\x0cinvert_color\x18\x04\x20\
-    \x01(\x08R\x0binvertColor\x12\"\n\ris_anti_alias\x18\x05\x20\x01(\x08R\
-    \x0bisAntiAlias\x12<\n\x06stroke\x18\x06\x20\x01(\x0b2\x1f.hala.canvas.o\
-    pcode.PaintStrokeH\0R\x06stroke\x88\x01\x01B\t\n\x07_stroke\"\xdd\x01\n\
-    \x0bPaintStroke\x12<\n\nstroke_cap\x18\x01\x20\x01(\x0e2\x1d.hala.canvas\
-    .opcode.StrokeCapR\tstrokeCap\x12?\n\x0bstroke_join\x18\x02\x20\x01(\x0e\
-    2\x1e.hala.canvas.opcode.StrokeJoinR\nstrokeJoin\x12,\n\x12stroke_miter_\
-    limit\x18\x03\x20\x01(\x02R\x10strokeMiterLimit\x12!\n\x0cstroke_width\
-    \x18\x04\x20\x01(\x02R\x0bstrokeWidth\"&\n\x05Image\x12\x14\n\x04path\
-    \x18\x01\x20\x01(\tH\0R\x04pathB\x07\n\x05image\"\xa1\x01\n\tDrawImage\
-    \x12/\n\x05image\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.ImageR\x05\
-    image\x122\n\x06offset\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.Offs\
-    etR\x06offset\x12/\n\x05paint\x18\x03\x20\x01(\x0b2\x19.hala.canvas.opco\
-    de.PaintR\x05paint\"\xc9\x01\n\rDrawImageRect\x12/\n\x05image\x18\x01\
-    \x20\x01(\x0b2\x19.hala.canvas.opcode.ImageR\x05image\x12*\n\x03src\x18\
-    \x02\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\x03src\x12*\n\x03dst\x18\
-    \x03\x20\x01(\x0b2\x18.hala.canvas.opcode.RectR\x03dst\x12/\n\x05paint\
-    \x18\x04\x20\x01(\x0b2\x19.hala.canvas.opcode.PaintR\x05paint\"i\n\x08Dr\
-    awPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.PathR\
-    \x04path\x12/\n\x05paint\x18\x02\x20\x01(\x0b2\x19.hala.canvas.opcode.Pa\
-    intR\x05paint\"\\\n\x08ClipPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\x18\
-    .hala.canvas.opcode.PathR\x04path\x12\"\n\rdo_anti_alias\x18\x02\x20\x01\
-    (\x08R\x0bdoAntiAlias\"\xc3\x01\n\x08ClipRect\x12,\n\x04rect\x18\x01\x20\
-    \x01(\x0b2\x18.hala.canvas.opcode.RectR\x04rect\x12<\n\x07clip_op\x18\
-    \x02\x20\x01(\x0e2#.hala.canvas.opcode.ClipRect.ClipOpR\x06clipOp\x12\"\
-    \n\rdo_anti_alias\x18\x03\x20\x01(\x08R\x0bdoAntiAlias\"'\n\x06ClipOp\
-    \x12\x0e\n\nDifference\x10\0\x12\r\n\tIntersect\x10\x01\"`\n\tClipRRect\
-    \x12/\n\x05rrect\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.RRectR\x05\
-    rrect\x12\"\n\rdo_anti_alias\x18\x02\x20\x01(\x08R\x0bdoAntiAlias\"z\n\t\
-    DrawColor\x12/\n\x05color\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.C\
-    olorR\x05color\x12<\n\nblend_mode\x18\x02\x20\x01(\x0e2\x1d.hala.canvas.\
-    opcode.BlendModeR\tblendMode\"3\n\x05Scale\x12\x0e\n\x02sx\x18\x01\x20\
-    \x01(\x02R\x02sx\x12\x13\n\x02sy\x18\x02\x20\x01(\x02H\0R\x02sy\x88\x01\
-    \x01B\x05\n\x03_sy\"&\n\x04Skew\x12\x0e\n\x02sx\x18\x01\x20\x01(\x02R\
-    \x02sx\x12\x0e\n\x02sy\x18\x02\x20\x01(\x02R\x02sy\"\x8e\x01\n\nDrawShad\
-    ow\x12/\n\x05color\x18\x01\x20\x01(\x0b2\x19.hala.canvas.opcode.ColorR\
-    \x05color\x12\x1c\n\televation\x18\x02\x20\x01(\x02R\televation\x121\n\
-    \x14transparent_occluder\x18\x03\x20\x01(\x08R\x13transparentOccluder\"?\
-    \n\x05Color\x12\x0c\n\x01r\x18\x01\x20\x01(\x01R\x01r\x12\x0c\n\x01g\x18\
-    \x02\x20\x01(\x01R\x01g\x12\x0c\n\x01b\x18\x03\x20\x01(\x01R\x01b\x12\
-    \x0c\n\x01a\x18\x04\x20\x01(\x01R\x01a\"\xef\t\n\x07SubPath\x125\n\x07li\
-    ne_to\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetH\0R\x06lineTo\
-    \x12F\n\x10relative_line_to\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode\
-    .OffsetH\0R\x0erelativeLineTo\x125\n\x07move_to\x18\x03\x20\x01(\x0b2\
-    \x1a.hala.canvas.opcode.OffsetH\0R\x06moveTo\x12F\n\x10realtive_move_to\
-    \x18\x04\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetH\0R\x0erealtiveMove\
-    To\x12+\n\x03arc\x18\x05\x20\x01(\x0b2\x17.hala.canvas.opcode.ArcH\0R\
-    \x03arc\x122\n\x06arc_to\x18\x06\x20\x01(\x0b2\x19.hala.canvas.opcode.Ar\
-    cToH\0R\x05arcTo\x12B\n\x0carc_to_point\x18\x07\x20\x01(\x0b2\x1e.hala.c\
-    anvas.opcode.ArcToPointH\0R\narcToPoint\x12S\n\x15relative_arc_to_point\
-    \x18\x08\x20\x01(\x0b2\x1e.hala.canvas.opcode.ArcToPointH\0R\x12relative\
-    ArcToPoint\x12.\n\x04oval\x18\t\x20\x01(\x0b2\x18.hala.canvas.opcode.Rec\
-    tH\0R\x04oval\x128\n\x04path\x18\n\x20\x01(\x0b2\".hala.canvas.opcode.Ex\
-    tendWithPathH\0R\x04path\x126\n\x08conic_to\x18\x0b\x20\x01(\x0b2\x19.ha\
-    la.canvas.opcode.ConicH\0R\x07conicTo\x12G\n\x11relative_conic_to\x18\
-    \x0c\x20\x01(\x0b2\x19.hala.canvas.opcode.ConicH\0R\x0frelativeConicTo\
-    \x126\n\x08cubic_to\x18\r\x20\x01(\x0b2\x19.hala.canvas.opcode.CubicH\0R\
-    \x07cubicTo\x12G\n\x11relative_cubic_to\x18\x0e\x20\x01(\x0b2\x19.hala.c\
-    anvas.opcode.CubicH\0R\x0frelativeCubicTo\x12U\n\x13quadratic_bezier_to\
-    \x18\x0f\x20\x01(\x0b2#.hala.canvas.opcode.QuadraticBezierH\0R\x11quadra\
-    ticBezierTo\x12f\n\x1crelative_quadratic_bezier_to\x18\x10\x20\x01(\x0b2\
-    #.hala.canvas.opcode.QuadraticBezierH\0R\x19relativeQuadraticBezierTo\
-    \x122\n\x05shift\x18\x11\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetH\0R\
-    \x05shift\x128\n\ttransform\x18\x12\x20\x01(\x0b2\x18.hala.canvas.opcode\
-    .Mat4H\0R\ttransform\x12\x18\n\x06closed\x18\x13\x20\x01(\x08H\0R\x06clo\
-    sed\x121\n\x05rrect\x18\x14\x20\x01(\x0b2\x19.hala.canvas.opcode.RRectH\
-    \0R\x05rrectB\x06\n\x04code\"@\n\x04Path\x128\n\tsub_paths\x18\x01\x20\
-    \x03(\x0b2\x1b.hala.canvas.opcode.SubPathR\x08subPaths\"m\n\x05Conic\x12\
-    *\n\x02p1\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p1\x12\
-    *\n\x02p2\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p2\x12\
-    \x0c\n\x01w\x18\x03\x20\x01(\x02R\x01w\"o\n\x05Cubic\x12*\n\x02p1\x18\
-    \x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p1\x12*\n\x02p2\x18\
-    \x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x02p2\x12\x0e\n\x02p3\
-    \x18\x03\x20\x01(\x02R\x02p3\"u\n\x03Arc\x12,\n\x04oval\x18\x01\x20\x01(\
-    \x0b2\x18.hala.canvas.opcode.RectR\x04oval\x12\x1f\n\x0bstart_angle\x18\
-    \x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_angle\x18\x03\x20\x01(\
-    \x02R\nsweepAngle\"\x9b\x01\n\x05ArcTo\x12,\n\x04oval\x18\x01\x20\x01(\
-    \x0b2\x18.hala.canvas.opcode.RectR\x04oval\x12\x1f\n\x0bstart_angle\x18\
-    \x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_angle\x18\x03\x20\x01(\
-    \x02R\nsweepAngle\x12\"\n\rforce_move_to\x18\x04\x20\x01(\x08R\x0bforceM\
-    oveTo\"\x94\x02\n\nArcToPoint\x123\n\x07arc_end\x18\x01\x20\x01(\x0b2\
-    \x1a.hala.canvas.opcode.OffsetR\x06arcEnd\x127\n\x06radius\x18\x02\x20\
-    \x01(\x0b2\x1a.hala.canvas.opcode.RadiusH\0R\x06radius\x88\x01\x01\x12\
-    \x1f\n\x08rotation\x18\x03\x20\x01(\x01H\x01R\x08rotation\x88\x01\x01\
-    \x12\x20\n\tlarge_arc\x18\x04\x20\x01(\x08H\x02R\x08largeArc\x88\x01\x01\
-    \x12!\n\tclockwise\x18\x05\x20\x01(\x08H\x03R\tclockwise\x88\x01\x01B\t\
-    \n\x07_radiusB\x0b\n\t_rotationB\x0c\n\n_large_arcB\x0c\n\n_clockwise\"k\
-    \n\x06Radius\x12\x1c\n\x08circular\x18\x01\x20\x01(\x02H\0R\x08circular\
-    \x12:\n\nelliptical\x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.SizeH\0\
-    R\nellipticalB\x07\n\x05types\"(\n\x06Offset\x12\x0e\n\x02dx\x18\x01\x20\
-    \x01(\x02R\x02dx\x12\x0e\n\x02dy\x18\x02\x20\x01(\x02R\x02dy\"4\n\x04Siz\
-    e\x12\x14\n\x05width\x18\x01\x20\x01(\x02R\x05width\x12\x16\n\x06height\
-    \x18\x02\x20\x01(\x02R\x06height\"h\n\x04Rect\x122\n\x06offset\x18\x01\
-    \x20\x01(\x0b2\x1a.hala.canvas.opcode.OffsetR\x06offset\x12,\n\x04size\
-    \x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.SizeR\x04size\"\xae\x01\n\
-    \x0eExtendWithPath\x12,\n\x04path\x18\x01\x20\x01(\x0b2\x18.hala.canvas.\
-    opcode.PathR\x04path\x122\n\x06offset\x18\x02\x20\x01(\x0b2\x1a.hala.can\
-    vas.opcode.OffsetR\x06offset\x121\n\x04mat4\x18\x03\x20\x01(\x0b2\x18.ha\
-    la.canvas.opcode.Mat4H\0R\x04mat4\x88\x01\x01B\x07\n\x05_mat4\"i\n\x0fQu\
-    adraticBezier\x12*\n\x02p1\x18\x01\x20\x01(\x0b2\x1a.hala.canvas.opcode.\
-    OffsetR\x02p1\x12*\n\x02p2\x18\x02\x20\x01(\x0b2\x1a.hala.canvas.opcode.\
-    OffsetR\x02p2\">\n\x04Vec4\x12\x0c\n\x01x\x18\x01\x20\x01(\x02R\x01x\x12\
-    \x0c\n\x01y\x18\x02\x20\x01(\x02R\x01y\x12\x0c\n\x01z\x18\x03\x20\x01(\
-    \x02R\x01z\x12\x0c\n\x01w\x18\x04\x20\x01(\x02R\x01w\"\xca\x01\n\x04Mat4\
-    \x12/\n\x06x_axis\x18\x01\x20\x01(\x0b2\x18.hala.canvas.opcode.Vec4R\x05\
-    xAxis\x12/\n\x06y_axis\x18\x02\x20\x01(\x0b2\x18.hala.canvas.opcode.Vec4\
-    R\x05yAxis\x12/\n\x06z_axis\x18\x03\x20\x01(\x0b2\x18.hala.canvas.opcode\
-    .Vec4R\x05zAxis\x12/\n\x06w_axis\x18\x04\x20\x01(\x0b2\x18.hala.canvas.o\
-    pcode.Vec4R\x05wAxis\"\xe5\x01\n\x05RRect\x12,\n\x04rect\x18\x01\x20\x01\
-    (\x0b2\x18.hala.canvas.opcode.RectR\x04rect\x12*\n\x02tl\x18\x02\x20\x01\
-    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02tl\x12*\n\x02tr\x18\x03\x20\x01\
-    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02tr\x12*\n\x02bl\x18\x04\x20\x01\
-    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02bl\x12*\n\x02br\x18\x05\x20\x01\
-    (\x0b2\x1a.hala.canvas.opcode.RadiusR\x02br*m\n\rFilterQuality\x12\x15\n\
-    \x11FilterQualityNone\x10\0\x12\x14\n\x10FilterQualityLow\x10\x01\x12\
-    \x17\n\x13FilterQualityMedium\x10\x02\x12\x16\n\x12FilterQualityHight\
-    \x10\x03*G\n\tStrokeCap\x12\x11\n\rStrokeCapButt\x10\0\x12\x12\n\x0eStro\
-    keCapRound\x10\x01\x12\x13\n\x0fStrokeCapSquare\x10\x02*K\n\nStrokeJoin\
-    \x12\x13\n\x0fStrokeJoinMiter\x10\0\x12\x13\n\x0fStrokeJoinRound\x10\x01\
-    \x12\x13\n\x0fStrokeJoinBevel\x10\x02*\x84\x03\n\tBlendMode\x12\t\n\x05C\
-    lear\x10\0\x12\x07\n\x03Src\x10\x02\x12\x07\n\x03Dst\x10\x03\x12\x0b\n\
-    \x07SrcOver\x10\x04\x12\x0b\n\x07DstOver\x10\x05\x12\t\n\x05SrcIn\x10\
-    \x06\x12\t\n\x05DstIn\x10\x07\x12\n\n\x06SrcOut\x10\x08\x12\n\n\x06DstOu\
-    t\x10\t\x12\x0b\n\x07SrcATop\x10\n\x12\x0b\n\x07DstATop\x10\x0b\x12\x07\
-    \n\x03Xor\x10\x0c\x12\x08\n\x04Plus\x10\r\x12\x0c\n\x08Modulate\x10\x0e\
-    \x12\n\n\x06Screen\x10\x0f\x12\x0b\n\x07Overlay\x10\x10\x12\n\n\x06Darke\
-    n\x10\x11\x12\x0b\n\x07Lighten\x10\x12\x12\x0e\n\nColorDodge\x10\x13\x12\
-    \r\n\tColorBurn\x10\x14\x12\r\n\tHardLight\x10\x15\x12\r\n\tSoftLight\
-    \x10\x16\x12\x0e\n\nDifference\x10\x17\x12\r\n\tExclusion\x10\x18\x12\
-    \x0c\n\x08Multiply\x10\x19\x12\x07\n\x03Hue\x10\x1a\x12\x0e\n\nSaturatio\
-    n\x10\x1b\x12\x12\n\x0eBlendModeColor\x10\x1c\x12\x0e\n\nLuminosity\x10\
-    \x1db\x06proto3\
+    \n\x0copcode.proto\x12\x13hala.graphic.opcode\"\xa5\x07\n\x06OpCode\x122\
+    \n\x05scale\x18\x01\x20\x01(\x0b2\x1a.hala.graphic.opcode.ScaleH\0R\x05s\
+    cale\x12/\n\x04skew\x18\x02\x20\x01(\x0b2\x19.hala.graphic.opcode.SkewH\
+    \0R\x04skew\x12<\n\tclip_path\x18\x03\x20\x01(\x0b2\x1d.hala.graphic.opc\
+    ode.ClipPathH\0R\x08clipPath\x12<\n\tclip_rect\x18\x04\x20\x01(\x0b2\x1d\
+    .hala.graphic.opcode.ClipRectH\0R\x08clipRect\x12?\n\nclip_rrect\x18\x05\
+    \x20\x01(\x0b2\x1e.hala.graphic.opcode.ClipRRectH\0R\tclipRrect\x12?\n\n\
+    draw_color\x18\x06\x20\x01(\x0b2\x1e.hala.graphic.opcode.DrawColorH\0R\t\
+    drawColor\x12<\n\tdraw_path\x18\x07\x20\x01(\x0b2\x1d.hala.graphic.opcod\
+    e.DrawPathH\0R\x08drawPath\x12?\n\ndraw_image\x18\x08\x20\x01(\x0b2\x1e.\
+    hala.graphic.opcode.DrawImageH\0R\tdrawImage\x12L\n\x0fdraw_image_rect\
+    \x18\t\x20\x01(\x0b2\".hala.graphic.opcode.DrawImageRectH\0R\rdrawImageR\
+    ect\x12;\n\ndraw_paint\x18\n\x20\x01(\x0b2\x1a.hala.graphic.opcode.Paint\
+    H\0R\tdrawPaint\x12B\n\x0bdraw_shadow\x18\x0b\x20\x01(\x0b2\x1f.hala.gra\
+    phic.opcode.DrawShadowH\0R\ndrawShadow\x129\n\ttransform\x18\x0c\x20\x01\
+    (\x0b2\x19.hala.graphic.opcode.Mat4H\0R\ttransform\x12;\n\ttranslate\x18\
+    \r\x20\x01(\x0b2\x1b.hala.graphic.opcode.OffsetH\0R\ttranslate\x12\x18\n\
+    \x06rotate\x18\x0e\x20\x01(\x02H\0R\x06rotate\x12K\n\x0edraw_paragraph\
+    \x18\x0f\x20\x01(\x0b2\".hala.graphic.opcode.DrawParagraphH\0R\rdrawPara\
+    graphB\x0b\n\tdirective\"3\n\x05Scale\x12\x0e\n\x02sx\x18\x01\x20\x01(\
+    \x02R\x02sx\x12\x13\n\x02sy\x18\x02\x20\x01(\x02H\0R\x02sy\x88\x01\x01B\
+    \x05\n\x03_sy\"&\n\x04Skew\x12\x0e\n\x02sx\x18\x01\x20\x01(\x02R\x02sx\
+    \x12\x0e\n\x02sy\x18\x02\x20\x01(\x02R\x02sy\"\x8f\x01\n\nDrawShadow\x12\
+    0\n\x05color\x18\x01\x20\x01(\x0b2\x1a.hala.graphic.opcode.ColorR\x05col\
+    or\x12\x1c\n\televation\x18\x02\x20\x01(\x02R\televation\x121\n\x14trans\
+    parent_occluder\x18\x03\x20\x01(\x08R\x13transparentOccluder\"\xa4\x01\n\
+    \tDrawImage\x120\n\x05image\x18\x01\x20\x01(\x0b2\x1a.hala.graphic.opcod\
+    e.ImageR\x05image\x123\n\x06offset\x18\x02\x20\x01(\x0b2\x1b.hala.graphi\
+    c.opcode.OffsetR\x06offset\x120\n\x05paint\x18\x03\x20\x01(\x0b2\x1a.hal\
+    a.graphic.opcode.PaintR\x05paint\"\xcd\x01\n\rDrawImageRect\x120\n\x05im\
+    age\x18\x01\x20\x01(\x0b2\x1a.hala.graphic.opcode.ImageR\x05image\x12+\n\
+    \x03src\x18\x02\x20\x01(\x0b2\x19.hala.graphic.opcode.RectR\x03src\x12+\
+    \n\x03dst\x18\x03\x20\x01(\x0b2\x19.hala.graphic.opcode.RectR\x03dst\x12\
+    0\n\x05paint\x18\x04\x20\x01(\x0b2\x1a.hala.graphic.opcode.PaintR\x05pai\
+    nt\"k\n\x08DrawPath\x12-\n\x04path\x18\x01\x20\x01(\x0b2\x19.hala.graphi\
+    c.opcode.PathR\x04path\x120\n\x05paint\x18\x02\x20\x01(\x0b2\x1a.hala.gr\
+    aphic.opcode.PaintR\x05paint\"]\n\x08ClipPath\x12-\n\x04path\x18\x01\x20\
+    \x01(\x0b2\x19.hala.graphic.opcode.PathR\x04path\x12\"\n\rdo_anti_alias\
+    \x18\x02\x20\x01(\x08R\x0bdoAntiAlias\"\x93\x01\n\x08ClipRect\x12-\n\x04\
+    rect\x18\x01\x20\x01(\x0b2\x19.hala.graphic.opcode.RectR\x04rect\x124\n\
+    \x07clip_op\x18\x02\x20\x01(\x0e2\x1b.hala.graphic.opcode.ClipOpR\x06cli\
+    pOp\x12\"\n\rdo_anti_alias\x18\x03\x20\x01(\x08R\x0bdoAntiAlias\"a\n\tCl\
+    ipRRect\x120\n\x05rrect\x18\x01\x20\x01(\x0b2\x1a.hala.graphic.opcode.RR\
+    ectR\x05rrect\x12\"\n\rdo_anti_alias\x18\x02\x20\x01(\x08R\x0bdoAntiAlia\
+    s\"|\n\tDrawColor\x120\n\x05color\x18\x01\x20\x01(\x0b2\x1a.hala.graphic\
+    .opcode.ColorR\x05color\x12=\n\nblend_mode\x18\x02\x20\x01(\x0e2\x1e.hal\
+    a.graphic.opcode.BlendModeR\tblendMode\"\x82\x01\n\rDrawParagraph\x12<\n\
+    \tparagraph\x18\x01\x20\x01(\x0b2\x1e.hala.graphic.opcode.ParagraphR\tpa\
+    ragraph\x123\n\x06offset\x18\x02\x20\x01(\x0b2\x1b.hala.graphic.opcode.O\
+    ffsetR\x06offset\"&\n\x05Image\x12\x14\n\x04path\x18\x01\x20\x01(\tH\0R\
+    \x04pathB\x07\n\x05image\"\xd0\x02\n\tParagraph\x12/\n\x13alphabetic_bas\
+    eline\x18\x01\x20\x01(\x02R\x12alphabeticBaseline\x12/\n\x14did_exceed_m\
+    ax_lines\x18\x02\x20\x01(\x02R\x11didExceedMaxLines\x12\x16\n\x06height\
+    \x18\x03\x20\x01(\x02R\x06height\x122\n\x15ideo_graphic_baseline\x18\x04\
+    \x20\x01(\x02R\x13ideoGraphicBaseline\x12!\n\x0clongest_line\x18\x05\x20\
+    \x01(\x02R\x0blongestLine\x12,\n\x12max_intrinsic_with\x18\x06\x20\x01(\
+    \x02R\x10maxIntrinsicWith\x12.\n\x13min_intrinsic_width\x18\x07\x20\x01(\
+    \x02R\x11minIntrinsicWidth\x12\x14\n\x05width\x18\x08\x20\x01(\x02R\x05w\
+    idth\"\xd4\x02\n\x05Paint\x12=\n\nblend_mode\x18\x01\x20\x01(\x0e2\x1e.h\
+    ala.graphic.opcode.BlendModeR\tblendMode\x120\n\x05color\x18\x02\x20\x01\
+    (\x0b2\x1a.hala.graphic.opcode.ColorR\x05color\x12I\n\x0efilter_quality\
+    \x18\x03\x20\x01(\x0e2\".hala.graphic.opcode.FilterQualityR\rfilterQuali\
+    ty\x12!\n\x0cinvert_color\x18\x04\x20\x01(\x08R\x0binvertColor\x12\"\n\r\
+    is_anti_alias\x18\x05\x20\x01(\x08R\x0bisAntiAlias\x12=\n\x06stroke\x18\
+    \x06\x20\x01(\x0b2\x20.hala.graphic.opcode.PaintStrokeH\0R\x06stroke\x88\
+    \x01\x01B\t\n\x07_stroke\"\xdf\x01\n\x0bPaintStroke\x12=\n\nstroke_cap\
+    \x18\x01\x20\x01(\x0e2\x1e.hala.graphic.opcode.StrokeCapR\tstrokeCap\x12\
+    @\n\x0bstroke_join\x18\x02\x20\x01(\x0e2\x1f.hala.graphic.opcode.StrokeJ\
+    oinR\nstrokeJoin\x12,\n\x12stroke_miter_limit\x18\x03\x20\x01(\x02R\x10s\
+    trokeMiterLimit\x12!\n\x0cstroke_width\x18\x04\x20\x01(\x02R\x0bstrokeWi\
+    dth\"A\n\x04Path\x129\n\tsub_paths\x18\x01\x20\x03(\x0b2\x1c.hala.graphi\
+    c.opcode.SubPathR\x08subPaths\"?\n\x05Color\x12\x0c\n\x01r\x18\x01\x20\
+    \x01(\x01R\x01r\x12\x0c\n\x01g\x18\x02\x20\x01(\x01R\x01g\x12\x0c\n\x01b\
+    \x18\x03\x20\x01(\x01R\x01b\x12\x0c\n\x01a\x18\x04\x20\x01(\x01R\x01a\"\
+    \x82\n\n\x07SubPath\x126\n\x07line_to\x18\x01\x20\x01(\x0b2\x1b.hala.gra\
+    phic.opcode.OffsetH\0R\x06lineTo\x12G\n\x10relative_line_to\x18\x02\x20\
+    \x01(\x0b2\x1b.hala.graphic.opcode.OffsetH\0R\x0erelativeLineTo\x126\n\
+    \x07move_to\x18\x03\x20\x01(\x0b2\x1b.hala.graphic.opcode.OffsetH\0R\x06\
+    moveTo\x12G\n\x10realtive_move_to\x18\x04\x20\x01(\x0b2\x1b.hala.graphic\
+    .opcode.OffsetH\0R\x0erealtiveMoveTo\x12,\n\x03arc\x18\x05\x20\x01(\x0b2\
+    \x18.hala.graphic.opcode.ArcH\0R\x03arc\x123\n\x06arc_to\x18\x06\x20\x01\
+    (\x0b2\x1a.hala.graphic.opcode.ArcToH\0R\x05arcTo\x12C\n\x0carc_to_point\
+    \x18\x07\x20\x01(\x0b2\x1f.hala.graphic.opcode.ArcToPointH\0R\narcToPoin\
+    t\x12T\n\x15relative_arc_to_point\x18\x08\x20\x01(\x0b2\x1f.hala.graphic\
+    .opcode.ArcToPointH\0R\x12relativeArcToPoint\x12/\n\x04oval\x18\t\x20\
+    \x01(\x0b2\x19.hala.graphic.opcode.RectH\0R\x04oval\x129\n\x04path\x18\n\
+    \x20\x01(\x0b2#.hala.graphic.opcode.ExtendWithPathH\0R\x04path\x127\n\
+    \x08conic_to\x18\x0b\x20\x01(\x0b2\x1a.hala.graphic.opcode.ConicH\0R\x07\
+    conicTo\x12H\n\x11relative_conic_to\x18\x0c\x20\x01(\x0b2\x1a.hala.graph\
+    ic.opcode.ConicH\0R\x0frelativeConicTo\x127\n\x08cubic_to\x18\r\x20\x01(\
+    \x0b2\x1a.hala.graphic.opcode.CubicH\0R\x07cubicTo\x12H\n\x11relative_cu\
+    bic_to\x18\x0e\x20\x01(\x0b2\x1a.hala.graphic.opcode.CubicH\0R\x0frelati\
+    veCubicTo\x12V\n\x13quadratic_bezier_to\x18\x0f\x20\x01(\x0b2$.hala.grap\
+    hic.opcode.QuadraticBezierH\0R\x11quadraticBezierTo\x12g\n\x1crelative_q\
+    uadratic_bezier_to\x18\x10\x20\x01(\x0b2$.hala.graphic.opcode.QuadraticB\
+    ezierH\0R\x19relativeQuadraticBezierTo\x123\n\x05shift\x18\x11\x20\x01(\
+    \x0b2\x1b.hala.graphic.opcode.OffsetH\0R\x05shift\x129\n\ttransform\x18\
+    \x12\x20\x01(\x0b2\x19.hala.graphic.opcode.Mat4H\0R\ttransform\x12\x18\n\
+    \x06closed\x18\x13\x20\x01(\x08H\0R\x06closed\x122\n\x05rrect\x18\x14\
+    \x20\x01(\x0b2\x1a.hala.graphic.opcode.RRectH\0R\x05rrectB\x06\n\x04code\
+    \"o\n\x05Conic\x12+\n\x02p1\x18\x01\x20\x01(\x0b2\x1b.hala.graphic.opcod\
+    e.OffsetR\x02p1\x12+\n\x02p2\x18\x02\x20\x01(\x0b2\x1b.hala.graphic.opco\
+    de.OffsetR\x02p2\x12\x0c\n\x01w\x18\x03\x20\x01(\x02R\x01w\"q\n\x05Cubic\
+    \x12+\n\x02p1\x18\x01\x20\x01(\x0b2\x1b.hala.graphic.opcode.OffsetR\x02p\
+    1\x12+\n\x02p2\x18\x02\x20\x01(\x0b2\x1b.hala.graphic.opcode.OffsetR\x02\
+    p2\x12\x0e\n\x02p3\x18\x03\x20\x01(\x02R\x02p3\"v\n\x03Arc\x12-\n\x04ova\
+    l\x18\x01\x20\x01(\x0b2\x19.hala.graphic.opcode.RectR\x04oval\x12\x1f\n\
+    \x0bstart_angle\x18\x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_ang\
+    le\x18\x03\x20\x01(\x02R\nsweepAngle\"\x9c\x01\n\x05ArcTo\x12-\n\x04oval\
+    \x18\x01\x20\x01(\x0b2\x19.hala.graphic.opcode.RectR\x04oval\x12\x1f\n\
+    \x0bstart_angle\x18\x02\x20\x01(\x02R\nstartAngle\x12\x1f\n\x0bsweep_ang\
+    le\x18\x03\x20\x01(\x02R\nsweepAngle\x12\"\n\rforce_move_to\x18\x04\x20\
+    \x01(\x08R\x0bforceMoveTo\"\x96\x02\n\nArcToPoint\x124\n\x07arc_end\x18\
+    \x01\x20\x01(\x0b2\x1b.hala.graphic.opcode.OffsetR\x06arcEnd\x128\n\x06r\
+    adius\x18\x02\x20\x01(\x0b2\x1b.hala.graphic.opcode.RadiusH\0R\x06radius\
+    \x88\x01\x01\x12\x1f\n\x08rotation\x18\x03\x20\x01(\x01H\x01R\x08rotatio\
+    n\x88\x01\x01\x12\x20\n\tlarge_arc\x18\x04\x20\x01(\x08H\x02R\x08largeAr\
+    c\x88\x01\x01\x12!\n\tclockwise\x18\x05\x20\x01(\x08H\x03R\tclockwise\
+    \x88\x01\x01B\t\n\x07_radiusB\x0b\n\t_rotationB\x0c\n\n_large_arcB\x0c\n\
+    \n_clockwise\"l\n\x06Radius\x12\x1c\n\x08circular\x18\x01\x20\x01(\x02H\
+    \0R\x08circular\x12;\n\nelliptical\x18\x02\x20\x01(\x0b2\x19.hala.graphi\
+    c.opcode.SizeH\0R\nellipticalB\x07\n\x05types\"(\n\x06Offset\x12\x0e\n\
+    \x02dx\x18\x01\x20\x01(\x02R\x02dx\x12\x0e\n\x02dy\x18\x02\x20\x01(\x02R\
+    \x02dy\"4\n\x04Size\x12\x14\n\x05width\x18\x01\x20\x01(\x02R\x05width\
+    \x12\x16\n\x06height\x18\x02\x20\x01(\x02R\x06height\"j\n\x04Rect\x123\n\
+    \x06offset\x18\x01\x20\x01(\x0b2\x1b.hala.graphic.opcode.OffsetR\x06offs\
+    et\x12-\n\x04size\x18\x02\x20\x01(\x0b2\x19.hala.graphic.opcode.SizeR\
+    \x04size\"\xb1\x01\n\x0eExtendWithPath\x12-\n\x04path\x18\x01\x20\x01(\
+    \x0b2\x19.hala.graphic.opcode.PathR\x04path\x123\n\x06offset\x18\x02\x20\
+    \x01(\x0b2\x1b.hala.graphic.opcode.OffsetR\x06offset\x122\n\x04mat4\x18\
+    \x03\x20\x01(\x0b2\x19.hala.graphic.opcode.Mat4H\0R\x04mat4\x88\x01\x01B\
+    \x07\n\x05_mat4\"k\n\x0fQuadraticBezier\x12+\n\x02p1\x18\x01\x20\x01(\
+    \x0b2\x1b.hala.graphic.opcode.OffsetR\x02p1\x12+\n\x02p2\x18\x02\x20\x01\
+    (\x0b2\x1b.hala.graphic.opcode.OffsetR\x02p2\">\n\x04Vec4\x12\x0c\n\x01x\
+    \x18\x01\x20\x01(\x02R\x01x\x12\x0c\n\x01y\x18\x02\x20\x01(\x02R\x01y\
+    \x12\x0c\n\x01z\x18\x03\x20\x01(\x02R\x01z\x12\x0c\n\x01w\x18\x04\x20\
+    \x01(\x02R\x01w\"\xce\x01\n\x04Mat4\x120\n\x06x_axis\x18\x01\x20\x01(\
+    \x0b2\x19.hala.graphic.opcode.Vec4R\x05xAxis\x120\n\x06y_axis\x18\x02\
+    \x20\x01(\x0b2\x19.hala.graphic.opcode.Vec4R\x05yAxis\x120\n\x06z_axis\
+    \x18\x03\x20\x01(\x0b2\x19.hala.graphic.opcode.Vec4R\x05zAxis\x120\n\x06\
+    w_axis\x18\x04\x20\x01(\x0b2\x19.hala.graphic.opcode.Vec4R\x05wAxis\"\
+    \xea\x01\n\x05RRect\x12-\n\x04rect\x18\x01\x20\x01(\x0b2\x19.hala.graphi\
+    c.opcode.RectR\x04rect\x12+\n\x02tl\x18\x02\x20\x01(\x0b2\x1b.hala.graph\
+    ic.opcode.RadiusR\x02tl\x12+\n\x02tr\x18\x03\x20\x01(\x0b2\x1b.hala.grap\
+    hic.opcode.RadiusR\x02tr\x12+\n\x02bl\x18\x04\x20\x01(\x0b2\x1b.hala.gra\
+    phic.opcode.RadiusR\x02bl\x12+\n\x02br\x18\x05\x20\x01(\x0b2\x1b.hala.gr\
+    aphic.opcode.RadiusR\x02br*3\n\x06ClipOp\x12\x14\n\x10ClipOpDifference\
+    \x10\0\x12\x13\n\x0fClipOpIntersect\x10\x01*U\n\rFilterQuality\x12\x0f\n\
+    \x0bQualityNone\x10\0\x12\x0e\n\nQualityLow\x10\x01\x12\x11\n\rQualityMe\
+    dium\x10\x02\x12\x10\n\x0cQualityHight\x10\x03*5\n\tStrokeCap\x12\x0b\n\
+    \x07CapButt\x10\0\x12\x0c\n\x08CapRound\x10\x01\x12\r\n\tCapSquare\x10\
+    \x02*9\n\nStrokeJoin\x12\r\n\tJoinMiter\x10\0\x12\r\n\tJoinRound\x10\x01\
+    \x12\r\n\tJoinBevel\x10\x02*\x89\x05\n\tBlendMode\x12\x12\n\x0eBlendMode\
+    Clear\x10\0\x12\x10\n\x0cBlendModeSrc\x10\x02\x12\x10\n\x0cBlendModeDst\
+    \x10\x03\x12\x14\n\x10BlendModeSrcOver\x10\x04\x12\x14\n\x10BlendModeDst\
+    Over\x10\x05\x12\x12\n\x0eBlendModeSrcIn\x10\x06\x12\x12\n\x0eBlendModeD\
+    stIn\x10\x07\x12\x13\n\x0fBlendModeSrcOut\x10\x08\x12\x13\n\x0fBlendMode\
+    DstOut\x10\t\x12\x14\n\x10BlendModeSrcATop\x10\n\x12\x14\n\x10BlendModeD\
+    stATop\x10\x0b\x12\x10\n\x0cBlendModeXor\x10\x0c\x12\x11\n\rBlendModePlu\
+    s\x10\r\x12\x15\n\x11BlendModeModulate\x10\x0e\x12\x13\n\x0fBlendModeScr\
+    een\x10\x0f\x12\x14\n\x10BlendModeOverlay\x10\x10\x12\x13\n\x0fBlendMode\
+    Darken\x10\x11\x12\x14\n\x10BlendModeLighten\x10\x12\x12\x17\n\x13BlendM\
+    odeColorDodge\x10\x13\x12\x16\n\x12BlendModeColorBurn\x10\x14\x12\x16\n\
+    \x12BlendModeHardLight\x10\x15\x12\x16\n\x12BlendModeSoftLight\x10\x16\
+    \x12\x17\n\x13BlendModeDifference\x10\x17\x12\x16\n\x12BlendModeExclusio\
+    n\x10\x18\x12\x15\n\x11BlendModeMultiply\x10\x19\x12\x10\n\x0cBlendModeH\
+    ue\x10\x1a\x12\x17\n\x13BlendModeSaturation\x10\x1b\x12\x1b\n\x17BlendMo\
+    deBlendModeColor\x10\x1c\x12\x17\n\x13BlendModeLuminosity\x10\x1db\x06pr\
+    oto3\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -8529,11 +8530,9 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             let mut deps = ::std::vec::Vec::with_capacity(0);
             let mut messages = ::std::vec::Vec::with_capacity(33);
             messages.push(OpCode::generated_message_descriptor_data());
-            messages.push(Paragraph::generated_message_descriptor_data());
-            messages.push(DrawParagraph::generated_message_descriptor_data());
-            messages.push(Paint::generated_message_descriptor_data());
-            messages.push(PaintStroke::generated_message_descriptor_data());
-            messages.push(Image::generated_message_descriptor_data());
+            messages.push(Scale::generated_message_descriptor_data());
+            messages.push(Skew::generated_message_descriptor_data());
+            messages.push(DrawShadow::generated_message_descriptor_data());
             messages.push(DrawImage::generated_message_descriptor_data());
             messages.push(DrawImageRect::generated_message_descriptor_data());
             messages.push(DrawPath::generated_message_descriptor_data());
@@ -8541,12 +8540,14 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(ClipRect::generated_message_descriptor_data());
             messages.push(ClipRRect::generated_message_descriptor_data());
             messages.push(DrawColor::generated_message_descriptor_data());
-            messages.push(Scale::generated_message_descriptor_data());
-            messages.push(Skew::generated_message_descriptor_data());
-            messages.push(DrawShadow::generated_message_descriptor_data());
+            messages.push(DrawParagraph::generated_message_descriptor_data());
+            messages.push(Image::generated_message_descriptor_data());
+            messages.push(Paragraph::generated_message_descriptor_data());
+            messages.push(Paint::generated_message_descriptor_data());
+            messages.push(PaintStroke::generated_message_descriptor_data());
+            messages.push(Path::generated_message_descriptor_data());
             messages.push(Color::generated_message_descriptor_data());
             messages.push(SubPath::generated_message_descriptor_data());
-            messages.push(Path::generated_message_descriptor_data());
             messages.push(Conic::generated_message_descriptor_data());
             messages.push(Cubic::generated_message_descriptor_data());
             messages.push(Arc::generated_message_descriptor_data());
@@ -8562,11 +8563,11 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(Mat4::generated_message_descriptor_data());
             messages.push(RRect::generated_message_descriptor_data());
             let mut enums = ::std::vec::Vec::with_capacity(5);
+            enums.push(ClipOp::generated_enum_descriptor_data());
             enums.push(FilterQuality::generated_enum_descriptor_data());
             enums.push(StrokeCap::generated_enum_descriptor_data());
             enums.push(StrokeJoin::generated_enum_descriptor_data());
             enums.push(BlendMode::generated_enum_descriptor_data());
-            enums.push(clip_rect::ClipOp::generated_enum_descriptor_data());
             ::protobuf::reflect::GeneratedFileDescriptor::new_generated(
                 file_descriptor_proto(),
                 deps,
