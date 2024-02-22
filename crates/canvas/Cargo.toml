@@ -13,11 +13,15 @@ libm = {workspace = true}
 log = {workspace = true}
 serde = {workspace = true}
 
-[features]
-default = ["tessellator", "serde_support"]
-serde_support = []
-tessellator = []
-
 [dev-dependencies]
 pretty_env_logger = {workspace = true}
 serde_json = {workspace = true}
+
+[features]
+default = ["serde_support", "canvas2d_support", "canvas3d_support"]
+
+canvas2d_support = []
+canvas3d_support = []
+serde_support = []
+
+no_std = ["glam/libm", "serde/alloc"]
