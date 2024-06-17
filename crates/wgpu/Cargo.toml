@@ -6,5 +6,16 @@ repository.workspace = true
 version.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+thiserror = { workspace = true }
+winit = { workspace = true, optional = true }
+wgpu = { workspace = true }
+log = { workspace = true }
+pollster = { workspace = true }
+
+[features]
+default = ["use_winit"]
+use_winit = ["winit"]
+
+[dev-dependencies]
+pretty_env_logger = { workspace = true }

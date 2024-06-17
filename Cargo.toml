@@ -22,3 +22,10 @@ serde = { version = "^1.0", default-features = false, features = ["derive"] }
 serde_json = "^1.0"
 # sub crates.
 hala-canvas = { path = "crates/canvas", version = "^0.1" }
+# graphics
+lyon = "^1.0"
+winit = "^0.30"
+wgpu = "^0.20"
+#futures
+futures = "^0.3"
+pollster = "^0.3.0"
