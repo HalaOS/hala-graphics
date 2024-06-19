@@ -83,8 +83,8 @@ impl ApplicationHandler for Application {
             }
             WindowEvent::Resized(new_size) => {
                 self.winit_wgpu_state.as_mut().unwrap().resize(new_size);
+                self.window.as_ref().unwrap().request_redraw();
             }
-
             event => {
                 if !self.winit_wgpu_state.as_mut().unwrap().input(&event) {
                     // log::trace!("Unhandle window event: {:?}", event);
@@ -186,6 +186,43 @@ impl WinitWgpuState {
 
     fn render(&mut self) -> Result<()> {
         log::trace!("render...");
+
+        let output = self.surface.get_current_texture()?;
+
+        let view = output
+            .texture
+            .create_view(&wgpu::TextureViewDescriptor::default());
+
+        let mut encoder = self
+            .device
+            .create_command_encoder(&wgpu::CommandEncoderDescriptor {
+                label: Some("HalaOS wgpu encoder"),
+            });
+
+        {
+            let _render_pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                label: Some("Render Pass"),
+                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                    view: &view,
+                    resolve_target: None,
+                    ops: wgpu::Operations {
+                        load: wgpu::LoadOp::Clear(wgpu::Color {
+                            r: 1.0,
+                            g: 0.0,
+                            b: 0.0,
+                            a: 0.5,
+                        }),
+                        store: wgpu::StoreOp::Store,
+                    },
+                })],
+                depth_stencil_attachment: None,
+                timestamp_writes: None,
+                occlusion_query_set: None,
+            });
+        }
+
+        self.queue.submit(std::iter::once(encoder.finish()));
+        output.present();
 
         Ok(())
     }
