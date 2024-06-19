@@ -1,6 +1,9 @@
 use std::sync::Arc;
 
-use wgpu::{CreateSurfaceError, Features, RequestDeviceError, SurfaceError};
+use wgpu::{
+    CreateSurfaceError, Features, FragmentState, MultisampleState, RequestDeviceError,
+    SurfaceError, VertexState,
+};
 use winit::{
     application::ApplicationHandler,
     dpi::PhysicalSize,
@@ -12,7 +15,7 @@ use winit::{
 
 /// Test error variant.
 #[derive(thiserror::Error, Debug)]
-pub enum WinitError {
+pub enum TestError {
     /// Wrapper of [`winit::error::EventLoopError`]
     #[error(transparent)]
     EventLoopError(#[from] EventLoopError),
@@ -34,15 +37,15 @@ pub enum WinitError {
 }
 
 /// Result type for mod test.
-pub type Result<T> = std::result::Result<T, WinitError>;
+pub type Result<T> = std::result::Result<T, TestError>;
 
 #[derive(Default)]
-pub struct Application {
+pub struct TestRunner {
     window: Option<Arc<Window>>,
     winit_wgpu_state: Option<WinitWgpuState>,
 }
 
-impl ApplicationHandler for Application {
+impl ApplicationHandler for TestRunner {
     fn resumed(&mut self, event_loop: &winit::event_loop::ActiveEventLoop) {
         let window = Arc::new(
             event_loop
@@ -94,14 +97,14 @@ impl ApplicationHandler for Application {
     }
 }
 
-impl Application {
+impl TestRunner {
     /// Create a new `WinitRunner` instance and run it.
     pub fn run() -> Result<()> {
         let event_loop = EventLoop::new()?;
 
         event_loop.set_control_flow(ControlFlow::Wait);
 
-        let mut app = Application::default();
+        let mut app = TestRunner::default();
 
         event_loop.run_app(&mut app)?;
 
@@ -117,6 +120,7 @@ struct WinitWgpuState {
     queue: wgpu::Queue,
     config: wgpu::SurfaceConfiguration,
     size: winit::dpi::PhysicalSize<u32>,
+    render_pipeline: wgpu::RenderPipeline,
 }
 
 #[allow(unused)]
@@ -138,7 +142,7 @@ impl WinitWgpuState {
                 compatible_surface: Some(&surface),
             })
             .await
-            .ok_or(WinitError::RequestAdapterError)?;
+            .ok_or(TestError::RequestAdapterError)?;
 
         let (device, queue) = adapter
             .request_device(
@@ -164,12 +168,55 @@ impl WinitWgpuState {
 
         surface.configure(&device, &config);
 
+        let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("Hala graphic shader"),
+            source: wgpu::ShaderSource::Wgsl(include_str!("shader.wgsl").into()),
+        });
+
+        let render_pipeline_layout =
+            device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+                label: Some("Hala graphic shader layout"),
+                bind_group_layouts: &[],
+                push_constant_ranges: &[],
+            });
+
+        let render_pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+            label: Some("Hala graphic render pipeline"),
+            layout: Some(&render_pipeline_layout),
+            vertex: VertexState {
+                module: &shader,
+                entry_point: "vs_main",
+                compilation_options: Default::default(),
+                buffers: &[],
+            },
+            fragment: Some(FragmentState {
+                module: &shader,
+                entry_point: "vs_main",
+                compilation_options: Default::default(),
+                targets: &[Some(wgpu::ColorTargetState {
+                    format: config.format,
+                    blend: Some(wgpu::BlendState::REPLACE),
+                    write_mask: wgpu::ColorWrites::ALL,
+                })],
+            }),
+            primitive: Default::default(),
+            depth_stencil: Default::default(),
+            multisample: MultisampleState {
+                count: 1,
+                mask: !0,
+                alpha_to_coverage_enabled: false,
+            },
+
+            multiview: None,
+        });
+
         Ok(Self {
             surface,
             device,
             queue,
             config,
             size,
+            render_pipeline,
         })
     }
 

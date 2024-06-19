@@ -1,6 +1,6 @@
-#[cfg(feature = "use_winit")]
-mod winit_app;
-#[cfg(feature = "use_winit")]
-pub use winit_app::Application;
+#[cfg(feature = "wgpu_test")]
+pub mod test;
+
+pub mod buffer;
 
 mod state;

@@ -1,6 +1,6 @@
-use hala_canvas_wgpu::Application;
+use hala_canvas_wgpu::test::TestRunner;
 
 fn main() {
     pretty_env_logger::init_timed();
-    Application::run().unwrap();
+    TestRunner::run().unwrap();
 }

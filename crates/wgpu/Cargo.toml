@@ -14,8 +14,8 @@ log = { workspace = true }
 pollster = { workspace = true }
 
 [features]
-default = ["use_winit"]
-use_winit = ["winit"]
+default = ["wgpu_test"]
+wgpu_test = ["winit"]
 
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
