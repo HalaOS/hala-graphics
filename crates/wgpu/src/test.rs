@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
 use wgpu::{
-    CreateSurfaceError, Features, FragmentState, MultisampleState, RequestDeviceError,
-    SurfaceError, VertexState,
+    util::DeviceExt, CreateSurfaceError, Features, FragmentState, MultisampleState, PrimitiveState,
+    RequestDeviceError, SurfaceError, VertexState,
 };
 use winit::{
     application::ApplicationHandler,
@@ -12,6 +12,8 @@ use winit::{
     event_loop::{ControlFlow, EventLoop},
     window::Window,
 };
+
+use crate::buffer::Vertex;
 
 /// Test error variant.
 #[derive(thiserror::Error, Debug)]
@@ -187,11 +189,11 @@ impl WinitWgpuState {
                 module: &shader,
                 entry_point: "vs_main",
                 compilation_options: Default::default(),
-                buffers: &[],
+                buffers: &[Vertex::desc()],
             },
             fragment: Some(FragmentState {
                 module: &shader,
-                entry_point: "vs_main",
+                entry_point: "fs_main",
                 compilation_options: Default::default(),
                 targets: &[Some(wgpu::ColorTargetState {
                     format: config.format,
@@ -199,7 +201,15 @@ impl WinitWgpuState {
                     write_mask: wgpu::ColorWrites::ALL,
                 })],
             }),
-            primitive: Default::default(),
+            primitive: PrimitiveState {
+                topology: wgpu::PrimitiveTopology::TriangleList,
+                strip_index_format: None,
+                front_face: wgpu::FrontFace::Ccw,
+                cull_mode: Some(wgpu::Face::Back),
+                unclipped_depth: false,
+                polygon_mode: wgpu::PolygonMode::Fill,
+                conservative: false,
+            },
             depth_stencil: Default::default(),
             multisample: MultisampleState {
                 count: 1,
@@ -234,6 +244,29 @@ impl WinitWgpuState {
     fn render(&mut self) -> Result<()> {
         log::trace!("render...");
 
+        const VERTICES: &[Vertex] = &[
+            Vertex {
+                position: [0.0, 0.5, 0.0],
+                color: [1.0, 0.0, 0.0],
+            },
+            Vertex {
+                position: [-0.5, -0.5, 0.0],
+                color: [0.0, 1.0, 0.0],
+            },
+            Vertex {
+                position: [0.5, -0.5, 0.0],
+                color: [0.0, 0.0, 1.0],
+            },
+        ];
+
+        let vertex_buffer = self
+            .device
+            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("Vertex Buffer"),
+                contents: bytemuck::cast_slice(VERTICES),
+                usage: wgpu::BufferUsages::VERTEX,
+            });
+
         let output = self.surface.get_current_texture()?;
 
         let view = output
@@ -247,17 +280,17 @@ impl WinitWgpuState {
             });
 
         {
-            let _render_pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+            let mut render_pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("Render Pass"),
                 color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                     view: &view,
                     resolve_target: None,
                     ops: wgpu::Operations {
                         load: wgpu::LoadOp::Clear(wgpu::Color {
-                            r: 1.0,
+                            r: 0.0,
                             g: 0.0,
                             b: 0.0,
-                            a: 0.5,
+                            a: 1.0,
                         }),
                         store: wgpu::StoreOp::Store,
                     },
@@ -266,6 +299,10 @@ impl WinitWgpuState {
                 timestamp_writes: None,
                 occlusion_query_set: None,
             });
+
+            render_pass.set_pipeline(&self.render_pipeline); // 2.
+            render_pass.set_vertex_buffer(0, vertex_buffer.slice(..));
+            render_pass.draw(0..3, 0..1); // 3.
         }
 
         self.queue.submit(std::iter::once(encoder.finish()));
