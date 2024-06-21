@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
 use wgpu::{
-    util::DeviceExt, CreateSurfaceError, Features, FragmentState, MultisampleState, PrimitiveState,
-    RequestDeviceError, SurfaceError, VertexState,
+    util::DeviceExt, Buffer, CreateSurfaceError, Features, FragmentState, MultisampleState,
+    PrimitiveState, RequestDeviceError, SurfaceError, VertexState,
 };
 use winit::{
     application::ApplicationHandler,
@@ -41,13 +41,14 @@ pub enum TestError {
 /// Result type for mod test.
 pub type Result<T> = std::result::Result<T, TestError>;
 
-#[derive(Default)]
-pub struct TestRunner {
+pub struct TestRunner<'a> {
     window: Option<Arc<Window>>,
     winit_wgpu_state: Option<WinitWgpuState>,
+    vertices: &'a [Vertex],
+    indeces: &'a [u32],
 }
 
-impl ApplicationHandler for TestRunner {
+impl<'a> ApplicationHandler for TestRunner<'a> {
     fn resumed(&mut self, event_loop: &winit::event_loop::ActiveEventLoop) {
         let window = Arc::new(
             event_loop
@@ -57,7 +58,9 @@ impl ApplicationHandler for TestRunner {
 
         self.window = Some(window.clone());
 
-        let state = match pollster::block_on(async move { WinitWgpuState::new(window).await }) {
+        let state = match pollster::block_on(async {
+            WinitWgpuState::new(window, &self.vertices, &self.indeces).await
+        }) {
             Ok(state) => state,
             Err(err) => {
                 log::error!("Create winit wgpu state error: {}", err);
@@ -99,14 +102,19 @@ impl ApplicationHandler for TestRunner {
     }
 }
 
-impl TestRunner {
+impl<'a> TestRunner<'a> {
     /// Create a new `WinitRunner` instance and run it.
-    pub fn run() -> Result<()> {
+    pub fn run(vertices: &'a [Vertex], indeces: &'a [u32]) -> Result<()> {
         let event_loop = EventLoop::new()?;
 
         event_loop.set_control_flow(ControlFlow::Wait);
 
-        let mut app = TestRunner::default();
+        let mut app = TestRunner {
+            window: None,
+            winit_wgpu_state: None,
+            vertices,
+            indeces,
+        };
 
         event_loop.run_app(&mut app)?;
 
@@ -123,11 +131,14 @@ struct WinitWgpuState {
     config: wgpu::SurfaceConfiguration,
     size: winit::dpi::PhysicalSize<u32>,
     render_pipeline: wgpu::RenderPipeline,
+    vertex_buffer: Buffer,
+    index_buffer: Buffer,
+    num_indices: u32,
 }
 
 #[allow(unused)]
 impl WinitWgpuState {
-    async fn new(window: Arc<Window>) -> Result<Self> {
+    async fn new(window: Arc<Window>, vertices: &[Vertex], indeces: &[u32]) -> Result<Self> {
         let size = window.inner_size();
 
         let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
@@ -220,6 +231,20 @@ impl WinitWgpuState {
             multiview: None,
         });
 
+        let vertex_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("hala graphic vertex buffer"),
+            contents: bytemuck::cast_slice(vertices),
+            usage: wgpu::BufferUsages::VERTEX,
+        });
+
+        let index_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("hala graphic index buffer"),
+            contents: bytemuck::cast_slice(indeces),
+            usage: wgpu::BufferUsages::INDEX,
+        });
+
+        let num_indices = indeces.len() as u32;
+
         Ok(Self {
             surface,
             device,
@@ -227,6 +252,9 @@ impl WinitWgpuState {
             config,
             size,
             render_pipeline,
+            vertex_buffer,
+            index_buffer,
+            num_indices,
         })
     }
 
@@ -243,29 +271,6 @@ impl WinitWgpuState {
 
     fn render(&mut self) -> Result<()> {
         log::trace!("render...");
-
-        const VERTICES: &[Vertex] = &[
-            Vertex {
-                position: [0.0, 0.5, 0.0],
-                color: [1.0, 0.0, 0.0],
-            },
-            Vertex {
-                position: [-0.5, -0.5, 0.0],
-                color: [0.0, 1.0, 0.0],
-            },
-            Vertex {
-                position: [0.5, -0.5, 0.0],
-                color: [0.0, 0.0, 1.0],
-            },
-        ];
-
-        let vertex_buffer = self
-            .device
-            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some("Vertex Buffer"),
-                contents: bytemuck::cast_slice(VERTICES),
-                usage: wgpu::BufferUsages::VERTEX,
-            });
 
         let output = self.surface.get_current_texture()?;
 
@@ -287,9 +292,9 @@ impl WinitWgpuState {
                     resolve_target: None,
                     ops: wgpu::Operations {
                         load: wgpu::LoadOp::Clear(wgpu::Color {
-                            r: 0.0,
-                            g: 0.0,
-                            b: 0.0,
+                            r: 1.0,
+                            g: 1.0,
+                            b: 1.0,
                             a: 1.0,
                         }),
                         store: wgpu::StoreOp::Store,
@@ -301,8 +306,9 @@ impl WinitWgpuState {
             });
 
             render_pass.set_pipeline(&self.render_pipeline); // 2.
-            render_pass.set_vertex_buffer(0, vertex_buffer.slice(..));
-            render_pass.draw(0..3, 0..1); // 3.
+            render_pass.set_vertex_buffer(0, self.vertex_buffer.slice(..));
+            render_pass.set_index_buffer(self.index_buffer.slice(..), wgpu::IndexFormat::Uint32);
+            render_pass.draw_indexed(0..self.num_indices, 0, 0..1); // 3.
         }
 
         self.queue.submit(std::iter::once(encoder.finish()));
