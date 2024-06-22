@@ -1,0 +1,17 @@
+[package]
+description = "Hala graphics svg support"
+edition.workspace = true
+name = "hala-svg"
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+wgpu = { workspace = true }
+bytemuck = { workspace = true, features = ["derive"] }
+log = { workspace = true }
+pollster = { workspace = true }
+svg = { workspace = true }
+
+[dev-dependencies]
+winit = { workspace = true }
