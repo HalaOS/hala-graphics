@@ -1,6 +1,5 @@
-#[cfg(feature = "wgpu_test")]
-pub mod test;
+mod render;
+pub use render::*;
 
-pub mod buffer;
-
-mod state;
+mod canvas;
+pub use canvas::*;
