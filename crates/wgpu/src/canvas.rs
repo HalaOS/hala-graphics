@@ -150,13 +150,13 @@ impl<'a> RenderLayer for CanvasLayer<'a> {
         let texture_view = self.create_view(&Default::default());
 
         let vertex_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-            label: Some("hala graphic vertex buffer"),
+            label: Some("CanvasLayer"),
             contents: bytemuck::cast_slice(&self.vertices),
             usage: wgpu::BufferUsages::VERTEX,
         });
 
         let index_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-            label: Some("hala graphic index buffer"),
+            label: Some("CanvasLayer"),
             contents: bytemuck::cast_slice(&self.indeces),
             usage: wgpu::BufferUsages::INDEX,
         });
