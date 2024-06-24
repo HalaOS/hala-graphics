@@ -31,5 +31,6 @@ futures = "^0.3"
 pollster = "^0.3.0"
 #utils
 bytemuck = "1.16.1"
+uuid = "^1.9"
 # sub crates.
 hala-canvas = { path = "crates/canvas", version = "^0.1" }

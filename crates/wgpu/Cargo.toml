@@ -13,6 +13,8 @@ wgpu = { workspace = true }
 bytemuck = { workspace = true, features = ["derive"] }
 log = { workspace = true }
 pollster = { workspace = true }
+uuid = { workspace = true, features = ["v4", "fast-rng", "macro-diagnostics"] }
+futures = { workspace = true }
 
 [features]
 default = ["wgpu_test"]
