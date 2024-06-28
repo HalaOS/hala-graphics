@@ -342,7 +342,7 @@ impl Canvas {
 
     // /// Draws a circle centered at the point given by the first argument and that has the radius given by the second argument,
     // /// with the Paint given in the third argument. Whether the circle is filled or stroked (or both) is controlled by Paint.style.
-    // pub fn draw_circle<P: Into<Offset>>(&mut self, center: P, radius: f32, paint: Paint) {}
+    pub fn draw_circle<P: Into<Offset>>(&mut self, center: P, radius: f32, paint: Paint) {}
 
     /// Paints the given Color onto the canvas, applying the given BlendMode, with the given color being the source and the background being the destination.
     #[inline]

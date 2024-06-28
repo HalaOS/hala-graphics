@@ -51,7 +51,7 @@ pub struct PaintStroke {
     pub stroke_join: StrokeJoin,
 
     /// The limit for miters to be drawn on segments when the join is set to StrokeJoin.miter and the style is
-    /// set to [`PaintingStyle::Stroke`]. If this limit is exceeded, then a [`StrokeJoin::Bevel`] join will be drawn instead.
+    /// set to `PaintingStyle::Stroke`. If this limit is exceeded, then a [`StrokeJoin::Bevel`] join will be drawn instead.
     /// This may cause some 'popping' of the corners of a path if the angle between line segments is animated,
     /// as seen in the diagrams below.
     pub stroke_miter_limit: f32,
@@ -69,11 +69,11 @@ pub struct PaintStroke {
     derive(serde::Serialize, serde::Deserialize)
 )]
 pub enum PaintStyle {
-    /// Apply the Paint to the inside of the shape. For example, when applied to the [`draw_circle`](super::PictureLayer::draw_circle) call,
+    /// Apply the Paint to the inside of the shape. For example, when applied to the `draw_circle` call,
     /// this results in a disc of the given size being painted.
     Fill,
 
-    /// Apply the Paint to the edge of the shape. For example, when applied to the [`draw_circle`](super::PictureLayer::draw_circle) call,
+    /// Apply the Paint to the edge of the shape. For example, when applied to the `draw_circle` call,
     /// this results is a hoop of the given size being painted. The line drawn on the edge will be
     /// the width given by the Paint.strokeWidth property.
     Stroke,
