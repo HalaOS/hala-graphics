@@ -177,7 +177,7 @@ impl RenderEngine {
         context.height = height;
     }
 
-    pub fn render<L: RenderLayer>(&mut self, layer: &mut L) {
+    pub fn render_layer<L: RenderLayer>(&mut self, layer: &mut L) {
         let context = self
             .layers
             .get_mut(layer.id().expect("Call attach first"))
@@ -192,6 +192,10 @@ impl RenderEngine {
         );
 
         self.frame_command_buffers.push(command_buffer);
+    }
+
+    pub fn represent(&mut self, _texture: Option<&TextureView>) {
+        self.queue.submit(self.frame_command_buffers.drain(..));
     }
 
     fn create_texture(device: &Device, width: u32, height: u32) -> Texture {
@@ -266,7 +270,7 @@ pub struct TessellatorRenderLayer<'a> {
 }
 
 impl<'a> TessellatorRenderLayer<'a> {
-    pub fn new(shader_source: wgpu::ShaderSource<'a>, label: Option<&str>) -> Self {
+    pub fn new(label: Option<&str>, shader_source: wgpu::ShaderSource<'a>) -> Self {
         Self {
             id: None,
             shader_source,
