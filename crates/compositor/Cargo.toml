@@ -1,0 +1,9 @@
+[package]
+description = "A canvas/window compositor for hala graphics system"
+documentation = "https://docs.rs/hala-graphics-compositor"
+edition.workspace = true
+license = "MIT"
+name = "hala-graphics-compositor"
+repository = "https://github.com/HalaOS/hala-graphics.git"
+version.workspace = true
+readme = "../../README.md"
