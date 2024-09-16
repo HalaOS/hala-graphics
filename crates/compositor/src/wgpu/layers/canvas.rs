@@ -9,9 +9,11 @@ use wgpu::{
     TextureViewDescriptor, TextureViewDimension,
 };
 
-use crate::{syscall::DriverCanvas, Error, Geometry, LayerId, Rect, Result, Vertex};
-
-use super::{capture::WgpuCapture, create_layer_texture, syscall::DriverWgpuLayer, WgpuRendering};
+use crate::{
+    syscall::DriverCanvas,
+    wgpu::{capture::WgpuCapture, WgpuRendering},
+    DriverWgpuLayer, Error, Geometry, LayerId, Rect, Result, Vertex,
+};
 
 #[derive(Default)]
 struct MutableWgpuCanvas {
@@ -22,7 +24,13 @@ struct MutableWgpuCanvas {
 }
 
 impl MutableWgpuCanvas {
-    fn texture_view(&mut self, device: &Device, width: u32, height: u32) -> TextureView {
+    fn texture_view(
+        &mut self,
+        rendering: &WgpuRendering,
+        device: &Device,
+        width: u32,
+        height: u32,
+    ) -> TextureView {
         let desc = TextureViewDescriptor {
             dimension: Some(TextureViewDimension::D2),
             ..Default::default()
@@ -36,7 +44,7 @@ impl MutableWgpuCanvas {
 
         log::trace!("create canvas texture({},{})", width, height);
 
-        let texture = create_layer_texture(device, width, height);
+        let texture = rendering.create_texture(device, width, height);
 
         let texture_view = texture.create_view(&desc);
 
@@ -47,7 +55,7 @@ impl MutableWgpuCanvas {
 }
 
 #[derive(Clone, Default)]
-pub(super) struct WgpuCanvas {
+pub struct WgpuCanvas {
     id: LayerId,
     mutable: Arc<Mutex<MutableWgpuCanvas>>,
     capture: WgpuCapture,
@@ -72,7 +80,7 @@ impl WgpuCanvas {
     }
     fn redraw(
         &self,
-        render: &WgpuRendering,
+        rendering: &WgpuRendering,
         device: &Device,
         render_pipeline: &RenderPipeline,
         command_encoder: &mut CommandEncoder,
@@ -87,13 +95,13 @@ impl WgpuCanvas {
             }
 
             (
-                mutable.texture_view(device, width, height),
+                mutable.texture_view(rendering, device, width, height),
                 mutable.geometry.take(),
             )
         };
 
         if let Some(geometry) = geometry {
-            render.render_pass(
+            rendering.render_pass(
                 device,
                 render_pipeline,
                 &texture_view,

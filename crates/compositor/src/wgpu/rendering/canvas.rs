@@ -1,10 +1,8 @@
 use wgpu::{util::DeviceExt, CommandEncoder, Device, RenderPipeline, ShaderSource, TextureView};
 
-use crate::{Geometry, Vertex};
+use crate::{DriverWgpuRendering, Geometry, Vertex};
 
-use super::syscall::DriverWgpuRendering;
-
-pub(super) struct WgpCanvasRender(pub(super) ShaderSource<'static>);
+pub struct WgpCanvasRender(pub ShaderSource<'static>);
 
 impl DriverWgpuRendering for WgpCanvasRender {
     fn create_piple_line(&self, device: &Device) -> RenderPipeline {
@@ -101,5 +99,24 @@ impl DriverWgpuRendering for WgpCanvasRender {
         render_pass.set_vertex_buffer(0, vertex_buffer.slice(..));
         render_pass.set_index_buffer(index_buffer.slice(..), wgpu::IndexFormat::Uint32);
         render_pass.draw_indexed(0..geometry.indeces.len() as u32, 0, 0..1);
+    }
+
+    fn create_texture(&self, device: &Device, width: u32, height: u32) -> wgpu::Texture {
+        let texture_desc = wgpu::TextureDescriptor {
+            size: wgpu::Extent3d {
+                width,
+                height,
+                depth_or_array_layers: 1,
+            },
+            mip_level_count: 1,
+            sample_count: 1,
+            dimension: wgpu::TextureDimension::D2,
+            format: wgpu::TextureFormat::Rgba8UnormSrgb,
+            usage: wgpu::TextureUsages::COPY_SRC | wgpu::TextureUsages::RENDER_ATTACHMENT,
+            label: None,
+            view_formats: &[wgpu::TextureFormat::Rgba8UnormSrgb],
+        };
+
+        device.create_texture(&texture_desc)
     }
 }

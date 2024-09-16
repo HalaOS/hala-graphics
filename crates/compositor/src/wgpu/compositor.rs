@@ -4,10 +4,10 @@ use async_trait::async_trait;
 use spin::Mutex;
 use wgpu::{Device, Queue, RenderPipeline, ShaderSource};
 
-use crate::{syscall::DriverCompositor, Canvas, Error, Rect, Result};
+use crate::{syscall::DriverCompositor, Canvas, Compositor, Error, Rect, Result};
 
 use super::{
-    canvas::WgpuCanvas, canvas_render::WgpCanvasRender, syscall::DriverWgpuRendering, WgpuLayer,
+    layers::WgpuCanvas, rendering::WgpCanvasRender, syscall::DriverWgpuRendering, WgpuLayer,
     WgpuRendering,
 };
 
@@ -133,6 +133,7 @@ impl MutableWgpuCompositor {
     }
 }
 
+/// [`Compositor`](crate::Compositor) implementation backed with [`wgpu`](https://docs.rs/wgpu/latest/wgpu/)
 #[derive(Clone)]
 pub struct WgpuCompositor {
     ops: Arc<WgpuCompositorOps>,
@@ -155,6 +156,10 @@ impl WgpuCompositor {
 
 #[async_trait]
 impl DriverCompositor for WgpuCompositor {
+    fn clone(&self) -> Compositor {
+        Clone::clone(self).into()
+    }
+
     async fn resize(&self, width: u32, height: u32) -> Result<()> {
         self.mutable.lock().resize(width, height);
         Ok(())
@@ -163,7 +168,7 @@ impl DriverCompositor for WgpuCompositor {
     async fn size(&self) -> Result<(u32, u32)> {
         Ok(self.mutable.lock().size())
     }
-    /// Create a new canvas layer with initial position and size.
+
     async fn create_canvas(&self, resize: Option<Rect>) -> Result<Canvas> {
         let canvas = WgpuCanvas::new(resize);
 
@@ -174,7 +179,6 @@ impl DriverCompositor for WgpuCompositor {
         Ok(canvas.into())
     }
 
-    /// Display compositing effects.
     async fn compositing(&self) -> Result<()> {
         let (layers, width, height) = self.mutable.lock().compositing();
 

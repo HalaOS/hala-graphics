@@ -31,17 +31,11 @@ macro_rules! driver_wrapper_impl {
 }
 
 macro_rules! driver_wrapper {
-    ([$doc:expr]$vs:ident $ident:ident[$driver: path]) => {
+    ([$doc:expr] $ident:ident [$driver: path]) => {
         #[doc = $doc]
-        $vs struct $ident(Box<dyn $driver>);
+        pub struct $ident(Box<dyn $driver>);
 
-        crate::macros::driver_wrapper_impl!($ident,$driver);
-    };
-     ([$doc:expr] $ident:ident[$driver: path]) => {
-        #[doc = $doc]
-        struct $ident(Box<dyn $driver>);
-
-        crate::macros::driver_wrapper_impl!($ident,$driver);
+        crate::macros::driver_wrapper_impl!($ident, $driver);
     };
 }
 

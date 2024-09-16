@@ -57,6 +57,9 @@ pub mod syscall {
 
     #[async_trait]
     pub trait DriverCompositor: Sync + Send {
+        /// Clone self.
+        fn clone(&self) -> Compositor;
+
         /// Adjust the compositor rendering size.
         async fn resize(&self, width: u32, height: u32) -> Result<()>;
 
@@ -87,10 +90,10 @@ pub mod syscall {
 
 driver_wrapper!(
     ["A type wrapper of [`DriverCompositor`](syscall::DriverCompositor)"]
-    pub Compositor[syscall::DriverCompositor]
+    Compositor[syscall::DriverCompositor]
 );
 
 driver_wrapper!(
     ["A type wrapper of [`DriverCanvas`](syscall::DriverCanvas)"]
-    pub Canvas[syscall::DriverCanvas]
+    Canvas[syscall::DriverCanvas]
 );

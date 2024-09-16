@@ -1,13 +1,13 @@
 use async_trait::async_trait;
-use wgpu::{CommandBuffer, CommandEncoder, Device, RenderPipeline, TextureView};
+use wgpu::{CommandBuffer, CommandEncoder, Device, RenderPipeline, Texture, TextureView};
 
 use crate::{syscall::DriverCanvas, Geometry, Result};
 
 use super::WgpuRendering;
 
-#[async_trait]
 /// Trait used by compositor layer.
-pub(super) trait DriverWgpuLayer: DriverCanvas {
+#[async_trait]
+pub trait DriverWgpuLayer: DriverCanvas {
     /// Returns `None`, if this layer is closed.
     fn render(
         &self,
@@ -23,6 +23,8 @@ pub(super) trait DriverWgpuLayer: DriverCanvas {
 
 pub trait DriverWgpuRendering: Sync + Send {
     fn create_piple_line(&self, device: &Device) -> RenderPipeline;
+
+    fn create_texture(&self, device: &Device, width: u32, height: u32) -> Texture;
 
     fn render_pass(
         &self,

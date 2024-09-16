@@ -1,11 +1,10 @@
-mod canvas;
-mod canvas_render;
+mod layers;
+mod rendering;
 
 mod capture;
 
 mod compositor;
 pub use compositor::*;
-use wgpu::{Device, Texture};
 
 use crate::macros::driver_wrapper;
 
@@ -21,25 +20,6 @@ driver_wrapper!(
     ["A type wrapper of [`WgpuLayerRender`](syscall::DriverWgpuLayerRender)"]
     WgpuRendering[syscall::DriverWgpuRendering]
 );
-
-fn create_layer_texture(device: &Device, width: u32, height: u32) -> Texture {
-    let texture_desc = wgpu::TextureDescriptor {
-        size: wgpu::Extent3d {
-            width,
-            height,
-            depth_or_array_layers: 1,
-        },
-        mip_level_count: 1,
-        sample_count: 1,
-        dimension: wgpu::TextureDimension::D2,
-        format: wgpu::TextureFormat::Rgba8UnormSrgb,
-        usage: wgpu::TextureUsages::COPY_SRC | wgpu::TextureUsages::RENDER_ATTACHMENT,
-        label: None,
-        view_formats: &[wgpu::TextureFormat::Rgba8UnormSrgb],
-    };
-
-    device.create_texture(&texture_desc)
-}
 
 #[cfg(test)]
 mod tests {
