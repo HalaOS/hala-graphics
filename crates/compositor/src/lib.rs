@@ -1,14 +1,16 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+#![cfg_attr(docsrs, feature(doc_cfg))]
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+mod compositor;
+pub use compositor::*;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+mod errors;
+pub use errors::*;
+
+#[cfg(feature = "wgpu")]
+#[cfg_attr(docsrs, doc(cfg(feature = "wgpu")))]
+mod wgpu;
+
+#[cfg(feature = "wgpu")]
+pub use wgpu::*;
+
+mod macros;
