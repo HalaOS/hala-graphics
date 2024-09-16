@@ -1,3 +1,5 @@
+//! The compositor for hala graphics system.
+
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 mod compositor;

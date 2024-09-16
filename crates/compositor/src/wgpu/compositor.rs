@@ -7,23 +7,25 @@ use wgpu::{Device, Queue, RenderPipeline, ShaderSource};
 use crate::{syscall::DriverCompositor, Canvas, Compositor, Error, Rect, Result};
 
 use super::{
-    layers::WgpuCanvas, rendering::WgpCanvasRender, syscall::DriverWgpuRendering, WgpuLayer,
-    WgpuRendering,
+    layers::WgpuCanvas, rendering::WgpCanvasRender, wgpu_syscall::DriverWgpuRenderer, WgpuLayer,
+    WgpuRenderer,
 };
 
+/// Options of one wgpu [`Compositor`](crate::Compositor)
 pub struct WgpuCompositorOps {
     /// Render pipeline for canvas layer.
     canvas_pipeline: RenderPipeline,
     /// Render for canvas layer.
-    canvas_render: WgpuRendering,
+    canvas_render: WgpuRenderer,
     /// Device associated with this `WgpuCompositor`
     device: Device,
     /// Queue associated with this `WgpuCompositor`
     queue: Queue,
 }
 
+/// The builder of [`WgpuCompositor`]
 pub struct WgpuCompositorBuilder {
-    canvas_render: WgpuRendering,
+    canvas_render: WgpuRenderer,
 }
 
 impl Default for WgpuCompositorBuilder {
@@ -47,13 +49,13 @@ impl WgpuCompositorBuilder {
     /// Override default canvas rendering.
     pub fn canvas_rendering<R>(mut self, rendering: R) -> Self
     where
-        R: DriverWgpuRendering + 'static,
+        R: DriverWgpuRenderer + 'static,
     {
         self.canvas_render = rendering.into();
         self
     }
 
-    /// Create a new [`WgpuCompositor`] with initial width and height.
+    /// Create a new [`WgpuCompositor`] with initial width and height in pixels.
     pub async fn create(self, width: u32, height: u32) -> Result<WgpuCompositor> {
         let (device, queue) = Self::init_wgpu().await?;
 

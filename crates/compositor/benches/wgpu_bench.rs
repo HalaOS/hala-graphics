@@ -1,6 +1,6 @@
 use std::time::Instant;
 
-use hala_graphics_compositor::{syscall::DriverCompositor, Vertex, WgpuCompositor};
+use hala_compositor::{syscall::DriverCompositor, Vertex, WgpuCompositor};
 
 fn main() {
     futures::executor::block_on(wgpu_bench());

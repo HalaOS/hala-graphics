@@ -11,8 +11,9 @@ use wgpu::{
 
 use crate::{
     syscall::DriverCanvas,
-    wgpu::{capture::WgpuCapture, WgpuRendering},
-    DriverWgpuLayer, Error, Geometry, LayerId, Rect, Result, Vertex,
+    wgpu::{capture::WgpuCapture, WgpuRenderer},
+    wgpu_syscall::DriverWgpuLayer,
+    Error, Geometry, LayerId, Rect, Result, Vertex,
 };
 
 #[derive(Default)]
@@ -26,7 +27,7 @@ struct MutableWgpuCanvas {
 impl MutableWgpuCanvas {
     fn texture_view(
         &mut self,
-        rendering: &WgpuRendering,
+        rendering: &WgpuRenderer,
         device: &Device,
         width: u32,
         height: u32,
@@ -80,7 +81,7 @@ impl WgpuCanvas {
     }
     fn redraw(
         &self,
-        rendering: &WgpuRendering,
+        rendering: &WgpuRenderer,
         device: &Device,
         render_pipeline: &RenderPipeline,
         command_encoder: &mut CommandEncoder,
@@ -160,7 +161,7 @@ impl DriverCanvas for WgpuCanvas {
 impl DriverWgpuLayer for WgpuCanvas {
     fn render(
         &self,
-        render: &WgpuRendering,
+        renderer: &WgpuRenderer,
         device: &Device,
         render_pipeline: &RenderPipeline,
         width: u32,
@@ -171,7 +172,7 @@ impl DriverWgpuLayer for WgpuCanvas {
         });
 
         self.redraw(
-            render,
+            renderer,
             device,
             render_pipeline,
             &mut command_encoder,

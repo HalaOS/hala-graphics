@@ -1,10 +1,10 @@
 use wgpu::{util::DeviceExt, CommandEncoder, Device, RenderPipeline, ShaderSource, TextureView};
 
-use crate::{DriverWgpuRendering, Geometry, Vertex};
+use crate::{wgpu_syscall::DriverWgpuRenderer, Geometry, Vertex};
 
 pub struct WgpCanvasRender(pub ShaderSource<'static>);
 
-impl DriverWgpuRendering for WgpCanvasRender {
+impl DriverWgpuRenderer for WgpCanvasRender {
     fn create_piple_line(&self, device: &Device) -> RenderPipeline {
         let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("CanvasLayer"),

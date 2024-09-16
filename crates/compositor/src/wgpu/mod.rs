@@ -8,17 +8,16 @@ pub use compositor::*;
 
 use crate::macros::driver_wrapper;
 
-mod syscall;
-pub use syscall::*;
+pub mod wgpu_syscall;
 
 driver_wrapper!(
-    ["A type wrapper of [`WgpuLayer`](syscall::DriverWgpuLayer)"]
-    WgpuLayer[syscall::DriverWgpuLayer]
+    ["A type wrapper of [`WgpuLayer`](wgpu_syscall::DriverWgpuLayer)"]
+    WgpuLayer[wgpu_syscall::DriverWgpuLayer]
 );
 
 driver_wrapper!(
-    ["A type wrapper of [`WgpuLayerRender`](syscall::DriverWgpuLayerRender)"]
-    WgpuRendering[syscall::DriverWgpuRendering]
+    ["A type wrapper of [`WgpuRenderer`](wgpu_syscall::DriverWgpuRenderer)"]
+    WgpuRenderer[wgpu_syscall::DriverWgpuRenderer]
 );
 
 #[cfg(test)]
