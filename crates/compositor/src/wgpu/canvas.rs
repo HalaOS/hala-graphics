@@ -77,7 +77,7 @@ impl WgpuCanvas {
         command_encoder: &mut CommandEncoder,
         width: u32,
         height: u32,
-    ) -> Result<()> {
+    ) -> Result<TextureView> {
         let (texture_view, geometry) = {
             let mut mutable = self.mutable.lock();
 
@@ -130,7 +130,7 @@ impl WgpuCanvas {
             render_pass.draw_indexed(0..geometry.indeces.len() as u32, 0, 0..1);
         }
 
-        Ok(())
+        Ok(texture_view)
     }
 
     fn capture(
@@ -184,7 +184,6 @@ impl DriverWgpuLayer for WgpuCanvas {
         render_pipeline: &RenderPipeline,
         width: u32,
         height: u32,
-        _target: &TextureView,
     ) -> Result<Option<CommandBuffer>> {
         let mut command_encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
             label: Some("CanvasLayer"),

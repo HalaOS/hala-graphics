@@ -9,6 +9,7 @@ use crate::{syscall::DriverCompositor, Canvas, Error, Rect, Result, Vertex};
 use super::{canvas::WgpuCanvas, WgpuLayer};
 
 pub struct WgpuCompositorOps {
+    #[allow(unused)]
     /// rendering target.
     target: TextureView,
     /// Render pipeline for canvas layer.
@@ -237,13 +238,7 @@ impl DriverCompositor for WgpuCompositor {
         let mut valid_layers = vec![];
 
         for layer in layers {
-            match layer.render(
-                &self.ops.device,
-                &self.ops.canvas_pipeline,
-                width,
-                height,
-                &self.ops.target,
-            ) {
+            match layer.render(&self.ops.device, &self.ops.canvas_pipeline, width, height) {
                 Ok(buff) => {
                     if let Some(buff) = buff {
                         command_buffers.push(buff);

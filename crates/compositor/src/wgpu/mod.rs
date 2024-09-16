@@ -37,8 +37,9 @@ fn create_layer_texture(device: &Device, width: u32, height: u32) -> Texture {
 #[cfg(test)]
 mod tests {
 
+    use std::io::Write;
+
     use futures::poll;
-    use image::{ImageBuffer, Rgb};
 
     use crate::{Compositor, Result, Vertex};
 
@@ -49,6 +50,24 @@ mod tests {
         let (compositor, texture) = WgpuCompositor::new().to_texture(256, 256).await?;
 
         Ok((compositor.into(), texture))
+    }
+
+    pub fn save_image(image_data: Vec<u8>, texture_dims: (u32, u32), path: &str) {
+        let mut png_data = Vec::<u8>::with_capacity(image_data.len());
+        let mut encoder = png::Encoder::new(
+            std::io::Cursor::new(&mut png_data),
+            texture_dims.0 as u32,
+            texture_dims.1 as u32,
+        );
+        encoder.set_color(png::ColorType::Rgba);
+        let mut png_writer = encoder.write_header().unwrap();
+        png_writer.write_image_data(&image_data[..]).unwrap();
+        png_writer.finish().unwrap();
+        log::info!("PNG file encoded in memory.");
+
+        let mut file = std::fs::File::create(&path).unwrap();
+        file.write_all(&png_data[..]).unwrap();
+        log::info!("PNG file written to disc as \"{}\".", path);
     }
 
     #[futures_test::test]
@@ -115,8 +134,6 @@ mod tests {
 
         log::trace!("image size({},{})", width, height);
 
-        let buffer = ImageBuffer::<Rgb<u8>, _>::from_raw(width, height, data).unwrap();
-
-        buffer.save("image.png").unwrap();
+        save_image(data, (width, height), "image.png");
     }
 }
