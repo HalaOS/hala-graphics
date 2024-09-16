@@ -13,7 +13,7 @@ use crate::{
     syscall::DriverCanvas,
     wgpu::{capture::WgpuCapture, WgpuRenderer},
     wgpu_syscall::DriverWgpuLayer,
-    Error, Geometry, LayerId, Rect, Result, Vertex,
+    Error, Geometry, Id, Rect, Result, Vertex,
 };
 
 #[derive(Default)]
@@ -57,7 +57,7 @@ impl MutableWgpuCanvas {
 
 #[derive(Clone, Default)]
 pub struct WgpuCanvas {
-    id: LayerId,
+    id: Id,
     mutable: Arc<Mutex<MutableWgpuCanvas>>,
     capture: WgpuCapture,
 }
@@ -71,7 +71,7 @@ impl Drop for WgpuCanvas {
 impl WgpuCanvas {
     pub fn new(resize: Option<Rect>) -> Self {
         Self {
-            id: Uuid::new_v4(),
+            id: Id(Uuid::new_v4()),
             mutable: Arc::new(Mutex::new(MutableWgpuCanvas {
                 resize,
                 ..Default::default()
@@ -136,7 +136,7 @@ impl WgpuCanvas {
 #[async_trait]
 impl DriverCanvas for WgpuCanvas {
     /// Returns the layer id.
-    fn id(&self) -> &LayerId {
+    fn id(&self) -> &Id {
         &self.id
     }
     /// Move this canvas's position and size.
