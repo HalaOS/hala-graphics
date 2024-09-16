@@ -64,7 +64,7 @@ pub mod syscall {
         async fn size(&self) -> Result<(u32, u32)>;
 
         /// Create a new canvas layer with initial position and size.
-        async fn create_canvas(&self, rect: Option<Rect>) -> Result<Canvas>;
+        async fn create_canvas(&self, resize: Option<Rect>) -> Result<Canvas>;
 
         /// Display compositing effects.
         async fn compositing(&self) -> Result<()>;
