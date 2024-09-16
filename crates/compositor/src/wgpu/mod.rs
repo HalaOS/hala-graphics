@@ -1,4 +1,5 @@
 mod canvas;
+mod canvas_render;
 
 mod capture;
 
@@ -9,10 +10,16 @@ use wgpu::{Device, Texture};
 use crate::macros::driver_wrapper;
 
 mod syscall;
+pub use syscall::*;
 
 driver_wrapper!(
-    ["A type wrapper of [`DriverCompositor`](syscall::DriverCompositor)"]
+    ["A type wrapper of [`WgpuLayer`](syscall::DriverWgpuLayer)"]
     WgpuLayer[syscall::DriverWgpuLayer]
+);
+
+driver_wrapper!(
+    ["A type wrapper of [`WgpuLayerRender`](syscall::DriverWgpuLayerRender)"]
+    WgpuRendering[syscall::DriverWgpuRendering]
 );
 
 fn create_layer_texture(device: &Device, width: u32, height: u32) -> Texture {
@@ -45,11 +52,11 @@ mod tests {
 
     use super::*;
 
-    async fn init() -> Result<(Compositor, Texture)> {
+    async fn init() -> Result<Compositor> {
         _ = pretty_env_logger::try_init_timed();
-        let (compositor, texture) = WgpuCompositor::new().to_texture(256, 256).await?;
+        let compositor = WgpuCompositor::new().create(1920, 1080).await?;
 
-        Ok((compositor.into(), texture))
+        Ok(compositor.into())
     }
 
     pub fn save_image(image_data: Vec<u8>, texture_dims: (u32, u32), path: &str) {
@@ -72,7 +79,7 @@ mod tests {
 
     #[futures_test::test]
     async fn canvas_test() {
-        let (compositor, _texture) = init().await.unwrap();
+        let compositor = init().await.unwrap();
 
         let canvas = compositor.create_canvas(None).await.unwrap();
 

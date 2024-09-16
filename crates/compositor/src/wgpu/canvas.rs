@@ -5,13 +5,13 @@ use futures::future::poll_fn;
 use spin::mutex::Mutex;
 use uuid::Uuid;
 use wgpu::{
-    util::DeviceExt, CommandBuffer, CommandEncoder, Device, RenderPipeline, Texture, TextureView,
+    CommandBuffer, CommandEncoder, Device, RenderPipeline, Texture, TextureView,
     TextureViewDescriptor, TextureViewDimension,
 };
 
 use crate::{syscall::DriverCanvas, Error, Geometry, LayerId, Rect, Result, Vertex};
 
-use super::{capture::WgpuCapture, create_layer_texture, syscall::DriverWgpuLayer};
+use super::{capture::WgpuCapture, create_layer_texture, syscall::DriverWgpuLayer, WgpuRendering};
 
 #[derive(Default)]
 struct MutableWgpuCanvas {
@@ -72,6 +72,7 @@ impl WgpuCanvas {
     }
     fn redraw(
         &self,
+        render: &WgpuRendering,
         device: &Device,
         render_pipeline: &RenderPipeline,
         command_encoder: &mut CommandEncoder,
@@ -92,42 +93,13 @@ impl WgpuCanvas {
         };
 
         if let Some(geometry) = geometry {
-            let vertex_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some("CanvasLayer"),
-                contents: bytemuck::cast_slice(&geometry.vertices),
-                usage: wgpu::BufferUsages::VERTEX,
-            });
-
-            let index_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some("CanvasLayer"),
-                contents: bytemuck::cast_slice(&geometry.indeces),
-                usage: wgpu::BufferUsages::INDEX,
-            });
-
-            let mut render_pass = command_encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("CanvasLayer"),
-                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                    view: &texture_view,
-                    resolve_target: None,
-                    ops: wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(wgpu::Color {
-                            r: 0.1,
-                            g: 0.2,
-                            b: 0.3,
-                            a: 1.0,
-                        }),
-                        store: wgpu::StoreOp::Store,
-                    },
-                })],
-                depth_stencil_attachment: None,
-                timestamp_writes: None,
-                occlusion_query_set: None,
-            });
-
-            render_pass.set_pipeline(render_pipeline); // 2.
-            render_pass.set_vertex_buffer(0, vertex_buffer.slice(..));
-            render_pass.set_index_buffer(index_buffer.slice(..), wgpu::IndexFormat::Uint32);
-            render_pass.draw_indexed(0..geometry.indeces.len() as u32, 0, 0..1);
+            render.render_pass(
+                device,
+                render_pipeline,
+                &texture_view,
+                command_encoder,
+                geometry,
+            );
         }
 
         Ok(texture_view)
@@ -180,6 +152,7 @@ impl DriverCanvas for WgpuCanvas {
 impl DriverWgpuLayer for WgpuCanvas {
     fn render(
         &self,
+        render: &WgpuRendering,
         device: &Device,
         render_pipeline: &RenderPipeline,
         width: u32,
@@ -189,7 +162,14 @@ impl DriverWgpuLayer for WgpuCanvas {
             label: Some("CanvasLayer"),
         });
 
-        self.redraw(device, render_pipeline, &mut command_encoder, width, height)?;
+        self.redraw(
+            render,
+            device,
+            render_pipeline,
+            &mut command_encoder,
+            width,
+            height,
+        )?;
 
         self.capture(device, &mut command_encoder, width, height);
 

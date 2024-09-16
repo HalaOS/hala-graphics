@@ -7,7 +7,7 @@ fn main() {
 }
 
 async fn wgpu_bench() {
-    let (compositor, _) = WgpuCompositor::new().to_texture(256, 256).await.unwrap();
+    let compositor = WgpuCompositor::new().create(1920, 1080).await.unwrap();
 
     let canvas = compositor.create_canvas(None).await.unwrap();
 
