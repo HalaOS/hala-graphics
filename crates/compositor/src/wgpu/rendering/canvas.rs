@@ -83,9 +83,9 @@ impl DriverWgpuRenderer for WgpCanvasRender {
                 ops: wgpu::Operations {
                     load: wgpu::LoadOp::Clear(wgpu::Color {
                         r: 0.1,
-                        g: 0.2,
-                        b: 0.3,
-                        a: 1.0,
+                        g: 0.1,
+                        b: 0.1,
+                        a: 0.0,
                     }),
                     store: wgpu::StoreOp::Store,
                 },

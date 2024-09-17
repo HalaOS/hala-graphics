@@ -19,6 +19,8 @@ log = { workspace = true }
 #wgpu
 wgpu = { workspace = true, optional = true }
 spin = { workspace = true, optional = true }
+#svg
+usvg = { workspace = true, optional = true }
 
 [dev-dependencies]
 futures-test = { workspace = true }
@@ -26,8 +28,9 @@ pretty_env_logger = { workspace = true }
 png = { workspace = true }
 
 [features]
-default = ["wgpu"]
+default = ["wgpu", "svg"]
 wgpu = ["dep:wgpu", "spin"]
+svg = ["usvg"]
 
 [[bench]]
 name = "wgpu_bench"

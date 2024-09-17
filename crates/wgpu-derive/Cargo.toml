@@ -1,0 +1,12 @@
+[package]
+description = "Some useful proc-macros for wgpu programs."
+documentation = "https://docs.rs/wgpu-derive"
+edition.workspace = true
+license = "MIT"
+name = "wgpu-derive"
+repository = "https://github.com/HalaOS/hala-graphics.git"
+version.workspace = true
+readme = "../../README.md"
+
+[lib]
+proc-macro = true
