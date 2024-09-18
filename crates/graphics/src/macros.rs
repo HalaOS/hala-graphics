@@ -1,5 +1,9 @@
-macro_rules! driver_wrapper_impl {
-    ($ident:ident,$driver: path) => {
+#[macro_export]
+macro_rules! driver_wrapper {
+    ([$doc:expr] $ident:ident [$driver: path]) => {
+        #[doc = $doc]
+        pub struct $ident(Box<dyn $driver>);
+
         unsafe impl Send for $ident {}
 
         impl<D: $driver + 'static> From<D> for $ident {
@@ -29,15 +33,3 @@ macro_rules! driver_wrapper_impl {
         }
     };
 }
-
-macro_rules! driver_wrapper {
-    ([$doc:expr] $ident:ident [$driver: path]) => {
-        #[doc = $doc]
-        pub struct $ident(Box<dyn $driver>);
-
-        crate::macros::driver_wrapper_impl!($ident, $driver);
-    };
-}
-
-pub(crate) use driver_wrapper;
-pub(crate) use driver_wrapper_impl;

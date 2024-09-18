@@ -1,4 +1,5 @@
 use std::{
+    future::poll_fn,
     sync::Arc,
     task::{Context, Poll, Waker},
 };
@@ -7,6 +8,8 @@ use spin::Mutex;
 use wgpu::{Buffer, CommandEncoder, Device, Extent3d, Texture};
 
 use crate::Result;
+
+use super::render_syscall::DriverElement;
 
 static U32_SIZE: u32 = std::mem::size_of::<u32>() as u32;
 
@@ -18,6 +21,8 @@ enum InnerState {
 
 #[derive(Default)]
 struct RawCapture {
+    label: Option<String>,
+    is_attached: bool,
     waker: Option<Waker>,
     state: Option<InnerState>,
 }
@@ -66,7 +71,7 @@ impl RawCapture {
         let desc = wgpu::BufferDescriptor {
             size: buffer_size,
             usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
-            label: Some("CanvasLayer"),
+            label: self.label.as_deref(),
             mapped_at_creation: false,
         };
 
@@ -117,29 +122,15 @@ impl RawCapture {
     }
 }
 
+/// A rendering element for svg image.
 #[derive(Default, Clone)]
-pub(super) struct WgpuCapture(Arc<Mutex<RawCapture>>);
+pub struct CaptureElement {
+    raw: Arc<Mutex<RawCapture>>,
+}
 
-impl WgpuCapture {
-    pub fn poll(&self, cx: &mut Context<'_>) -> Poll<Result<Vec<u8>>> {
-        self.0.lock().poll(cx)
-    }
-
-    pub fn capture(
-        &self,
-        device: &Device,
-        command_encoder: &mut CommandEncoder,
-        texture: &Texture,
-        width: u32,
-        height: u32,
-    ) -> bool {
-        self.0
-            .lock()
-            .capture(device, command_encoder, texture, width, height)
-    }
-
-    pub fn sync(&self) {
-        if let Some(buffer) = self.0.lock().sync() {
+impl CaptureElement {
+    fn sync(&self) {
+        if let Some(buffer) = self.raw.lock().sync() {
             let capturable = buffer.clone();
 
             let this = self.clone();
@@ -170,7 +161,65 @@ impl WgpuCapture {
         }
     }
 
-    pub fn result(&self, result: Result<Vec<u8>>) -> Option<Waker> {
-        self.0.lock().result(result)
+    fn result(&self, result: Result<Vec<u8>>) -> Option<Waker> {
+        self.raw.lock().result(result)
+    }
+
+    /// Capture bitmaps on next frame.
+    pub async fn once(&self) -> Result<Vec<u8>> {
+        poll_fn(|cx| self.raw.lock().poll(cx)).await
+    }
+}
+
+impl DriverElement for CaptureElement {
+    fn attach(&self, _device: &wgpu::Device) {
+        self.raw.lock().is_attached = true;
+    }
+
+    fn detach(&self) {
+        self.raw.lock().is_attached = false;
+    }
+
+    fn is_attached(&self) -> bool {
+        self.raw.lock().is_attached
+    }
+
+    fn submit(&self, _device: &wgpu::Device) {
+        self.sync();
+    }
+
+    #[allow(unused)]
+    fn before_redraw(
+        &self,
+        device: &Device,
+        render_attachment: &Texture,
+        command_encoder: &mut CommandEncoder,
+        viewport: &crate::Viewport,
+    ) {
+    }
+
+    #[allow(unused)]
+    fn redraw(
+        &self,
+        device: &Device,
+        render_pass: &mut wgpu::RenderPass<'_>,
+        viewport: &crate::Viewport,
+    ) {
+    }
+
+    fn after_redraw(
+        &self,
+        device: &Device,
+        render_attachment: &Texture,
+        command_encoder: &mut CommandEncoder,
+        viewport: &crate::Viewport,
+    ) {
+        self.raw.lock().capture(
+            device,
+            command_encoder,
+            render_attachment,
+            viewport.width,
+            viewport.height,
+        );
     }
 }

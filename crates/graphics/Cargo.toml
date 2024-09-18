@@ -1,0 +1,25 @@
+[package]
+description = "A cross plaform graphics system backed by wgpu."
+documentation = "https://docs.rs/hala-graphics"
+edition.workspace = true
+license = "MIT"
+name = "hala-graphics"
+repository = "https://github.com/HalaOS/hala-graphics.git"
+version.workspace = true
+
+[dependencies]
+usvg = { workspace = true }
+wgpu = { workspace = true }
+lyon = { workspace = true }
+thiserror = { workspace = true }
+spin = { workspace = true }
+euclid = { workspace = true }
+wgpu-derive = { workspace = true }
+bytemuck = { workspace = true, features = ["derive"] }
+log = { workspace = true }
+futures = { workspace = true }
+png = { workspace = true }
+
+[dev-dependencies]
+pretty_env_logger = { workspace = true }
+futures-test = { workspace = true }
