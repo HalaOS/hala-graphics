@@ -11,7 +11,7 @@ pub(crate) async fn init_wgpu() -> Result<(Device, Queue)> {
 
     let adapter = instance
         .request_adapter(&wgpu::RequestAdapterOptionsBase {
-            power_preference: wgpu::PowerPreference::HighPerformance,
+            power_preference: wgpu::PowerPreference::None,
             force_fallback_adapter: false,
             compatible_surface: None,
         })
