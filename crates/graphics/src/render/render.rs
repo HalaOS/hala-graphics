@@ -3,10 +3,10 @@ use crate::driver_wrapper;
 /// A rendering widget must impl the Driver-* traits in this mod.
 pub mod render_syscall {
     use crate::{Transform2D, Transform3D, Viewport};
-    use wgpu::{CommandEncoder, Device, RenderPass, Texture};
+    use wgpu::{CommandEncoder, Device, RenderPass, Texture, WasmNotSendSync};
 
     /// A rendering widget used by wgpu backend.
-    pub trait DriverElement: Sync + Send {
+    pub trait DriverElement: WasmNotSendSync {
         /// Attach this element to a wgpu [`Device`]
         fn attach(&self, device: &Device);
 
