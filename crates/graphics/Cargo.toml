@@ -23,3 +23,8 @@ png = { workspace = true }
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
 futures-test = { workspace = true }
+divan = { workspace = true }
+
+[[bench]]
+name = "transfer_data_bench"
+harness = false
