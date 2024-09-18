@@ -119,6 +119,9 @@ mod tests {
 
         render_to_png(Some("render_to_png"), &element, Viewport::new(1920, 1080))
             .await
+            .unwrap()
+            .save("test.png")
+            .await
             .unwrap();
     }
 }

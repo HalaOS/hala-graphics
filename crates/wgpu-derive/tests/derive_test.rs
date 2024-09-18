@@ -56,6 +56,8 @@ pub struct Mock {
 
 #[test]
 fn get_buffer_layout() {
+    println!("{:?}", Mock::vertex_buff_layout());
+
     let vertex = Mock::default();
 
     let mut buf = vec![0u8; 1024];
