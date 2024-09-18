@@ -4,8 +4,8 @@ pub use render::*;
 mod svg;
 pub use svg::*;
 
-mod to_file;
-pub use to_file::*;
+mod to_png;
+pub use to_png::*;
 
 mod capture;
 pub use capture::*;
