@@ -6,7 +6,6 @@ license = "MIT"
 name = "wgpu-derive"
 repository = "https://github.com/HalaOS/hala-graphics.git"
 version.workspace = true
-readme = "../../README.md"
 
 [lib]
 proc-macro = true

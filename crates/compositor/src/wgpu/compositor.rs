@@ -4,7 +4,7 @@ use async_trait::async_trait;
 use spin::Mutex;
 use wgpu::{Device, Queue, RenderPipeline, ShaderSource};
 
-use crate::{syscall::DriverCompositor, Canvas, Compositor, Error, Rect, Result};
+use crate::{syscall::DriverCompositor, Canvas, Compositor, Error, Rect, Result, Svg};
 
 use super::{
     layers::WgpuCanvas, rendering::WgpCanvasRender, wgpu_syscall::DriverWgpuRenderer, WgpuLayer,
@@ -179,6 +179,10 @@ impl DriverCompositor for WgpuCompositor {
             .insert_layer(Clone::clone(&canvas).into());
 
         Ok(canvas.into())
+    }
+
+    async fn create_svg(&self) -> Result<Svg> {
+        todo!()
     }
 
     async fn compositing(&self) -> Result<()> {
