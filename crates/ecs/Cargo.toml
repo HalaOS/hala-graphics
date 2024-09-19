@@ -1,0 +1,19 @@
+[package]
+description = "A ecs implementation for rust programs."
+documentation = "https://docs.rs/ecsrs"
+edition.workspace = true
+license = "MIT"
+name = "ecsrs"
+repository = "https://github.com/HalaOS/hala-graphics.git"
+version.workspace = true
+
+[dependencies]
+log = { workspace = true }
+
+[dev-dependencies]
+divan = { workspace = true }
+pretty_env_logger = { workspace = true }
+
+[[bench]]
+name = "bench_ecs"
+harness = false
