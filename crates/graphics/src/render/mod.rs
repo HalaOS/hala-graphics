@@ -1,11 +1,3 @@
-mod render;
-pub use render::*;
-
-mod svg;
-pub use svg::*;
-
-mod to_png;
-pub use to_png::*;
-
-mod capture;
-pub use capture::*;
+//! a rendering system with [`ECS`] pattern.
+//!
+//! [`ECS`]: https://www.wikiwand.com/en/articles/Entity_component_system

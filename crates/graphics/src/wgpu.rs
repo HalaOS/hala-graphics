@@ -3,6 +3,7 @@ use wgpu::{Device, Queue};
 use crate::{Error, Result};
 
 /// Create new wgpu context.
+#[allow(unused)]
 pub(crate) async fn init_wgpu() -> Result<(Device, Queue)> {
     let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
         backends: wgpu::Backends::all(),
