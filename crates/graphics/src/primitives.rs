@@ -15,11 +15,11 @@ pub struct Pixels;
 pub type Viewport = euclid::Size2D<u32, Pixels>;
 
 /// Calculates the size of the buffer used to hold the render target with `viewport` dimensions.
-pub trait BufferSize {
+pub trait BufferSizeOf {
     fn buffer_size_of(&self) -> u64;
 }
 
-impl BufferSize for Viewport {
+impl BufferSizeOf for Viewport {
     fn buffer_size_of(&self) -> u64 {
         (size_of::<u32>() as u32 * self.width * self.height) as wgpu::BufferAddress
     }

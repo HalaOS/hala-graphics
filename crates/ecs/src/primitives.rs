@@ -148,7 +148,7 @@ pub trait AsComponent {
     /// Returns the component type.
     fn component_type() -> &'static ComponentType;
 }
-
+/// A macro to drive [`AsComponent`] trait for types.
 #[macro_export]
 macro_rules! ecs_system {
     (@step $_idx:expr,) => {};

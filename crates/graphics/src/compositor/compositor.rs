@@ -15,7 +15,7 @@ use crate::{
         Canvas2DComponent, CaptureComponent, LayerComponent, RedrawComponent, SvgComponent,
     },
     wgpu::init_wgpu,
-    BufferSize, Png, Result, Viewport,
+    BufferSizeOf, Png, Result, Viewport,
 };
 
 use super::{RenderSystem, SvgSystem};
