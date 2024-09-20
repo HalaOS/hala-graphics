@@ -11,7 +11,9 @@ use wgpu::{
 };
 
 use crate::{
-    render::{Canvas2DComponent, CaptureComponent, LayerComponent, RedrawComponent, SvgComponent},
+    compositor::{
+        Canvas2DComponent, CaptureComponent, LayerComponent, RedrawComponent, SvgComponent,
+    },
     wgpu::init_wgpu,
     BufferSize, Png, Result, Viewport,
 };

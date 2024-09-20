@@ -1,6 +1,6 @@
 use wgpu::{Device, RenderPipeline, RenderPipelineDescriptor, ShaderSource};
 
-use crate::render::SvgVertex;
+use crate::compositor::SvgVertex;
 
 use super::RenderSystem;
 
