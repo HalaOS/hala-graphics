@@ -19,6 +19,7 @@ bytemuck = { workspace = true, features = ["derive"] }
 log = { workspace = true }
 futures = { workspace = true }
 png = { workspace = true }
+ecsrs = { workspace = true }
 
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
@@ -26,5 +27,5 @@ futures-test = { workspace = true }
 divan = { workspace = true }
 
 [[bench]]
-name = "transfer_data_bench"
+name = "compositing"
 harness = false

@@ -268,7 +268,7 @@ pub fn drive_wgpu_vertex(item: TokenStream) -> TokenStream {
 
     quote! {
         impl #name {
-            fn vertex_buff_layout() -> wgpu::VertexBufferLayout<'static> {
+            pub const fn vertex_buff_layout() -> wgpu::VertexBufferLayout<'static> {
                 use std::mem;
 
                 const ATTRIBS: [wgpu::VertexAttribute; #length] = wgpu::vertex_attr_array![#(#attrs,)*];
@@ -280,7 +280,7 @@ pub fn drive_wgpu_vertex(item: TokenStream) -> TokenStream {
                 }
             }
 
-            fn to_bytes<Buf>(&self, mut buf: Buf) where Buf: AsMut<[u8]>{
+            pub fn to_bytes<Buf>(&self, mut buf: Buf) where Buf: AsMut<[u8]>{
                 let buf = buf.as_mut();
 
                 assert!(buf.len() > #array_stride, "bo_bytes: output buf too short");
