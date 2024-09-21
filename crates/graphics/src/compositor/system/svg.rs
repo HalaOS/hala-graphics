@@ -1,6 +1,6 @@
 use wgpu::{Device, RenderPipeline, RenderPipelineDescriptor, ShaderSource};
 
-use crate::compositor::SvgVertex;
+use crate::compositor::{SvgComponent, SvgVertex};
 
 use super::RenderSystem;
 
@@ -83,10 +83,18 @@ impl RenderSystem for SvgSystem {
 
     fn redraw<'a>(
         &self,
-        _world: &mut ecsrs::World,
+        world: &mut ecsrs::World,
         _viewport: &crate::Viewport,
         _render_pass: &mut wgpu::RenderPass<'a>,
     ) {
+        for component in world.component_iter::<SvgComponent>() {
+            log::trace!(
+                "svg({}), vertex({}) indecs({})",
+                component.id,
+                component.tessellated.vertexes.len(),
+                component.tessellated.indecs.len()
+            );
+        }
     }
 
     fn composite(

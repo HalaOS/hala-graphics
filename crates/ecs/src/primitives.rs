@@ -162,11 +162,11 @@ macro_rules! ecs_system {
             }
         }
 
-        ecs_system!(@step $idx + 1usize, $($tail,)*);
+        $crate::ecs_system!(@step $idx + 1usize, $($tail,)*);
     };
 
     ($($n:tt),*) => {
-        ecs_system!(@step 0usize, $($n,)*);
+        $crate::ecs_system!(@step 0usize, $($n,)*);
     }
 }
 

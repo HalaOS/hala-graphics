@@ -1,5 +1,8 @@
 use png::EncodingError;
-use wgpu::{BufferAsyncError, RequestDeviceError};
+use wgpu::{BufferAsyncError, CreateSurfaceError, RequestDeviceError, SurfaceError};
+
+#[cfg(feature = "utilities")]
+use winit::error::EventLoopError;
 
 /// The error type used by this crate.
 #[derive(Debug, thiserror::Error)]
@@ -22,6 +25,23 @@ pub enum Error {
     /// std::io::Error
     #[error(transparent)]
     IoError(#[from] std::io::Error),
+
+    /// Error returns by [`create_surface`](wgpu::Instance::create_surface)
+    #[error(transparent)]
+    CreateSurfaceError(#[from] CreateSurfaceError),
+
+    /// Error returns by [`get_current_texture`](wgpu::Surface::get_current_texture)
+    #[error(transparent)]
+    SurfaceError(#[from] SurfaceError),
+
+    /// Error returns by [`run_app`](winit::event_loop::EventLoop::run_app)
+    #[cfg(feature = "utilities")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "utilities")))]
+    #[error(transparent)]
+    EventLoopError(#[from] EventLoopError),
+
+    #[error("Invalid viewport string: {0}")]
+    InvalidViewPortStr(String),
 }
 
 /// The result type used by this crate.

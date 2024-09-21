@@ -3,22 +3,21 @@ use std::{
     sync::mpsc,
 };
 
-use ecsrs::AsComponent;
+use ecsrs::{AsComponent, Id};
 
 use wgpu::{
-    Buffer, CommandBuffer, CommandEncoder, CommandEncoderDescriptor, Device, Extent3d, Queue,
-    RenderPass, ShaderSource, SurfaceTarget, Texture, TextureDescriptor,
+    Adapter, Buffer, CommandBuffer, CommandEncoder, CommandEncoderDescriptor, Device, Extent3d,
+    Queue, RenderPass, ShaderSource, Surface, SurfaceTarget, Texture, TextureDescriptor,
 };
 
 use crate::{
     compositor::{
         Canvas2DComponent, CaptureComponent, LayerComponent, RedrawComponent, SvgComponent,
     },
-    wgpu::init_wgpu,
-    BufferSizeOf, Png, Result, Viewport,
+    BufferSizeOf, Error, Png, Result, Viewport,
 };
 
-use super::{RenderSystem, SvgSystem};
+use super::{RenderSystem, SvgSystem, SvgTessellated};
 
 /// A builder for graphics [`Compositor`]
 pub struct CompositorBuilder {
@@ -32,7 +31,67 @@ impl CompositorBuilder {
         }
     }
 
-    async fn create(self) -> Result<Compositor> {
+    async fn create_wgpu() -> Result<(Device, Queue)> {
+        let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
+            backends: wgpu::Backends::all(),
+            ..Default::default()
+        });
+
+        let adapter = instance
+            .request_adapter(&wgpu::RequestAdapterOptionsBase {
+                power_preference: wgpu::PowerPreference::None,
+                force_fallback_adapter: false,
+                compatible_surface: None,
+            })
+            .await
+            .ok_or(Error::RequestAdapterError)?;
+
+        Ok(adapter
+            .request_device(
+                &wgpu::DeviceDescriptor {
+                    label: Some("WgpuCompositor"),
+                    memory_hints: wgpu::MemoryHints::MemoryUsage,
+                    ..Default::default()
+                },
+                None,
+            )
+            .await?)
+    }
+
+    async fn create_wgpu_with<'window>(
+        target: impl Into<SurfaceTarget<'window>>,
+    ) -> Result<(Device, Queue, Adapter, Surface<'window>)> {
+        let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
+            backends: wgpu::Backends::all(),
+            ..Default::default()
+        });
+
+        let surface = instance.create_surface(target)?;
+
+        let adapter = instance
+            .request_adapter(&wgpu::RequestAdapterOptionsBase {
+                power_preference: wgpu::PowerPreference::None,
+                force_fallback_adapter: false,
+                compatible_surface: Some(&surface),
+            })
+            .await
+            .ok_or(Error::RequestAdapterError)?;
+
+        let (device, queue) = adapter
+            .request_device(
+                &wgpu::DeviceDescriptor {
+                    label: Some("WgpuCompositor"),
+                    memory_hints: wgpu::MemoryHints::MemoryUsage,
+                    ..Default::default()
+                },
+                None,
+            )
+            .await?;
+
+        Ok((device, queue, adapter, surface))
+    }
+
+    async fn create(self, device: Device, queue: Queue) -> Result<Compositor> {
         let world = ecsrs::World::new([
             LayerComponent::component_type(),
             RedrawComponent::component_type(),
@@ -40,8 +99,6 @@ impl CompositorBuilder {
             SvgComponent::component_type(),
             CaptureComponent::component_type(),
         ]);
-
-        let (device, queue) = init_wgpu().await?;
 
         let systems: Vec<Box<dyn RenderSystem>> = vec![Box::new(SvgSystem::with_shader(
             Some("Svg"),
@@ -58,21 +115,32 @@ impl CompositorBuilder {
     }
 
     /// Create a [`Compositor`] whose rendering target is a `window`.
-    pub async fn render_to_window<'window>(
+    pub async fn render_to_surface<'window>(
         self,
         target: impl Into<SurfaceTarget<'window>>,
+        viewport: Viewport,
     ) -> Result<SurfaceCompositor<'window>> {
-        let rendering = self.create().await?;
+        let (device, queue, adapter, surface) = Self::create_wgpu_with(target).await?;
+        let rendering = self.create(device, queue).await?;
+
+        let config = surface
+            .get_default_config(&adapter, viewport.width, viewport.height)
+            .unwrap();
+
+        surface.configure(&rendering.device, &config);
 
         Ok(SurfaceCompositor {
-            surface_target: target.into(),
+            surface,
             rendering,
+            config,
         })
     }
 
     /// Create a [`Compositor`] whose rendering target is a GPU texture.
     pub async fn render_to_texture(self, viewport: Viewport) -> Result<TextureCompositor> {
-        let rendering = self.create().await?;
+        let (device, queue) = Self::create_wgpu().await?;
+
+        let rendering = self.create(device, queue).await?;
 
         let texture_target = rendering.device.create_texture(&TextureDescriptor {
             size: wgpu::Extent3d {
@@ -123,6 +191,25 @@ impl Compositor {
         CompositorBuilder::new()
     }
 
+    /// Create a new svg rendering element.
+    ///
+    /// On success, returns the id of new rendering element.
+    pub fn new_svg(&mut self, tessellated: SvgTessellated) -> Id {
+        let id = self.world.new_entity();
+
+        self.world.new_component(
+            SvgComponent {
+                id: id.clone(),
+                tessellated,
+            },
+            [&id],
+        );
+
+        id
+    }
+}
+
+impl Compositor {
     fn prepare(&mut self, viewport: &Viewport, command_encoder: &mut CommandEncoder) {
         for system in &self.systems {
             system.prepare(&mut self.world, viewport, command_encoder);
@@ -150,9 +237,11 @@ impl Compositor {
 pub struct SurfaceCompositor<'window> {
     #[allow(unused)]
     /// surface associated with the window.
-    surface_target: SurfaceTarget<'window>,
+    surface: Surface<'window>,
     /// rendeing system
     rendering: Compositor,
+    /// surface configuration.
+    config: wgpu::SurfaceConfiguration,
 }
 
 impl<'window> Deref for SurfaceCompositor<'window> {
@@ -165,6 +254,73 @@ impl<'window> Deref for SurfaceCompositor<'window> {
 impl<'window> DerefMut for SurfaceCompositor<'window> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.rendering
+    }
+}
+
+impl<'a> SurfaceCompositor<'a> {
+    /// Invoke a rendering process and composite all rendering layer into the surface target.
+    ///
+    /// On success, this fn will call [`present`](wgpu::SurfaceTexture::present) internally.
+    pub fn compositing(&mut self) -> Result<()> {
+        let texture = self.surface.get_current_texture()?;
+
+        let mut command_encoder =
+            self.rendering
+                .device
+                .create_command_encoder(&CommandEncoderDescriptor {
+                    label: Some("TextureCompositor"),
+                });
+
+        let viewport = Viewport::new(texture.texture.width(), texture.texture.height());
+
+        let texture_view = texture.texture.create_view(&Default::default());
+
+        self.prepare(&viewport, &mut command_encoder);
+
+        {
+            let mut render_pass = command_encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                label: Some("TextureCompositor"),
+                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                    view: &texture_view,
+                    resolve_target: None,
+                    ops: wgpu::Operations {
+                        load: wgpu::LoadOp::Clear(wgpu::Color {
+                            r: 0.1,
+                            g: 0.1,
+                            b: 0.1,
+                            a: 0.0,
+                        }),
+                        store: wgpu::StoreOp::Store,
+                    },
+                })],
+                depth_stencil_attachment: None,
+                timestamp_writes: None,
+                occlusion_query_set: None,
+            });
+
+            self.redraw(&viewport, &mut render_pass);
+        }
+
+        self.composite(&viewport, &mut command_encoder);
+
+        self.submit([command_encoder.finish()]);
+
+        texture.present();
+
+        Ok(())
+    }
+
+    /// Resize the surface's viewport.
+    pub fn resize(&mut self, viewport: Viewport) {
+        if viewport.width == 0 || viewport.height == 0 {
+            log::warn!("SurfaceCompositor, resize with invalid data: {}", viewport);
+            return;
+        }
+
+        self.config.width = viewport.width;
+        self.config.height = viewport.height;
+
+        self.surface.configure(&self.device, &self.config);
     }
 }
 
@@ -203,11 +359,7 @@ impl TextureCompositor {
                     label: Some("TextureCompositor"),
                 });
 
-        let viewport = Viewport {
-            width: self.texture_target.width(),
-            height: self.texture_target.height(),
-            ..Default::default()
-        };
+        let viewport = Viewport::new(self.texture_target.width(), self.texture_target.height());
 
         let texture_view = self.texture_target.create_view(&Default::default());
 
