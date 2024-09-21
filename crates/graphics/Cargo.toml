@@ -8,7 +8,6 @@ repository = "https://github.com/HalaOS/hala-graphics.git"
 version.workspace = true
 
 [dependencies]
-usvg = { workspace = true }
 wgpu = { workspace = true }
 lyon = { workspace = true }
 thiserror = { workspace = true }
@@ -19,9 +18,8 @@ bytemuck = { workspace = true, features = ["derive"] }
 log = { workspace = true }
 futures = { workspace = true }
 png = { workspace = true }
-ecsrs = { workspace = true }
-winit = { workspace = true, optional = true }
 regex = { workspace = true }
+ecsrs = { workspace = true }
 
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
@@ -30,8 +28,6 @@ divan = { workspace = true }
 clap = { workspace = true, features = ["derive"] }
 
 [features]
-default = ["utilities"]
-utilities = ["winit"]
 
 [[bench]]
 name = "compositing"

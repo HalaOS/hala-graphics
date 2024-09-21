@@ -1,9 +1,6 @@
 use png::EncodingError;
 use wgpu::{BufferAsyncError, CreateSurfaceError, RequestDeviceError, SurfaceError};
 
-#[cfg(feature = "utilities")]
-use winit::error::EventLoopError;
-
 /// The error type used by this crate.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -33,12 +30,6 @@ pub enum Error {
     /// Error returns by [`get_current_texture`](wgpu::Surface::get_current_texture)
     #[error(transparent)]
     SurfaceError(#[from] SurfaceError),
-
-    /// Error returns by [`run_app`](winit::event_loop::EventLoop::run_app)
-    #[cfg(feature = "utilities")]
-    #[cfg_attr(docsrs, doc(cfg(feature = "utilities")))]
-    #[error(transparent)]
-    EventLoopError(#[from] EventLoopError),
 
     #[error("Invalid viewport string: {0}")]
     InvalidViewPortStr(String),

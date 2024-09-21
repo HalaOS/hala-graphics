@@ -31,7 +31,7 @@ async-trait = "0.1.82"
 spin = "0.9.8"
 png = "0.17.11"
 ttf-parser = "0.24.1"
-usvg = "0.43.0"
+svg = "0.17.0"
 euclid = "0.22.11"
 divan = "0.1.14"
 # proc-macro
