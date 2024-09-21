@@ -86,6 +86,7 @@ mod native {
                         .compositing()
                         .unwrap();
                 }
+
                 WindowEvent::Resized(resize) => {
                     self.viewport = Viewport::new(resize.width, resize.height);
 
@@ -95,7 +96,9 @@ mod native {
 
                     self.window.as_ref().unwrap().request_redraw();
                 }
-                _ => (),
+                _ => {
+                    log::trace!("{:?}", event)
+                }
             }
         }
     }
