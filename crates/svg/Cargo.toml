@@ -1,0 +1,8 @@
+[package]
+description = "A full features svg render backend with hala-graphics"
+documentation = "https://docs.rs/hala-svg"
+edition.workspace = true
+license = "MIT"
+name = "hala-svg"
+repository = "https://github.com/HalaOS/hala-graphics.git"
+version.workspace = true
