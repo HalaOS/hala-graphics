@@ -1,6 +1,6 @@
 use wgpu::{Device, RenderPipeline, RenderPipelineDescriptor, ShaderSource};
 
-use crate::compositor::{SvgComponent, SvgVertex};
+use crate::compositor::{Canvas2DComponent, Canvas2DVertex};
 
 use super::RenderSystem;
 
@@ -38,7 +38,7 @@ impl SvgSystem {
                 module: &shader,
                 entry_point: "vs_main",
                 compilation_options: Default::default(),
-                buffers: &[SvgVertex::vertex_buff_layout()],
+                buffers: &[Canvas2DVertex::vertex_buff_layout()],
             },
             fragment: Some(wgpu::FragmentState {
                 module: &shader,
@@ -87,13 +87,8 @@ impl RenderSystem for SvgSystem {
         _viewport: &crate::Viewport,
         _render_pass: &mut wgpu::RenderPass<'a>,
     ) {
-        for component in world.component_iter::<SvgComponent>() {
-            log::trace!(
-                "svg({}), vertex({}) indecs({})",
-                component.id,
-                component.tessellated.vertexes.len(),
-                component.tessellated.indecs.len()
-            );
+        for component in world.component_iter::<Canvas2DComponent>() {
+            log::trace!("canvas({})", component.id,);
         }
     }
 

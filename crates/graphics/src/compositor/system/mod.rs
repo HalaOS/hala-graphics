@@ -1,6 +1,6 @@
-mod svg;
+mod canvas;
+pub use canvas::*;
 use ecsrs::World;
-pub use svg::*;
 use wgpu::{CommandEncoder, RenderPass};
 
 use crate::Viewport;

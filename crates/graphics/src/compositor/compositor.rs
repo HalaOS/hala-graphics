@@ -11,13 +11,11 @@ use wgpu::{
 };
 
 use crate::{
-    compositor::{
-        Canvas2DComponent, CaptureComponent, LayerComponent, RedrawComponent, SvgComponent,
-    },
+    compositor::{Canvas2DComponent, CaptureComponent, LayerComponent, RedrawComponent},
     BufferSizeOf, Error, Png, Result, Viewport,
 };
 
-use super::{RenderSystem, SvgSystem, SvgTessellated};
+use super::{RenderSystem, SvgSystem};
 
 /// A builder for graphics [`Compositor`]
 pub struct CompositorBuilder {
@@ -96,7 +94,6 @@ impl CompositorBuilder {
             LayerComponent::component_type(),
             RedrawComponent::component_type(),
             Canvas2DComponent::component_type(),
-            SvgComponent::component_type(),
             CaptureComponent::component_type(),
         ]);
 
@@ -191,19 +188,14 @@ impl Compositor {
         CompositorBuilder::new()
     }
 
-    /// Create a new svg rendering element.
+    /// Create a new canvas element.
     ///
-    /// On success, returns the id of new rendering element.
-    pub fn new_svg(&mut self, tessellated: SvgTessellated) -> Id {
+    /// On success, returns the id of new canvas element.
+    pub fn new_canvas(&mut self) -> Id {
         let id = self.world.new_entity();
 
-        self.world.new_component(
-            SvgComponent {
-                id: id.clone(),
-                tessellated,
-            },
-            [&id],
-        );
+        self.world
+            .new_component(Canvas2DComponent { id: id.clone() }, [&id]);
 
         id
     }

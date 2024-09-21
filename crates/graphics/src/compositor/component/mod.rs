@@ -1,9 +1,6 @@
 mod canvas;
 pub use canvas::*;
 
-mod svg;
-pub use svg::*;
-
 mod layer;
 pub use layer::*;
 
@@ -23,6 +20,5 @@ ecsrs::ecs_system!(
     LayerComponent,
     RedrawComponent,
     Canvas2DComponent,
-    SvgComponent,
     CaptureComponent
 );
