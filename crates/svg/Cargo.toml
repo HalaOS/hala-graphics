@@ -6,3 +6,7 @@ license = "MIT"
 name = "hala-svg"
 repository = "https://github.com/HalaOS/hala-graphics.git"
 version.workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+svg = { workspace = true }
