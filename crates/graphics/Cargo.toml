@@ -1,9 +1,9 @@
 [package]
 description = "A cross plaform graphics system backed by wgpu."
-documentation = "https://docs.rs/hala-graphics"
+documentation = "https://docs.rs/kree"
 edition.workspace = true
 license = "MIT"
-name = "hala-graphics"
+name = "kree"
 repository = "https://github.com/HalaOS/hala-graphics.git"
 version.workspace = true
 

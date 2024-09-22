@@ -1,5 +1,7 @@
 use std::{fs, path::Path};
 
+use xml::EventReader;
+
 use crate::Result;
 
 /// The svg rendering backend.
@@ -11,20 +13,13 @@ pub fn render_file<P: AsRef<Path>, R: SvgRendering>(svg_path: P, renderer: &mut 
 }
 
 /// Render a svg image in memory.
-pub fn render<C: AsRef<str>, R: SvgRendering>(content: C, renderer: &mut R) -> Result<()> {
-    let parser = svg::read(content.as_ref())?;
+pub fn render<C: AsRef<str>, R: SvgRendering>(content: C, _renderer: &mut R) -> Result<()> {
+    let reader = EventReader::from_str(content.as_ref());
 
-    for event in parser {
-        match event {
-            svg::parser::Event::Error(error) => return Err(error.into()),
-
-            svg::parser::Event::Tag(_, t, hash_map) => todo!(),
-            svg::parser::Event::Text(_) => todo!(),
-            svg::parser::Event::Comment(_) => todo!(),
-            svg::parser::Event::Declaration(_) => todo!(),
-            svg::parser::Event::Instruction(_) => todo!(),
+    for event in reader {
+        match event? {
+            _ => {}
         }
     }
-
     todo!()
 }

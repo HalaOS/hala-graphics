@@ -2,7 +2,7 @@
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error(transparent)]
-    SvgParseError(#[from] svg::parser::Error),
+    SvgParseError(#[from] xml::reader::Error),
 
     /// Error raised by [`read`](svg::read) or [`open`](svg::open) fns.
     #[error(transparent)]

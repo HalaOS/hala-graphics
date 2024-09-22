@@ -2,7 +2,7 @@ use std::hint::black_box;
 
 use divan::Bencher;
 use futures::executor::block_on;
-use hala_graphics::{compositor::Compositor, Viewport};
+use kree::{compositor::Compositor, Viewport};
 
 fn main() {
     // Run registered benchmarks.

@@ -9,4 +9,4 @@ version.workspace = true
 
 [dependencies]
 thiserror = { workspace = true }
-svg = { workspace = true }
+xml-rs = { workspace = true }
