@@ -1,9 +1,9 @@
 [package]
-description = "A full features svg render backend with hala-graphics"
-documentation = "https://docs.rs/hala-svg"
+description = "A full features svg render backend with kree"
+documentation = "https://docs.rs/cotati"
 edition.workspace = true
 license = "MIT"
-name = "hala-svg"
+name = "cotati"
 repository = "https://github.com/HalaOS/hala-graphics.git"
 version.workspace = true
 
