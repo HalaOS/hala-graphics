@@ -1,8 +1,16 @@
+use std::num::ParseIntError;
+
 /// Error variant used by this mod.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
+    #[error("Invalid viewport string: {0}")]
+    InvalidViewPortStr(String),
+
+    #[error("Unknown color: {0}")]
+    UnrecognizedColor(String),
+
     #[error(transparent)]
-    SvgParseError(#[from] xml::reader::Error),
+    ParseIntError(#[from] ParseIntError),
 
     /// Error raised by [`read`](svg::read) or [`open`](svg::open) fns.
     #[error(transparent)]

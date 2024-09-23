@@ -33,6 +33,9 @@ pub enum Error {
 
     #[error("Invalid viewport string: {0}")]
     InvalidViewPortStr(String),
+
+    #[error("Unknown color: {0}")]
+    UnrecognizedColor(String),
 }
 
 /// The result type used by this crate.

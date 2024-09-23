@@ -1,5 +1,5 @@
 [package]
-description = "A cross plaform graphics system backed by wgpu."
+description = "A cotati renderer implementation with wgpu"
 documentation = "https://docs.rs/kree"
 edition.workspace = true
 license = "MIT"

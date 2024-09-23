@@ -1,5 +1,5 @@
 [package]
-description = "A full features svg render backend with kree"
+description = "cotati is a general-purpose vector drawing interface that does not restrict binding to a back-end renderer."
 documentation = "https://docs.rs/cotati"
 edition.workspace = true
 license = "MIT"
@@ -10,3 +10,8 @@ version.workspace = true
 [dependencies]
 thiserror = { workspace = true }
 xml-rs = { workspace = true }
+regex = { workspace = true }
+log = { workspace = true }
+
+[dev-dependencies]
+pretty_env_logger = { workspace = true }
