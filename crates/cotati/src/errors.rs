@@ -15,6 +15,12 @@ pub enum Error {
     /// Error raised by [`read`](svg::read) or [`open`](svg::open) fns.
     #[error(transparent)]
     IoError(#[from] std::io::Error),
+
+    #[error(transparent)]
+    Rxml(#[from] roxmltree::Error),
+
+    #[error("Incomplete svg doc.")]
+    SvgDocument,
 }
 
 /// Result type used by this mod.

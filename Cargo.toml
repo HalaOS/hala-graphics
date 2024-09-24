@@ -35,6 +35,7 @@ svg = "0.17.0"
 euclid = "0.22.11"
 divan = "0.1.14"
 xml-rs = "0.8.22"
+roxmltree = "0.20.0"
 # proc-macro
 quote = "^1"
 proc-macro2 = "^1"
