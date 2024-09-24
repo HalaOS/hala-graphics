@@ -1,4 +1,4 @@
 mod errors;
 pub use errors::*;
 
-pub mod color;
+pub mod primitives;

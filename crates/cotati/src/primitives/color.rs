@@ -53,7 +53,7 @@ impl FromStr for Rgba {
         }
 
         let r = RegexBuilder::new(
-            r"(#(?<hex>[0-9A-Fa-f]{3,6}))|(rgb\(\s*(?<r>\d{1,3}),(?<g>\d{1,3}),(?<b>\d{1,3})\s*\))|(rgb\(\s*(?<rp>\d{1,3})%,(?<gp>\d{1,3})%,(?<bp>\d{1,3})%\s*\))",
+            r"(#(?<hex>[0-9A-Fa-f]{3,6}))|(rgb\(\s*(?<r>\d{1,3})\s*,\s*(?<g>\d{1,3})\s*,\s*(?<b>\d{1,3})\s*\))|(rgb\(\s*(?<rp>\d{1,3})%\s*,\s*(?<gp>\d{1,3})%\s*,\s*(?<bp>\d{1,3})%\s*\))",
         )
         .case_insensitive(true)
         .build()
@@ -569,14 +569,12 @@ impl From<Recognized> for Rgba {
 
 #[cfg(test)]
 mod tests {
-    use crate::color::Recognized;
+    use crate::primitives::Recognized;
 
     use super::Rgba;
 
     #[test]
     fn color_parse() {
-        pretty_env_logger::init_timed();
-
         assert_eq!("#fff".parse::<Rgba>().unwrap(), Rgba::rgb(255, 255, 255));
 
         assert_eq!("#ffffff".parse::<Rgba>().unwrap(), Rgba::rgb(255, 255, 255));
@@ -601,7 +599,7 @@ mod tests {
         );
 
         assert_eq!(
-            "rGb(10%,100%,29% )".parse::<Rgba>().unwrap(),
+            "rGb(10%,100% , 29% )".parse::<Rgba>().unwrap(),
             Rgba::rgbf(0.1, 1.0, 0.29)
         );
 
