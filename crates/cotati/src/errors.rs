@@ -21,6 +21,12 @@ pub enum Error {
 
     #[error("Incomplete svg doc.")]
     SvgDocument,
+
+    #[error("Invalid length string: {0}")]
+    LengthStr(String),
+
+    #[error("Invalid length unit: {0}")]
+    LengthUnit(String),
 }
 
 /// Result type used by this mod.

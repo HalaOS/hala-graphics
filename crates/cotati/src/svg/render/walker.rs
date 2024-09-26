@@ -1,10 +1,12 @@
 //! A svg document visitor pattern implementation.
 
+#![allow(unused)]
+
 use std::{fs, path::Path};
 
 use roxmltree::ParsingOptions;
 
-use crate::{Error, Result};
+use crate::Result;
 
 /// A svg document visitor must implement this trait.
 pub trait SvgWalker {}
@@ -34,8 +36,10 @@ pub fn read<C: AsRef<str>, W: SvgWalker>(doc: C, walker: &mut W) -> Result<()> {
         },
     )?;
 
-    for node in doc.descendants() {
-        log::trace!("{:?}", node.tag_name());
+    for node in doc.root().children() {
+        if node.is_element() {
+            log::trace!("{:?}", node.default_namespace());
+        }
     }
 
     Ok(())
