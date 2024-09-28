@@ -1,4 +1,4 @@
-use std::num::ParseIntError;
+use std::num::{ParseFloatError, ParseIntError};
 
 /// Error variant used by this mod.
 #[derive(Debug, thiserror::Error)]
@@ -8,6 +8,9 @@ pub enum Error {
 
     #[error("Unknown color: {0}")]
     UnrecognizedColor(String),
+
+    #[error(transparent)]
+    ParseFloatError(#[from] ParseFloatError),
 
     #[error(transparent)]
     ParseIntError(#[from] ParseIntError),
@@ -27,6 +30,9 @@ pub enum Error {
 
     #[error("Invalid length unit: {0}")]
     LengthUnit(String),
+
+    #[error("Invalid transform string: {0}")]
+    TransformStr(String),
 }
 
 /// Result type used by this mod.
