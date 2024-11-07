@@ -1,6 +1,13 @@
 use std::{fmt::Display, str::FromStr};
 
-use regex::RegexBuilder;
+use nom::{
+    branch::alt,
+    bytes::complete::{tag, tag_no_case, take_while},
+    character::complete::hex_digit1,
+    IResult,
+};
+
+use crate::Error;
 
 /// A color structure repesents as RGBA, the storage value is normalized.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -52,58 +59,118 @@ impl FromStr for Rgba {
             return Ok(value.into());
         }
 
-        let r = RegexBuilder::new(
-            r"(#(?<hex>[0-9A-Fa-f]{3,6}))|(rgb\(\s*(?<r>\d{1,3})\s*,\s*(?<g>\d{1,3})\s*,\s*(?<b>\d{1,3})\s*\))|(rgb\(\s*(?<rp>\d{1,3})%\s*,\s*(?<gp>\d{1,3})%\s*,\s*(?<bp>\d{1,3})%\s*\))",
-        )
-        .case_insensitive(true)
-        .build()
-        .unwrap();
-
-        let capture = r
-            .captures(s)
-            .ok_or(crate::Error::UnrecognizedColor(s.to_string()))?;
-
-        if let Some(rgba) = capture.name("hex") {
-            let hex = if rgba.len() == 3 {
-                let rgba = rgba.as_str();
-
-                u32::from_str_radix(
-                    format!(
-                        "{}{}{}{}{}{}",
-                        &rgba[0..1],
-                        &rgba[0..1],
-                        &rgba[1..2],
-                        &rgba[1..2],
-                        &rgba[2..],
-                        &rgba[2..],
-                    )
-                    .as_str(),
-                    16,
-                )?
-            } else {
-                u32::from_str_radix(rgba.as_str(), 16)?
-            };
-
-            Ok(Rgba::rgb(
-                ((hex >> 16) & 0xff) as u8,
-                ((hex >> 8) & 0xff) as u8,
-                (hex & 0xff) as u8,
-            ))
-        } else if capture.name("r").is_some() {
-            let r = u8::from_str(capture.name("r").unwrap().as_str())?;
-            let g = u8::from_str(capture.name("g").unwrap().as_str())?;
-            let b = u8::from_str(capture.name("b").unwrap().as_str())?;
-
-            Ok(Rgba::rgb(r, g, b))
-        } else if capture.name("rp").is_some() {
-            let r = u8::from_str(capture.name("rp").unwrap().as_str())? as f32 / 100f32;
-            let g = u8::from_str(capture.name("gp").unwrap().as_str())? as f32 / 100f32;
-            let b = u8::from_str(capture.name("bp").unwrap().as_str())? as f32 / 100f32;
-
-            Ok(Rgba::rgbf(r, g, b))
-        } else {
-            return Err(crate::Error::UnrecognizedColor(s.to_owned()));
+        const fn is_whitespace_char(c: char) -> bool {
+            matches!(c, '\x20' | '\x0a' | '\x09' | '\x0d')
         }
+        fn rgbhex(input: &str) -> IResult<&str, Rgba> {
+            let (input, _) = tag("#")(input)?;
+            let (input, hex) = hex_digit1(input)?;
+
+            match hex.len() {
+                3 => {
+                    let value = format!(
+                        "{}{}{}{}{}{}",
+                        &hex[0..1],
+                        &hex[0..1],
+                        &hex[1..2],
+                        &hex[1..2],
+                        &hex[2..],
+                        &hex[2..],
+                    );
+
+                    let hex = u32::from_str_radix(&value, 16).map_err(|_| {
+                        nom::Err::Failure(nom::error::Error::new(
+                            input,
+                            nom::error::ErrorKind::HexDigit,
+                        ))
+                    })?;
+
+                    Ok((
+                        input,
+                        Rgba::rgb(
+                            ((hex >> 16) & 0xff) as u8,
+                            ((hex >> 8) & 0xff) as u8,
+                            (hex & 0xff) as u8,
+                        ),
+                    ))
+                }
+                6 => {
+                    let hex = u32::from_str_radix(hex, 16).map_err(|_| {
+                        nom::Err::Failure(nom::error::Error::new(
+                            input,
+                            nom::error::ErrorKind::HexDigit,
+                        ))
+                    })?;
+
+                    Ok((
+                        input,
+                        Rgba::rgb(
+                            ((hex >> 16) & 0xff) as u8,
+                            ((hex >> 8) & 0xff) as u8,
+                            (hex & 0xff) as u8,
+                        ),
+                    ))
+                }
+                _ => Err(nom::Err::Failure(nom::error::Error::new(
+                    input,
+                    nom::error::ErrorKind::HexDigit,
+                ))),
+            }
+        }
+
+        fn rgb(input: &str) -> IResult<&str, Rgba> {
+            let (input, _) = tag_no_case("rgb(")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, r) = nom::character::complete::u8(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, _) = tag(",")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, g) = nom::character::complete::u8(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, _) = tag(",")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, b) = nom::character::complete::u8(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, _) = tag(")")(input)?;
+
+            Ok((input, Rgba::rgb(r, g, b)))
+        }
+
+        fn rgb_percentage(input: &str) -> IResult<&str, Rgba> {
+            let (input, _) = tag_no_case("rgb(")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, r) = nom::character::complete::u8(input)?;
+            let (input, _) = tag("%")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, _) = tag(",")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, g) = nom::character::complete::u8(input)?;
+            let (input, _) = tag("%")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, _) = tag(",")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, b) = nom::character::complete::u8(input)?;
+            let (input, _) = tag("%")(input)?;
+            let (input, _) = take_while(is_whitespace_char)(input)?;
+            let (input, _) = tag(")")(input)?;
+
+            if r > 100 || g > 100 || b > 100 {
+                return Err(nom::Err::Failure(nom::error::Error::new(
+                    input,
+                    nom::error::ErrorKind::AlphaNumeric,
+                )));
+            }
+
+            Ok((
+                input,
+                Rgba::rgbf(r as f32 / 100f32, g as f32 / 100f32, b as f32 / 100f32),
+            ))
+        }
+
+        let (_, rgb) = alt((rgbhex, rgb, rgb_percentage))(s)
+            .map_err(|_| Error::UnrecognizedColor(s.to_owned()))?;
+
+        Ok(rgb)
     }
 }
 
