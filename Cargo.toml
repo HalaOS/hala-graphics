@@ -9,7 +9,7 @@ version = "0.1.2"
 
 [workspace.dependencies]
 # errors
-thiserror = "^1"
+thiserror = "^2.0"
 log = "^0.4"
 pretty_env_logger = "^0.5"
 # serde frameworks
@@ -18,7 +18,7 @@ serde_json = "^1.0"
 # graphics
 lyon = "^1.0"
 winit = "^0.30"
-wgpu = "^22.1.0"
+wgpu = "^23"
 #futures
 futures = "^0.3"
 futures-test = "^0.3"
@@ -30,11 +30,10 @@ uuid = { version = "1.2.2", features = ["serde", "v4"] }
 async-trait = "0.1.82"
 spin = "0.9.8"
 png = "^0.17"
-ttf-parser = "0.24.1"
+ttf-parser = "0.25"
 euclid = "0.22.11"
 divan = "0.1.14"
 xml-rs = "0.8.22"
-roxmltree = "0.20.0"
 iref = "3.2.2"
 # proc-macro
 quote = "^1"

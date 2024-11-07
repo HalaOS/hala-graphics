@@ -19,12 +19,6 @@ pub enum Error {
     #[error(transparent)]
     IoError(#[from] std::io::Error),
 
-    #[error(transparent)]
-    Rxml(#[from] roxmltree::Error),
-
-    #[error("Incomplete svg doc.")]
-    SvgDocument,
-
     #[error("Invalid length string: {0}")]
     LengthStr(String),
 

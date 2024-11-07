@@ -1,5 +1,5 @@
 [package]
-description = "A cotati renderer implementation with wgpu"
+description = "A renderer of cotati implementation with wgpu"
 documentation = "https://docs.rs/kree"
 edition.workspace = true
 license = "MIT"

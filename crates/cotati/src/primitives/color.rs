@@ -64,22 +64,25 @@ impl FromStr for Rgba {
             .ok_or(crate::Error::UnrecognizedColor(s.to_string()))?;
 
         if let Some(rgba) = capture.name("hex") {
-            let rgba = if rgba.len() == 3 {
+            let hex = if rgba.len() == 3 {
                 let rgba = rgba.as_str();
 
-                format!(
-                    "{}{}{}{}{}{}",
-                    &rgba[0..1],
-                    &rgba[0..1],
-                    &rgba[1..2],
-                    &rgba[1..2],
-                    &rgba[2..],
-                    &rgba[2..],
-                )
+                u32::from_str_radix(
+                    format!(
+                        "{}{}{}{}{}{}",
+                        &rgba[0..1],
+                        &rgba[0..1],
+                        &rgba[1..2],
+                        &rgba[1..2],
+                        &rgba[2..],
+                        &rgba[2..],
+                    )
+                    .as_str(),
+                    16,
+                )?
             } else {
-                rgba.as_str().to_string()
+                u32::from_str_radix(rgba.as_str(), 16)?
             };
-            let hex = u32::from_str_radix(rgba.as_str(), 16)?;
 
             Ok(Rgba::rgb(
                 ((hex >> 16) & 0xff) as u8,
