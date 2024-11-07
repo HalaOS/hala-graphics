@@ -60,3 +60,14 @@ mod transform {
         black_box("matrix(1,2,3,4,5,6)".parse::<Transform>().unwrap());
     }
 }
+
+mod color {
+    use std::hint::black_box;
+
+    use cotati::primitives::Rgba;
+
+    #[divan::bench]
+    fn hex() {
+        black_box("#fff".parse::<Rgba>().unwrap());
+    }
+}
