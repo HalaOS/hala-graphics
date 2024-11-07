@@ -9,8 +9,6 @@ version.workspace = true
 
 [dependencies]
 thiserror = { workspace = true }
-xml-rs = { workspace = true }
-regex = { workspace = true }
 log = { workspace = true }
 futures = { workspace = true }
 iref = { workspace = true }
