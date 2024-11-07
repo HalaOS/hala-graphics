@@ -1,4 +1,10 @@
 mod errors;
 pub use errors::*;
 
-pub mod primitives;
+mod primitives;
+pub use primitives::*;
+
+mod draw;
+pub use draw::*;
+mod renderer;
+pub use renderer::*;

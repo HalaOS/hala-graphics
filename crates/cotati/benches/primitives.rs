@@ -6,7 +6,7 @@ fn main() {
 mod length {
     use std::hint::black_box;
 
-    use cotati::primitives::{Length, LengthUnit};
+    use cotati::{Length, Unit};
 
     #[divan::bench]
     fn display() {
@@ -20,12 +20,12 @@ mod length {
 
     #[divan::bench]
     fn display_unit() {
-        black_box(LengthUnit::Cm.to_string());
+        black_box(Unit::Cm.to_string());
     }
 
     #[divan::bench]
     fn parse_unit() {
-        black_box("cm".parse::<LengthUnit>().unwrap());
+        black_box("cm".parse::<Unit>().unwrap());
     }
 }
 
@@ -33,7 +33,7 @@ mod length {
 mod transform {
     use std::hint::black_box;
 
-    use cotati::primitives::Transform;
+    use cotati::Transform;
 
     #[divan::bench]
     fn translate() {
@@ -64,7 +64,7 @@ mod transform {
 mod color {
     use std::hint::black_box;
 
-    use cotati::primitives::Rgba;
+    use cotati::Rgba;
 
     #[divan::bench]
     fn hex() {

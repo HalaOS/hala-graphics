@@ -15,7 +15,6 @@ pub enum Error {
     #[error(transparent)]
     ParseIntError(#[from] ParseIntError),
 
-    /// Error raised by [`read`](svg::read) or [`open`](svg::open) fns.
     #[error(transparent)]
     IoError(#[from] std::io::Error),
 
@@ -27,6 +26,9 @@ pub enum Error {
 
     #[error("Invalid transform string: {0}")]
     TransformStr(String),
+
+    #[error("Invalid angle string: {0}")]
+    Angle(String),
 }
 
 /// Result type used by this mod.
