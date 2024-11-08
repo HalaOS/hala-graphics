@@ -20,7 +20,7 @@ where
     }
 }
 
-/// Apply fill paint style to `draw` element.
+/// Apply stroke paint style to `draw` element.
 pub fn stroke<R, D, C, L, E>(color: C, width: L, draw: D) -> impl Fn(&mut R) -> Result<(), E>
 where
     Length: From<L>,

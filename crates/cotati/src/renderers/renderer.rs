@@ -2,7 +2,7 @@ use crate::{Angle, Length, Point, PreserveAspectRatio, Rgba, Transform};
 
 /// A rendering target must implement this trait.
 pub trait Renderer {
-    /// Error type returns by [`commit`](Renderer::commit) function.
+    /// Error type returns by [`submit`](Renderer::submit) function.
     type Error;
 
     /// Clear all graphics instructions in the stack.
