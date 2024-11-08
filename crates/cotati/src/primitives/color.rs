@@ -174,6 +174,20 @@ impl FromStr for Rgba {
     }
 }
 
+impl TryFrom<&str> for Rgba {
+    type Error = Error;
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        value.parse()
+    }
+}
+
+impl TryFrom<String> for Rgba {
+    type Error = Error;
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        value.parse()
+    }
+}
+
 /// Recognized color keyword names, compliant with svg 1.1.
 #[allow(non_camel_case_types)]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]

@@ -15,6 +15,23 @@ pub enum Angle {
     rad(f32),
 }
 
+impl Angle {
+    /// Create instance of `angle=0.0deg`.
+    pub fn zero() -> Self {
+        Self::deg(0.0)
+    }
+
+    /// Create instance of `angle=2πdeg`.
+    pub fn two_pi() -> Self {
+        Self::deg(360.0)
+    }
+
+    /// Create instance of `angle=πdeg`.
+    pub fn pi() -> Self {
+        Self::deg(180.0)
+    }
+}
+
 impl FromStr for Angle {
     type Err = crate::Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {

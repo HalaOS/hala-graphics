@@ -9,7 +9,7 @@ use super::Unit;
 /// A length is a distance measurement, given as a number along with a unit which may be optional.
 /// The unit identifier, if present, must be in lower case; if not present,
 /// the length value represents a distance in the current user coordinate system.
-#[derive(Debug, PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct Length(pub f32, pub Unit);
 
 impl Display for Length {

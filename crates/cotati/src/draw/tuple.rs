@@ -1,49 +1,5 @@
+use super::Draw;
 use crate::Renderer;
-
-/// A draw element must implement this trait.
-pub trait Draw<R>
-where
-    R: Renderer,
-{
-    /// Error returns by draw function.
-    type Error;
-
-    /// Render draw element to target.
-    fn render(&mut self, render: &mut R) -> Result<(), Self::Error>;
-}
-
-/// All `FnMut(&mut R) -> Result<(), E>` function are valid [`Draw`] elements.
-impl<F, R, E> Draw<R> for F
-where
-    R: Renderer,
-    F: FnMut(&mut R) -> Result<(), E>,
-{
-    type Error = E;
-
-    fn render(&mut self, render: &mut R) -> Result<(), Self::Error> {
-        self(render)
-    }
-}
-
-struct PairDraw<D1, D2> {
-    left: D1,
-    right: D2,
-}
-
-impl<D1, D2, R, E1, E2> Draw<R> for PairDraw<D1, D2>
-where
-    R: Renderer,
-    D1: Draw<R, Error = E1>,
-    D2: Draw<R, Error = E2>,
-    E2: From<E1>,
-{
-    type Error = E2;
-
-    fn render(&mut self, render: &mut R) -> Result<(), Self::Error> {
-        self.left.render(render)?;
-        self.right.render(render)
-    }
-}
 
 macro_rules! tuple_draw {
     ($header: ident, $($tail: ident),+) => {

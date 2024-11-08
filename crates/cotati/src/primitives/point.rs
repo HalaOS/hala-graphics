@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use super::Unit;
 
-#[derive(Debug, PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct Point {
     pub x: f32,
     pub y: f32,
