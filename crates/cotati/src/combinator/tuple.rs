@@ -38,7 +38,7 @@ mod tests {
 
     use super::Draw;
 
-    use crate::NoopRenderer;
+    use crate::MockRenderer;
 
     fn mock_1<R>(_: &mut R) -> Result<(), ()>
     where
@@ -56,6 +56,8 @@ mod tests {
 
     #[test]
     fn test_tuple() {
-        (mock_1, mock_2).render(&mut NoopRenderer).unwrap();
+        (mock_1, mock_2)
+            .render(&mut MockRenderer::default())
+            .unwrap();
     }
 }

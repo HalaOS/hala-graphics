@@ -11,7 +11,7 @@ use crate::Error;
 
 /// A color structure repesents as RGBA, the storage value is normalized.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
-pub struct Rgba(f32, f32, f32, f32);
+pub struct Rgba(pub f32, pub f32, pub f32, pub f32);
 
 impl From<Rgba> for [f32; 4] {
     fn from(value: Rgba) -> Self {

@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 /// A memory represents of svg element's `transform` attribute.
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub enum Transform {
     Translate {
         tx: f32,

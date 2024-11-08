@@ -11,6 +11,9 @@ pub trait Renderer {
     /// Pop n instructions from graphics stack.
     fn pop(&mut self, n: usize);
 
+    /// Push `entity` instruction into stack.
+    fn push_entity(&mut self, id: &str);
+
     /// Push a `canvas` instruction.
     fn push_canvas(&mut self, width: Length, height: Length);
     /// Push a `viewbox` instruction.
@@ -27,6 +30,12 @@ pub trait Renderer {
 
     /// Push a `stroke` instruction into graphics stack.
     fn push_stroke(&mut self, color: Rgba, width: Length);
+
+    /// Push a debug `label` instruction into graphics stack.
+    fn push_label(&mut self, label: &str);
+
+    /// Attach a entity into the rendering tree.
+    fn entity_ref(&mut self, id: &str);
 
     /// Draw a line on the target.
     fn line(&mut self, from: Point, to: Point);
