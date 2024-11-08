@@ -13,7 +13,7 @@ macro_rules! tuple_draw {
             type Error = E;
 
             #[allow(non_snake_case)]
-            fn render(&mut self, render: &mut R) -> Result<(), Self::Error> {
+            fn render(&self, render: &mut R) -> Result<(), Self::Error> {
                     let ($header, $($tail),+) = self;
 
                     $header.render(render)?;
@@ -39,7 +39,7 @@ mod tests {
 
     use super::Draw;
 
-    use crate::mock::NoopRenders;
+    use crate::mock::NoopRenderer;
 
     fn mock_1<R>(_: &mut R) -> Result<(), ()>
     where
@@ -57,6 +57,6 @@ mod tests {
 
     #[test]
     fn test_tuple() {
-        (mock_1, mock_2).render(&mut NoopRenders).unwrap();
+        (mock_1, mock_2).render(&mut NoopRenderer).unwrap();
     }
 }

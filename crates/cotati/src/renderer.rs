@@ -39,9 +39,9 @@ pub trait Renderer {
 pub(crate) mod mock {
     use super::Renderer;
 
-    pub(crate) struct NoopRenders;
+    pub(crate) struct NoopRenderer;
 
-    impl Renderer for NoopRenders {
+    impl Renderer for NoopRenderer {
         fn pop(&mut self, n: usize) {}
 
         fn push_transform(&mut self, transform: crate::Transform) {}

@@ -6,9 +6,7 @@ use crate::Error;
 
 use super::Unit;
 
-/// A length is a distance measurement, given as a number along with a unit which may be optional.
-/// The unit identifier, if present, must be in lower case; if not present,
-/// the length value represents a distance in the current user coordinate system.
+/// A length is a distance measurement, given as a number along with a unit.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct Length(pub f32, pub Unit);
 
@@ -38,6 +36,12 @@ impl FromStr for Length {
         .map_err(|_: Err<nom::error::Error<&str>>| Error::Angle(s.to_owned()))?;
 
         Ok(Self(value, unit))
+    }
+}
+
+impl From<f32> for Length {
+    fn from(value: f32) -> Self {
+        Self::px(value)
     }
 }
 

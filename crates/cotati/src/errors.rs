@@ -1,6 +1,6 @@
 use std::num::{ParseFloatError, ParseIntError};
 
-/// Error variant used by this mod.
+/// Error variant used by `cotati`.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error("Invalid viewport string: {0}")]
@@ -31,5 +31,5 @@ pub enum Error {
     Angle(String),
 }
 
-/// Result type used by this mod.
+/// Result type used by this `cotati`.
 pub type Result<T> = std::result::Result<T, Error>;

@@ -2,11 +2,19 @@ use std::fmt::Display;
 
 use super::Unit;
 
+/// A 2d coordinate point.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct Point {
     pub x: f32,
     pub y: f32,
     pub unit: Unit,
+}
+
+/// Create a point from (f32,f32) with default unit `px`.
+impl From<(f32, f32)> for Point {
+    fn from(value: (f32, f32)) -> Self {
+        Self::px(value.0, value.1)
+    }
 }
 
 impl Display for Point {

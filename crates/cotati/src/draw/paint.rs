@@ -3,7 +3,7 @@ use crate::{Renderer, Rgba};
 use super::Draw;
 
 /// Apply fill paint style to `draw` element.
-pub fn fill<R, D, E>(color: Rgba, mut draw: D) -> impl FnMut(&mut R) -> Result<(), E>
+pub fn fill<R, D, E>(color: Rgba, draw: D) -> impl Fn(&mut R) -> Result<(), E>
 where
     R: Renderer,
     D: Draw<R, Error = E>,
@@ -22,7 +22,7 @@ where
 #[cfg(test)]
 mod tests {
 
-    use crate::{circle, mock::NoopRenders, Length, Point};
+    use crate::{circle, mock::NoopRenderer};
 
     use super::*;
     #[test]
@@ -30,10 +30,10 @@ mod tests {
         fill(
             "#f00".parse().unwrap(),
             (
-                circle(Point::px(20.0, 20.0), Length::px(10.0)),
-                circle(Point::px(20.0, 20.0), Length::px(20.0)),
+                circle((20.0, 20.0).into(), 10.0.into()),
+                circle((20.0, 20.0).into(), 10.0.into()),
             ),
-        )(&mut NoopRenders)
+        )(&mut NoopRenderer)
         .unwrap();
     }
 }
