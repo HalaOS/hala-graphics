@@ -14,7 +14,7 @@ pub use viewbox::*;
 #[cfg(test)]
 mod tests {
 
-    use crate::{Length, NoopRenderer, PreserveAspectRatio};
+    use crate::{Length, NoopRenderer, Renderer};
 
     use super::*;
     #[test]
@@ -26,7 +26,7 @@ mod tests {
                 10.0,
                 10.0,
                 aspect(
-                    PreserveAspectRatio::default(),
+                    Default::default(),
                     fill(
                         (255, 0, 255),
                         stroke(
@@ -35,6 +35,10 @@ mod tests {
                             (
                                 circle((20.0, 20.0), 10.0),
                                 circle((20.0, 20.0), Length::pc(10.0)),
+                                |renderer: &mut NoopRenderer| {
+                                    renderer.line((0.0, 0.0).into(), (5.0, 5.0).into());
+                                    Ok(())
+                                },
                             ),
                         ),
                     ),
