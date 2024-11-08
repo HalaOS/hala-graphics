@@ -22,7 +22,7 @@ where
 #[cfg(test)]
 mod tests {
 
-    use crate::{circle, mock::NoopRenderer};
+    use crate::{circle, NoopRenderer};
 
     use super::*;
     #[test]

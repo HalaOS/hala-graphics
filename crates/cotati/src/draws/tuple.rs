@@ -39,7 +39,7 @@ mod tests {
 
     use super::Draw;
 
-    use crate::mock::NoopRenderer;
+    use crate::NoopRenderer;
 
     fn mock_1<R>(_: &mut R) -> Result<(), ()>
     where
