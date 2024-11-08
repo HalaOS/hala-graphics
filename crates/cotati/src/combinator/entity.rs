@@ -1,10 +1,10 @@
-use crate::{View, Renderer};
+use crate::{Drawing, Renderer};
 
 /// Creates an entity that will not be rendered until it is referenced in the render tree.
 pub fn entity<'a, R, D, E>(name: &'a str, child: D) -> impl Fn(&mut R) -> Result<(), E> + 'a
 where
     R: Renderer,
-    D: View<R, Error = E> + 'a,
+    D: Drawing<R, Error = E> + 'a,
 {
     move |renderer| {
         renderer.push_entity(name);
@@ -33,7 +33,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::{combinator::circle, View, MockRenderer};
+    use crate::{combinator::circle, Drawing, MockRenderer};
 
     use super::{entity, entity_ref};
 

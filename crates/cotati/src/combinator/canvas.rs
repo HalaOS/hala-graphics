@@ -1,11 +1,11 @@
-use crate::{View, Length, Renderer};
+use crate::{Drawing, Length, Renderer};
 
 /// Create a new `canvas`.
 pub fn canvas<R, D, W, H, E>(width: W, height: H, draw: D) -> impl Fn(&mut R) -> Result<(), E>
 where
     Length: From<W> + From<H>,
     R: Renderer,
-    D: View<R, Error = E>,
+    D: Drawing<R, Error = E>,
 {
     let width = width.into();
     let height = height.into();

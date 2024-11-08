@@ -1,7 +1,7 @@
 use crate::Renderer;
 
 /// A vector drawing element/commander must implement this trait.
-pub trait View<R>
+pub trait Drawing<R>
 where
     R: Renderer,
 {
@@ -13,7 +13,7 @@ where
 }
 
 /// All `FnMut(& R) -> Result<(), E>` function are valid [`Draw`] elements.
-impl<F, R, E> View<R> for F
+impl<F, R, E> Drawing<R> for F
 where
     R: Renderer,
     F: Fn(&mut R) -> Result<(), E>,

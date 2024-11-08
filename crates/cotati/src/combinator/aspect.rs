@@ -1,10 +1,10 @@
-use crate::{PreserveAspectRatio, Renderer, View};
+use crate::{PreserveAspectRatio, Renderer, Drawing};
 
 /// Apply `PreserveAspectRatio` to viewbox.
 pub fn aspect<R, D, E>(ratio: PreserveAspectRatio, child: D) -> impl Fn(&mut R) -> Result<(), E>
 where
     R: Renderer,
-    D: View<R, Error = E>,
+    D: Drawing<R, Error = E>,
 {
     move |renderer| {
         renderer.push_preserve_aspect_ratio(ratio);

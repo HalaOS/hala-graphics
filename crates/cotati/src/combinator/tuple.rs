@@ -1,13 +1,13 @@
-use crate::{Renderer, View};
+use crate::{Drawing, Renderer};
 
-macro_rules! tuple_views {
+macro_rules! tuple_drawing {
     ($header: ident, $($tail: ident),+) => {
 
-        impl<$header, $($tail),+ , R, E> View<R> for ($header, $($tail),+)
+        impl<$header, $($tail),+ , R, E> Drawing<R> for ($header, $($tail),+)
         where
              R: Renderer,
-            $header: View<R, Error=E>,
-            $($tail: View<R, Error=E>),+,
+            $header: Drawing<R, Error=E>,
+            $($tail: Drawing<R, Error=E>),+,
         {
             type Error = E;
 
@@ -23,12 +23,12 @@ macro_rules! tuple_views {
             }
         }
 
-        tuple_views!($($tail),+);
+        tuple_drawing!($($tail),+);
     };
     ($header: ident) => {}
 }
 
-tuple_views!(
+tuple_drawing!(
     A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20
 );
 
@@ -36,7 +36,7 @@ tuple_views!(
 mod tests {
     use crate::Renderer;
 
-    use super::View;
+    use super::Drawing;
 
     use crate::MockRenderer;
 
