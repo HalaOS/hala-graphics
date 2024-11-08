@@ -1,11 +1,11 @@
-use crate::{Draw, Length, Renderer, Rgba};
+use crate::{View, Length, Renderer, Rgba};
 
 /// Apply fill paint style to `draw` element.
 pub fn fill<R, D, C, E>(color: C, draw: D) -> impl Fn(&mut R) -> Result<(), E>
 where
     Rgba: From<C>,
     R: Renderer,
-    D: Draw<R, Error = E>,
+    D: View<R, Error = E>,
 {
     let color = color.into();
 
@@ -26,7 +26,7 @@ where
     Length: From<L>,
     Rgba: From<C>,
     R: Renderer,
-    D: Draw<R, Error = E>,
+    D: View<R, Error = E>,
 {
     let color = color.into();
     let width = width.into();

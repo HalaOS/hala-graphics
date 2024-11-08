@@ -1,9 +1,9 @@
-use crate::{Draw, Renderer};
+use crate::{View, Renderer};
 
 /// Attach a debug `label` to a draw element.
 pub fn label<'a, R, D, E>(name: &'a str, child: D) -> impl Fn(&mut R) -> Result<(), E> + 'a
 where
-    D: Draw<R, Error = E> + 'a,
+    D: View<R, Error = E> + 'a,
     R: Renderer,
 {
     // let name = name.to_owned();

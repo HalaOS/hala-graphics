@@ -6,7 +6,7 @@ mod primitives;
 pub use primitives::*;
 mod renderers;
 pub use renderers::*;
-mod draw;
-pub use draw::*;
+mod view;
+pub use view::*;
 
 pub mod combinator;
