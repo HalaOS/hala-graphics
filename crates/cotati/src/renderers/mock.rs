@@ -4,13 +4,17 @@ pub(crate) struct NoopRenderer;
 
 #[allow(unused)]
 impl Renderer for NoopRenderer {
+    type Error = ();
+
+    fn clear(&mut self) {}
+
     fn pop(&mut self, n: usize) {}
 
     fn push_transform(&mut self, transform: crate::Transform) {}
 
     fn push_fill(&mut self, color: crate::Rgba) {}
 
-    fn push_stroke(&mut self, color: crate::Rgba, width: crate::Rgba) {}
+    fn push_stroke(&mut self, color: crate::Rgba, width: crate::Length) {}
 
     fn line(&mut self, from: crate::Point, to: crate::Point) {}
 
@@ -33,5 +37,15 @@ impl Renderer for NoopRenderer {
         sweep_angle: crate::Angle,
         x_rotation: crate::Angle,
     ) {
+    }
+
+    fn push_canvas(&mut self, width: crate::Length, height: crate::Length) {}
+
+    fn push_viewbox(&mut self, width: crate::Length, height: crate::Length) {}
+
+    fn push_preserve_aspect_ratio(&mut self, ratio: crate::PreserveAspectRatio) {}
+
+    fn submit(&mut self) -> Result<(), Self::Error> {
+        Ok(())
     }
 }

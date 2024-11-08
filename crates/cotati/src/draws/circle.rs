@@ -1,7 +1,7 @@
-use crate::{Angle, Error, Length, Point, Renderer};
+use crate::{Angle, Length, Point, Renderer};
 
 /// Create a circle
-pub fn circle<R>(center: Point, radius: Length) -> impl Fn(&mut R) -> Result<(), Error>
+pub fn circle<R>(center: Point, radius: Length) -> impl Fn(&mut R) -> Result<(), ()>
 where
     R: Renderer,
 {

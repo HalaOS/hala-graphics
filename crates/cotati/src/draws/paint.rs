@@ -1,4 +1,4 @@
-use crate::{Renderer, Rgba};
+use crate::{Length, Renderer, Rgba};
 
 use super::Draw;
 
@@ -11,11 +11,28 @@ where
     move |renderer| {
         renderer.push_fill(color);
 
-        let r = draw.render(renderer);
+        draw.render(renderer)?;
 
         renderer.pop(1);
 
-        r
+        Ok(())
+    }
+}
+
+/// Apply fill paint style to `draw` element.
+pub fn stroke<R, D, E>(color: Rgba, width: Length, draw: D) -> impl Fn(&mut R) -> Result<(), E>
+where
+    R: Renderer,
+    D: Draw<R, Error = E>,
+{
+    move |renderer| {
+        renderer.push_stroke(color, width);
+
+        draw.render(renderer)?;
+
+        renderer.pop(1);
+
+        Ok(())
     }
 }
 
