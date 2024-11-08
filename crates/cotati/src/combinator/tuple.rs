@@ -1,5 +1,4 @@
-use super::Draw;
-use crate::Renderer;
+use crate::{Draw, Renderer};
 
 macro_rules! tuple_draw {
     ($header: ident, $($tail: ident),+) => {

@@ -52,3 +52,9 @@ pub enum PreserveAspectRatio {
     /// Align the <min-y>+<height> of the element's ‘viewBox’ with the maximum Y value of the viewport.
     xMaxYMax,
 }
+
+impl Default for PreserveAspectRatio {
+    fn default() -> Self {
+        Self::xMidYMid
+    }
+}

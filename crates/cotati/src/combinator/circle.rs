@@ -1,10 +1,15 @@
 use crate::{Angle, Length, Point, Renderer};
 
 /// Create a circle
-pub fn circle<R>(center: Point, radius: Length) -> impl Fn(&mut R) -> Result<(), ()>
+pub fn circle<R, P, L>(center: P, radius: L) -> impl Fn(&mut R) -> Result<(), ()>
 where
+    Point: From<P>,
+    Length: From<L>,
     R: Renderer,
 {
+    let center = center.into();
+    let radius = radius.into();
+
     move |render| {
         render.arc(
             center,

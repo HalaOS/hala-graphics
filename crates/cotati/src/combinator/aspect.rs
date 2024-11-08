@@ -1,6 +1,4 @@
-use crate::{PreserveAspectRatio, Renderer};
-
-use super::Draw;
+use crate::{Draw, PreserveAspectRatio, Renderer};
 
 /// Apply `PreserveAspectRatio` to viewbox.
 pub fn aspect<R, D, E>(ratio: PreserveAspectRatio, child: D) -> impl Fn(&mut R) -> Result<(), E>

@@ -1,13 +1,15 @@
-use crate::{Length, Renderer};
-
-use super::Draw;
+use crate::{Draw, Length, Renderer};
 
 /// Apply `viewbox` to canvas.
-pub fn viewbox<R, D, E>(width: Length, height: Length, child: D) -> impl Fn(&mut R) -> Result<(), E>
+pub fn viewbox<R, D, W, H, E>(width: W, height: H, child: D) -> impl Fn(&mut R) -> Result<(), E>
 where
+    Length: From<W> + From<H>,
     R: Renderer,
     D: Draw<R, Error = E>,
 {
+    let width = width.into();
+    let height = height.into();
+
     move |renderer| {
         renderer.push_viewbox(width, height);
 

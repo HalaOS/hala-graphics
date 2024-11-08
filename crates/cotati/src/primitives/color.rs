@@ -174,17 +174,41 @@ impl FromStr for Rgba {
     }
 }
 
-impl TryFrom<&str> for Rgba {
-    type Error = Error;
-    fn try_from(value: &str) -> Result<Self, Self::Error> {
-        value.parse()
+impl From<u32> for Rgba {
+    fn from(hex: u32) -> Self {
+        Rgba::rgb(
+            ((hex >> 16) & 0xff) as u8,
+            ((hex >> 8) & 0xff) as u8,
+            (hex & 0xff) as u8,
+        )
     }
 }
 
-impl TryFrom<String> for Rgba {
-    type Error = Error;
-    fn try_from(value: String) -> Result<Self, Self::Error> {
-        value.parse()
+impl From<(u32, u8)> for Rgba {
+    fn from(value: (u32, u8)) -> Self {
+        let (hex, opacity) = value;
+
+        Rgba::new(
+            ((hex >> 16) & 0xff) as u8,
+            ((hex >> 8) & 0xff) as u8,
+            (hex & 0xff) as u8,
+            opacity,
+        )
+    }
+}
+impl From<(u8, u8, u8)> for Rgba {
+    fn from(value: (u8, u8, u8)) -> Self {
+        let (r, g, b) = value;
+
+        Rgba::rgb(r, g, b)
+    }
+}
+
+impl From<(u8, u8, u8, u8)> for Rgba {
+    fn from(value: (u8, u8, u8, u8)) -> Self {
+        let (r, g, b, a) = value;
+
+        Rgba::new(r, g, b, a)
     }
 }
 
