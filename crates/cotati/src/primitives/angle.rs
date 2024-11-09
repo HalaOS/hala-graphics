@@ -8,7 +8,7 @@ use crate::Error;
 /// whether they are used in CSS property syntax or SVG
 /// presentation attribute syntax:
 #[allow(non_camel_case_types)]
-#[derive(Debug, PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub enum Angle {
     deg(f32),
     grad(f32),

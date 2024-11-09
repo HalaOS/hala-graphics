@@ -41,7 +41,7 @@ pub trait Renderer {
     /// Attach a entity into the rendering tree.
     fn entity_ref(&mut self, id: &str);
 
-    /// Move current point to `point`.
+    /// Move current point to `to` point.
     fn move_to(&mut self, to: Point);
 
     /// Draw a line on the target.

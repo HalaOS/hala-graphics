@@ -1,7 +1,7 @@
 mod tuple;
 
-mod circle;
-pub use circle::*;
+mod graphics;
+pub use graphics::*;
 mod paint;
 pub use paint::*;
 mod canvas;
