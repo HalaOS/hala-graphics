@@ -5,14 +5,14 @@ pub trait Drawing<R>
 where
     R: Renderer,
 {
-    /// Error returns by [`render`](View) function.
+    /// Error returns by [`render`](Drawing::render) function.
     type Error;
 
     /// Render element to target.
     fn render(&self, renderer: &mut R) -> Result<(), Self::Error>;
 }
 
-/// All `FnMut(& R) -> Result<(), E>` function are valid [`Draw`] elements.
+/// All `FnMut(& R) -> Result<(), E>` function are valid [`Drawing`] elements.
 impl<F, R, E> Drawing<R> for F
 where
     R: Renderer,

@@ -12,7 +12,7 @@ where
 
     move |render| {
         render.arc(
-            center,
+            Some(center),
             (radius, radius),
             Angle::zero(),
             Angle::two_pi(),

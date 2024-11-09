@@ -18,3 +18,6 @@ pub use angle::*;
 
 mod aspect;
 pub use aspect::*;
+
+mod canvas;
+pub use canvas::*;

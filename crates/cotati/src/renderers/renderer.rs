@@ -1,11 +1,17 @@
-use crate::{Angle, Length, Point, PreserveAspectRatio, Rgba, Transform};
+use crate::{Angle, Canvas, Length, Point, Rgba, Transform};
 
 /// A rendering target must implement this trait.
+///
+/// # immediately / scoped instructions
+///
+/// All scoped instructions are created by `push_*` functions and removed by [`pop`](Renderer::pop) function.
+///
+/// immediately instructions are created by other functions.
 pub trait Renderer {
     /// Error type returns by [`submit`](Renderer::submit) function.
     type Error;
 
-    /// Clear all graphics instructions in the stack.
+    /// Clear up the rendering target.
     fn clear(&mut self);
 
     /// Pop n instructions from graphics stack.
@@ -15,12 +21,10 @@ pub trait Renderer {
     fn push_entity(&mut self, id: &str);
 
     /// Push a `canvas` instruction.
-    fn push_canvas(&mut self, width: Length, height: Length);
-    /// Push a `viewbox` instruction.
-    fn push_viewbox(&mut self, width: Length, height: Length);
+    fn push_canvas(&mut self, canvas: Canvas);
 
-    /// Push a `PreserveAspectRatio` instruction.
-    fn push_preserve_aspect_ratio(&mut self, ratio: PreserveAspectRatio);
+    /// Push a `path` instruction into graphics stack.
+    fn push_path(&mut self);
 
     /// Push a `transform` instruction into graphics stack.
     fn push_transform(&mut self, transform: Transform);
@@ -37,19 +41,22 @@ pub trait Renderer {
     /// Attach a entity into the rendering tree.
     fn entity_ref(&mut self, id: &str);
 
+    /// Move current point to `point`.
+    fn move_to(&mut self, to: Point);
+
     /// Draw a line on the target.
-    fn line(&mut self, from: Point, to: Point);
+    fn line(&mut self, from: Option<Point>, to: Point);
 
     /// Draw a quadratic bezier curve on the target.
-    fn quadratic_bezier(&mut self, from: Point, ctrl: Point, to: Point);
+    fn quadratic_bezier(&mut self, from: Option<Point>, ctrl: Point, to: Point);
 
     /// Draw a cubic bezier curve on the target.
-    fn cubic_bezier(&mut self, from: Point, ctrl1: Point, ctrl2: Point, to: Point);
+    fn cubic_bezier(&mut self, from: Option<Point>, ctrl1: Point, ctrl2: Point, to: Point);
 
     /// Draw an elliptic arc curve segment.
     fn arc(
         &mut self,
-        center: Point,
+        center: Option<Point>,
         raddii: (Length, Length),
         start_angle: Angle,
         sweep_angle: Angle,
