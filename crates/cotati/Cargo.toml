@@ -19,6 +19,8 @@ pretty_env_logger = { workspace = true }
 divan = { workspace = true }
 
 [features]
+default = ["svg"]
+svg = []
 
 [[bench]]
 name = "primitives"
