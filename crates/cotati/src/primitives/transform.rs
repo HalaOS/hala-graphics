@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use std::{fmt::Display, str::FromStr};
 
 /// A memory represents of svg element's `transform` attribute.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -27,6 +27,21 @@ pub enum Transform {
     },
     SkewX(f32),
     SkewY(f32),
+}
+
+impl Display for Transform {
+    fn fmt(&self, _f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Transform::Translate { tx, ty } => write!(_f, "translate({}, {})", tx, ty),
+            Transform::Matrix { a, b, c, d, e, f } => {
+                write!(_f, "matrix({},{},{},{},{},{})", a, b, c, d, e, f)
+            }
+            Transform::Scale { sx, sy } => write!(_f, "scale({}, {})", sx, sy),
+            Transform::Rotate { angle, cx, cy } => write!(_f, "rotate({}, {}, {})", angle, cx, cy),
+            Transform::SkewX(angle) => write!(_f, "skewX({})", angle),
+            Transform::SkewY(angle) => write!(_f, "skewY({})", angle),
+        }
+    }
 }
 
 /// transform string parser.

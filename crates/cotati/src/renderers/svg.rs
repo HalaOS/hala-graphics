@@ -7,13 +7,13 @@ use crate::{Error, Result};
 use super::Renderer;
 
 #[allow(unused)]
+#[derive(Debug, PartialEq)]
 enum ScopeInstructon {
-    Canvas,
+    Canvas(RefNode),
     Path,
-    Transform,
-    Fill,
-    Stroke,
-    Label,
+    Transform(RefNode),
+    Fill(RefNode),
+    Stroke(RefNode),
     Entity(String, RefNode),
 }
 
@@ -37,11 +37,18 @@ impl RawSvgRenderer {
     }
 
     fn get_parent(&mut self) -> &mut RefNode {
-        if let Some(ScopeInstructon::Entity(_, node)) = self.scoped_instructions.last_mut() {
-            return node;
+        match self.scoped_instructions.last_mut() {
+            Some(ScopeInstructon::Entity(_, node)) => node,
+            Some(ScopeInstructon::Canvas(node)) => node,
+            Some(ScopeInstructon::Transform(node)) => node,
+            Some(ScopeInstructon::Fill(node)) => node,
+            Some(ScopeInstructon::Stroke(node)) => node,
+            _ => &mut self.document,
         }
+    }
 
-        return &mut self.document;
+    fn is_in_path(&self) -> bool {
+        self.scoped_instructions.last() == Some(&ScopeInstructon::Path)
     }
 
     fn pop(&mut self, n: usize) -> Result<()> {
@@ -92,33 +99,66 @@ impl RawSvgRenderer {
             }
         }
 
-        parent.append_child(el);
+        self.scoped_instructions.push(ScopeInstructon::Canvas(el));
 
         Ok(())
     }
 
     fn push_path(&mut self) -> Result<()> {
-        todo!()
+        self.scoped_instructions.push(ScopeInstructon::Path);
+        Ok(())
     }
 
     fn push_transform(&mut self, transform: crate::Transform) -> Result<()> {
-        todo!()
+        let parent = self.get_parent();
+
+        let mut el = parent.create_element("g")?;
+
+        el.set_attribute("transform", transform.to_string().as_str())?;
+
+        self.scoped_instructions
+            .push(ScopeInstructon::Transform(el));
+
+        Ok(())
     }
 
     fn push_fill(&mut self, color: crate::Rgba) -> Result<()> {
-        todo!()
+        let parent = self.get_parent();
+
+        let mut el = parent.create_element("g")?;
+
+        el.set_attribute("color", color.to_string().as_str())?;
+
+        self.scoped_instructions.push(ScopeInstructon::Fill(el));
+
+        Ok(())
     }
 
     fn push_stroke(&mut self, color: crate::Rgba, width: crate::Length) -> Result<()> {
-        todo!()
+        let parent = self.get_parent();
+
+        let mut el = parent.create_element("g")?;
+
+        el.set_attribute("stroke", color.to_string().as_str())?;
+        el.set_attribute("stroke-width", width.to_string().as_str())?;
+
+        self.scoped_instructions.push(ScopeInstructon::Stroke(el));
+
+        Ok(())
     }
 
-    fn push_label(&mut self, label: &str) -> Result<()> {
-        todo!()
+    fn push_label(&mut self, _label: &str) -> Result<()> {
+        Ok(())
     }
 
     fn entity_ref(&mut self, id: &str) -> Result<()> {
-        todo!()
+        let parent = self.get_parent();
+
+        let entity_ref = parent.create_entity_reference(id)?;
+
+        parent.append_child(entity_ref);
+
+        Ok(())
     }
 
     fn move_to(&mut self, to: crate::Point) -> Result<()> {
