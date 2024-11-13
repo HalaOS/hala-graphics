@@ -2,6 +2,10 @@ use super::{Length, PreserveAspectRatio};
 
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub struct ViewBox {
+    /// ViewBox left-top x coordinate,
+    pub x: Length,
+    /// ViewBox left-top y coordinate,
+    pub y: Length,
     /// ViewBox width dimension.
     pub width: Length,
     /// ViewBox height dimension.

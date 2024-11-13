@@ -42,6 +42,7 @@ heck = "^0.5"
 syn = "^2"
 nom = "^7.1"
 num = "^0.4"
+xml_dom = "^0.2"
 #
 wgpu-derive = { path = "./crates/wgpu-derive", version = "^0.1" }
 ecsrs = { path = "./crates/ecs", version = "^0.1" }

@@ -29,6 +29,12 @@ pub enum Error {
 
     #[error("Invalid angle string: {0}")]
     Angle(String),
+
+    #[error("{0}")]
+    XmlDOM(#[from] xml_dom::level2::Error),
+
+    #[error("The stack is less than {0}")]
+    Pop(usize),
 }
 
 /// Result type used by this `cotati`.

@@ -10,14 +10,16 @@ impl Into<Canvas> for ViewBoxBuilder {
 }
 
 /// Create a new viewbox,
-pub fn viewbox<W, H, C>(config: C, width: W, height: H) -> ViewBoxBuilder
+pub fn viewbox<X, Y, W, H, C>(config: C, x: X, y: Y, width: W, height: H) -> ViewBoxBuilder
 where
     C: Into<Canvas>,
-    Length: From<W> + From<H>,
+    Length: From<W> + From<H> + From<X> + From<Y>,
 {
     let mut canvas: Canvas = config.into();
 
     canvas.viewbox = Some(ViewBox {
+        x: x.into(),
+        y: y.into(),
         width: width.into(),
         height: height.into(),
         aspect: None,

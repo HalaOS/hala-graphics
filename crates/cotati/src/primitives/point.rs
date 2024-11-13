@@ -7,19 +7,27 @@ use super::Unit;
 pub struct Point {
     pub x: f32,
     pub y: f32,
-    pub unit: Unit,
+    pub unit: Option<Unit>,
 }
 
 /// Create a point from (f32,f32) with default unit `px`.
 impl From<(f32, f32)> for Point {
     fn from(value: (f32, f32)) -> Self {
-        Self::px(value.0, value.1)
+        Self {
+            x: value.0,
+            y: value.1,
+            unit: None,
+        }
     }
 }
 
 impl Display for Point {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "point({}{},{}{})", self.x, self.unit, self.y, self.unit)
+        if let Some(unit) = self.unit {
+            write!(f, "({}{},{}{})", self.x, unit, self.y, unit)
+        } else {
+            write!(f, "({},{})", self.x, self.y)
+        }
     }
 }
 
@@ -29,7 +37,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Em,
+            unit: Some(Unit::Em),
         }
     }
 
@@ -38,7 +46,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Ex,
+            unit: Some(Unit::Ex),
         }
     }
 
@@ -47,7 +55,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Px,
+            unit: Some(Unit::Px),
         }
     }
 
@@ -56,7 +64,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::In,
+            unit: Some(Unit::In),
         }
     }
     /// Create a point with `cm` unit identifier.
@@ -64,7 +72,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Cm,
+            unit: Some(Unit::Cm),
         }
     }
     /// Create a point with `mm` unit identifier.
@@ -72,7 +80,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Mm,
+            unit: Some(Unit::Mm),
         }
     }
     /// Create a point with `pt` unit identifier.
@@ -80,7 +88,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Pt,
+            unit: Some(Unit::Pt),
         }
     }
     /// Create a point with `pc` unit identifier.
@@ -88,7 +96,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Pc,
+            unit: Some(Unit::Pc),
         }
     }
 
@@ -97,7 +105,7 @@ impl Point {
         Self {
             x,
             y,
-            unit: Unit::Percentages,
+            unit: Some(Unit::Percentages),
         }
     }
 }

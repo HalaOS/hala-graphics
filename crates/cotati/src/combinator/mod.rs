@@ -15,8 +15,8 @@ pub use label::*;
 mod tests {
 
     use crate::{
-        Angle, Canvas, Length, MockDirection, MockRenderer, Point, PreserveAspectRatio, Renderer,
-        Rgba, Unit, ViewBox,
+        Angle, Canvas, Length, MeetOrSlice, MockDirection, MockRenderer, Point,
+        PreserveAspectRatio, Renderer, Rgba, Unit, ViewBox,
     };
 
     use super::*;
@@ -26,8 +26,8 @@ mod tests {
 
         canvas(
             aspect(
-                viewbox((10.0, 10.0), 10.0, 10.0),
-                PreserveAspectRatio::xMaxYMax,
+                viewbox((10.0, 10.0), 0.0, 0.0, 10.0, 10.0),
+                PreserveAspectRatio::xMaxYMax(MeetOrSlice::Meet),
             ),
             fill(
                 (255, 0, 255),
@@ -54,27 +54,29 @@ mod tests {
             renderer.instructions(),
             &[
                 MockDirection::Canvas(Canvas {
-                    width: Length(10.0, Unit::Px),
-                    height: Length(10.0, Unit::Px),
+                    width: Length(10.0, None),
+                    height: Length(10.0, None),
                     viewbox: Some(ViewBox {
-                        width: Length(10.0, Unit::Px),
-                        height: Length(10.0, Unit::Px),
-                        aspect: Some(PreserveAspectRatio::xMaxYMax),
+                        x: 0.0.into(),
+                        y: 0.0.into(),
+                        width: Length(10.0, None),
+                        height: Length(10.0, None),
+                        aspect: Some(PreserveAspectRatio::xMaxYMax(MeetOrSlice::Meet)),
                     })
                 }),
                 MockDirection::Fill(Rgba(1.0, 0.0, 1.0, 1.0)),
                 MockDirection::Stroke {
                     color: Rgba(1.0, 0.0, 1.0, 1.0),
-                    width: Length(1.0, Unit::Px)
+                    width: Length(1.0, None)
                 },
                 MockDirection::Label("content".to_owned()),
                 MockDirection::Arc {
                     center: Some(Point {
                         x: 20.0,
                         y: 20.0,
-                        unit: Unit::Px
+                        unit: None
                     }),
-                    raddii: (Length(10.0, Unit::Px), Length(10.0, Unit::Px)),
+                    raddii: (Length(10.0, None), Length(10.0, None)),
                     start_angle: Angle::deg(0.0),
                     sweep_angle: Angle::deg(360.0),
                     x_rotation: Angle::deg(0.0)
@@ -83,9 +85,9 @@ mod tests {
                     center: Some(Point {
                         x: 20.0,
                         y: 20.0,
-                        unit: Unit::Px
+                        unit: None
                     }),
-                    raddii: (Length(10.0, Unit::Pc), Length(10.0, Unit::Pc)),
+                    raddii: (Length(10.0, Some(Unit::Pc)), Length(10.0, Some(Unit::Pc))),
                     start_angle: Angle::deg(0.0),
                     sweep_angle: Angle::deg(360.0),
                     x_rotation: Angle::deg(0.0)
@@ -94,12 +96,12 @@ mod tests {
                     from: Some(Point {
                         x: 0.0,
                         y: 0.0,
-                        unit: Unit::Px
+                        unit: None
                     }),
                     to: Point {
                         x: 5.0,
                         y: 5.0,
-                        unit: Unit::Px
+                        unit: None
                     }
                 },
                 MockDirection::Pop(1),
