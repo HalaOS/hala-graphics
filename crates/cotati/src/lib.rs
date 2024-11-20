@@ -5,11 +5,3 @@
 
 mod errors;
 pub use errors::*;
-mod primitives;
-pub use primitives::*;
-mod renderers;
-pub use renderers::*;
-mod drawing;
-pub use drawing::*;
-
-pub mod combinator;

@@ -13,16 +13,7 @@ log = { workspace = true }
 futures = { workspace = true }
 iref = { workspace = true }
 nom = { workspace = true }
-xml_dom = { workspace = true, optional = true }
 
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
 divan = { workspace = true }
-
-[features]
-default = ["svg"]
-svg = ["xml_dom"]
-
-[[bench]]
-name = "primitives"
-harness = false
