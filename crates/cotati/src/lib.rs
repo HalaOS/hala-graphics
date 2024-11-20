@@ -1,4 +1,4 @@
-//! cotati is a general-purpose vector drawing language that does not restrict binding to a back-end renderer.
+//! cotati is a general-purpose vector graphic language system.
 //!
 
 #![cfg_attr(docsrs, feature(doc_cfg))]

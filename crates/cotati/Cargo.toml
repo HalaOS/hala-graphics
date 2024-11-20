@@ -1,5 +1,5 @@
 [package]
-description = "cotati is a general-purpose vector drawing interface that does not restrict binding to a back-end renderer."
+description = "cotati is a general-purpose vector graphic language system"
 documentation = "https://docs.rs/cotati"
 edition.workspace = true
 license = "MIT"
