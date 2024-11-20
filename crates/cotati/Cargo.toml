@@ -11,9 +11,15 @@ version.workspace = true
 thiserror = { workspace = true }
 log = { workspace = true }
 futures = { workspace = true }
-iref = { workspace = true }
-nom = { workspace = true }
+nom = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
 
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
 divan = { workspace = true }
+
+[features]
+default = ["dsl", "ir", "serde"]
+ir = []
+dsl = ["nom", "ir"]
+serde = ["dep:serde"]
