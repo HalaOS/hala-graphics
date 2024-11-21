@@ -317,6 +317,8 @@ pub struct ViewBox {
     pub aspect: Option<Variant<PreserveAspectRatio>>,
 }
 
+impl Variable for ViewBox {}
+
 impl From<(f32, f32, f32, f32)> for ViewBox {
     fn from(value: (f32, f32, f32, f32)) -> Self {
         Self {
@@ -342,6 +344,66 @@ impl From<(f32, f32, f32, f32, PreserveAspectRatio)> for ViewBox {
 }
 
 impl ViewBox {
+    /// Reset minx property.
+    pub fn minx<V>(mut self, value: V) -> Self
+    where
+        Measurement: From<V>,
+    {
+        self.minx = Variant::Constant(value.into());
+        self
+    }
+
+    /// Reset minx property to register variant.
+    pub fn minx_variable(mut self, id: usize) -> Self {
+        self.minx = Variant::Register(id);
+        self
+    }
+
+    /// Reset miny property.
+    pub fn miny<V>(mut self, value: V) -> Self
+    where
+        Measurement: From<V>,
+    {
+        self.miny = Variant::Constant(value.into());
+        self
+    }
+
+    /// Reset miny property to register variant.
+    pub fn miny_variable(mut self, id: usize) -> Self {
+        self.miny = Variant::Register(id);
+        self
+    }
+
+    /// Reset width property.
+    pub fn width<V>(mut self, value: V) -> Self
+    where
+        Measurement: From<V>,
+    {
+        self.width = Variant::Constant(value.into());
+        self
+    }
+
+    /// Reset width property to register variant.
+    pub fn width_variable(mut self, id: usize) -> Self {
+        self.width = Variant::Register(id);
+        self
+    }
+
+    /// Reset height property.
+    pub fn height<V>(mut self, value: V) -> Self
+    where
+        Measurement: From<V>,
+    {
+        self.height = Variant::Constant(value.into());
+        self
+    }
+
+    /// Reset height property to register variant.
+    pub fn height_variable(mut self, id: usize) -> Self {
+        self.height = Variant::Register(id);
+        self
+    }
+
     /// Reset the aspect property of this viewbox.
     pub fn aspect<V>(mut self, value: V) -> Self
     where

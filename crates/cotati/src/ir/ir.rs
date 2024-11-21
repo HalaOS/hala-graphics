@@ -1,4 +1,4 @@
-use super::{Fill, Marker, Stroke, Transform, ViewBox};
+use super::{Fill, Layer, Marker, Stroke, Transform, ViewBox};
 
 /// Effect scope of one instruction.
 pub enum EffectScope {
@@ -19,6 +19,7 @@ pub enum IR {
     Fill(Box<Fill>),
     Stroke(Box<Stroke>),
     Maker(Box<Marker>),
+    Layer(Box<Layer>),
     /// Defines a entity with id.
     Declare(Box<String>),
     /// A reference to entity by id.
@@ -41,6 +42,7 @@ impl IR {
             | IR::Stroke(_)
             | IR::Maker(_)
             | IR::Declare(_)
+            | IR::Layer(_)
             | IR::If(_)
             | IR::Else => EffectScope::Multiline,
             _ => EffectScope::Singleline,

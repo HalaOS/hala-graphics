@@ -21,3 +21,9 @@ pub use painting::*;
 
 mod shapes;
 pub use shapes::*;
+
+mod layer;
+pub use layer::*;
+
+mod gradients;
+pub use gradients::*;

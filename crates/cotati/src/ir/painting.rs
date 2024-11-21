@@ -1,4 +1,4 @@
-use super::{Angle, Measurement, RecognizedColor, Rgba, Variable, Variant};
+use super::{Angle, Measurement, RecognizedColor, Rgba, Variable, Variant, ViewBox};
 
 //// The ‘fill-rule’ property indicates the algorithm which is to be used to determine what parts of the canvas are
 //// included inside the shape. For a simple, non-intersecting path, it is intuitively clear what region lies "inside";
@@ -322,6 +322,9 @@ pub struct Marker {
     ///
     /// [`svg`]: https://www.w3.org/TR/SVG11/painting.html#MarkerElement
     pub orient: Option<Variant<Angle>>,
+
+    /// stretch to fit a particular container element.
+    pub viewbox: Option<Variant<ViewBox>>,
 }
 
 impl Default for Marker {
@@ -333,6 +336,7 @@ impl Default for Marker {
             width: Variant::Constant(3.0.into()),
             height: Variant::Constant(3.0.into()),
             orient: None,
+            viewbox: None,
         }
     }
 }
@@ -431,6 +435,21 @@ impl Marker {
     /// Reset orient property to `auto`.
     pub fn orient_auto(mut self) -> Self {
         self.orient = None;
+        self
+    }
+
+    /// Reset viewbox property.
+    pub fn viewbox<V>(mut self, value: V) -> Self
+    where
+        ViewBox: From<V>,
+    {
+        self.viewbox = Some(Variant::Constant(value.into()));
+        self
+    }
+
+    /// Reset viewbox property to register variant.
+    pub fn viewbox_variable(mut self, id: usize) -> Self {
+        self.viewbox = Some(Variant::Register(id));
         self
     }
 }
