@@ -1,4 +1,4 @@
-use crate::{Error, Result};
+use crate::errors::{Error, Result};
 
 use super::{
     Angle, FillRule, MarkerUnits, Measurement, Point, PreserveAspectRatio, Rgba, StrokeLineCap,

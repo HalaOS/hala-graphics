@@ -1,3 +1,5 @@
+//! `errors`,`result` types used by this crate.
+
 /// Error variant used by `cotati`.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
