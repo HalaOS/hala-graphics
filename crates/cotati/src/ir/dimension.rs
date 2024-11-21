@@ -48,6 +48,12 @@ pub struct Measurement(pub f32, pub Option<Unit>);
 /// Measurement can be used as context variant type.
 impl Variable for Measurement {}
 
+impl Default for Measurement {
+    fn default() -> Self {
+        Self(0f32, None)
+    }
+}
+
 impl From<f32> for Measurement {
     fn from(value: f32) -> Self {
         Self(value, None)
@@ -97,7 +103,9 @@ impl Measurement {
     }
 }
 
-/// see [`https://www.w3.org/TR/SVG11/coords.html#PreserveAspectRatioAttribute`]
+/// see [`svg`] document for more information.
+///
+/// [`svg`]: https://www.w3.org/TR/SVG11/coords.html#PreserveAspectRatioAttribute
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum MeetOrSlice {
@@ -203,7 +211,7 @@ impl Angle {
 }
 
 /// A 2d coordinate point.
-#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Point {
     pub x: Measurement,
@@ -344,7 +352,7 @@ impl ViewBox {
     }
 
     /// Reset the aspect property of this viewbox to register variant.
-    pub fn aspect_register(mut self, id: usize) -> Self {
+    pub fn aspect_variable(mut self, id: usize) -> Self {
         self.aspect = Some(Variant::Register(id));
         self
     }

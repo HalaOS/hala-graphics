@@ -62,7 +62,7 @@ impl Fill {
     }
 
     /// Reset the color property to register variant.
-    pub fn color_register(mut self, id: usize) -> Self {
+    pub fn color_variable(mut self, id: usize) -> Self {
         self.color = Some(Variant::Register(id));
         self
     }
@@ -77,7 +77,7 @@ impl Fill {
     }
 
     /// Reset the rule property to register variant.
-    pub fn rule_register(mut self, id: usize) -> Self {
+    pub fn rule_variable(mut self, id: usize) -> Self {
         self.color = Some(Variant::Register(id));
         self
     }
@@ -158,7 +158,7 @@ pub struct Stroke {
     /// Thus, stroke-dasharray: 5,3,2 is equivalent to stroke-dasharray: 5,3,2,5,3,2.
     ///
     /// `Inherited: yes`
-    pub dasharray: Option<Variant<Vec<Measurement>>>,
+    pub dasharray: Option<Variant<Vec<Variant<Measurement>>>>,
     /// specifies the distance into the dash pattern to start the dash
     ///
     /// `Inherited: yes`
@@ -176,7 +176,7 @@ impl Stroke {
     }
 
     /// Reset color property to register variant.
-    pub fn color_register(mut self, id: usize) -> Self {
+    pub fn color_variable(mut self, id: usize) -> Self {
         self.color = Some(Variant::Register(id));
         self
     }
@@ -191,7 +191,7 @@ impl Stroke {
     }
 
     /// Reset stroke width property to register variant.
-    pub fn width_register(mut self, id: usize) -> Self {
+    pub fn width_variable(mut self, id: usize) -> Self {
         self.width = Some(Variant::Register(id));
         self
     }
@@ -206,7 +206,7 @@ impl Stroke {
     }
 
     /// Reset linecap property to register variant.
-    pub fn linecap_register(mut self, id: usize) -> Self {
+    pub fn linecap_variable(mut self, id: usize) -> Self {
         self.linecap = Some(Variant::Register(id));
         self
     }
@@ -221,16 +221,16 @@ impl Stroke {
     }
 
     /// Reset linejoin property to register variant.
-    pub fn linejoin_register(mut self, id: usize) -> Self {
+    pub fn linejoin_variable(mut self, id: usize) -> Self {
         self.linejoin = Some(Variant::Register(id));
         self
     }
 
     /// Reset dasharray property.
-    pub fn dasharray<I, V>(mut self, value: I) -> Self
+    pub fn dasharray<I>(mut self, value: I) -> Self
     where
-        I: IntoIterator<Item = V>,
-        Measurement: From<V>,
+        I: IntoIterator,
+        Variant<Measurement>: From<I::Item>,
     {
         self.dasharray = Some(Variant::Constant(
             value.into_iter().map(|v| v.into()).collect(),
@@ -239,7 +239,7 @@ impl Stroke {
     }
 
     /// Reset dasharray property to register variant.
-    pub fn dasharray_register(mut self, id: usize) -> Self {
+    pub fn dasharray_variable(mut self, id: usize) -> Self {
         self.dasharray = Some(Variant::Register(id));
         self
     }
@@ -254,7 +254,7 @@ impl Stroke {
     }
 
     /// Reset dashoffset property to register variant.
-    pub fn dashoffset_register(mut self, id: usize) -> Self {
+    pub fn dashoffset_variable(mut self, id: usize) -> Self {
         self.dashoffset = Some(Variant::Register(id));
         self
     }
@@ -348,7 +348,7 @@ impl Marker {
     }
 
     /// Reset unit property to register variant.
-    pub fn unit_register(mut self, id: usize) -> Self {
+    pub fn unit_variable(mut self, id: usize) -> Self {
         self.unit = Variant::Register(id);
         self
     }
@@ -363,7 +363,7 @@ impl Marker {
     }
 
     /// Reset refx property to register variant.
-    pub fn refx_register(mut self, id: usize) -> Self {
+    pub fn refx_variable(mut self, id: usize) -> Self {
         self.refx = Variant::Register(id);
         self
     }
@@ -378,7 +378,7 @@ impl Marker {
     }
 
     /// Reset refy property to register variant.
-    pub fn refy_register(mut self, id: usize) -> Self {
+    pub fn refy_variable(mut self, id: usize) -> Self {
         self.refy = Variant::Register(id);
         self
     }
@@ -393,7 +393,7 @@ impl Marker {
     }
 
     /// Reset width property to register variant.
-    pub fn width_register(mut self, id: usize) -> Self {
+    pub fn width_variable(mut self, id: usize) -> Self {
         self.width = Variant::Register(id);
         self
     }
@@ -408,7 +408,7 @@ impl Marker {
     }
 
     /// Reset refy property to register variant.
-    pub fn height_register(mut self, id: usize) -> Self {
+    pub fn height_variable(mut self, id: usize) -> Self {
         self.height = Variant::Register(id);
         self
     }
@@ -423,7 +423,7 @@ impl Marker {
     }
 
     /// Reset orient property to register variant.
-    pub fn orient_register(mut self, id: usize) -> Self {
+    pub fn orient_variable(mut self, id: usize) -> Self {
         self.orient = Some(Variant::Register(id));
         self
     }

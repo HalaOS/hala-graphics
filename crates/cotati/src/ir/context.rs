@@ -23,6 +23,8 @@ where
     Constant(T),
 }
 
+impl<T> Variable for Variant<T> where T: Variable {}
+
 impl<T> Variant<T>
 where
     T: Variable,
@@ -48,20 +50,30 @@ where
     }
 }
 
+impl<T> Default for Variant<T>
+where
+    T: Default + Variable,
+{
+    fn default() -> Self {
+        Self::Constant(T::default())
+    }
+}
+
 /// A register value.
 #[derive(Debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Value {
-    Color(Rgba),
+    Color(Box<Rgba>),
     Measurement(Measurement),
     Aspect(PreserveAspectRatio),
     Angle(Angle),
     Point(Point),
+    Points(Box<Vec<Point>>),
     FillRule(FillRule),
     StrokeLineCap(StrokeLineCap),
     StrokeLineJoin(StrokeLineJoin),
     StrokeMiterlimit(StrokeMiterlimit),
     MarkerUnits(MarkerUnits),
-    DashArray(Vec<Measurement>),
+    DashArray(Box<Vec<Measurement>>),
     Bool(bool),
 }
