@@ -27,3 +27,6 @@ pub use layer::*;
 
 mod gradients;
 pub use gradients::*;
+
+mod pattern;
+pub use pattern::*;
