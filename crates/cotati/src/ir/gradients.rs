@@ -424,7 +424,7 @@ impl RadialGradient {
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct GradientStop {
-    /// The ‘offset’ attribute is either a <number> (usually ranging from 0 to 1) or a <percentage>
+    /// The ‘offset’ attribute is either a `<number>` (usually ranging from 0 to 1) or a `<percentage>`
     /// (usually ranging from 0% to 100%) which indicates where the gradient stop is placed.
     /// For linear gradients, the ‘offset’ attribute represents a location along the gradient vector.
     /// For radial gradients, it represents a percentage distance from (fx,fy) to the edge of the

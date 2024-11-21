@@ -32,3 +32,17 @@ pub enum Transform {
 
 /// Transform can be used as context variant type.
 impl Variable for Transform {}
+
+impl Transform {
+    /// Create an [`identity matrix`](https://www.wikiwand.com/en/articles/Identity_matrix).
+    pub fn identity() -> Self {
+        Self::Matrix {
+            a: 1.0,
+            b: 0.0,
+            c: 0.0,
+            d: 1.0,
+            e: 0.0,
+            f: 0.0,
+        }
+    }
+}
