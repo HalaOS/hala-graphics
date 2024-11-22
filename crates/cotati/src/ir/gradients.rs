@@ -1,4 +1,4 @@
-use super::{Measurement, RecognizedColor, Rgba, Transform, Variable, Variant};
+use super::{Animatable, Animation, Measurement, RecognizedColor, Rgba, Transform};
 
 /// Defines the coordinate system for attributes ‘x1’, ‘y1’, ‘x2’ and ‘y2’.
 ///
@@ -33,7 +33,7 @@ impl Default for GradientUnits {
     }
 }
 
-impl Variable for GradientUnits {}
+impl Animatable for GradientUnits {}
 
 /// Indicates what happens if the gradient starts or ends inside the bounds of the target rectangle.
 /// Possible values are: 'pad', which says to use the terminal colors of the gradient to fill the remainder of the target region,
@@ -55,14 +55,14 @@ impl Default for SpreadMethod {
     }
 }
 
-impl Variable for SpreadMethod {}
+impl Animatable for SpreadMethod {}
 
 /// Linear gradients are defined by a ‘linearGradient’ element.
-#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct LinearGradient {
     /// Defines the coordinate system for attributes ‘x1’, ‘y1’, ‘x2’ and ‘y2’.
-    pub unit: Variant<GradientUnits>,
+    pub unit: Animation<GradientUnits>,
 
     /// Contains the definition of an optional additional transformation from the gradient coordinate system onto the
     /// target coordinate system (i.e., userSpaceOnUse or objectBoundingBox). This allows for things such as skewing
@@ -73,7 +73,7 @@ pub struct LinearGradient {
     /// If attribute ‘gradientTransform’ is not specified, then the effect is as if an identity transform were specified.
     ///
     /// Animatable: yes.
-    pub transform: Variant<Transform>,
+    pub transform: Animation<Transform>,
 
     /// ‘x1’, ‘y1’, ‘x2’ and ‘y2’ define a gradient vector for the linear gradient.
     /// This gradient vector provides starting and ending points onto which the gradient stops are mapped. The values
@@ -82,148 +82,41 @@ pub struct LinearGradient {
     /// If the attribute is not specified, the effect is as if a value of '0%' were specified.
     ///
     /// Animatable: yes.
-    pub x1: Variant<Measurement>,
+    pub x1: Animation<Measurement>,
 
     /// See [`x1`](LinearGradient::x1)
-    pub y1: Variant<Measurement>,
+    pub y1: Animation<Measurement>,
 
     /// See [`x1`](LinearGradient::x1)
-    pub x2: Variant<Measurement>,
+    pub x2: Animation<Measurement>,
 
     /// See [`x1`](LinearGradient::x1)
-    pub y2: Variant<Measurement>,
+    pub y2: Animation<Measurement>,
 
     /// Indicates what happens if the gradient starts or ends inside the bounds of the target rectangle.
-    pub spread: Variant<SpreadMethod>,
+    pub spread: Animation<SpreadMethod>,
 }
 
 impl Default for LinearGradient {
     fn default() -> Self {
         Self {
-            unit: Variant::Constant(GradientUnits::default()),
-            transform: Variant::Constant(Transform::identity()),
-            x1: Variant::Constant(Measurement::percentage(0.0)),
-            y1: Variant::Constant(Measurement::percentage(0.0)),
-            x2: Variant::Constant(Measurement::percentage(100.0)),
-            y2: Variant::Constant(Measurement::percentage(100.0)),
-            spread: Variant::Constant(SpreadMethod::default()),
+            unit: Animation::Constant(GradientUnits::default()),
+            transform: Animation::Constant(Transform::identity()),
+            x1: Animation::Constant(Measurement::percentage(0.0)),
+            y1: Animation::Constant(Measurement::percentage(0.0)),
+            x2: Animation::Constant(Measurement::percentage(100.0)),
+            y2: Animation::Constant(Measurement::percentage(100.0)),
+            spread: Animation::Constant(SpreadMethod::default()),
         }
     }
 }
 
-impl LinearGradient {
-    /// Reset unit property.
-    pub fn unit<V>(mut self, value: V) -> Self
-    where
-        GradientUnits: From<V>,
-    {
-        self.unit = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset unit property to register variant.
-    pub fn unit_variable(mut self, id: usize) -> Self {
-        self.unit = Variant::Register(id);
-        self
-    }
-
-    /// Reset transform property.
-    pub fn transform<V>(mut self, value: V) -> Self
-    where
-        Transform: From<V>,
-    {
-        self.transform = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset transform property to register variant.
-    pub fn transform_variable(mut self, id: usize) -> Self {
-        self.transform = Variant::Register(id);
-        self
-    }
-
-    /// Reset x1 property.
-    pub fn x1<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.x1 = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset x1 property to register variant.
-    pub fn x1_variable(mut self, id: usize) -> Self {
-        self.x1 = Variant::Register(id);
-        self
-    }
-
-    /// Reset y1 property.
-    pub fn y1<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.y1 = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset y1 property to register variant.
-    pub fn y1_variable(mut self, id: usize) -> Self {
-        self.y1 = Variant::Register(id);
-        self
-    }
-
-    /// Reset x2 property.
-    pub fn x2<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.x2 = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset x2 property to register variant.
-    pub fn x2_variable(mut self, id: usize) -> Self {
-        self.x2 = Variant::Register(id);
-        self
-    }
-
-    /// Reset y2 property.
-    pub fn y2<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.y2 = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset y2 property to register variant.
-    pub fn y2_variable(mut self, id: usize) -> Self {
-        self.y2 = Variant::Register(id);
-        self
-    }
-
-    /// Reset spread property.
-    pub fn spread<V>(mut self, value: V) -> Self
-    where
-        SpreadMethod: From<V>,
-    {
-        self.spread = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset spread property to register variant.
-    pub fn spread_variable(mut self, id: usize) -> Self {
-        self.spread = Variant::Register(id);
-        self
-    }
-}
-
 /// Radial gradients are defined by a ‘radialGradient’ element.
-#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct RadialGradient {
     /// Defines the coordinate system for attributes ‘x1’, ‘y1’, ‘x2’ and ‘y2’.
-    pub unit: Variant<GradientUnits>,
+    pub unit: Animation<GradientUnits>,
 
     /// Contains the definition of an optional additional transformation from the gradient coordinate system onto the
     /// target coordinate system (i.e., userSpaceOnUse or objectBoundingBox). This allows for things such as skewing
@@ -234,7 +127,7 @@ pub struct RadialGradient {
     /// If attribute ‘gradientTransform’ is not specified, then the effect is as if an identity transform were specified.
     ///
     /// Animatable: yes.
-    pub transform: Option<Variant<Transform>>,
+    pub transform: Animation<Transform>,
 
     /// ‘cx’, ‘cy’ and ‘r’ define the largest (i.e., outermost) circle for the radial gradient.
     /// The gradient will be drawn such that the 100% gradient stop is mapped to the perimeter
@@ -243,11 +136,11 @@ pub struct RadialGradient {
     /// If the attribute is not specified, the effect is as if a value of '50%' were specified.
     ///
     /// Animatable: yes.
-    pub cx: Variant<Measurement>,
+    pub cx: Animation<Measurement>,
 
     /// See [`cx`](RadialGradient::cx)
     /// If the attribute is not specified, the effect is as if a value of '50%' were specified.
-    pub cy: Variant<Measurement>,
+    pub cy: Animation<Measurement>,
 
     /// See [`cx`](RadialGradient::cx)
     ///
@@ -257,7 +150,7 @@ pub struct RadialGradient {
     /// If the attribute is not specified, the effect is as if a value of '50%' were specified.
     ///
     /// Animatable: yes.
-    pub r: Variant<Measurement>,
+    pub r: Animation<Measurement>,
 
     /// ‘fx’ and ‘fy’ define the focal point for the radial gradient. The gradient will be drawn such that the
     /// 0% gradient stop is mapped to (fx, fy).
@@ -267,7 +160,7 @@ pub struct RadialGradient {
     /// is inherited from the referenced element.
     ///
     /// Animatable: yes.
-    pub fx: Variant<Measurement>,
+    pub fx: Animation<Measurement>,
 
     /// See [`fx`](RadialGradient::fx)
     ///
@@ -276,152 +169,30 @@ pub struct RadialGradient {
     /// is inherited from the referenced element.
     ///
     /// Animatable: yes.
-    pub fy: Variant<Measurement>,
+    pub fy: Animation<Measurement>,
 
     /// Indicates what happens if the gradient starts or ends inside the bounds of the target rectangle.
-    pub spread: Variant<SpreadMethod>,
+    pub spread: Animation<SpreadMethod>,
 }
 
 impl Default for RadialGradient {
     fn default() -> Self {
         Self {
-            unit: Variant::Constant(GradientUnits::default()),
-            transform: None,
-            cx: Variant::Constant(Measurement::percentage(50.0)),
-            cy: Variant::Constant(Measurement::percentage(50.0)),
-            r: Variant::Constant(Measurement::percentage(50.0)),
-            fx: Variant::Constant(Measurement::percentage(50.0)),
-            fy: Variant::Constant(Measurement::percentage(50.0)),
-            spread: Variant::Constant(SpreadMethod::default()),
+            unit: Animation::Constant(GradientUnits::default()),
+            transform: Animation::Constant(Transform::identity()),
+            cx: Animation::Constant(Measurement::percentage(50.0)),
+            cy: Animation::Constant(Measurement::percentage(50.0)),
+            r: Animation::Constant(Measurement::percentage(50.0)),
+            fx: Animation::Constant(Measurement::percentage(50.0)),
+            fy: Animation::Constant(Measurement::percentage(50.0)),
+            spread: Animation::Constant(SpreadMethod::default()),
         }
-    }
-}
-
-impl RadialGradient {
-    /// Reset unit property.
-    pub fn unit<V>(mut self, value: V) -> Self
-    where
-        GradientUnits: From<V>,
-    {
-        self.unit = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset unit property to register variant.
-    pub fn unit_variable(mut self, id: usize) -> Self {
-        self.unit = Variant::Register(id);
-        self
-    }
-
-    /// Reset transform property.
-    pub fn transform<V>(mut self, value: V) -> Self
-    where
-        Transform: From<V>,
-    {
-        self.transform = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset transform property to register variant.
-    pub fn transform_variable(mut self, id: usize) -> Self {
-        self.transform = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset cx property.
-    pub fn cx<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.cx = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset cx property to register variant.
-    pub fn cx_variable(mut self, id: usize) -> Self {
-        self.cx = Variant::Register(id);
-        self
-    }
-
-    /// Reset y1 property.
-    pub fn cy<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.cy = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset y1 property to register variant.
-    pub fn cy_variable(mut self, id: usize) -> Self {
-        self.cy = Variant::Register(id);
-        self
-    }
-
-    /// Reset r property.
-    pub fn r<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.r = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset r property to register variant.
-    pub fn r_variable(mut self, id: usize) -> Self {
-        self.r = Variant::Register(id);
-        self
-    }
-
-    /// Reset fx property.
-    pub fn fx<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.fx = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset fx property to register variant.
-    pub fn fx_variable(mut self, id: usize) -> Self {
-        self.fx = Variant::Register(id);
-        self
-    }
-
-    /// Reset fx property.
-    pub fn fy<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.fy = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset fx property to register variant.
-    pub fn fy_variable(mut self, id: usize) -> Self {
-        self.fy = Variant::Register(id);
-        self
-    }
-
-    /// Reset spread property.
-    pub fn spread<V>(mut self, value: V) -> Self
-    where
-        SpreadMethod: From<V>,
-    {
-        self.spread = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset spread property to register variant.
-    pub fn spread_variable(mut self, id: usize) -> Self {
-        self.spread = Variant::Register(id);
-        self
     }
 }
 
 /// The ramp of colors to use on a gradient is defined by the ‘stop’ elements that are child elements
 /// to either the ‘linearGradient’ element or the ‘radialGradient’ element.
-#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct GradientStop {
     /// The ‘offset’ attribute is either a `<number>` (usually ranging from 0 to 1) or a `<percentage>`
@@ -431,49 +202,17 @@ pub struct GradientStop {
     /// outermost/largest circle.
     ///
     /// Animatable: yes.
-    pub offset: Variant<Measurement>,
+    pub offset: Animation<Measurement>,
 
     /// indicates what color to use at that gradient stop
-    pub color: Variant<Rgba>,
+    pub color: Animation<Rgba>,
 }
 
 impl Default for GradientStop {
     fn default() -> Self {
         Self {
-            offset: Variant::Constant(Default::default()),
-            color: Variant::Constant(RecognizedColor::black.into()),
+            offset: Animation::Constant(Default::default()),
+            color: Animation::Constant(RecognizedColor::black.into()),
         }
-    }
-}
-
-impl GradientStop {
-    /// Reset offset property.
-    pub fn offset<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.offset = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset offset property to register variant.
-    pub fn offset_variable(mut self, id: usize) -> Self {
-        self.offset = Variant::Register(id);
-        self
-    }
-
-    /// Reset color property.
-    pub fn color<V>(mut self, value: V) -> Self
-    where
-        Rgba: From<V>,
-    {
-        self.color = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset offset property to register variant.
-    pub fn color_variable(mut self, id: usize) -> Self {
-        self.color = Variant::Register(id);
-        self
     }
 }

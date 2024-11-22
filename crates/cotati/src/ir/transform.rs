@@ -1,4 +1,4 @@
-use super::Variable;
+use super::Animatable;
 
 /// A memory represents of svg element's `transform` attribute.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -31,7 +31,7 @@ pub enum Transform {
 }
 
 /// Transform can be used as context variant type.
-impl Variable for Transform {}
+impl Animatable for Transform {}
 
 impl Transform {
     /// Create an [`identity matrix`](https://www.wikiwand.com/en/articles/Identity_matrix).

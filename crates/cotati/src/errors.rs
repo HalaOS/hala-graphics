@@ -4,7 +4,7 @@
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error("unsatisfied variant with register({0})")]
-    UnsatisfiedVariant(usize),
+    UnsatisfiedVariant(String),
 
     #[error("unrecognized color: {0}")]
     UnrecognizedColor(String),

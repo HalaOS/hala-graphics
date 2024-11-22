@@ -1,4 +1,4 @@
-use super::{Angle, Measurement, RecognizedColor, Rgba, Variable, Variant, ViewBox};
+use super::{Angle, Animatable, Animation, Measurement, RecognizedColor, Rgba, ViewBox};
 
 /// ‘fill’ and ‘stroke’ take on a value of type [`Paint`], which is specified as follows:
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
@@ -12,7 +12,7 @@ pub enum Paint {
     Pattern(String),
 }
 
-impl Variable for Paint {}
+impl Animatable for Paint {}
 
 impl From<RecognizedColor> for Paint {
     fn from(value: RecognizedColor) -> Self {
@@ -45,7 +45,7 @@ impl Default for FillRule {
     }
 }
 
-impl Variable for FillRule {}
+impl Animatable for FillRule {}
 
 /// The ‘fill’ instruction paints the interior of the given graphical element.
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
@@ -54,53 +54,11 @@ pub struct Fill {
     /// paints color.
     ///
     /// `Inherited: yes`
-    pub paint: Option<Variant<Paint>>,
+    pub paint: Option<Animation<Paint>>,
     /// fill painting rule, see [`FillRule`] for more information.
     ///
     /// `Inherited: yes`
-    pub rule: Option<Variant<FillRule>>,
-}
-
-impl Fill {
-    /// Initialize a new `Fill` painting instruction.
-    ///
-    /// * set color = [`black`](RecognizedColor::black)
-    /// * set rule = [`Nonzero`](FillRule::Nonzero)
-    pub fn new() -> Self {
-        Self {
-            paint: Some(Variant::Constant(RecognizedColor::black.into())),
-            rule: Some(Variant::Constant(FillRule::Nonzero)),
-        }
-    }
-    /// Reset the color property.
-    pub fn paint<V>(mut self, value: V) -> Self
-    where
-        Paint: From<V>,
-    {
-        self.paint = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset the color property to register variant.
-    pub fn paint_variable(mut self, id: usize) -> Self {
-        self.paint = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset the color property.
-    pub fn rule<V>(mut self, value: V) -> Self
-    where
-        FillRule: From<V>,
-    {
-        self.rule = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset the rule property to register variant.
-    pub fn rule_variable(mut self, id: usize) -> Self {
-        self.paint = Some(Variant::Register(id));
-        self
-    }
+    pub rule: Option<Animation<FillRule>>,
 }
 
 /// Specifies the shape to be used at the end of open subpaths when they are stroked
@@ -112,7 +70,7 @@ pub enum StrokeLineCap {
     Square,
 }
 
-impl Variable for StrokeLineCap {}
+impl Animatable for StrokeLineCap {}
 
 impl Default for StrokeLineCap {
     fn default() -> Self {
@@ -124,7 +82,7 @@ impl Default for StrokeLineCap {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct StrokeMiterlimit(Measurement);
 
-impl Variable for StrokeMiterlimit {}
+impl Animatable for StrokeMiterlimit {}
 
 impl Default for StrokeMiterlimit {
     fn default() -> Self {
@@ -141,7 +99,7 @@ pub enum StrokeLineJoin {
     Bevel,
 }
 
-impl Variable for StrokeLineJoin {}
+impl Animatable for StrokeLineJoin {}
 
 impl Default for StrokeLineJoin {
     fn default() -> Self {
@@ -156,21 +114,21 @@ pub struct Stroke {
     /// paints color paints along the outline of the given graphical element.
     ///
     /// `Inherited: yes`
-    pub paint: Option<Variant<Paint>>,
+    pub paint: Option<Animation<Paint>>,
     /// This property specifies the width of the stroke on the current object
     ///
     /// `Inherited: yes`
-    pub width: Option<Variant<Measurement>>,
+    pub width: Option<Animation<Measurement>>,
 
     /// specifies the shape to be used at the end of open subpaths when they are stroked.
     ///
     /// `Inherited: yes`
-    pub linecap: Option<Variant<StrokeLineCap>>,
+    pub linecap: Option<Animation<StrokeLineCap>>,
 
     /// specifies the shape to be used at the corners of paths or basic shapes when they are stroked.
     ///
     /// `Inherited: yes`
-    pub linejoin: Option<Variant<StrokeLineJoin>>,
+    pub linejoin: Option<Animation<StrokeLineJoin>>,
 
     /// controls the pattern of dashes and gaps used to stroke paths. `<dasharray>` contains a list of comma and/or
     /// white space separated `<length>s` and `<percentage>s` that specify the lengths of alternating dashes and gaps.
@@ -178,106 +136,11 @@ pub struct Stroke {
     /// Thus, stroke-dasharray: 5,3,2 is equivalent to stroke-dasharray: 5,3,2,5,3,2.
     ///
     /// `Inherited: yes`
-    pub dasharray: Option<Variant<Vec<Variant<Measurement>>>>,
+    pub dasharray: Option<Animation<Vec<Animation<Measurement>>>>,
     /// specifies the distance into the dash pattern to start the dash
     ///
     /// `Inherited: yes`
-    pub dashoffset: Option<Variant<Measurement>>,
-}
-
-impl Stroke {
-    /// Reset color property.
-    pub fn color<V>(mut self, value: V) -> Self
-    where
-        Paint: From<V>,
-    {
-        self.paint = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset color property to register variant.
-    pub fn color_variable(mut self, id: usize) -> Self {
-        self.paint = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset stroke width property.
-    pub fn width<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.width = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset stroke width property to register variant.
-    pub fn width_variable(mut self, id: usize) -> Self {
-        self.width = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset linecap property.
-    pub fn linecap<V>(mut self, value: V) -> Self
-    where
-        StrokeLineCap: From<V>,
-    {
-        self.linecap = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset linecap property to register variant.
-    pub fn linecap_variable(mut self, id: usize) -> Self {
-        self.linecap = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset linejoin property.
-    pub fn linejoin<V>(mut self, value: V) -> Self
-    where
-        StrokeLineJoin: From<V>,
-    {
-        self.linejoin = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset linejoin property to register variant.
-    pub fn linejoin_variable(mut self, id: usize) -> Self {
-        self.linejoin = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset dasharray property.
-    pub fn dasharray<I>(mut self, value: I) -> Self
-    where
-        I: IntoIterator,
-        Variant<Measurement>: From<I::Item>,
-    {
-        self.dasharray = Some(Variant::Constant(
-            value.into_iter().map(|v| v.into()).collect(),
-        ));
-        self
-    }
-
-    /// Reset dasharray property to register variant.
-    pub fn dasharray_variable(mut self, id: usize) -> Self {
-        self.dasharray = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset dashoffset property.
-    pub fn dashoffset<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.dashoffset = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset dashoffset property to register variant.
-    pub fn dashoffset_variable(mut self, id: usize) -> Self {
-        self.dashoffset = Some(Variant::Register(id));
-        self
-    }
+    pub dashoffset: Option<Animation<Measurement>>,
 }
 
 /// Defines the coordinate system for attributes ‘markerWidth’, ‘markerHeight’ and the contents of the ‘marker’.
@@ -295,7 +158,7 @@ pub enum MarkerUnits {
     UserSpaceOnUse,
 }
 
-impl Variable for MarkerUnits {}
+impl Animatable for MarkerUnits {}
 
 impl Default for MarkerUnits {
     fn default() -> Self {
@@ -313,163 +176,50 @@ pub struct Marker {
     /// Defines the coordinate system for attributes ‘markerWidth’, ‘markerHeight’ and the contents of the ‘marker’.
     ///
     /// If attribute ‘markerUnits’ is not specified, then the effect is as if a value of 'strokeWidth' were specified.
-    pub unit: Variant<MarkerUnits>,
+    pub unit: Animation<MarkerUnits>,
     /// The x-axis coordinate of the reference point which is to be aligned exactly at the marker position. The
     /// coordinate is defined in the coordinate system after application of the ‘viewBox’ and ‘preserveAspectRatio’
     /// attributes.
     ///
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
-    pub refx: Variant<Measurement>,
+    pub refx: Animation<Measurement>,
 
     /// The y-axis coordinate of the reference point which is to be aligned exactly at the marker position. The
     /// coordinate is defined in the coordinate system after application of the ‘viewBox’ and ‘preserveAspectRatio’
     /// attributes.
     ///
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
-    pub refy: Variant<Measurement>,
+    pub refy: Animation<Measurement>,
 
     /// Represents the width of the viewport into which the marker is to be fitted when it is rendered.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     /// If the attribute is not specified, the effect is as if a value of "3" were specified.
-    pub width: Variant<Measurement>,
+    pub width: Animation<Measurement>,
 
     /// Represents the height of the viewport into which the marker is to be fitted when it is rendered.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     /// If the attribute is not specified, the effect is as if a value of "3" were specified.
-    pub height: Variant<Measurement>,
+    pub height: Animation<Measurement>,
 
     /// Indicates how the marker is rotated. see [`svg`] document for more information.
     ///
     /// [`svg`]: https://www.w3.org/TR/SVG11/painting.html#MarkerElement
-    pub orient: Option<Variant<Angle>>,
+    pub orient: Option<Animation<Angle>>,
 
     /// stretch to fit a particular container element.
-    pub viewbox: Option<Variant<ViewBox>>,
+    pub viewbox: Option<Animation<ViewBox>>,
 }
 
 impl Default for Marker {
     fn default() -> Self {
         Self {
-            unit: Variant::Constant(MarkerUnits::StrokeWidth),
-            refx: Variant::Constant(0.0.into()),
-            refy: Variant::Constant(0.0.into()),
-            width: Variant::Constant(3.0.into()),
-            height: Variant::Constant(3.0.into()),
+            unit: Animation::Constant(MarkerUnits::StrokeWidth),
+            refx: Animation::Constant(0.0.into()),
+            refy: Animation::Constant(0.0.into()),
+            width: Animation::Constant(3.0.into()),
+            height: Animation::Constant(3.0.into()),
             orient: None,
             viewbox: None,
         }
-    }
-}
-
-impl Marker {
-    /// Reset unit property.
-    pub fn unit<V>(mut self, value: V) -> Self
-    where
-        MarkerUnits: From<V>,
-    {
-        self.unit = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset unit property to register variant.
-    pub fn unit_variable(mut self, id: usize) -> Self {
-        self.unit = Variant::Register(id);
-        self
-    }
-
-    /// Reset refx property.
-    pub fn refx<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.refx = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset refx property to register variant.
-    pub fn refx_variable(mut self, id: usize) -> Self {
-        self.refx = Variant::Register(id);
-        self
-    }
-
-    /// Reset refy property.
-    pub fn refy<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.refy = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset refy property to register variant.
-    pub fn refy_variable(mut self, id: usize) -> Self {
-        self.refy = Variant::Register(id);
-        self
-    }
-
-    /// Reset width property.
-    pub fn width<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.width = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset width property to register variant.
-    pub fn width_variable(mut self, id: usize) -> Self {
-        self.width = Variant::Register(id);
-        self
-    }
-
-    /// Reset height property.
-    pub fn height<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.height = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset refy property to register variant.
-    pub fn height_variable(mut self, id: usize) -> Self {
-        self.height = Variant::Register(id);
-        self
-    }
-
-    /// Reset orient property.
-    pub fn orient<V>(mut self, value: V) -> Self
-    where
-        Angle: From<V>,
-    {
-        self.orient = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset orient property to register variant.
-    pub fn orient_variable(mut self, id: usize) -> Self {
-        self.orient = Some(Variant::Register(id));
-        self
-    }
-
-    /// Reset orient property to `auto`.
-    pub fn orient_auto(mut self) -> Self {
-        self.orient = None;
-        self
-    }
-
-    /// Reset viewbox property.
-    pub fn viewbox<V>(mut self, value: V) -> Self
-    where
-        ViewBox: From<V>,
-    {
-        self.viewbox = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset viewbox property to register variant.
-    pub fn viewbox_variable(mut self, id: usize) -> Self {
-        self.viewbox = Some(Variant::Register(id));
-        self
     }
 }

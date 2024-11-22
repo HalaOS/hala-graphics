@@ -1,4 +1,4 @@
-use super::{Variable, Variant};
+use super::{Animatable, Animation};
 
 /// The unit identifier.
 #[derive(Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
@@ -46,7 +46,7 @@ impl AsRef<str> for Unit {
 pub struct Measurement(pub f32, pub Option<Unit>);
 
 /// Measurement can be used as context variant type.
-impl Variable for Measurement {}
+impl Animatable for Measurement {}
 
 impl Default for Measurement {
     fn default() -> Self {
@@ -176,7 +176,7 @@ impl Default for PreserveAspectRatio {
 }
 
 /// PreserveAspectRatio can be used as context variant type.
-impl Variable for PreserveAspectRatio {}
+impl Animatable for PreserveAspectRatio {}
 
 /// Angles are specified in one of two ways depending upon
 /// whether they are used in CSS property syntax or SVG
@@ -191,7 +191,7 @@ pub enum Angle {
 }
 
 /// Angle can be used as context variant type.
-impl Variable for Angle {}
+impl Animatable for Angle {}
 
 impl Angle {
     /// Create instance of `angle=0.0deg`.
@@ -219,7 +219,7 @@ pub struct Point {
 }
 
 /// Point can be used as context variant type.
-impl Variable for Point {}
+impl Animatable for Point {}
 
 /// Create a point from (f32,f32) with default unit `px`.
 impl From<(f32, f32)> for Point {
@@ -303,30 +303,30 @@ impl Point {
 
 /// It is often desirable to specify that a given set of graphics stretch to fit a particular container element.
 /// The ‘viewBox’ attribute provides this capability.
-#[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ViewBox {
     /// ViewBox left-top x coordinate,
-    pub minx: Variant<Measurement>,
+    pub minx: Animation<Measurement>,
     /// ViewBox left-top y coordinate,
-    pub miny: Variant<Measurement>,
+    pub miny: Animation<Measurement>,
     /// ViewBox width dimension.
-    pub width: Variant<Measurement>,
+    pub width: Animation<Measurement>,
     /// ViewBox height dimension.
-    pub height: Variant<Measurement>,
+    pub height: Animation<Measurement>,
     /// clip preserve aspect ratio.
-    pub aspect: Option<Variant<PreserveAspectRatio>>,
+    pub aspect: Option<Animation<PreserveAspectRatio>>,
 }
 
-impl Variable for ViewBox {}
+impl Animatable for ViewBox {}
 
 impl From<(f32, f32, f32, f32)> for ViewBox {
     fn from(value: (f32, f32, f32, f32)) -> Self {
         Self {
-            minx: Variant::Constant(value.0.into()),
-            miny: Variant::Constant(value.1.into()),
-            width: Variant::Constant(value.2.into()),
-            height: Variant::Constant(value.3.into()),
+            minx: Animation::Constant(value.0.into()),
+            miny: Animation::Constant(value.1.into()),
+            width: Animation::Constant(value.2.into()),
+            height: Animation::Constant(value.3.into()),
             aspect: None,
         }
     }
@@ -335,88 +335,11 @@ impl From<(f32, f32, f32, f32)> for ViewBox {
 impl From<(f32, f32, f32, f32, PreserveAspectRatio)> for ViewBox {
     fn from(value: (f32, f32, f32, f32, PreserveAspectRatio)) -> Self {
         Self {
-            minx: Variant::Constant(value.0.into()),
-            miny: Variant::Constant(value.1.into()),
-            width: Variant::Constant(value.2.into()),
-            height: Variant::Constant(value.3.into()),
-            aspect: Some(Variant::Constant(value.4)),
+            minx: Animation::Constant(value.0.into()),
+            miny: Animation::Constant(value.1.into()),
+            width: Animation::Constant(value.2.into()),
+            height: Animation::Constant(value.3.into()),
+            aspect: Some(Animation::Constant(value.4)),
         }
-    }
-}
-
-impl ViewBox {
-    /// Reset minx property.
-    pub fn minx<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.minx = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset minx property to register variant.
-    pub fn minx_variable(mut self, id: usize) -> Self {
-        self.minx = Variant::Register(id);
-        self
-    }
-
-    /// Reset miny property.
-    pub fn miny<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.miny = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset miny property to register variant.
-    pub fn miny_variable(mut self, id: usize) -> Self {
-        self.miny = Variant::Register(id);
-        self
-    }
-
-    /// Reset width property.
-    pub fn width<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.width = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset width property to register variant.
-    pub fn width_variable(mut self, id: usize) -> Self {
-        self.width = Variant::Register(id);
-        self
-    }
-
-    /// Reset height property.
-    pub fn height<V>(mut self, value: V) -> Self
-    where
-        Measurement: From<V>,
-    {
-        self.height = Variant::Constant(value.into());
-        self
-    }
-
-    /// Reset height property to register variant.
-    pub fn height_variable(mut self, id: usize) -> Self {
-        self.height = Variant::Register(id);
-        self
-    }
-
-    /// Reset the aspect property of this viewbox.
-    pub fn aspect<V>(mut self, value: V) -> Self
-    where
-        PreserveAspectRatio: From<V>,
-    {
-        self.aspect = Some(Variant::Constant(value.into()));
-        self
-    }
-
-    /// Reset the aspect property of this viewbox to register variant.
-    pub fn aspect_variable(mut self, id: usize) -> Self {
-        self.aspect = Some(Variant::Register(id));
-        self
     }
 }

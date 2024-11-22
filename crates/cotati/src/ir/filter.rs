@@ -1,4 +1,4 @@
-use super::{Measurement, Variable, Variant};
+use super::{Animatable, Animation, Measurement};
 
 /// Defines the coordinate system for attributes ‘x’, ‘y’, ‘width’ and ‘height’.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
@@ -18,7 +18,7 @@ impl Default for FilterUnits {
     }
 }
 
-impl Variable for FilterUnits {}
+impl Animatable for FilterUnits {}
 
 /// This attribute takes the form x-pixels [y-pixels], and indicates the width and height
 /// of the intermediate images in pixels. If not provided, then the user agent will use
@@ -42,13 +42,13 @@ pub struct FilterRes {
     pub y: Option<f32>,
 }
 
-impl Variable for FilterRes {}
+impl Animatable for FilterRes {}
 
 /// A filter effect consists of a series of graphics operations that are applied to
 /// a given source graphic to produce a modified graphical result. The result of the
 /// filter effect is rendered to the target device instead of the original source
 /// graphic.
-#[derive(Debug, Default, PartialEq, PartialOrd, Clone, Copy)]
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Filter {
     /// Defines the coordinate system for attributes ‘x’, ‘y’, ‘width’ and ‘height’.
@@ -64,7 +64,7 @@ pub struct Filter {
     ///
     /// If attribute ‘filterUnits’ is not specified, then the effect is if a value of
     /// 'objectBoundingBox' were specified.
-    pub units: Variant<FilterUnits>,
+    pub units: Animation<FilterUnits>,
 
     /// Specifies the coordinate system for the various length values within the filter
     /// primitives and for the attributes that define the filter primitive subregion.
@@ -82,7 +82,7 @@ pub struct Filter {
     ///
     /// If attribute ‘primitiveUnits’ is not specified, then the effect is as if a value of
     /// userSpaceOnUse were specified.
-    pub primitive_units: Variant<FilterUnits>,
+    pub primitive_units: Animation<FilterUnits>,
 
     /// These attributes define a rectangular region on the canvas to which this filter applies.
     ///
@@ -102,29 +102,29 @@ pub struct Filter {
     /// If ‘x’ or ‘y’ is not specified, the effect is as if a value of -10% were specified.
     ///
     /// If ‘width’ or ‘height’ is not specified, the effect is as if a value of 120% were specified.
-    pub x: Variant<Measurement>,
+    pub x: Animation<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub y: Variant<Measurement>,
+    pub y: Animation<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub width: Variant<Measurement>,
+    pub width: Animation<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub height: Variant<Measurement>,
+    pub height: Animation<Measurement>,
 
     /// See [`FilterRes`]
-    pub filter_res: Variant<FilterRes>,
+    pub filter_res: Animation<FilterRes>,
 }

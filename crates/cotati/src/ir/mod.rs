@@ -1,8 +1,8 @@
 //! An intermediate representation of the `VGL` language.
 //!
 
-mod context;
-pub use context::*;
+mod animation;
+pub use animation::*;
 
 mod color;
 pub use color::*;
