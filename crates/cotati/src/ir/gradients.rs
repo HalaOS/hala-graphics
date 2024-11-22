@@ -73,7 +73,7 @@ pub struct LinearGradient {
     /// If attribute ‘gradientTransform’ is not specified, then the effect is as if an identity transform were specified.
     ///
     /// Animatable: yes.
-    pub transform: Option<Variant<Transform>>,
+    pub transform: Variant<Transform>,
 
     /// ‘x1’, ‘y1’, ‘x2’ and ‘y2’ define a gradient vector for the linear gradient.
     /// This gradient vector provides starting and ending points onto which the gradient stops are mapped. The values
@@ -101,7 +101,7 @@ impl Default for LinearGradient {
     fn default() -> Self {
         Self {
             unit: Variant::Constant(GradientUnits::default()),
-            transform: None,
+            transform: Variant::Constant(Transform::identity()),
             x1: Variant::Constant(Measurement::percentage(0.0)),
             y1: Variant::Constant(Measurement::percentage(0.0)),
             x2: Variant::Constant(Measurement::percentage(100.0)),
@@ -132,13 +132,13 @@ impl LinearGradient {
     where
         Transform: From<V>,
     {
-        self.transform = Some(Variant::Constant(value.into()));
+        self.transform = Variant::Constant(value.into());
         self
     }
 
     /// Reset transform property to register variant.
     pub fn transform_variable(mut self, id: usize) -> Self {
-        self.transform = Some(Variant::Register(id));
+        self.transform = Variant::Register(id);
         self
     }
 

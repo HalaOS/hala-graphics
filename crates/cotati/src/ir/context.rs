@@ -2,7 +2,7 @@ use crate::errors::{Error, Result};
 
 use super::{
     Angle, FillRule, MarkerUnits, Measurement, Point, PreserveAspectRatio, Rgba, StrokeLineCap,
-    StrokeLineJoin, StrokeMiterlimit,
+    StrokeLineJoin, StrokeMiterlimit, ViewBox,
 };
 
 /// This is a marker trait that a type with this trait can be used as `context variant type`.
@@ -69,6 +69,7 @@ pub enum Value {
     Angle(Angle),
     Point(Point),
     Points(Box<Vec<Point>>),
+    ViewBox(Box<ViewBox>),
     FillRule(FillRule),
     StrokeLineCap(StrokeLineCap),
     StrokeLineJoin(StrokeLineJoin),

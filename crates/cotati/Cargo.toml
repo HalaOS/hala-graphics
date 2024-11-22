@@ -1,5 +1,5 @@
 [package]
-description = "cotati is a general-purpose vector graphic language system"
+description = "cotati is a general-purpose VGL(vector graphics language) system"
 documentation = "https://docs.rs/cotati"
 edition.workspace = true
 license = "MIT"
@@ -19,7 +19,8 @@ pretty_env_logger = { workspace = true }
 divan = { workspace = true }
 
 [features]
-default = ["dsl", "ir", "serde"]
-ir = []
+default = ["vgl", "dsl", "ir", "serde"]
 dsl = ["nom", "ir"]
+vgl = ["nom", "ir"]
 serde = ["dep:serde"]
+ir = []

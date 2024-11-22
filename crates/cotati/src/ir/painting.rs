@@ -1,5 +1,25 @@
 use super::{Angle, Measurement, RecognizedColor, Rgba, Variable, Variant, ViewBox};
 
+/// ‘fill’ and ‘stroke’ take on a value of type [`Paint`], which is specified as follows:
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum Paint {
+    /// the explicit color to be used to paint the current object
+    Color(Rgba),
+    /// A gradient entity reference.
+    Gradient(String),
+    /// A pattern entity reference.
+    Pattern(String),
+}
+
+impl Variable for Paint {}
+
+impl From<RecognizedColor> for Paint {
+    fn from(value: RecognizedColor) -> Self {
+        Self::Color(value.into())
+    }
+}
+
 //// The ‘fill-rule’ property indicates the algorithm which is to be used to determine what parts of the canvas are
 //// included inside the shape. For a simple, non-intersecting path, it is intuitively clear what region lies "inside";
 //// however, for a more complex path, such as a path that intersects itself or where one subpath encloses another,
@@ -28,13 +48,13 @@ impl Default for FillRule {
 impl Variable for FillRule {}
 
 /// The ‘fill’ instruction paints the interior of the given graphical element.
-#[derive(Debug, Default, PartialEq, PartialOrd, Clone, Copy)]
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Fill {
     /// paints color.
     ///
     /// `Inherited: yes`
-    pub color: Option<Variant<Rgba>>,
+    pub paint: Option<Variant<Paint>>,
     /// fill painting rule, see [`FillRule`] for more information.
     ///
     /// `Inherited: yes`
@@ -48,22 +68,22 @@ impl Fill {
     /// * set rule = [`Nonzero`](FillRule::Nonzero)
     pub fn new() -> Self {
         Self {
-            color: Some(Variant::Constant(RecognizedColor::black.into())),
+            paint: Some(Variant::Constant(RecognizedColor::black.into())),
             rule: Some(Variant::Constant(FillRule::Nonzero)),
         }
     }
     /// Reset the color property.
-    pub fn color<V>(mut self, value: V) -> Self
+    pub fn paint<V>(mut self, value: V) -> Self
     where
-        Rgba: From<V>,
+        Paint: From<V>,
     {
-        self.color = Some(Variant::Constant(value.into()));
+        self.paint = Some(Variant::Constant(value.into()));
         self
     }
 
     /// Reset the color property to register variant.
-    pub fn color_variable(mut self, id: usize) -> Self {
-        self.color = Some(Variant::Register(id));
+    pub fn paint_variable(mut self, id: usize) -> Self {
+        self.paint = Some(Variant::Register(id));
         self
     }
 
@@ -78,7 +98,7 @@ impl Fill {
 
     /// Reset the rule property to register variant.
     pub fn rule_variable(mut self, id: usize) -> Self {
-        self.color = Some(Variant::Register(id));
+        self.paint = Some(Variant::Register(id));
         self
     }
 }
@@ -136,7 +156,7 @@ pub struct Stroke {
     /// paints color paints along the outline of the given graphical element.
     ///
     /// `Inherited: yes`
-    pub color: Option<Variant<Rgba>>,
+    pub paint: Option<Variant<Paint>>,
     /// This property specifies the width of the stroke on the current object
     ///
     /// `Inherited: yes`
@@ -169,15 +189,15 @@ impl Stroke {
     /// Reset color property.
     pub fn color<V>(mut self, value: V) -> Self
     where
-        Rgba: From<V>,
+        Paint: From<V>,
     {
-        self.color = Some(Variant::Constant(value.into()));
+        self.paint = Some(Variant::Constant(value.into()));
         self
     }
 
     /// Reset color property to register variant.
     pub fn color_variable(mut self, id: usize) -> Self {
-        self.color = Some(Variant::Register(id));
+        self.paint = Some(Variant::Register(id));
         self
     }
 

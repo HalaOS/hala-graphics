@@ -301,7 +301,8 @@ impl Point {
     }
 }
 
-/// A 2d coordinate point.
+/// It is often desirable to specify that a given set of graphics stretch to fit a particular container element.
+/// The ‘viewBox’ attribute provides this capability.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ViewBox {

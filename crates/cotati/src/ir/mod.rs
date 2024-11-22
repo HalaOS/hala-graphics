@@ -1,4 +1,4 @@
-//! The intermediate representation of the `VGL` language.
+//! An intermediate representation of the `VGL` language.
 //!
 
 mod context;
