@@ -30,3 +30,6 @@ pub use gradients::*;
 
 mod pattern;
 pub use pattern::*;
+
+mod path;
+pub use path::*;
