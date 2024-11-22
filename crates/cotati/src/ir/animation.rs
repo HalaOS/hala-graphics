@@ -14,7 +14,7 @@ where
 {
     /// a reference variable to `frame register`.
     Frame(String),
-    /// const value
+    /// non-animated variable
     Constant(T),
 }
 
@@ -26,11 +26,11 @@ where
 {
     /// Convert self into [`Result<T>`].
     ///
-    /// * returns [`Error::UnsatisfiedVariant`] if this variant is a [`register`](Variant::Register) value.
-    /// * returns [`Ok(T)`](Ok) if this variant is a [`constant`](Variant::Constant) value
+    /// * returns [`Error::UnsatisfiedFrameVariable`] if this variant is a [`frame register`](Animatable::Frame) variable.
+    /// * returns [`Ok(T)`](Ok) if this variant is a [`constant`](Animatable::Constant) variable
     pub fn ok(self) -> Result<T> {
         match self {
-            Animatable::Frame(n) => Err(Error::UnsatisfiedVariant(n)),
+            Animatable::Frame(n) => Err(Error::UnsatisfiedFrameVariable(n)),
             Animatable::Constant(v) => Ok(v),
         }
     }
