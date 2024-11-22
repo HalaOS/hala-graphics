@@ -33,3 +33,6 @@ pub use pattern::*;
 
 mod path;
 pub use path::*;
+
+mod filter;
+pub use filter::*;
