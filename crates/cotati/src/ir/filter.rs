@@ -4,9 +4,11 @@ use super::{Measurement, Variable, Variant};
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum FilterUnits {
-    /// see [`units`](Pattern::units) and [`content_units`](Pattern::content_units) for more informations.
+    /// see [`units`](Filter::units) and [`primitive_units`](Filter::primitive_units)
+    /// for more informations.
     UserSpaceOnUse,
-    /// see [`units`](Pattern::units) and [`content_units`](Pattern::content_units) for more informations.
+    /// see [`units`](Filter::units) and [`primitive_units`](Filter::primitive_units)
+    /// for more informations.
     ObjectBoundingBox,
 }
 
@@ -18,20 +20,25 @@ impl Default for FilterUnits {
 
 impl Variable for FilterUnits {}
 
-/// This attribute takes the form x-pixels [y-pixels], and indicates the width and height of the intermediate images in pixels.
-/// If not provided, then the user agent will use reasonable values to produce a high-quality result on the output device.
+/// This attribute takes the form x-pixels [y-pixels], and indicates the width and height
+/// of the intermediate images in pixels. If not provided, then the user agent will use
+/// reasonable values to produce a high-quality result on the output device.
 ///
-/// Care should be taken when assigning a non-default value to this attribute. Too small of a value may result in unwanted pixelation
-/// in the result. Too large of a value may result in slow processing and large memory usage.
+/// Care should be taken when assigning a non-default value to this attribute. Too small
+/// of a value may result in unwanted pixelation in the result. Too large of a value may
+/// result in slow processing and large memory usage.
 ///
-/// Negative values are an error (see Error processing). Zero values disable rendering of the element which referenced the filter.
+/// Negative values are an error (see Error processing). Zero values disable rendering of
+/// the element which referenced the filter.
 ///
 /// Non-integer values are truncated, i.e rounded to the closest integer value towards zero.
 ///
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct FilterRes {
+    /// `x-pixels`
     pub x: f32,
+    /// optional `y-pixels`
     pub y: Option<f32>,
 }
 
