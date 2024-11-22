@@ -1,28 +1,28 @@
 use crate::errors::{Error, Result};
 
-/// This is a marker trait that a type with this trait can be used as `context variant type`.
-pub trait Animatable {}
+/// This is a marker trait that a type with this trait can be used as frame register variable.
+pub trait FrameVariable {}
 
-impl<T> Animatable for Vec<T> where T: Animatable {}
+impl<T> FrameVariable for Vec<T> where T: FrameVariable {}
 
-/// An [`Animatable`] value container that indicate this variable is animatable.
+/// An variable container, indicates that this variable can be used as animation frame variable.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum Animation<T>
+pub enum Animatable<T>
 where
-    T: Animatable,
+    T: FrameVariable,
 {
-    /// `Animation Frame Register` variable.
-    Animatable(String),
-    /// Variant is a constant value.
+    /// a reference variable to `frame register`.
+    Frame(String),
+    /// const value
     Constant(T),
 }
 
-impl<T> Animatable for Animation<T> where T: Animatable {}
+impl<T> FrameVariable for Animatable<T> where T: FrameVariable {}
 
-impl<T> Animation<T>
+impl<T> Animatable<T>
 where
-    T: Animatable,
+    T: FrameVariable,
 {
     /// Convert self into [`Result<T>`].
     ///
@@ -30,42 +30,42 @@ where
     /// * returns [`Ok(T)`](Ok) if this variant is a [`constant`](Variant::Constant) value
     pub fn ok(self) -> Result<T> {
         match self {
-            Animation::Animatable(n) => Err(Error::UnsatisfiedVariant(n)),
-            Animation::Constant(v) => Ok(v),
+            Animatable::Frame(n) => Err(Error::UnsatisfiedVariant(n)),
+            Animatable::Constant(v) => Ok(v),
         }
     }
 }
 
-impl<T> From<T> for Animation<T>
+impl<T> From<T> for Animatable<T>
 where
-    T: Animatable,
+    T: FrameVariable,
 {
     fn from(value: T) -> Self {
         Self::Constant(value)
     }
 }
 
-impl<T> From<&str> for Animation<T>
+impl<T> From<&str> for Animatable<T>
 where
-    T: Animatable,
+    T: FrameVariable,
 {
     fn from(value: &str) -> Self {
-        Self::Animatable(value.to_string())
+        Self::Frame(value.to_string())
     }
 }
 
-impl<T> From<String> for Animation<T>
+impl<T> From<String> for Animatable<T>
 where
-    T: Animatable,
+    T: FrameVariable,
 {
     fn from(value: String) -> Self {
-        Self::Animatable(value)
+        Self::Frame(value)
     }
 }
 
-impl<T> Default for Animation<T>
+impl<T> Default for Animatable<T>
 where
-    T: Default + Animatable,
+    T: Default + FrameVariable,
 {
     fn default() -> Self {
         Self::Constant(T::default())

@@ -1,4 +1,4 @@
-use super::{Angle, Animatable, Animation, Measurement, Point};
+use super::{Angle, Animatable, FrameVariable, Measurement, Point};
 
 /// A direction that representation a path drawing commander.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
@@ -48,7 +48,7 @@ pub enum PathEvent {
         to: Point,
     },
 }
-impl Animatable for PathEvent {}
+impl FrameVariable for PathEvent {}
 
 /// Paths represent the outline of a shape which can be filled, stroked, used as a clipping path,
 /// or any combination of the three.
@@ -56,7 +56,7 @@ impl Animatable for PathEvent {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Path {
     /// The definition of the outline of a shape.
-    pub data: Animation<Vec<Animation<PathEvent>>>,
+    pub data: Animatable<Vec<Animatable<PathEvent>>>,
 
     /// The author's computation of the total length of the path, in user units.
     /// This value is used to calibrate the user agent's own distance-along-a-path
@@ -67,5 +67,5 @@ pub struct Path {
     /// operations.
     ///
     /// A negative value is an error (see Error processing).
-    pub length: Animation<Measurement>,
+    pub length: Animatable<Measurement>,
 }

@@ -1,4 +1,4 @@
-use super::{Animatable, Animation};
+use super::{Animatable, FrameVariable};
 
 /// The unit identifier.
 #[derive(Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
@@ -46,7 +46,7 @@ impl AsRef<str> for Unit {
 pub struct Measurement(pub f32, pub Option<Unit>);
 
 /// Measurement can be used as context variant type.
-impl Animatable for Measurement {}
+impl FrameVariable for Measurement {}
 
 impl Default for Measurement {
     fn default() -> Self {
@@ -176,7 +176,7 @@ impl Default for PreserveAspectRatio {
 }
 
 /// PreserveAspectRatio can be used as context variant type.
-impl Animatable for PreserveAspectRatio {}
+impl FrameVariable for PreserveAspectRatio {}
 
 /// Angles are specified in one of two ways depending upon
 /// whether they are used in CSS property syntax or SVG
@@ -191,7 +191,7 @@ pub enum Angle {
 }
 
 /// Angle can be used as context variant type.
-impl Animatable for Angle {}
+impl FrameVariable for Angle {}
 
 impl Angle {
     /// Create instance of `angle=0.0deg`.
@@ -219,7 +219,7 @@ pub struct Point {
 }
 
 /// Point can be used as context variant type.
-impl Animatable for Point {}
+impl FrameVariable for Point {}
 
 /// Create a point from (f32,f32) with default unit `px`.
 impl From<(f32, f32)> for Point {
@@ -307,26 +307,26 @@ impl Point {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ViewBox {
     /// ViewBox left-top x coordinate,
-    pub minx: Animation<Measurement>,
+    pub minx: Animatable<Measurement>,
     /// ViewBox left-top y coordinate,
-    pub miny: Animation<Measurement>,
+    pub miny: Animatable<Measurement>,
     /// ViewBox width dimension.
-    pub width: Animation<Measurement>,
+    pub width: Animatable<Measurement>,
     /// ViewBox height dimension.
-    pub height: Animation<Measurement>,
+    pub height: Animatable<Measurement>,
     /// clip preserve aspect ratio.
-    pub aspect: Option<Animation<PreserveAspectRatio>>,
+    pub aspect: Option<Animatable<PreserveAspectRatio>>,
 }
 
-impl Animatable for ViewBox {}
+impl FrameVariable for ViewBox {}
 
 impl From<(f32, f32, f32, f32)> for ViewBox {
     fn from(value: (f32, f32, f32, f32)) -> Self {
         Self {
-            minx: Animation::Constant(value.0.into()),
-            miny: Animation::Constant(value.1.into()),
-            width: Animation::Constant(value.2.into()),
-            height: Animation::Constant(value.3.into()),
+            minx: Animatable::Constant(value.0.into()),
+            miny: Animatable::Constant(value.1.into()),
+            width: Animatable::Constant(value.2.into()),
+            height: Animatable::Constant(value.3.into()),
             aspect: None,
         }
     }
@@ -335,11 +335,11 @@ impl From<(f32, f32, f32, f32)> for ViewBox {
 impl From<(f32, f32, f32, f32, PreserveAspectRatio)> for ViewBox {
     fn from(value: (f32, f32, f32, f32, PreserveAspectRatio)) -> Self {
         Self {
-            minx: Animation::Constant(value.0.into()),
-            miny: Animation::Constant(value.1.into()),
-            width: Animation::Constant(value.2.into()),
-            height: Animation::Constant(value.3.into()),
-            aspect: Some(Animation::Constant(value.4)),
+            minx: Animatable::Constant(value.0.into()),
+            miny: Animatable::Constant(value.1.into()),
+            width: Animatable::Constant(value.2.into()),
+            height: Animatable::Constant(value.3.into()),
+            aspect: Some(Animatable::Constant(value.4)),
         }
     }
 }

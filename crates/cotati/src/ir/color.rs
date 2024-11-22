@@ -1,4 +1,4 @@
-use super::Animatable;
+use super::FrameVariable;
 
 /// A color structure repesents as RGBA, the storage value is normalized.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -6,7 +6,7 @@ use super::Animatable;
 pub struct Rgba(pub f32, pub f32, pub f32, pub f32);
 
 /// Rgba can be used as context variant type.
-impl Animatable for Rgba {}
+impl FrameVariable for Rgba {}
 
 impl From<Rgba> for [f32; 4] {
     fn from(value: Rgba) -> Self {

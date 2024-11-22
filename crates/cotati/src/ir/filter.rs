@@ -1,4 +1,4 @@
-use super::{Animatable, Animation, Measurement};
+use super::{FrameVariable, Animatable, Measurement};
 
 /// Defines the coordinate system for attributes ‘x’, ‘y’, ‘width’ and ‘height’.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
@@ -18,7 +18,7 @@ impl Default for FilterUnits {
     }
 }
 
-impl Animatable for FilterUnits {}
+impl FrameVariable for FilterUnits {}
 
 /// This attribute takes the form x-pixels [y-pixels], and indicates the width and height
 /// of the intermediate images in pixels. If not provided, then the user agent will use
@@ -42,7 +42,7 @@ pub struct FilterRes {
     pub y: Option<f32>,
 }
 
-impl Animatable for FilterRes {}
+impl FrameVariable for FilterRes {}
 
 /// A filter effect consists of a series of graphics operations that are applied to
 /// a given source graphic to produce a modified graphical result. The result of the
@@ -64,7 +64,7 @@ pub struct Filter {
     ///
     /// If attribute ‘filterUnits’ is not specified, then the effect is if a value of
     /// 'objectBoundingBox' were specified.
-    pub units: Animation<FilterUnits>,
+    pub units: Animatable<FilterUnits>,
 
     /// Specifies the coordinate system for the various length values within the filter
     /// primitives and for the attributes that define the filter primitive subregion.
@@ -82,7 +82,7 @@ pub struct Filter {
     ///
     /// If attribute ‘primitiveUnits’ is not specified, then the effect is as if a value of
     /// userSpaceOnUse were specified.
-    pub primitive_units: Animation<FilterUnits>,
+    pub primitive_units: Animatable<FilterUnits>,
 
     /// These attributes define a rectangular region on the canvas to which this filter applies.
     ///
@@ -102,29 +102,29 @@ pub struct Filter {
     /// If ‘x’ or ‘y’ is not specified, the effect is as if a value of -10% were specified.
     ///
     /// If ‘width’ or ‘height’ is not specified, the effect is as if a value of 120% were specified.
-    pub x: Animation<Measurement>,
+    pub x: Animatable<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub y: Animation<Measurement>,
+    pub y: Animatable<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub width: Animation<Measurement>,
+    pub width: Animatable<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub height: Animation<Measurement>,
+    pub height: Animatable<Measurement>,
 
     /// See [`FilterRes`]
-    pub filter_res: Animation<FilterRes>,
+    pub filter_res: Animatable<FilterRes>,
 }

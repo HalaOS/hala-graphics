@@ -1,4 +1,4 @@
-use super::{Angle, Animatable, Animation, Measurement, RecognizedColor, Rgba, ViewBox};
+use super::{Angle, Animatable, FrameVariable, Measurement, RecognizedColor, Rgba, ViewBox};
 
 /// ‘fill’ and ‘stroke’ take on a value of type [`Paint`], which is specified as follows:
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
@@ -12,7 +12,7 @@ pub enum Paint {
     Pattern(String),
 }
 
-impl Animatable for Paint {}
+impl FrameVariable for Paint {}
 
 impl From<RecognizedColor> for Paint {
     fn from(value: RecognizedColor) -> Self {
@@ -45,7 +45,7 @@ impl Default for FillRule {
     }
 }
 
-impl Animatable for FillRule {}
+impl FrameVariable for FillRule {}
 
 /// The ‘fill’ instruction paints the interior of the given graphical element.
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
@@ -54,11 +54,11 @@ pub struct Fill {
     /// paints color.
     ///
     /// `Inherited: yes`
-    pub paint: Option<Animation<Paint>>,
+    pub paint: Option<Animatable<Paint>>,
     /// fill painting rule, see [`FillRule`] for more information.
     ///
     /// `Inherited: yes`
-    pub rule: Option<Animation<FillRule>>,
+    pub rule: Option<Animatable<FillRule>>,
 }
 
 /// Specifies the shape to be used at the end of open subpaths when they are stroked
@@ -70,7 +70,7 @@ pub enum StrokeLineCap {
     Square,
 }
 
-impl Animatable for StrokeLineCap {}
+impl FrameVariable for StrokeLineCap {}
 
 impl Default for StrokeLineCap {
     fn default() -> Self {
@@ -82,7 +82,7 @@ impl Default for StrokeLineCap {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct StrokeMiterlimit(Measurement);
 
-impl Animatable for StrokeMiterlimit {}
+impl FrameVariable for StrokeMiterlimit {}
 
 impl Default for StrokeMiterlimit {
     fn default() -> Self {
@@ -99,7 +99,7 @@ pub enum StrokeLineJoin {
     Bevel,
 }
 
-impl Animatable for StrokeLineJoin {}
+impl FrameVariable for StrokeLineJoin {}
 
 impl Default for StrokeLineJoin {
     fn default() -> Self {
@@ -114,21 +114,21 @@ pub struct Stroke {
     /// paints color paints along the outline of the given graphical element.
     ///
     /// `Inherited: yes`
-    pub paint: Option<Animation<Paint>>,
+    pub paint: Option<Animatable<Paint>>,
     /// This property specifies the width of the stroke on the current object
     ///
     /// `Inherited: yes`
-    pub width: Option<Animation<Measurement>>,
+    pub width: Option<Animatable<Measurement>>,
 
     /// specifies the shape to be used at the end of open subpaths when they are stroked.
     ///
     /// `Inherited: yes`
-    pub linecap: Option<Animation<StrokeLineCap>>,
+    pub linecap: Option<Animatable<StrokeLineCap>>,
 
     /// specifies the shape to be used at the corners of paths or basic shapes when they are stroked.
     ///
     /// `Inherited: yes`
-    pub linejoin: Option<Animation<StrokeLineJoin>>,
+    pub linejoin: Option<Animatable<StrokeLineJoin>>,
 
     /// controls the pattern of dashes and gaps used to stroke paths. `<dasharray>` contains a list of comma and/or
     /// white space separated `<length>s` and `<percentage>s` that specify the lengths of alternating dashes and gaps.
@@ -136,11 +136,11 @@ pub struct Stroke {
     /// Thus, stroke-dasharray: 5,3,2 is equivalent to stroke-dasharray: 5,3,2,5,3,2.
     ///
     /// `Inherited: yes`
-    pub dasharray: Option<Animation<Vec<Animation<Measurement>>>>,
+    pub dasharray: Option<Animatable<Vec<Animatable<Measurement>>>>,
     /// specifies the distance into the dash pattern to start the dash
     ///
     /// `Inherited: yes`
-    pub dashoffset: Option<Animation<Measurement>>,
+    pub dashoffset: Option<Animatable<Measurement>>,
 }
 
 /// Defines the coordinate system for attributes ‘markerWidth’, ‘markerHeight’ and the contents of the ‘marker’.
@@ -158,7 +158,7 @@ pub enum MarkerUnits {
     UserSpaceOnUse,
 }
 
-impl Animatable for MarkerUnits {}
+impl FrameVariable for MarkerUnits {}
 
 impl Default for MarkerUnits {
     fn default() -> Self {
@@ -176,48 +176,48 @@ pub struct Marker {
     /// Defines the coordinate system for attributes ‘markerWidth’, ‘markerHeight’ and the contents of the ‘marker’.
     ///
     /// If attribute ‘markerUnits’ is not specified, then the effect is as if a value of 'strokeWidth' were specified.
-    pub unit: Animation<MarkerUnits>,
+    pub unit: Animatable<MarkerUnits>,
     /// The x-axis coordinate of the reference point which is to be aligned exactly at the marker position. The
     /// coordinate is defined in the coordinate system after application of the ‘viewBox’ and ‘preserveAspectRatio’
     /// attributes.
     ///
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
-    pub refx: Animation<Measurement>,
+    pub refx: Animatable<Measurement>,
 
     /// The y-axis coordinate of the reference point which is to be aligned exactly at the marker position. The
     /// coordinate is defined in the coordinate system after application of the ‘viewBox’ and ‘preserveAspectRatio’
     /// attributes.
     ///
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
-    pub refy: Animation<Measurement>,
+    pub refy: Animatable<Measurement>,
 
     /// Represents the width of the viewport into which the marker is to be fitted when it is rendered.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     /// If the attribute is not specified, the effect is as if a value of "3" were specified.
-    pub width: Animation<Measurement>,
+    pub width: Animatable<Measurement>,
 
     /// Represents the height of the viewport into which the marker is to be fitted when it is rendered.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     /// If the attribute is not specified, the effect is as if a value of "3" were specified.
-    pub height: Animation<Measurement>,
+    pub height: Animatable<Measurement>,
 
     /// Indicates how the marker is rotated. see [`svg`] document for more information.
     ///
     /// [`svg`]: https://www.w3.org/TR/SVG11/painting.html#MarkerElement
-    pub orient: Option<Animation<Angle>>,
+    pub orient: Option<Animatable<Angle>>,
 
     /// stretch to fit a particular container element.
-    pub viewbox: Option<Animation<ViewBox>>,
+    pub viewbox: Option<Animatable<ViewBox>>,
 }
 
 impl Default for Marker {
     fn default() -> Self {
         Self {
-            unit: Animation::Constant(MarkerUnits::StrokeWidth),
-            refx: Animation::Constant(0.0.into()),
-            refy: Animation::Constant(0.0.into()),
-            width: Animation::Constant(3.0.into()),
-            height: Animation::Constant(3.0.into()),
+            unit: Animatable::Constant(MarkerUnits::StrokeWidth),
+            refx: Animatable::Constant(0.0.into()),
+            refy: Animatable::Constant(0.0.into()),
+            width: Animatable::Constant(3.0.into()),
+            height: Animatable::Constant(3.0.into()),
             orient: None,
             viewbox: None,
         }

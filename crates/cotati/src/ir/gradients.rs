@@ -1,4 +1,4 @@
-use super::{Animatable, Animation, Measurement, RecognizedColor, Rgba, Transform};
+use super::{Animatable, FrameVariable, Measurement, RecognizedColor, Rgba, Transform};
 
 /// Defines the coordinate system for attributes ‘x1’, ‘y1’, ‘x2’ and ‘y2’.
 ///
@@ -33,7 +33,7 @@ impl Default for GradientUnits {
     }
 }
 
-impl Animatable for GradientUnits {}
+impl FrameVariable for GradientUnits {}
 
 /// Indicates what happens if the gradient starts or ends inside the bounds of the target rectangle.
 /// Possible values are: 'pad', which says to use the terminal colors of the gradient to fill the remainder of the target region,
@@ -55,14 +55,14 @@ impl Default for SpreadMethod {
     }
 }
 
-impl Animatable for SpreadMethod {}
+impl FrameVariable for SpreadMethod {}
 
 /// Linear gradients are defined by a ‘linearGradient’ element.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct LinearGradient {
     /// Defines the coordinate system for attributes ‘x1’, ‘y1’, ‘x2’ and ‘y2’.
-    pub unit: Animation<GradientUnits>,
+    pub unit: Animatable<GradientUnits>,
 
     /// Contains the definition of an optional additional transformation from the gradient coordinate system onto the
     /// target coordinate system (i.e., userSpaceOnUse or objectBoundingBox). This allows for things such as skewing
@@ -73,7 +73,7 @@ pub struct LinearGradient {
     /// If attribute ‘gradientTransform’ is not specified, then the effect is as if an identity transform were specified.
     ///
     /// Animatable: yes.
-    pub transform: Animation<Transform>,
+    pub transform: Animatable<Transform>,
 
     /// ‘x1’, ‘y1’, ‘x2’ and ‘y2’ define a gradient vector for the linear gradient.
     /// This gradient vector provides starting and ending points onto which the gradient stops are mapped. The values
@@ -82,31 +82,31 @@ pub struct LinearGradient {
     /// If the attribute is not specified, the effect is as if a value of '0%' were specified.
     ///
     /// Animatable: yes.
-    pub x1: Animation<Measurement>,
+    pub x1: Animatable<Measurement>,
 
     /// See [`x1`](LinearGradient::x1)
-    pub y1: Animation<Measurement>,
+    pub y1: Animatable<Measurement>,
 
     /// See [`x1`](LinearGradient::x1)
-    pub x2: Animation<Measurement>,
+    pub x2: Animatable<Measurement>,
 
     /// See [`x1`](LinearGradient::x1)
-    pub y2: Animation<Measurement>,
+    pub y2: Animatable<Measurement>,
 
     /// Indicates what happens if the gradient starts or ends inside the bounds of the target rectangle.
-    pub spread: Animation<SpreadMethod>,
+    pub spread: Animatable<SpreadMethod>,
 }
 
 impl Default for LinearGradient {
     fn default() -> Self {
         Self {
-            unit: Animation::Constant(GradientUnits::default()),
-            transform: Animation::Constant(Transform::identity()),
-            x1: Animation::Constant(Measurement::percentage(0.0)),
-            y1: Animation::Constant(Measurement::percentage(0.0)),
-            x2: Animation::Constant(Measurement::percentage(100.0)),
-            y2: Animation::Constant(Measurement::percentage(100.0)),
-            spread: Animation::Constant(SpreadMethod::default()),
+            unit: Animatable::Constant(GradientUnits::default()),
+            transform: Animatable::Constant(Transform::identity()),
+            x1: Animatable::Constant(Measurement::percentage(0.0)),
+            y1: Animatable::Constant(Measurement::percentage(0.0)),
+            x2: Animatable::Constant(Measurement::percentage(100.0)),
+            y2: Animatable::Constant(Measurement::percentage(100.0)),
+            spread: Animatable::Constant(SpreadMethod::default()),
         }
     }
 }
@@ -116,7 +116,7 @@ impl Default for LinearGradient {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct RadialGradient {
     /// Defines the coordinate system for attributes ‘x1’, ‘y1’, ‘x2’ and ‘y2’.
-    pub unit: Animation<GradientUnits>,
+    pub unit: Animatable<GradientUnits>,
 
     /// Contains the definition of an optional additional transformation from the gradient coordinate system onto the
     /// target coordinate system (i.e., userSpaceOnUse or objectBoundingBox). This allows for things such as skewing
@@ -127,7 +127,7 @@ pub struct RadialGradient {
     /// If attribute ‘gradientTransform’ is not specified, then the effect is as if an identity transform were specified.
     ///
     /// Animatable: yes.
-    pub transform: Animation<Transform>,
+    pub transform: Animatable<Transform>,
 
     /// ‘cx’, ‘cy’ and ‘r’ define the largest (i.e., outermost) circle for the radial gradient.
     /// The gradient will be drawn such that the 100% gradient stop is mapped to the perimeter
@@ -136,11 +136,11 @@ pub struct RadialGradient {
     /// If the attribute is not specified, the effect is as if a value of '50%' were specified.
     ///
     /// Animatable: yes.
-    pub cx: Animation<Measurement>,
+    pub cx: Animatable<Measurement>,
 
     /// See [`cx`](RadialGradient::cx)
     /// If the attribute is not specified, the effect is as if a value of '50%' were specified.
-    pub cy: Animation<Measurement>,
+    pub cy: Animatable<Measurement>,
 
     /// See [`cx`](RadialGradient::cx)
     ///
@@ -150,7 +150,7 @@ pub struct RadialGradient {
     /// If the attribute is not specified, the effect is as if a value of '50%' were specified.
     ///
     /// Animatable: yes.
-    pub r: Animation<Measurement>,
+    pub r: Animatable<Measurement>,
 
     /// ‘fx’ and ‘fy’ define the focal point for the radial gradient. The gradient will be drawn such that the
     /// 0% gradient stop is mapped to (fx, fy).
@@ -160,7 +160,7 @@ pub struct RadialGradient {
     /// is inherited from the referenced element.
     ///
     /// Animatable: yes.
-    pub fx: Animation<Measurement>,
+    pub fx: Animatable<Measurement>,
 
     /// See [`fx`](RadialGradient::fx)
     ///
@@ -169,23 +169,23 @@ pub struct RadialGradient {
     /// is inherited from the referenced element.
     ///
     /// Animatable: yes.
-    pub fy: Animation<Measurement>,
+    pub fy: Animatable<Measurement>,
 
     /// Indicates what happens if the gradient starts or ends inside the bounds of the target rectangle.
-    pub spread: Animation<SpreadMethod>,
+    pub spread: Animatable<SpreadMethod>,
 }
 
 impl Default for RadialGradient {
     fn default() -> Self {
         Self {
-            unit: Animation::Constant(GradientUnits::default()),
-            transform: Animation::Constant(Transform::identity()),
-            cx: Animation::Constant(Measurement::percentage(50.0)),
-            cy: Animation::Constant(Measurement::percentage(50.0)),
-            r: Animation::Constant(Measurement::percentage(50.0)),
-            fx: Animation::Constant(Measurement::percentage(50.0)),
-            fy: Animation::Constant(Measurement::percentage(50.0)),
-            spread: Animation::Constant(SpreadMethod::default()),
+            unit: Animatable::Constant(GradientUnits::default()),
+            transform: Animatable::Constant(Transform::identity()),
+            cx: Animatable::Constant(Measurement::percentage(50.0)),
+            cy: Animatable::Constant(Measurement::percentage(50.0)),
+            r: Animatable::Constant(Measurement::percentage(50.0)),
+            fx: Animatable::Constant(Measurement::percentage(50.0)),
+            fy: Animatable::Constant(Measurement::percentage(50.0)),
+            spread: Animatable::Constant(SpreadMethod::default()),
         }
     }
 }
@@ -202,17 +202,17 @@ pub struct GradientStop {
     /// outermost/largest circle.
     ///
     /// Animatable: yes.
-    pub offset: Animation<Measurement>,
+    pub offset: Animatable<Measurement>,
 
     /// indicates what color to use at that gradient stop
-    pub color: Animation<Rgba>,
+    pub color: Animatable<Rgba>,
 }
 
 impl Default for GradientStop {
     fn default() -> Self {
         Self {
-            offset: Animation::Constant(Default::default()),
-            color: Animation::Constant(RecognizedColor::black.into()),
+            offset: Animatable::Constant(Default::default()),
+            color: Animatable::Constant(RecognizedColor::black.into()),
         }
     }
 }

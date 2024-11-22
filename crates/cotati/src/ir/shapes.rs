@@ -1,4 +1,4 @@
-use super::{Animation, Measurement, Point};
+use super::{Animatable, Measurement, Point};
 
 /// The ‘rect’ element defines a rectangle which is axis-aligned with the current user coordinate system.
 /// Rounded rectangles can be achieved by setting appropriate values for attributes ‘rx’ and ‘ry’.
@@ -21,37 +21,37 @@ pub struct Rect {
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub x: Animation<Measurement>,
+    pub x: Animatable<Measurement>,
 
     /// The y-axis coordinate of the side of the rectangle which has the smaller y-axis coordinate value in the current user coordinate system.
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub y: Animation<Measurement>,
+    pub y: Animatable<Measurement>,
 
     /// The width of the rectangle.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     ///
     /// Animatable: yes.
-    pub width: Animation<Measurement>,
+    pub width: Animatable<Measurement>,
 
     /// The height of the rectangle.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     ///
     /// Animatable: yes.
-    pub height: Animation<Measurement>,
+    pub height: Animatable<Measurement>,
 
     /// For rounded rectangles, the x-axis radius of the ellipse used to round off the corners of the rectangle.
     /// A negative value is an error (see Error processing).
     ///
     /// Animatable: yes.
-    pub rx: Animation<Measurement>,
+    pub rx: Animatable<Measurement>,
 
     /// For rounded rectangles, the y-axis radius of the ellipse used to round off the corners of the rectangle.
     /// A negative value is an error (see Error processing).
     ///
     /// Animatable: yes.
-    pub ry: Animation<Measurement>,
+    pub ry: Animatable<Measurement>,
 }
 
 /// The ‘circle’ element defines a circle based on a center point and a radius.
@@ -62,19 +62,19 @@ pub struct Circle {
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub cx: Animation<Measurement>,
+    pub cx: Animatable<Measurement>,
 
     /// The y-axis coordinate of the center of the circle.
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub cy: Animation<Measurement>,
+    pub cy: Animatable<Measurement>,
 
     /// The radius of the circle.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     ///
     /// Animatable: yes.
-    pub r: Animation<Measurement>,
+    pub r: Animatable<Measurement>,
 }
 
 /// The ‘ellipse’ element defines an ellipse which is axis-aligned with the current user coordinate
@@ -86,25 +86,25 @@ pub struct Ellipse {
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub cx: Animation<Measurement>,
+    pub cx: Animatable<Measurement>,
 
     /// The y-axis coordinate of the center of the ellipse.
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub cy: Animation<Measurement>,
+    pub cy: Animatable<Measurement>,
 
     /// The x-axis radius of the ellipse.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     ///
     /// Animatable: yes.
-    pub rx: Animation<Measurement>,
+    pub rx: Animatable<Measurement>,
 
     /// The y-axis radius of the ellipse.
     /// A negative value is an error (see Error processing). A value of zero disables rendering of the element.
     ///
     /// Animatable: yes.
-    pub ry: Animation<Measurement>,
+    pub ry: Animatable<Measurement>,
 }
 
 /// The ‘line’ element defines a line segment that starts at one point and ends at another.
@@ -116,28 +116,28 @@ pub struct Line {
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub x1: Animation<Measurement>,
+    pub x1: Animatable<Measurement>,
 
     /// The y-axis coordinate of the start of the line.
     ///
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub y1: Animation<Measurement>,
+    pub y1: Animatable<Measurement>,
 
     /// The x-axis coordinate of the end of the line.
     ///
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub x2: Animation<Measurement>,
+    pub x2: Animatable<Measurement>,
 
     /// The y-axis coordinate of the end of the line.
     ///
     /// If the attribute is not specified, the effect is as if a value of "0" were specified.
     ///
     /// Animatable: yes.
-    pub y2: Animation<Measurement>,
+    pub y2: Animatable<Measurement>,
 }
 
 /// The ‘polyline’ element defines a set of connected straight line segments. Typically, ‘polyline’ elements define open shapes.
@@ -147,7 +147,7 @@ pub struct Polyline(
     /// The points that make up the polyline. All coordinate values are in the user coordinate system.
     ///
     /// Animatable: yes.
-    Animation<Vec<Animation<Point>>>,
+    Animatable<Vec<Animatable<Point>>>,
 );
 
 impl Polyline {
@@ -155,9 +155,9 @@ impl Polyline {
     pub fn new<I>(points: I) -> Self
     where
         I: IntoIterator,
-        Animation<Point>: From<I::Item>,
+        Animatable<Point>: From<I::Item>,
     {
-        Self(Animation::Constant(
+        Self(Animatable::Constant(
             points.into_iter().map(|v| v.into()).collect(),
         ))
     }
@@ -170,7 +170,7 @@ pub struct Polygon(
     /// The points that make up the polygon. All coordinate values are in the user coordinate system.
     ///
     /// Animatable: yes.
-    Animation<Vec<Animation<Point>>>,
+    Animatable<Vec<Animatable<Point>>>,
 );
 
 impl Polygon {
@@ -178,9 +178,9 @@ impl Polygon {
     pub fn new<I>(points: I) -> Self
     where
         I: IntoIterator,
-        Animation<Point>: From<I::Item>,
+        Animatable<Point>: From<I::Item>,
     {
-        Self(Animation::Constant(
+        Self(Animatable::Constant(
             points.into_iter().map(|v| v.into()).collect(),
         ))
     }

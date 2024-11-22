@@ -1,4 +1,4 @@
-use super::{Animatable, Animation, Measurement, PreserveAspectRatio, Transform, ViewBox};
+use super::{Animatable, FrameVariable, Measurement, PreserveAspectRatio, Transform, ViewBox};
 
 /// Defines the coordinate system for attributes ‘x’, ‘y’, ‘width’ and ‘height’.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
@@ -16,7 +16,7 @@ impl Default for PatternUnits {
     }
 }
 
-impl Animatable for PatternUnits {}
+impl FrameVariable for PatternUnits {}
 
 /// A pattern is used to fill or stroke an object using a pre-defined graphic object which can be replicated ("tiled")
 /// at fixed intervals in x and y to cover the areas to be painted. Patterns are defined using a ‘pattern’ element and
@@ -42,7 +42,7 @@ pub struct Pattern {
     /// or ‘stroke’ property) and then applying the transform specified by attribute ‘patternTransform’.
     ///
     /// If attribute `units` is not specified, then the effect is as if a value of 'objectBoundingBox' were specified.
-    pub units: Animation<PatternUnits>,
+    pub units: Animatable<PatternUnits>,
     /// Defines the coordinate system for the contents of the ‘pattern’. Note that this attribute has no effect
     /// if attribute ‘viewBox’ is specified.
     ///
@@ -58,7 +58,7 @@ pub struct Pattern {
     ///
     /// If attribute `content_units` is not specified, then the effect is as if a value of 'userSpaceOnUse'
     /// were specified.
-    pub content_units: Animation<PatternUnits>,
+    pub content_units: Animatable<PatternUnits>,
 
     /// Contains the definition of an optional additional transformation from the pattern coordinate system onto the
     /// target coordinate system (i.e., 'userSpaceOnUse' or 'objectBoundingBox'). This allows for things such as
@@ -67,7 +67,7 @@ pub struct Pattern {
     /// from object bounding box units to user space.
     ///
     /// If attribute `transform` is not specified, then the effect is as if an identity transform were specified.
-    pub transform: Animation<Transform>,
+    pub transform: Animatable<Transform>,
 
     /// ‘x’, ‘y’, ‘width’ and ‘height’ indicate how the pattern tiles are placed and spaced. These attributes represent
     /// coordinates and values in the coordinate space specified by the combination of attributes [`units`](Self::units) and
@@ -76,48 +76,48 @@ pub struct Pattern {
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub x: Animation<Measurement>,
+    pub x: Animatable<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub y: Animation<Measurement>,
+    pub y: Animatable<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub width: Animation<Measurement>,
+    pub width: Animatable<Measurement>,
 
     /// See [`x`](Self::x).
     ///
     /// If the attribute is not specified, the effect is as if a value of zero were specified.
     ///
     /// Animatable: yes.
-    pub height: Animation<Measurement>,
+    pub height: Animatable<Measurement>,
 
     /// See [`PreserveAspectRatio`].
     ///
     /// If the attribute is not specified, then the effect is as if a value of xMidYMid meet were specified.
     ///
     /// Animatable: yes.
-    pub aspect: Animation<PreserveAspectRatio>,
+    pub aspect: Animatable<PreserveAspectRatio>,
 
     /// See [`ViewBox`].
     ///
     /// See [`content_units`](Self::content_units).
-    pub viewbox: Option<Animation<ViewBox>>,
+    pub viewbox: Option<Animatable<ViewBox>>,
 }
 
 impl Default for Pattern {
     fn default() -> Self {
         Self {
-            units: Animation::Constant(PatternUnits::ObjectBoundingBox),
-            content_units: Animation::Constant(PatternUnits::UserSpaceOnUse),
-            transform: Animation::Constant(Transform::identity()),
+            units: Animatable::Constant(PatternUnits::ObjectBoundingBox),
+            content_units: Animatable::Constant(PatternUnits::UserSpaceOnUse),
+            transform: Animatable::Constant(Transform::identity()),
             x: Default::default(),
             y: Default::default(),
             width: Default::default(),
