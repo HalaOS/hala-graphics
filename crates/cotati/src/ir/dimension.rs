@@ -190,6 +190,12 @@ pub enum Angle {
     rad(f32),
 }
 
+impl Default for Angle {
+    fn default() -> Self {
+        Self::deg(0.0)
+    }
+}
+
 /// Angle can be used as context variant type.
 impl FrameVariable for Angle {}
 
