@@ -444,28 +444,7 @@ impl Default for FilterBlend {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum FilterColorMatrixValues {
     /// a list of 20 matrix values.
-    Matrix {
-        a0: f32,
-        a1: f32,
-        a2: f32,
-        a3: f32,
-        a4: f32,
-        b0: f32,
-        b1: f32,
-        b2: f32,
-        b3: f32,
-        b4: f32,
-        c0: f32,
-        c1: f32,
-        c2: f32,
-        c3: f32,
-        c4: f32,
-        d0: f32,
-        d1: f32,
-        d2: f32,
-        d3: f32,
-        d4: f32,
-    },
+    Matrix([f32; 20]),
 
     /// `Saturate` is a single real number value (0 to 1).
     ///
@@ -517,28 +496,10 @@ impl FilterColorMatrix {
         Self {
             primitive: Default::default(),
             r#in: Default::default(),
-            values: FilterColorMatrixValues::Matrix {
-                a0: 1.0,
-                a1: 0.0,
-                a2: 0.0,
-                a3: 0.0,
-                a4: 0.0,
-                b0: 0.0,
-                b1: 1.0,
-                b2: 0.0,
-                b3: 0.0,
-                b4: 0.0,
-                c0: 0.0,
-                c1: 0.0,
-                c2: 1.0,
-                c3: 0.0,
-                c4: 0.0,
-                d0: 0.0,
-                d1: 0.0,
-                d2: 0.0,
-                d3: 1.0,
-                d4: 0.0,
-            }
+            values: FilterColorMatrixValues::Matrix([
+                1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
+                0.0, 0.0, 1.0, 0.0,
+            ])
             .into(),
         }
     }
