@@ -1,24 +1,24 @@
-use super::{Angle, Animatable, FrameVariable, Measurement};
+use super::{Angle, Animatable, FrameVariable, Measurement, NumberOptNumber};
 
 /// Defines the coordinate system for attributes ‘x’, ‘y’, ‘width’ and ‘height’.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum FilterUnits {
-    /// see [`units`](Filter::units) and [`primitive_units`](Filter::primitive_units)
+pub enum FeUnits {
+    /// see [`units`](Fe::units) and [`primitive_units`](Fe::primitive_units)
     /// for more informations.
     UserSpaceOnUse,
-    /// see [`units`](Filter::units) and [`primitive_units`](Filter::primitive_units)
+    /// see [`units`](Fe::units) and [`primitive_units`](Fe::primitive_units)
     /// for more informations.
     ObjectBoundingBox,
 }
 
-impl Default for FilterUnits {
+impl Default for FeUnits {
     fn default() -> Self {
         Self::ObjectBoundingBox
     }
 }
 
-impl FrameVariable for FilterUnits {}
+impl FrameVariable for FeUnits {}
 
 /// This attribute takes the form x-pixels [y-pixels], and indicates the width and height
 /// of the intermediate images in pixels. If not provided, then the user agent will use
@@ -35,14 +35,14 @@ impl FrameVariable for FilterUnits {}
 ///
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterRes {
+pub struct FeRes {
     /// `x-pixels`
     pub x: f32,
     /// optional `y-pixels`
     pub y: Option<f32>,
 }
 
-impl FrameVariable for FilterRes {}
+impl FrameVariable for FeRes {}
 
 /// Identifies input for the given filter primitive. The value can be either one of six keywords or
 /// can be a string which matches a previous ‘result’ attribute value within the same ‘filter’ element.
@@ -55,7 +55,7 @@ impl FrameVariable for FilterRes {}
 /// ‘result’. Forward references to results are an error.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum FilterIn {
+pub enum FeIn {
     /// This keyword represents the graphics elements that were the original input into the ‘filter’ element.
     /// For raster effects filter primitives, the graphics elements will be rasterized into an initially clear
     /// RGBA raster in image space. Pixels left untouched by the original graphic will be left clear. The image
@@ -89,9 +89,9 @@ pub enum FilterIn {
     Register(String),
 }
 
-impl FrameVariable for FilterIn {}
+impl FrameVariable for FeIn {}
 
-impl Default for FilterIn {
+impl Default for FeIn {
     fn default() -> Self {
         Self::SourceGraphic
     }
@@ -100,18 +100,18 @@ impl Default for FilterIn {
 /// Assign output to a named register. otherwise the filter output will only be referenced by next filter primitive.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum FilterOut {
+pub enum FeOut {
     Position,
     Named(String),
 }
 
-impl Default for FilterOut {
+impl Default for FeOut {
     fn default() -> Self {
         Self::Position
     }
 }
 
-impl FrameVariable for FilterOut {}
+impl FrameVariable for FeOut {}
 
 /// A filter effect consists of a series of graphics operations that are applied to
 /// a given source graphic to produce a modified graphical result. The result of the
@@ -119,7 +119,7 @@ impl FrameVariable for FilterOut {}
 /// graphic.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct Filter {
+pub struct Fe {
     /// Defines the coordinate system for attributes ‘x’, ‘y’, ‘width’ and ‘height’.
     ///
     /// If filterUnits="userSpaceOnUse", ‘x’, ‘y’, ‘width’ and ‘height’ represent values
@@ -133,7 +133,7 @@ pub struct Filter {
     ///
     /// If attribute ‘filterUnits’ is not specified, then the effect is if a value of
     /// 'objectBoundingBox' were specified.
-    pub units: Animatable<FilterUnits>,
+    pub units: Animatable<FeUnits>,
 
     /// Specifies the coordinate system for the various length values within the filter
     /// primitives and for the attributes that define the filter primitive subregion.
@@ -151,7 +151,7 @@ pub struct Filter {
     ///
     /// If attribute ‘primitiveUnits’ is not specified, then the effect is as if a value of
     /// userSpaceOnUse were specified.
-    pub primitive_units: Animatable<FilterUnits>,
+    pub primitive_units: Animatable<FeUnits>,
 
     /// These attributes define a rectangular region on the canvas to which this filter applies.
     ///
@@ -194,15 +194,15 @@ pub struct Filter {
     /// Animatable: yes.
     pub height: Animatable<Measurement>,
 
-    /// See [`FilterRes`]
-    pub filter_res: Option<Animatable<FilterRes>>,
+    /// See [`FeRes`]
+    pub filter_res: Option<Animatable<FeRes>>,
 }
 
-impl Default for Filter {
+impl Default for Fe {
     fn default() -> Self {
         Self {
-            units: FilterUnits::ObjectBoundingBox.into(),
-            primitive_units: FilterUnits::UserSpaceOnUse.into(),
+            units: FeUnits::ObjectBoundingBox.into(),
+            primitive_units: FeUnits::UserSpaceOnUse.into(),
             x: Measurement::percentage(-10.0).into(),
             y: Measurement::percentage(-10.0).into(),
             width: Measurement::percentage(120.0).into(),
@@ -215,7 +215,7 @@ impl Default for Filter {
 /// The common attributes are available on all filter primitive elements:
 ///
 ///
-/// # Filter primitive subregion
+/// # Fe primitive subregion
 ///
 /// All filter primitives have attributes ‘x’, ‘y’, ‘width’ and ‘height’ which identify a subregion
 /// which restricts calculation and rendering of the given filter primitive. These attributes are
@@ -244,7 +244,7 @@ impl Default for Filter {
 /// ‘width’ and ‘height’ values of the referenced filter primitive in order to fill its own filter primitive subregion.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterPrimitive {
+pub struct FePrimitive {
     /// The minimum x coordinate for the subregion which restricts calculation and rendering of the given filter primitive.
     pub x: Animatable<Measurement>,
 
@@ -264,17 +264,17 @@ pub struct FilterPrimitive {
     pub height: Animatable<Measurement>,
 
     /// Assign the filter primitive output to `position register` or `named register`.
-    pub out: Animatable<FilterOut>,
+    pub out: Animatable<FeOut>,
 }
 
-impl Default for FilterPrimitive {
+impl Default for FePrimitive {
     fn default() -> Self {
         Self {
             x: Measurement::percentage(0.0).into(),
             y: Measurement::percentage(0.0).into(),
             width: Measurement::percentage(100.0).into(),
             height: Measurement::percentage(100.0).into(),
-            out: FilterOut::Position.into(),
+            out: FeOut::Position.into(),
         }
     }
 }
@@ -286,7 +286,7 @@ impl Default for FilterPrimitive {
 /// ![`distance light source`](https://www.w3.org/TR/SVG11/images/filters/azimuth-elevation.png)
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterDistantLight {
+pub struct FeDistantLight {
     /// Direction angle for the light source on the XY plane (clockwise), in degrees from the x axis.
     ///
     /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
@@ -303,32 +303,32 @@ pub struct FilterDistantLight {
 /// Range 1.0 to 128.0.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterSpecularExponent(pub f32);
+pub struct FeSpecularExponent(pub f32);
 
-impl Default for FilterSpecularExponent {
+impl Default for FeSpecularExponent {
     fn default() -> Self {
         Self(1.0)
     }
 }
 
-impl From<f32> for FilterSpecularExponent {
+impl From<f32> for FeSpecularExponent {
     fn from(value: f32) -> Self {
         Self(value)
     }
 }
 
-impl From<FilterSpecularExponent> for f32 {
-    fn from(value: FilterSpecularExponent) -> Self {
+impl From<FeSpecularExponent> for f32 {
+    fn from(value: FeSpecularExponent) -> Self {
         value.0
     }
 }
 
-impl FrameVariable for FilterSpecularExponent {}
+impl FrameVariable for FeSpecularExponent {}
 
 /// Defines spot light source.
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterSpotLight {
+pub struct FeSpotLight {
     /// X location for the light source in the coordinate system established by attribute ‘primitiveUnits’ on the ‘filter’ element.
     ///
     /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
@@ -368,7 +368,7 @@ pub struct FilterSpotLight {
     /// Exponent value controlling the focus for the light source.
     ///
     /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
-    pub specular_exponent: Animatable<FilterSpecularExponent>,
+    pub specular_exponent: Animatable<FeSpecularExponent>,
 
     /// A limiting cone which restricts the region where the light is projected. No light is projected outside the cone.
     /// ‘limitingConeAngle’ represents the angle in degrees between the spot light axis (i.e. the axis between the light
@@ -388,7 +388,7 @@ pub struct FilterSpotLight {
 /// * cb = Color (RGB) at a given pixel for image B - premultiplied
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum FilterBlendMode {
+pub enum FeBlendMode {
     /// cr = (1 - qa) * cb + ca
     Normal,
     /// cr = (1-qa)*cb + (1-qb)*ca + ca*cb
@@ -401,48 +401,48 @@ pub enum FilterBlendMode {
     Lighten,
 }
 
-impl Default for FilterBlendMode {
+impl Default for FeBlendMode {
     fn default() -> Self {
         Self::Normal
     }
 }
 
-impl FrameVariable for FilterBlendMode {}
+impl FrameVariable for FeBlendMode {}
 
 /// This filter composites two objects together using commonly used imaging software blending modes.
 /// It performs a pixel-wise combination of two input images.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterBlend {
+pub struct FeBlend {
     /// common properties.
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub primitive: FilterPrimitive,
+    pub primitive: FePrimitive,
 
     /// Image blending mode
-    pub mode: Animatable<FilterBlendMode>,
+    pub mode: Animatable<FeBlendMode>,
 
     /// The first input image to the blending operation.
-    pub a: Animatable<FilterIn>,
+    pub a: Animatable<FeIn>,
 
     /// The second input image to the blending operation. This attribute can take on the same values as the ‘in’ attribute.
-    pub b: Animatable<FilterIn>,
+    pub b: Animatable<FeIn>,
 }
 
-impl Default for FilterBlend {
+impl Default for FeBlend {
     fn default() -> Self {
         Self {
             primitive: Default::default(),
-            mode: FilterBlendMode::Normal.into(),
-            a: FilterIn::SourceGraphic.into(),
-            b: FilterIn::BackgroundImage.into(),
+            mode: FeBlendMode::Normal.into(),
+            a: FeIn::SourceGraphic.into(),
+            b: FeIn::BackgroundImage.into(),
         }
     }
 }
 
-/// Values of FilterColorMatrix.
+/// Values of FeColorMatrix.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum FilterColorMatrixValues {
+pub enum FeColorMatrixValues {
     /// a list of 20 matrix values.
     Matrix([f32; 20]),
 
@@ -462,7 +462,7 @@ pub enum FilterColorMatrixValues {
     LuminanceToAlpha,
 }
 
-impl FrameVariable for FilterColorMatrixValues {}
+impl FrameVariable for FeColorMatrixValues {}
 
 /// This filter applies a matrix transformation.
 ///
@@ -479,25 +479,25 @@ impl FrameVariable for FilterColorMatrixValues {}
 /// See [`feColorMatrix`](https://www.w3.org/TR/SVG11/filters.html#feColorMatrixElement).
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterColorMatrix {
+pub struct FeColorMatrix {
     /// common properties.
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub primitive: FilterPrimitive,
+    pub primitive: FePrimitive,
 
-    /// See [`FilterIn`]
-    pub r#in: Animatable<FilterIn>,
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
 
     /// The contents of ‘values’ depends on the value of attribute ‘type’:
-    pub values: Animatable<FilterColorMatrixValues>,
+    pub values: Animatable<FeColorMatrixValues>,
 }
 
-impl FilterColorMatrix {
+impl FeColorMatrix {
     /// defaults to the identity matrix
     pub fn matrix() -> Self {
         Self {
             primitive: Default::default(),
             r#in: Default::default(),
-            values: FilterColorMatrixValues::Matrix([
+            values: FeColorMatrixValues::Matrix([
                 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
                 0.0, 0.0, 1.0, 0.0,
             ])
@@ -510,7 +510,7 @@ impl FilterColorMatrix {
         Self {
             primitive: Default::default(),
             r#in: Default::default(),
-            values: FilterColorMatrixValues::Saturate(1.0).into(),
+            values: FeColorMatrixValues::Saturate(1.0).into(),
         }
     }
 
@@ -519,7 +519,7 @@ impl FilterColorMatrix {
         Self {
             primitive: Default::default(),
             r#in: Default::default(),
-            values: FilterColorMatrixValues::HueRotate(Angle::deg(0.0)).into(),
+            values: FeColorMatrixValues::HueRotate(Angle::deg(0.0)).into(),
         }
     }
 }
@@ -527,7 +527,7 @@ impl FilterColorMatrix {
 /// Defines transfer function of [`feComponentTransfer`](https://www.w3.org/TR/SVG11/filters.html#feComponentTransferTypeAttribute)
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum FilterTransferFn {
+pub enum FeTransferFn {
     Identity,
 
     Table(Vec<f32>),
@@ -552,7 +552,7 @@ pub enum FilterTransferFn {
     },
 }
 
-impl Default for FilterTransferFn {
+impl Default for FeTransferFn {
     fn default() -> Self {
         Self::Identity
     }
@@ -570,48 +570,48 @@ impl Default for FilterTransferFn {
 /// for every pixel. It allows operations like brightness adjustment, contrast adjustment, color balance or thresholding.
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterComponentTransfer {
+pub struct FeComponentTransfer {
     /// common properties.
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub primitive: FilterPrimitive,
+    pub primitive: FePrimitive,
 
-    /// See [`FilterIn`]
-    pub r#in: Animatable<FilterIn>,
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
 
     /// transfer function for the red component of the input graphic
-    pub func_r: FilterTransferFn,
+    pub func_r: FeTransferFn,
     /// transfer function for the green component of the input graphic
-    pub func_g: FilterTransferFn,
+    pub func_g: FeTransferFn,
     /// transfer function for the blue component of the input graphic
-    pub func_b: FilterTransferFn,
+    pub func_b: FeTransferFn,
     /// transfer function for the alpha component of the input graphic
-    pub func_a: FilterTransferFn,
+    pub func_a: FeTransferFn,
 }
 
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterCompositeArithmetic(pub f32);
+pub struct FeCompositeArithmetic(pub f32);
 
-impl From<f32> for FilterCompositeArithmetic {
+impl From<f32> for FeCompositeArithmetic {
     fn from(value: f32) -> Self {
         Self(value)
     }
 }
 
-impl From<FilterCompositeArithmetic> for f32 {
-    fn from(value: FilterCompositeArithmetic) -> Self {
+impl From<FeCompositeArithmetic> for f32 {
+    fn from(value: FeCompositeArithmetic) -> Self {
         value.0
     }
 }
 
-impl FrameVariable for FilterCompositeArithmetic {}
+impl FrameVariable for FeCompositeArithmetic {}
 
 /// The compositing operation that is to be performed. All of the ‘operator’ types except arithmetic match the
 /// corresponding operation as described in [PORTERDUFF]. The arithmetic operator is described above. If attribute
 /// ‘operator’ is not specified, then the effect is as if a value of over were specified.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum FilterCompositeOperator {
+pub enum FeCompositeOperator {
     Over,
     In,
     Out,
@@ -620,13 +620,13 @@ pub enum FilterCompositeOperator {
     Arithmetic,
 }
 
-impl Default for FilterCompositeOperator {
+impl Default for FeCompositeOperator {
     fn default() -> Self {
         Self::Over
     }
 }
 
-impl FrameVariable for FilterCompositeOperator {}
+impl FrameVariable for FeCompositeOperator {}
 
 /// This filter performs the combination of the two input images pixel-wise in image space using one of the Porter-Duff [`PORTERDUFF`]
 /// compositing operations: over, in, atop, out, xor [`SVG-COMPOSITING`]. Additionally, a component-wise arithmetic operation (with
@@ -639,33 +639,178 @@ impl FrameVariable for FilterCompositeOperator {}
 /// [`SVG-COMPOSITING`]: https://www.w3.org/TR/SVG11/refs.html#ref-SVG-COMPOSITING
 #[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct FilterComposite {
+pub struct FeComposite {
     /// common properties.
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub primitive: FilterPrimitive,
+    pub primitive: FePrimitive,
 
-    /// See [`FilterIn`]
-    pub a: Animatable<FilterIn>,
+    /// See [`FeIn`]
+    pub a: Animatable<FeIn>,
 
     /// The second input image to the compositing operation. This attribute can take on the same values as the [`a`](Self::a) attribute.
-    pub b: Animatable<FilterIn>,
+    pub b: Animatable<FeIn>,
 
-    /// See [`FilterCompositeOperator`]
-    pub operator: Animatable<FilterCompositeOperator>,
-
-    /// Only applicable if operator="arithmetic".
-    /// If the attribute is not specified, the effect is as if a value of 0 were specified.
-    pub k1: Animatable<FilterCompositeArithmetic>,
+    /// See [`FeCompositeOperator`]
+    pub operator: Animatable<FeCompositeOperator>,
 
     /// Only applicable if operator="arithmetic".
     /// If the attribute is not specified, the effect is as if a value of 0 were specified.
-    pub k2: Animatable<FilterCompositeArithmetic>,
+    pub k1: Animatable<FeCompositeArithmetic>,
 
     /// Only applicable if operator="arithmetic".
     /// If the attribute is not specified, the effect is as if a value of 0 were specified.
-    pub k3: Animatable<FilterCompositeArithmetic>,
+    pub k2: Animatable<FeCompositeArithmetic>,
 
     /// Only applicable if operator="arithmetic".
     /// If the attribute is not specified, the effect is as if a value of 0 were specified.
-    pub k4: Animatable<FilterCompositeArithmetic>,
+    pub k3: Animatable<FeCompositeArithmetic>,
+
+    /// Only applicable if operator="arithmetic".
+    /// If the attribute is not specified, the effect is as if a value of 0 were specified.
+    pub k4: Animatable<FeCompositeArithmetic>,
+}
+
+/// Indicates the number of cells in each dimension for ‘kernelMatrix’. The values provided must be <integer>s greater than zero.
+/// The first number, <orderX>, indicates the number of columns in the matrix. The second number, <orderY>, indicates the number
+/// of rows in the matrix. If <orderY> is not provided, it defaults to <orderX>.
+///
+/// A typical value is order="3". It is recommended that only small values (e.g., 3) be used; higher values may result in very
+/// high CPU overhead and usually do not produce results that justify the impact on performance.
+///
+/// If the attribute is not specified, the effect is as if a value of 3 were specified.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeConvolveMatrixOrder {
+    pub order_x: u32,
+
+    pub order_y: Option<u32>,
+}
+
+impl Default for FeConvolveMatrixOrder {
+    fn default() -> Self {
+        Self {
+            order_x: 3,
+            order_y: None,
+        }
+    }
+}
+
+impl FrameVariable for FeConvolveMatrixOrder {}
+
+/// Determines how to extend the input image as necessary with color values so that the matrix operations
+/// can be applied when the kernel is positioned at or near the edge of the input image.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FeConvolveMatrixEdgeMode {
+    Duplicate,
+    Wrap,
+    None,
+}
+
+impl Default for FeConvolveMatrixEdgeMode {
+    fn default() -> Self {
+        Self::Duplicate
+    }
+}
+
+/// feConvolveMatrix applies a matrix convolution filter effect. A convolution combines pixels
+/// in the input image with neighboring pixels to produce a resulting image. A wide variety
+/// of imaging operations can be achieved through convolutions, including blurring, edge detection,
+/// sharpening, embossing and beveling.
+///
+/// See [`feConvolveMatrix`](https://www.w3.org/TR/SVG11/filters.html#feConvolveMatrixElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeConvolveMatrix {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
+    /// See [`FeConvolveMatrixOrder`]
+    pub order: Animatable<FeConvolveMatrixOrder>,
+    /// The list of `number`s that make up the kernel matrix for the convolution. Values are separated by space
+    /// characters and/or a comma. The number of entries in the list must equal `orderX` times `orderY`.
+    pub kernel: Animatable<Vec<f32>>,
+
+    /// After applying the ‘kernelMatrix’ to the input image to yield a number, that number is divided by ‘divisor’
+    /// to yield the final destination color value. A divisor that is the sum of all the matrix values tends to have
+    /// an evening effect on the overall color intensity of the result. It is an error to specify a divisor of zero.
+    /// The default value is the sum of all values in kernelMatrix, with the exception that if the sum is zero, then
+    /// the divisor is set to 1.
+    pub divisor: Option<Animatable<f32>>,
+
+    /// After applying the ‘kernelMatrix’ to the input image to yield a number and applying the ‘divisor’, the ‘bias’
+    /// attribute is added to each component. One application of ‘bias’ is when it is desirable to have .5 gray value
+    /// be the zero response of the filter. The bias property shifts the range of the filter. This allows representation
+    /// of values that would otherwise be clamped to 0 or 1. If ‘bias’ is not specified, then the effect is as if a
+    /// value of 0 were specified.
+    pub bias: Animatable<f32>,
+
+    /// After applying the ‘kernelMatrix’ to the input image to yield a number and applying the ‘divisor’, the ‘bias’
+    /// attribute is added to each component. One application of ‘bias’ is when it is desirable to have .5 gray value
+    /// be the zero response of the filter. The bias property shifts the range of the filter. This allows representation
+    /// of values that would otherwise be clamped to 0 or 1. If ‘bias’ is not specified, then the effect is as if a
+    /// value of 0 were specified.
+    pub target_x: Animatable<u32>,
+
+    /// Determines the positioning in Y of the convolution matrix relative to a given target pixel in the input image.
+    /// The topmost row of the matrix is row number zero. The value must be such that: 0 <= targetY < orderY. By default,
+    /// the convolution matrix is centered in Y over each pixel of the input image (i.e., targetY = floor ( orderY / 2 )).
+    pub target_y: Animatable<u32>,
+
+    /// The first number is the <dx> value. The second number is the <dy> value. If the <dy> value is not specified,
+    /// it defaults to the same value as <dx>. Indicates the intended distance in current filter units (i.e., units
+    /// as determined by the value of attribute ‘primitiveUnits’) between successive columns and rows, respectively,
+    /// in the ‘kernelMatrix’. By specifying value(s) for ‘kernelUnitLength’, the kernel becomes defined in a
+    /// scalable, abstract coordinate system. If ‘kernelUnitLength’ is not specified, the default value is one pixel
+    /// in the offscreen bitmap, which is a pixel-based coordinate system, and thus potentially not scalable. For
+    /// some level of consistency across display media and user agents, it is necessary that a value be provided for
+    /// at least one of ‘filterRes’ and ‘kernelUnitLength’. In some implementations, the most consistent results and
+    /// the fastest performance will be achieved if the pixel grid of the temporary offscreen images aligns with the
+    /// pixel grid of the kernel.
+    ///
+    /// A negative or zero value is an error (see Error processing).
+    pub kernel_unit_len: Option<Animatable<NumberOptNumber>>,
+
+    /// A value of false indicates that the convolution will apply to all channels, including the alpha channel.
+    ///
+    /// See [`feConvolveMatrix`](https://www.w3.org/TR/SVG11/filters.html#feConvolveMatrixElement)
+    pub preserve_alpha: Animatable<bool>,
+}
+
+/// See [`feConvolveMatrix`](https://www.w3.org/TR/SVG11/filters.html#feDiffuseLightingElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeDiffuseLighting {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
+
+    /// height of surface when Ain = 1.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+    pub surface_scale: Animatable<f32>,
+
+    /// kd in Phong lighting model. In SVG, this can be any non-negative number.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+    pub diffuse_constant: Animatable<f32>,
+
+    /// The first number is the <dx> value. The second number is the <dy> value. If the <dy> value is not specified,
+    /// it defaults to the same value as <dx>. Indicates the intended distance in current filter units (i.e., units
+    /// as determined by the value of attribute ‘primitiveUnits’) for dx and dy, respectively, in the surface normal
+    /// calculation formulas. By specifying value(s) for ‘kernelUnitLength’, the kernel becomes defined in a scalable,
+    /// abstract coordinate system. If ‘kernelUnitLength’ is not specified, the dx and dy values should represent
+    /// very small deltas relative to a given (x,y) position, which might be implemented in some cases as one pixel
+    /// in the intermediate image offscreen bitmap, which is a pixel-based coordinate system, and thus potentially
+    /// not scalable. For some level of consistency across display media and user agents, it is necessary that a value
+    /// be provided for at least one of ‘filterRes’ and ‘kernelUnitLength’. Discussion of intermediate images are in the
+    /// Introduction and in the description of attribute ‘filterRes’.
+    ///
+    /// A negative or zero value is an error (see Error processing).
+    pub kernel_unit_len: Option<Animatable<NumberOptNumber>>,
 }

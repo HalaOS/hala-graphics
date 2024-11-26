@@ -3,6 +3,9 @@ use crate::errors::{Error, Result};
 /// This is a marker trait that a type with this trait can be used as frame register variable.
 pub trait FrameVariable {}
 
+impl FrameVariable for bool {}
+impl FrameVariable for f32 {}
+impl FrameVariable for u32 {}
 impl<T> FrameVariable for Vec<T> where T: FrameVariable {}
 
 /// An variable container, indicates that this variable can be used as animation frame variable.
