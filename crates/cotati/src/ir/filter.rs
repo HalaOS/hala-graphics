@@ -1,4 +1,7 @@
-use super::{Angle, Animatable, FrameVariable, Measurement, NumberOptNumber};
+use super::{
+    Angle, Animatable, ChannelSelector, FrameVariable, Href, Measurement, NumberOptNumber,
+    PreserveAspectRatio, RecognizedColor, Rgba,
+};
 
 /// Defines the coordinate system for attributes ‘x’, ‘y’, ‘width’ and ‘height’.
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
@@ -607,7 +610,7 @@ impl From<FeCompositeArithmetic> for f32 {
 impl FrameVariable for FeCompositeArithmetic {}
 
 /// The compositing operation that is to be performed. All of the ‘operator’ types except arithmetic match the
-/// corresponding operation as described in [PORTERDUFF]. The arithmetic operator is described above. If attribute
+/// corresponding operation as described in `PORTERDUFF`. The arithmetic operator is described above. If attribute
 /// ‘operator’ is not specified, then the effect is as if a value of over were specified.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -670,9 +673,9 @@ pub struct FeComposite {
     pub k4: Animatable<FeCompositeArithmetic>,
 }
 
-/// Indicates the number of cells in each dimension for ‘kernelMatrix’. The values provided must be <integer>s greater than zero.
-/// The first number, <orderX>, indicates the number of columns in the matrix. The second number, <orderY>, indicates the number
-/// of rows in the matrix. If <orderY> is not provided, it defaults to <orderX>.
+/// Indicates the number of cells in each dimension for ‘kernelMatrix’. The values provided must be `integer`s greater than zero.
+/// The first number, `orderX`, indicates the number of columns in the matrix. The second number, `orderY`, indicates the number
+/// of rows in the matrix. If `orderY` is not provided, it defaults to `orderX`.
 ///
 /// A typical value is order="3". It is recommended that only small values (e.g., 3) be used; higher values may result in very
 /// high CPU overhead and usually do not produce results that justify the impact on performance.
@@ -759,8 +762,8 @@ pub struct FeConvolveMatrix {
     /// the convolution matrix is centered in Y over each pixel of the input image (i.e., targetY = floor ( orderY / 2 )).
     pub target_y: Animatable<u32>,
 
-    /// The first number is the <dx> value. The second number is the <dy> value. If the <dy> value is not specified,
-    /// it defaults to the same value as <dx>. Indicates the intended distance in current filter units (i.e., units
+    /// The first number is the `dx` value. The second number is the `dy` value. If the `dy` value is not specified,
+    /// it defaults to the same value as `dx`. Indicates the intended distance in current filter units (i.e., units
     /// as determined by the value of attribute ‘primitiveUnits’) between successive columns and rows, respectively,
     /// in the ‘kernelMatrix’. By specifying value(s) for ‘kernelUnitLength’, the kernel becomes defined in a
     /// scalable, abstract coordinate system. If ‘kernelUnitLength’ is not specified, the default value is one pixel
@@ -800,8 +803,8 @@ pub struct FeDiffuseLighting {
     /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
     pub diffuse_constant: Animatable<f32>,
 
-    /// The first number is the <dx> value. The second number is the <dy> value. If the <dy> value is not specified,
-    /// it defaults to the same value as <dx>. Indicates the intended distance in current filter units (i.e., units
+    /// The first number is the `dx` value. The second number is the `dy` value. If the `dy` value is not specified,
+    /// it defaults to the same value as `dx`. Indicates the intended distance in current filter units (i.e., units
     /// as determined by the value of attribute ‘primitiveUnits’) for dx and dy, respectively, in the surface normal
     /// calculation formulas. By specifying value(s) for ‘kernelUnitLength’, the kernel becomes defined in a scalable,
     /// abstract coordinate system. If ‘kernelUnitLength’ is not specified, the dx and dy values should represent
@@ -813,4 +816,354 @@ pub struct FeDiffuseLighting {
     ///
     /// A negative or zero value is an error (see Error processing).
     pub kernel_unit_len: Option<Animatable<NumberOptNumber>>,
+}
+
+/// This filter primitive uses the pixels values from the image from ‘in2’ to spatially displace the image from ‘in’.
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeDisplacementMap {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// See [`FeIn`]
+    pub a: Animatable<FeIn>,
+
+    /// See [`FeIn`]
+    pub b: Animatable<FeIn>,
+
+    /// Displacement scale factor. The amount is expressed in the coordinate system established by attribute ‘primitiveUnits’
+    /// on the ‘filter’ element.
+    ///
+    /// When the value of this attribute is 0, this operation has no effect on the source image.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
+    pub scale: Animatable<f32>,
+
+    /// Indicates which channel from ‘in2’ to use to displace the pixels in ‘in’ along the x-axis.
+    /// If attribute ‘xChannelSelector’ is not specified, then the effect is as if a value of A were
+    /// specified.
+    pub x_channel_selector: Animatable<ChannelSelector>,
+
+    /// Indicates which channel from ‘in2’ to use to displace the pixels in ‘in’ along the y-axis.
+    /// If attribute ‘yChannelSelector’ is not specified, then the effect is as if a value of A were
+    /// specified.
+    pub y_channel_selector: Animatable<ChannelSelector>,
+}
+
+/// This filter primitive creates a rectangle filled with the color and opacity values from properties ‘flood-color’ and ‘flood-opacity’.
+/// The rectangle is as large as the filter primitive subregion established by the ‘x’, ‘y’, ‘width’ and ‘height’ attributes on the
+/// ‘feFlood’ element.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeFlood(pub Rgba);
+
+impl Default for FeFlood {
+    fn default() -> Self {
+        Self(RecognizedColor::black.into())
+    }
+}
+
+/// This filter primitive performs a Gaussian blur on the input image.
+///
+/// See [`feGaussianBlur`](https://www.w3.org/TR/SVG11/filters.html#feGaussianBlurElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeGaussianBlur {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
+
+    /// The standard deviation for the blur operation. If two `number`s are provided, the first number represents
+    /// a standard deviation value along the x-axis of the coordinate system established by attribute ‘primitiveUnits’
+    /// on the ‘filter’ element. The second value represents a standard deviation in Y. If one number is provided,
+    /// then that value is used for both X and Y.
+    ///
+    /// A negative value is an error (see Error processing). A value of zero disables the effect of the given filter
+    /// primitive (i.e., the result is the filter input image). If ‘stdDeviation’ is 0 in only one of X or Y, then the
+    /// effect is that the blur is only applied in the direction that has a non-zero value.
+    pub std_deviation: Animatable<NumberOptNumber>,
+}
+
+/// This filter primitive refers to a graphic external to this filter element, which is loaded or rendered into an RGBA
+/// raster and becomes the result of the filter primitive.
+///
+/// See [`feImage`](https://www.w3.org/TR/SVG11/filters.html#feImageElement)
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeImage {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// An IRI reference to the image source.
+    pub href: Animatable<Href>,
+
+    /// See [`PreserveAspectRatio`].
+    pub aspect: Animatable<PreserveAspectRatio>,
+}
+
+impl FeImage {
+    /// Create a new FeImage filter primitive from image `href`.
+    pub fn new<S>(href: S) -> Self
+    where
+        S: ToOwned<Owned = String>,
+    {
+        FeImage {
+            primitive: Default::default(),
+            href: Href(href.to_owned()).into(),
+            aspect: Default::default(),
+        }
+    }
+}
+
+/// This filter primitive composites input image layers on top of each other using the over operator with Input1
+/// (corresponding to the first ‘feMergeNode’ child element) on the bottom and the last specified input, InputN
+/// (corresponding to the last ‘feMergeNode’ child element), on top.
+///
+/// See [`feMerge`](https://www.w3.org/TR/SVG11/filters.html#feMergeElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeMerge(pub FePrimitive);
+
+/// See [`FeMerge`]
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeMergeItem(pub Animatable<FeIn>);
+
+/// A keyword indicating whether to erode (i.e., thin) or dilate (fatten) the source graphic.
+/// If attribute `mode` is not specified, then the effect is as if a value of erode were specified.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FeMorphologyMode {
+    Erode,
+    Dilate,
+}
+
+impl Default for FeMorphologyMode {
+    fn default() -> Self {
+        Self::Erode
+    }
+}
+
+impl FrameVariable for FeMorphologyMode {}
+
+/// This filter primitive performs "fattening" or "thinning" of artwork.
+/// It is particularly useful for fattening or thinning an alpha channel.
+///
+/// See [`feMorphology`](https://www.w3.org/TR/SVG11/filters.html#feMorphologyElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeMorphology {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
+
+    /// See [`FeMorphologyMode`]
+    pub mode: Animatable<FeMorphologyMode>,
+
+    /// The radius (or radii) for the operation. If two `number`s are provided, the first number represents
+    /// a x-radius and the second value represents a y-radius. If one number is provided, then that value
+    /// is used for both X and Y. The values are in the coordinate system established by attribute
+    /// ‘primitiveUnits’ on the ‘filter’ element.
+    ///
+    /// A negative value is an error (see Error processing). A value of zero disables the effect of the given
+    /// filter primitive (i.e., the result is a transparent black image).
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
+    pub radius: Animatable<NumberOptNumber>,
+}
+
+/// This filter primitive offsets the input image relative to its current position in the image space by the specified vector.
+///
+/// This is important for effects like drop shadows.
+///
+/// See [`feOffset`](https://www.w3.org/TR/SVG11/filters.html#feOffsetElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeOffset {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
+
+    /// The amount to offset the input graphic along the x-axis. The offset amount is expressed in the coordinate system established
+    /// by attribute ‘primitiveUnits’ on the ‘filter’ element.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
+    pub dx: Animatable<f32>,
+
+    /// The amount to offset the input graphic along the y-axis. The offset amount is expressed in the coordinate system established
+    /// by attribute ‘primitiveUnits’ on the ‘filter’ element.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
+    pub dy: Animatable<f32>,
+}
+
+/// This filter primitive lights a source graphic using the alpha channel as a bump map.
+/// The resulting image is an RGBA image based on the light color. The lighting calculation follows the standard specular component of
+/// the Phong lighting model. The resulting image depends on the light color, light position and surface geometry of the input bump map.
+/// The result of the lighting calculation is added. The filter primitive assumes that the viewer is at infinity in the z direction (i.e.,
+/// the unit vector in the eye direction is (0,0,1) everywhere).
+///
+/// See [`feSpecularLighting`](https://www.w3.org/TR/SVG11/filters.html#feSpecularLightingElement)
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeSpecularLighting {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
+
+    /// height of surface when Ain = 1.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+    pub surface_scale: Animatable<f32>,
+
+    /// height of surface when Ain = 1.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+    pub specular_constant: Animatable<f32>,
+
+    /// Exponent for specular term, larger is more "shiny". Range 1.0 to 128.0.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+    pub specular_exponent: Animatable<f32>,
+
+    /// The first number is the `dx` value. The second number is the `dy` value. If the `dy` value is not specified,
+    /// it defaults to the same value as `dx`. Indicates the intended distance in current filter units (i.e., units
+    /// as determined by the value of attribute ‘primitiveUnits’) for dx and dy, respectively, in the surface normal
+    /// calculation formulas. By specifying value(s) for ‘kernelUnitLength’, the kernel becomes defined in a scalable,
+    /// abstract coordinate system. If ‘kernelUnitLength’ is not specified, the dx and dy values should represent very
+    /// small deltas relative to a given (x,y) position, which might be implemented in some cases as one pixel in the
+    /// intermediate image offscreen bitmap, which is a pixel-based coordinate system, and thus potentially not scalable.
+    /// For some level of consistency across display media and user agents, it is necessary that a value be provided
+    /// for at least one of ‘filterRes’ and ‘kernelUnitLength’. Discussion of intermediate images are in the Introduction
+    /// and in the description of attribute ‘filterRes’.
+    ///
+    /// A negative or zero value is an error (see Error processing).
+    pub kernel_unit_len: Option<Animatable<NumberOptNumber>>,
+}
+
+impl Default for FeSpecularLighting {
+    fn default() -> Self {
+        Self {
+            primitive: Default::default(),
+            surface_scale: 1.0.into(),
+            specular_constant: 1.0.into(),
+            specular_exponent: 1.0.into(),
+            kernel_unit_len: None,
+            r#in: Default::default(),
+        }
+    }
+}
+
+/// This filter primitive fills a target rectangle with a repeated, tiled pattern of an input image. The target rectangle is
+/// as large as the filter primitive subregion established by the ‘x’, ‘y’, ‘width’ and ‘height’ attributes on the ‘feTile’
+/// element.
+///
+/// See [`feTitle`](https://www.w3.org/TR/SVG11/filters.html#feTitleElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeTile {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// See [`FeIn`]
+    pub r#in: Animatable<FeIn>,
+}
+
+/// See [`stitch_tiles`](FeTurbulence::stitch_tiles)
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FeStitchTiles {
+    /// If stitchTiles="stitch", then the user agent will automatically adjust baseFrequency-x and baseFrequency-y values
+    /// such that the feTurbulence node's width and height (i.e., the width and height of the current subregion) contains
+    /// an integral number of the Perlin tile width and height for the first octave. The baseFrequency will be adjusted up
+    /// or down depending on which way has the smallest relative (not absolute) change as follows: Given the frequency,
+    /// calculate lowFreq=floor(width*frequency)/width and hiFreq=ceil(width*frequency)/width. If frequency/lowFreq < hiFreq/frequency
+    /// then use lowFreq, else use hiFreq. While generating turbulence values, generate lattice vectors as normal for Perlin Noise,
+    /// except for those lattice points that lie on the right or bottom edges of the active area (the size of the resulting tile).
+    /// In those cases, copy the lattice vector from the opposite edge of the active area.
+    Stitch,
+    /// If stitchTiles="noStitch", no attempt it made to achieve smooth transitions at the border of tiles which contain a turbulence
+    /// function. Sometimes the result will show clear discontinuities at the tile borders.
+    NoStitch,
+}
+
+impl Default for FeStitchTiles {
+    fn default() -> Self {
+        Self::NoStitch
+    }
+}
+
+impl FrameVariable for FeStitchTiles {}
+
+// Indicates whether the filter primitive should perform a noise or turbulence function.
+// If attribute ‘type’ is not specified, then the effect is as if a value of turbulence were specified.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FeTurbulenceType {
+    FractalNoise,
+    Turbulence,
+}
+
+impl Default for FeTurbulenceType {
+    fn default() -> Self {
+        Self::Turbulence
+    }
+}
+
+impl FrameVariable for FeTurbulenceType {}
+
+/// This filter primitive creates an image using the Perlin turbulence function.
+/// It allows the synthesis of artificial textures like clouds or marble. For a detailed description the of the Perlin turbulence
+/// function, see "Texturing and Modeling", Ebert et al, AP Professional, 1994. The resulting image will fill the entire filter
+/// primitive subregion for this filter primitive.
+///
+/// See [`feTurbulence`](https://www.w3.org/TR/SVG11/filters.html#feTurbulenceElement)
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FeTurbulence {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FePrimitive,
+
+    /// The base frequency (frequencies) parameter(s) for the noise function. If two `number`s are provided, the first number
+    /// represents a base frequency in the X direction and the second value represents a base frequency in the Y direction.
+    /// If one number is provided, then that value is used for both X and Y.
+    ///
+    /// A negative value for base frequency is an error (see Error processing).
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 0 were specifie.
+    pub base_frequency: Animatable<NumberOptNumber>,
+
+    /// The numOctaves parameter for the noise function.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+    pub num_octaves: Animatable<i32>,
+
+    /// The starting number for the pseudo random number generator.
+    ///
+    /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
+    /// When the seed number is handed over to the algorithm above it must first be truncated, i.e.
+    /// rounded to the closest integer value towards zero.
+    pub seed: Animatable<f32>,
+
+    /// See [`FeStitchTiles`]
+    pub stitch_tiles: Animatable<FeStitchTiles>,
+
+    /// See [`FeStitchTiles`]
+    pub r#type: Animatable<FeTurbulenceType>,
 }
