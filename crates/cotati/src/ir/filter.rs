@@ -484,6 +484,7 @@ pub struct FilterColorMatrix {
     #[cfg_attr(feature = "serde", serde(flatten))]
     pub primitive: FilterPrimitive,
 
+    /// See [`FilterIn`]
     pub r#in: Animatable<FilterIn>,
 
     /// The contents of ‘values’ depends on the value of attribute ‘type’:
@@ -521,4 +522,150 @@ impl FilterColorMatrix {
             values: FilterColorMatrixValues::HueRotate(Angle::deg(0.0)).into(),
         }
     }
+}
+
+/// Defines transfer function of [`feComponentTransfer`](https://www.w3.org/TR/SVG11/filters.html#feComponentTransferTypeAttribute)
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FilterTransferFn {
+    Identity,
+
+    Table(Vec<f32>),
+
+    Linear {
+        /// the slope of the linear function.
+        slope: f32,
+        /// the intercept of the linear function.
+        intercept: f32,
+    },
+
+    Gamma {
+        /// the amplitude of the gamma function.
+        /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+        amplitude: f32,
+        /// the exponent of the gamma function.
+        /// If the attribute is not specified, then the effect is as if a value of 1 were specified.
+        exponent: f32,
+        /// the offset of the gamma function.
+        /// If the attribute is not specified, then the effect is as if a value of 0 were specified.
+        offset: f32,
+    },
+}
+
+impl Default for FilterTransferFn {
+    fn default() -> Self {
+        Self::Identity
+    }
+}
+/// This filter primitive performs component-wise remapping of data as follows:
+///
+/// > R' = feFuncR( R )
+///
+/// > G' = feFuncG( G )
+///
+/// > B' = feFuncB( B )
+///
+/// > A' = feFuncA( A )
+///
+/// for every pixel. It allows operations like brightness adjustment, contrast adjustment, color balance or thresholding.
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FilterComponentTransfer {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FilterPrimitive,
+
+    /// See [`FilterIn`]
+    pub r#in: Animatable<FilterIn>,
+
+    /// transfer function for the red component of the input graphic
+    pub func_r: FilterTransferFn,
+    /// transfer function for the green component of the input graphic
+    pub func_g: FilterTransferFn,
+    /// transfer function for the blue component of the input graphic
+    pub func_b: FilterTransferFn,
+    /// transfer function for the alpha component of the input graphic
+    pub func_a: FilterTransferFn,
+}
+
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FilterCompositeArithmetic(pub f32);
+
+impl From<f32> for FilterCompositeArithmetic {
+    fn from(value: f32) -> Self {
+        Self(value)
+    }
+}
+
+impl From<FilterCompositeArithmetic> for f32 {
+    fn from(value: FilterCompositeArithmetic) -> Self {
+        value.0
+    }
+}
+
+impl FrameVariable for FilterCompositeArithmetic {}
+
+/// The compositing operation that is to be performed. All of the ‘operator’ types except arithmetic match the
+/// corresponding operation as described in [PORTERDUFF]. The arithmetic operator is described above. If attribute
+/// ‘operator’ is not specified, then the effect is as if a value of over were specified.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FilterCompositeOperator {
+    Over,
+    In,
+    Out,
+    Atop,
+    Xor,
+    Arithmetic,
+}
+
+impl Default for FilterCompositeOperator {
+    fn default() -> Self {
+        Self::Over
+    }
+}
+
+impl FrameVariable for FilterCompositeOperator {}
+
+/// This filter performs the combination of the two input images pixel-wise in image space using one of the Porter-Duff [`PORTERDUFF`]
+/// compositing operations: over, in, atop, out, xor [`SVG-COMPOSITING`]. Additionally, a component-wise arithmetic operation (with
+/// the result clamped between [0..1]) can be applied.
+///
+/// See [`feComposite`].
+///
+/// [`feComposite`]: https://www.w3.org/TR/SVG11/filters.html#feCompositeElement
+/// [`PORTERDUFF`]: https://www.w3.org/TR/SVG11/refs.html#ref-PORTERDUFF
+/// [`SVG-COMPOSITING`]: https://www.w3.org/TR/SVG11/refs.html#ref-SVG-COMPOSITING
+#[derive(Debug, Default, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FilterComposite {
+    /// common properties.
+    #[cfg_attr(feature = "serde", serde(flatten))]
+    pub primitive: FilterPrimitive,
+
+    /// See [`FilterIn`]
+    pub a: Animatable<FilterIn>,
+
+    /// The second input image to the compositing operation. This attribute can take on the same values as the [`a`](Self::a) attribute.
+    pub b: Animatable<FilterIn>,
+
+    /// See [`FilterCompositeOperator`]
+    pub operator: Animatable<FilterCompositeOperator>,
+
+    /// Only applicable if operator="arithmetic".
+    /// If the attribute is not specified, the effect is as if a value of 0 were specified.
+    pub k1: Animatable<FilterCompositeArithmetic>,
+
+    /// Only applicable if operator="arithmetic".
+    /// If the attribute is not specified, the effect is as if a value of 0 were specified.
+    pub k2: Animatable<FilterCompositeArithmetic>,
+
+    /// Only applicable if operator="arithmetic".
+    /// If the attribute is not specified, the effect is as if a value of 0 were specified.
+    pub k3: Animatable<FilterCompositeArithmetic>,
+
+    /// Only applicable if operator="arithmetic".
+    /// If the attribute is not specified, the effect is as if a value of 0 were specified.
+    pub k4: Animatable<FilterCompositeArithmetic>,
 }
