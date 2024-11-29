@@ -39,3 +39,6 @@ pub use filter::*;
 
 mod primitives;
 pub use primitives::*;
+
+mod compositing;
+pub use compositing::*;

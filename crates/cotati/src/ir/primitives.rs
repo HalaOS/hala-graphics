@@ -34,3 +34,13 @@ impl FrameVariable for ChannelSelector {}
 pub struct Href(pub String);
 
 impl FrameVariable for Href {}
+
+/// Defines the coordinate system for the contents
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum Units {
+    UserSpaceOnUse,
+    ObjectBoundingBox,
+}
+
+impl FrameVariable for Units {}
