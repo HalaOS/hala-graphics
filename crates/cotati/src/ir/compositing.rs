@@ -14,7 +14,7 @@ pub enum Overflow {
 
 impl FrameVariable for Overflow {}
 
-/// The ‘clip’ property has the same parameter values as defined in CSS2 ([CSS2], section 11.1.2).
+/// The ‘clip’ property has the same parameter values as defined in [`CSS2`](https://www.w3.org/TR/2008/REC-CSS2-20080411/visufx.html#clipping).
 /// Unitless values, which indicate current user coordinates, are permitted on the coordinate values on the `shape`.
 /// The value of auto defines a clipping path along the bounds of the viewport created by the given element.
 #[derive(Debug, PartialEq, PartialOrd, Clone)]

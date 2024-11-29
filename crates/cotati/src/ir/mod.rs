@@ -42,3 +42,6 @@ pub use primitives::*;
 
 mod compositing;
 pub use compositing::*;
+
+mod text;
+pub use text::*;
