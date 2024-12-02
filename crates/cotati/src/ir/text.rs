@@ -340,7 +340,9 @@ impl Default for TextAnchor {
 }
 
 /// See [`baseline`](https://www.w3.org/TR/SVG11/text.html#BaselineAlignmentProperties)
-pub enum DominantBaseLine {
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum DominantBaseline {
     /// If this property occurs on a ‘text’ element, then the computed value depends on the value of the ‘writing-mode’ property.
     /// If the 'writing-mode' is horizontal, then the value of the dominant-baseline component is 'alphabetic', else if the
     /// 'writing-mode' is vertical, then the value of the dominant-baseline component is 'central'.
@@ -408,8 +410,93 @@ pub enum DominantBaseLine {
     TextBeforeEdge,
 }
 
-impl Default for DominantBaseLine {
+impl Default for DominantBaseline {
     fn default() -> Self {
         Self::Auto
     }
 }
+
+impl FrameVariable for DominantBaseline {}
+
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum AlignmentBaseline {
+    /// The value is the dominant-baseline of the script to which the character belongs - i.e.,
+    /// use the dominant-baseline of the parent.
+    Auto,
+    /// The alignment-point of the object being aligned is aligned with the dominant-baseline of
+    /// the parent text content element.
+    Baseline,
+    /// The alignment-point of the object being aligned is aligned with the "before-edge" baseline of
+    /// the parent text content element.
+    BeforeEdge,
+    /// The alignment-point of the object being aligned is aligned with the "text-before-edge" baseline of
+    /// the parent text content element.
+    TextBeforeEdge,
+    /// The alignment-point of the object being aligned is aligned with the "middle" baseline of the parent text content element.
+    Middle,
+    /// The alignment-point of the object being aligned is aligned with the "central" baseline of the parent text content element.
+    Central,
+    /// The alignment-point of the object being aligned is aligned with the "after-edge" baseline of the parent text content element.
+    AfterEdge,
+    /// The alignment-point of the object being aligned is aligned with the "text-after-edge" baseline of the parent text content element.
+    TextAfterEdge,
+    /// The alignment-point of the object being aligned is aligned with the "ideographic" baseline of the parent text content element.
+    Ideographic,
+    /// The alignment-point of the object being aligned is aligned with the "alphabetic" baseline of the parent text content element.
+    Alphabetic,
+    /// The alignment-point of the object being aligned is aligned with the "hanging" baseline of the parent text content element.
+    Hanging,
+    /// The alignment-point of the object being aligned is aligned with the "mathematical" baseline of the parent text content element.
+    Mathematical,
+}
+
+impl Default for AlignmentBaseline {
+    fn default() -> Self {
+        Self::Auto
+    }
+}
+
+impl FrameVariable for AlignmentBaseline {}
+
+/// The ‘baseline-shift’ property allows repositioning of the dominant-baseline relative to the dominant-baseline of
+/// the parent text content element. The shifted object might be a sub- or superscript. Within the shifted object,
+/// the whole baseline-table is offset; not just a single baseline. The amount of the shift is determined from information
+/// from the parent text content element, the sub- or superscript offset from the nominal font of the parent text content
+/// element, percent of the "line-height" of the parent text content element or an absolute value.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum BaselineShift {
+    /// There is no baseline shift; the dominant-baseline remains in its original position.
+    Baseline,
+    /// The dominant-baseline is shifted to the default position for subscripts. The offset to this position
+    /// is determined using the font data for the nominal font. Because in most fonts the subscript position
+    /// is normally given relative to the "alphabetic" baseline, the user agent may compute the effective
+    /// position for subscripts for superscripts when some other baseline is dominant. The suggested computation
+    /// is to subtract the difference between the position of the dominant baseline and the position of the
+    /// "alphabetic" baseline from the position of the subscript. The resulting offset is determined by multiplying
+    /// the effective subscript position by the dominant baseline-table font-size. If there is no applicable font
+    /// data the user agent may use heuristics to determine the offset.
+    Sub,
+    /// The dominant-baseline is shifted to the default position for superscripts. The offset to this position is
+    /// determined using the font data for the nominal font. Because in most fonts the superscript position is normally
+    /// given relative to the "alphabetic" baseline, the user agent may compute the effective position for superscripts
+    /// when some other baseline is dominant. The suggested computation is to subtract the difference between the
+    /// position of the dominant baseline and the position of the "alphabetic" baseline from the position of the
+    /// superscript. The resulting offset is determined by multiplying the effective superscript position by the dominant
+    /// baseline-table font-size. If there is no applicable font data the user agent may use heuristics to determine the
+    /// offset.
+    Super,
+    /// The computed value of the property is this percentage multiplied by the computed "line-height" of the ‘text’ element.
+    /// The dominant-baseline is shifted in the shift direction (positive value) or opposite to the shift direction
+    /// (negative value) of the parent text content element by the computed value. A value of "0" is equivalent to "baseline".
+    Value(Measurement),
+}
+
+impl Default for BaselineShift {
+    fn default() -> Self {
+        Self::Baseline
+    }
+}
+
+impl FrameVariable for BaselineShift {}

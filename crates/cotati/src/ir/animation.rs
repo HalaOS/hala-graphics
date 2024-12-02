@@ -1,5 +1,3 @@
-use iref::Iri;
-
 use crate::errors::{Error, Result};
 
 /// This is a marker trait that a type with this trait can be used as frame register variable.
@@ -9,7 +7,6 @@ impl FrameVariable for bool {}
 impl FrameVariable for f32 {}
 impl FrameVariable for u32 {}
 impl FrameVariable for i32 {}
-impl FrameVariable for Iri {}
 impl<T> FrameVariable for Vec<T> where T: FrameVariable {}
 
 /// An variable container, indicates that this variable can be used as animation frame variable.

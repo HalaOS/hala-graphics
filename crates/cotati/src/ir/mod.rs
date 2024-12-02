@@ -45,3 +45,6 @@ pub use compositing::*;
 
 mod text;
 pub use text::*;
+
+mod font;
+pub use font::*;
