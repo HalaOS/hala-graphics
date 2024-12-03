@@ -460,3 +460,35 @@ pub struct FontFace {
     /// The ideal thickness of an overline, expressed as a length within the font coordinate system.
     pub overline_thickness: f32,
 }
+
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FontFormat {
+    /// TrueDoc™ Portable Font Resource
+    TrueDoc,
+    /// Embedded OpenType
+    Eot,
+    /// PostScript™ Type 1
+    PostScript,
+    TrueType,
+    /// OpenType, including TrueType Open
+    OpenType,
+    TrueTypeGX,
+    Speedo,
+    Intellifont,
+}
+
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum FontSourceUri {
+    FaceName(String),
+    Url(String),
+}
+
+/// This element correspond to the ‘src’ descriptor within an @font-face rule.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct FontSource {
+    pub uri: FontSourceUri,
+    pub format: Option<Vec<FontFormat>>,
+}
