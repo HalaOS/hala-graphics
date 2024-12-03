@@ -15,6 +15,7 @@ nom = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
 iref = { workspace = true, optional = true }
 oxilangtag = { workspace = true, optional = true }
+bitmask-enum = { workspace = true, optional = true }
 
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
@@ -25,4 +26,4 @@ default = ["vgl", "dsl", "ir", "serde"]
 dsl = ["nom", "ir"]
 vgl = ["nom", "ir"]
 serde = ["dep:serde"]
-ir = ["iref", "oxilangtag"]
+ir = ["iref", "oxilangtag", "bitmask-enum"]

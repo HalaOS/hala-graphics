@@ -44,3 +44,25 @@ pub enum Units {
 }
 
 impl FrameVariable for Units {}
+
+/// A sequence of Unicode characters
+///
+/// See [`description of ranges of Unicode characters in CSS2`](https://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#dataqual)
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum UnicodeRange {
+    Char(char),
+
+    Range { from: char, to: char },
+}
+
+impl FrameVariable for UnicodeRange {}
+
+impl Default for UnicodeRange {
+    fn default() -> Self {
+        Self::Range {
+            from: '\u{0}',
+            to: '\u{10ffff}',
+        }
+    }
+}

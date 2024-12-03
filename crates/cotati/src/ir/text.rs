@@ -102,16 +102,16 @@ pub struct Text {
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TextSpan {
-    /// If a single <coordinate> is provided, then the value represents the new absolute X coordinate for the current
+    /// If a single coordinate is provided, then the value represents the new absolute X coordinate for the current
     /// text position for rendering the glyphs that correspond to the first character within this element or any of its descendants.
     ///
-    /// If a comma- or space-separated list of n <coordinate>s is provided, then the values represent new absolute X coordinates
+    /// If a comma- or space-separated list of n coordinates is provided, then the values represent new absolute X coordinates
     /// for the current text position for rendering the glyphs corresponding to each of the first n characters within this element
     /// or any of its descendants.
     ///
-    /// If more <coordinate>s are provided than characters, then the extra <coordinate>s will have no effect on glyph positioning.
+    /// If more coordinates are provided than characters, then the extra coordinates will have no effect on glyph positioning.
     ///
-    /// If more characters exist than <coordinate>s, then for each of these extra characters: (a) if an ancestor ‘text’ or ‘tspan’
+    /// If more characters exist than coordinates, then for each of these extra characters: (a) if an ancestor ‘text’ or ‘tspan’
     /// element specifies an absolute X coordinate for the given character via an ‘x’ attribute, then that absolute X coordinate is
     /// used as the starting X coordinate for that character (nearest ancestor has precedence), else (b) the starting X coordinate
     /// for rendering the glyphs corresponding to the given character is the X coordinate of the resulting current text position
@@ -127,20 +127,20 @@ pub struct TextSpan {
     /// The processing rules for the ‘y’ attribute parallel the processing rules for the ‘x’ attribute.
     pub y: Animatable<Vec<Measurement>>,
 
-    /// If a single <length> is provided, this value represents the new relative X coordinate for the current text position for
+    /// If a single `length` is provided, this value represents the new relative X coordinate for the current text position for
     /// rendering the glyphs corresponding to the first character within this element or any of its descendants. The current text
-    /// position is shifted along the x-axis of the current user coordinate system by <length> before the first character's glyphs
+    /// position is shifted along the x-axis of the current user coordinate system by `length` before the first character's glyphs
     /// are rendered.
     ///
-    /// If a comma- or space-separated list of n <length>s is provided, then the values represent incremental shifts along the
+    /// If a comma- or space-separated list of n `length`s is provided, then the values represent incremental shifts along the
     /// x-axis for the current text position before rendering the glyphs corresponding to the first n characters within this element
     /// or any of its descendants. Thus, before the glyphs are rendered corresponding to each character, the current text position
     /// resulting from drawing the glyphs for the previous character within the current ‘text’ element is shifted along the X axis
-    /// of the current user coordinate system by <length>.
+    /// of the current user coordinate system by `length`.
     ///
-    /// If more <length>s are provided than characters, then any extra <length>s will have no effect on glyph positioning.
+    /// If more lengths are provided than characters, then any extra lengths will have no effect on glyph positioning.
     ///
-    /// If more characters exist than <length>s, then for each of these extra characters: (a) if an ancestor ‘text’ or ‘tspan’
+    /// If more characters exist than lengths, then for each of these extra characters: (a) if an ancestor ‘text’ or ‘tspan’
     /// element specifies a relative X coordinate for the given character via a ‘dx’ attribute, then the current text position
     /// is shifted along the x-axis of the current user coordinate system by that amount (nearest ancestor has precedence),
     /// else (b) no extra shift along the x-axis occurs.
@@ -161,14 +161,14 @@ pub struct TextSpan {
     /// for the glyphs corresponding to the first character within this element or any of its descendants, the second `number` represents
     /// the supplemental rotation for the glyphs that correspond to the second character, and so on.
     ///
-    /// If more <number>s are provided than there are characters, then the extra <number>s will be ignored.
+    /// If more numbers are provided than there are characters, then the extra numbers will be ignored.
     ///
-    /// If more characters are provided than <number>s, then for each of these extra characters the rotation value specified by the last
+    /// If more characters are provided than numbers, then for each of these extra characters the rotation value specified by the last
     /// number must be used.
     ///
     /// If the attribute is not specified and if an ancestor ‘text’ or ‘tspan’ element specifies a supplemental rotation for a given character
     /// via a ‘rotate’ attribute, then the given supplemental rotation is applied to the given character (nearest ancestor has precedence).
-    /// If there are more characters than <number>s specified in the ancestor's ‘rotate’ attribute, then for each of these extra characters
+    /// If there are more characters than numbers specified in the ancestor's ‘rotate’ attribute, then for each of these extra characters
     /// the rotation value specified by the last number must be used.
     ///
     /// This supplemental rotation has no impact on the rules by which current text position is modified as glyphs get rendered and is
