@@ -1,4 +1,4 @@
-use super::{Angle, Animatable, FrameVariable, Measurement};
+use super::{Angle, Animatable, FrameVariable, Href, Measurement};
 
 /// See [`length_adjust`](Text::length_adjust)
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
@@ -500,3 +500,87 @@ impl Default for BaselineShift {
 }
 
 impl FrameVariable for BaselineShift {}
+
+/// Indicates the method by which text should be rendered along the path.
+///
+/// A value of align indicates that the glyphs should be rendered using simple 2x3 transformations such
+/// that there is no stretching/warping of the glyphs. Typically, supplemental rotation, scaling and
+/// translation transformations are done for each glyph to be rendered. As a result, with align, fonts
+/// where the glyphs are designed to be connected (e.g., cursive fonts), the connections may not align
+/// properly when text is rendered along a path.
+///
+/// A value of stretch indicates that the glyph outlines will be converted into paths, and then all end
+/// points and control points will be adjusted to be along the perpendicular vectors from the path,
+/// thereby stretching and possibly warping the glyphs. With this approach, connected glyphs, such as in
+/// cursive scripts, will maintain their connections.
+///
+/// If the attribute is not specified, the effect is as if a value of align were specified.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum TextPathMethod {
+    Align,
+    Stretch,
+}
+
+impl Default for TextPathMethod {
+    fn default() -> Self {
+        Self::Align
+    }
+}
+
+impl FrameVariable for TextPathMethod {}
+
+/// Indicates how the user agent should determine the spacing between glyphs that are to be rendered along a path.
+///
+/// A value of exact indicates that the glyphs should be rendered exactly according to the spacing rules as specified
+/// in Text on a path layout rules.
+///
+///
+/// A value of auto indicates that the user agent should use text-on-a-path layout algorithms to adjust the spacing
+/// between glyphs in order to achieve visually appealing results.
+///
+/// If the attribute is not specified, the effect is as if a value of exact were specified.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum TextPathSpacing {
+    Auto,
+    Exact,
+}
+
+impl Default for TextPathSpacing {
+    fn default() -> Self {
+        Self::Exact
+    }
+}
+
+impl FrameVariable for TextPathSpacing {}
+
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct TextPath {
+    /// An offset from the start of the ‘path’ for the initial current text position,
+    /// calculated using the user agent's [`distance along the path`] algorithm.
+    ///
+    /// If a <length> other than a percentage is given, then the ‘startOffset’ represents a
+    /// distance along the path measured in the current user coordinate system.
+    ///
+    /// If a percentage is given, then the ‘startOffset’ represents a percentage distance along
+    /// the entire path. Thus, startOffset="0%" indicates the start point of the ‘path’ and
+    /// startOffset="100%" indicates the end point of the ‘path’.
+    ///
+    /// If the attribute is not specified, the effect is as if a value of "0" were specified.
+    ///
+    /// [`distance along the path`]: https://www.w3.org/TR/SVG11/paths.html#DistanceAlongAPath
+    pub start_offset: Animatable<Measurement>,
+
+    /// See [`TextPathMethod`]
+    pub method: Animatable<TextPathMethod>,
+
+    /// See [`TextPathSpacing`]
+    pub spacing: Animatable<TextPathSpacing>,
+
+    /// An IRI reference to the ‘path’ element onto which the glyphs will be rendered.
+    /// If <iri> is an invalid reference (e.g., no such element exists, or the referenced element is not a ‘path’),
+    /// then the ‘textPath’ element is in error and its entire contents shall not be rendered by the user agent.
+    pub href: Animatable<Href>,
+}
