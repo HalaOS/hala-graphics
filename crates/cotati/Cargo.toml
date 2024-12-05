@@ -10,20 +10,23 @@ version.workspace = true
 [dependencies]
 thiserror = { workspace = true }
 log = { workspace = true }
-futures = { workspace = true }
+futures = { workspace = true, optional = true }
 nom = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
 iref = { workspace = true, optional = true }
 oxilangtag = { workspace = true, optional = true }
 bitmask-enum = { workspace = true, optional = true }
+xml_dom = { workspace = true, optional = true }
 
 [dev-dependencies]
 pretty_env_logger = { workspace = true }
 divan = { workspace = true }
 
 [features]
-default = ["vgl", "dsl", "ir", "serde"]
+default = ["vgl", "dsl", "ir", "serde", "device", "svg"]
 dsl = ["nom", "ir"]
 vgl = ["nom", "ir"]
 serde = ["dep:serde"]
 ir = ["iref", "oxilangtag", "bitmask-enum"]
+device = ["futures"]
+svg = ["xml_dom"]

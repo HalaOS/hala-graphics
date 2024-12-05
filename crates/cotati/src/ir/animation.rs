@@ -75,3 +75,8 @@ where
         Self::Constant(T::default())
     }
 }
+
+/// An variant that referenced by one animatable register.
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum AnimatableValue {}
