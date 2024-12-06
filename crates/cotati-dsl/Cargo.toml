@@ -1,0 +1,15 @@
+[package]
+description = "A proc-macro crate for cotati that help generate dsl methods."
+documentation = "https://docs.rs/cotati"
+edition.workspace = true
+license = "MIT"
+name = "cotati-dsl"
+repository.workspace = true
+version.workspace = true
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { workspace = true }
+quote = { workspace = true }

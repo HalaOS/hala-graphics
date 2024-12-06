@@ -16,3 +16,7 @@ pub mod device;
 #[cfg(feature = "svg")]
 #[cfg_attr(docsrs, doc(cfg(feature = "svg")))]
 pub mod svg;
+
+#[cfg(feature = "dsl")]
+#[cfg_attr(docsrs, doc(cfg(feature = "dsl")))]
+pub mod dsl;
